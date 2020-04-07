@@ -5,8 +5,14 @@ import IconButton from '@material-ui/core/IconButton';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/Info';
 import React from 'react';
+import { workouts } from './data';
+
 
 const useStyles = makeStyles((theme: Theme) =>
+  // TODO (cb):
+  // what help is material ui if i got to create all this anyway
+  // not event the color scheme is set up?
+  // do i need a theme provider
   createStyles({
     root: {
       display: 'flex',
@@ -14,10 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'space-around',
       overflow: 'hidden',
       backgroundColor: theme.palette.background.paper,
-    },
-    gridList: {
-      width: 500,
-      height: 450,
     },
     icon: {
       color: theme.palette.secondary.dark,
@@ -44,36 +46,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface Workout {
-  short: string;
-  title: string;
-  description: string;
-}
-
-const workouts: Workout[] = [
-  { 
-    short: '18',
-    title: '18min',
-    description: '12 excercises 60s/30s go/break'
-  },
-  { 
-    short: 'TG',
-    title: 'TABATA',
-    description: '12 excercises 30s/10s go/break'
-  },
-  { 
-    short: 'P',
-    title: 'Master Planker',
-    description: 'Toughest planker on the block'
-  }
-];
-
 export default function WorkoutList() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={220} className={classes.gridList}>
+      <GridList cellHeight={220}>
         {workouts.map((workout) => (
           <GridListTile key={workout.title}>
             <div className={classes.tile}>

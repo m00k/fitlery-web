@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import NavBar from './NavBar';
-import WorkoutList from './WorkoutList';
+import WorkoutList from './workout/WorkoutList';
 
 function App() {
   return (
