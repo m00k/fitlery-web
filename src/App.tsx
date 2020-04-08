@@ -7,8 +7,8 @@ import WorkoutList2 from './workout/WorkoutList2';
 
 const useStyles = makeStyles(() => ({
   paper: {
-    height: '100vh',
-    backgroundColor: theme.palette.primary.light,
+    minHeight: '100vh',
+    backgroundColor: theme.palette.primary.dark,
   }
 }));
 
