@@ -1,12 +1,14 @@
 import { Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import NavBar from './NavBar';
-import WorkoutList from './workout/WorkoutList';
-import { makeStyles } from '@material-ui/core/styles';
+import theme from './theme/theme';
+import WorkoutList2 from './workout/WorkoutList2';
 
 const useStyles = makeStyles(() => ({
   paper: {
     height: '100vh',
+    backgroundColor: theme.palette.primary.light,
   }
 }));
 
@@ -16,7 +18,7 @@ function App() {
   return (
     <Paper className={classes.paper}>
       <NavBar></NavBar>
-      <WorkoutList></WorkoutList>
+      <WorkoutList2></WorkoutList2>
     </Paper>
   );
 }
