@@ -16,13 +16,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     card: {
       backgroundColor: theme.palette.secondary.main,
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.up('xs')]: {
         gridColumn: 'span 12',
       },
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.up('sm')]: {
         gridColumn: 'span 6',
       },
-      [theme.breakpoints.up('lg')]: {
+      [theme.breakpoints.up('md')]: {
         gridColumn: 'span 3',
       }
     },
