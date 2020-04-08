@@ -17,9 +17,6 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       backgroundColor: theme.palette.secondary.main,
       [theme.breakpoints.up('xs')]: {
-        gridColumn: 'span 12',
-      },
-      [theme.breakpoints.up('sm')]: {
         gridColumn: 'span 6',
       },
       [theme.breakpoints.up('md')]: {
@@ -36,7 +33,6 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       backgroundColor: theme.palette.common.black,
       color: theme.palette.secondary.contrastText,
-      lineHeight: 1.2, // TODO: overrides the mui way
       opacity: .6,
       padding: theme.spacing(1),
     },
