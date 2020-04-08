@@ -1,48 +1,53 @@
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
+import { Avatar, Card, Container, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import InfoIcon from '@material-ui/icons/Info';
 import React from 'react';
 import { workouts } from './data';
 
 
 const useStyles = makeStyles((theme: Theme) =>
-  // TODO (cb):
-  // what help is material ui if i got to create all this anyway
-  // not event the color scheme is set up?
-  // do i need a theme provider
   createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
-      overflow: 'hidden',
-      backgroundColor: theme.palette.background.paper,
-    },
-    icon: {
-      color: theme.palette.secondary.dark,
-    },
-    tile: {
-      backgroundColor: theme.palette.secondary.main,
-      alignItems: 'center',
-      display: 'flex',
-      fontSize: '3rem', // TODO
-      height: 220, // TODO
-      justifyContent: 'center',
-      paddingBottom: '68px',
-    },
-    short: {
-      backgroundColor: theme.palette.secondary.contrastText,
-      color: theme.palette.secondary.dark,
-      borderRadius: '50%',
+    avatar: {
+      fontSize: theme.typography.h2.fontSize,
       fontWeight: theme.typography.fontWeightBold,
       height: '6rem',
-      padding: '1rem', // TODO
-      textAlign: 'center', // TODO
       width: '6rem',
-    }
+      backgroundColor: theme.palette.background.paper,
+      color: theme.palette.secondary.dark
+    },
+    card: {
+      backgroundColor: theme.palette.secondary.main,
+      [theme.breakpoints.up('xs')]: {
+        gridColumn: 'span 12',
+      },
+      [theme.breakpoints.up('sm')]: {
+        gridColumn: 'span 6',
+      },
+      [theme.breakpoints.up('md')]: {
+        gridColumn: 'span 3',
+      }
+    },
+    container: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(12, 1fr)',
+      gridGap: theme.spacing(1),
+      maxWidth: theme.breakpoints.values.md,
+      padding: theme.spacing(1),
+    },
+    content: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.secondary.contrastText,
+      lineHeight: 1.2, // TODO: overrides the mui way
+      opacity: .6,
+      padding: theme.spacing(1),
+    },
+    header: {
+      display: 'grid',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingBottom: theme.spacing(3),
+      paddingTop: theme.spacing(3),
+    },
+    
   }),
 );
 
@@ -50,27 +55,24 @@ export default function WorkoutList() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <GridList cellHeight={220}>
-        {workouts.map((workout) => (
-          <GridListTile key={workout.title}>
-            <div className={classes.tile}>
-              <span className={classes.short}>
-                {workout.short}
-              </span>
-            </div>
-            <GridListTileBar
-              title={workout.title}
-              subtitle={<span>{workout.description}</span>}
-              actionIcon={
-                <IconButton aria-label={`info about ${workout.title}`} className={classes.icon}>
-                  <InfoIcon />
-                </IconButton>
-              }
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
+    <Container className={classes.container} disableGutters>
+      {workouts.map((workout) => (
+        <Card key={workout.title} className={classes.card}>
+          <div className={classes.header}>
+            <Avatar className={classes.avatar}>
+              {workout.short}
+            </Avatar>
+          </div>
+          <div className={classes.content}>
+            <Typography variant="subtitle1" noWrap>
+              {workout.title}
+            </Typography>
+            <Typography variant="caption" component="p">
+              {workout.description}
+            </Typography>
+          </div>
+        </Card>
+      ))}
+    </Container>
   );
 }

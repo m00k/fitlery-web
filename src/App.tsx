@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import NavBar from './NavBar';
 import theme from './theme/theme';
-import WorkoutList2 from './workout/WorkoutList2';
+import WorkoutList from './workout/WorkoutList';
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -18,7 +18,7 @@ function App() {
   return (
     <Paper className={classes.paper}>
       <NavBar></NavBar>
-      <WorkoutList2></WorkoutList2>
+      <WorkoutList></WorkoutList>
     </Paper>
   );
 }
