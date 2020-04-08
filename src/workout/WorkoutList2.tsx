@@ -1,4 +1,4 @@
-import { Avatar, Card, CardContent, Container, Typography } from '@material-ui/core';
+import { Avatar, Card, Container, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 import { workouts } from './data';
@@ -6,16 +6,16 @@ import { workouts } from './data';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(12, 1fr)',
-      gridGap: theme.spacing(1),
-      maxWidth: theme.breakpoints.values.md,
-      padding: theme.spacing(1),
+    avatar: {
+      fontSize: theme.typography.h2.fontSize,
+      fontWeight: theme.typography.fontWeightBold,
+      height: '6rem',
+      width: '6rem',
+      backgroundColor: theme.palette.background.paper,
+      color: theme.palette.secondary.dark
     },
     card: {
       backgroundColor: theme.palette.secondary.main,
-      width: '100%',
       [theme.breakpoints.down('xs')]: {
         gridColumn: 'span 12',
       },
@@ -26,18 +26,28 @@ const useStyles = makeStyles((theme: Theme) =>
         gridColumn: 'span 3',
       }
     },
-    header: {
+    container: {
       display: 'grid',
-
-    },
-    avatar: {
-      fontSize: '3rem',
-      height: '6rem',
-      width: '6rem',
+      gridTemplateColumns: 'repeat(12, 1fr)',
+      gridGap: theme.spacing(1),
+      maxWidth: theme.breakpoints.values.md,
+      padding: theme.spacing(1),
     },
     content: {
-      backgroundColor: theme.palette.secondary.dark,
-    }
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.secondary.contrastText,
+      lineHeight: 1.2, // TODO: overrides the mui way
+      opacity: .6,
+      padding: theme.spacing(1),
+    },
+    header: {
+      display: 'grid',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingBottom: theme.spacing(3),
+      paddingTop: theme.spacing(3),
+    },
+    
   }),
 );
 
@@ -53,14 +63,14 @@ export default function WorkoutList2() {
               {workout.short}
             </Avatar>
           </div>
-          <CardContent className={classes.content}>
-            <Typography variant="h5" noWrap>
+          <div className={classes.content}>
+            <Typography variant="subtitle1" noWrap>
               {workout.title}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p" noWrap>
+            <Typography variant="caption" component="p">
               {workout.description}
             </Typography>
-          </CardContent>
+          </div>
         </Card>
       ))}
     </Container>

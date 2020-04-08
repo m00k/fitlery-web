@@ -12,6 +12,11 @@ let theme = createMuiTheme({
       },
     },
   },
+  typography: {
+    caption: {
+      lineHeight: 1.2,
+    }
+  }
 });
 theme = responsiveFontSizes(theme);
 
