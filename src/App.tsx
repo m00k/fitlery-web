@@ -5,6 +5,7 @@ import exercises from './exercise/data';
 import ExerciseList from './exercise/ExerciseList';
 import NavBar from './NavBar';
 import theme from './theme/theme';
+import FtBottomNavigation from './navigation/BottomNavigation';
 // import WorkoutList from './workout/WorkoutList';
 
 const useStyles = makeStyles(() => ({
@@ -22,6 +23,7 @@ function App() {
       <NavBar></NavBar>
       {/* <WorkoutList></WorkoutList> */}
       <ExerciseList {...{ exercises }}></ExerciseList>
+      <FtBottomNavigation></FtBottomNavigation>
     </Paper>
   );
 }
