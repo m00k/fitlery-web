@@ -2,9 +2,10 @@ import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import exercises from './exercise/data';
-import ExerciseList from './exercise/ExercixeList';
+import ExerciseList from './exercise/ExerciseList';
 import NavBar from './NavBar';
 import theme from './theme/theme';
+// import WorkoutList from './workout/WorkoutList';
 
 const useStyles = makeStyles(() => ({
   paper: {

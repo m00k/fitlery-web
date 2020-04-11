@@ -1,8 +1,8 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core";
-import { bluegrey400_bluegrey800 } from "./palette";
+import { bluegrey800_bluegrey400 } from "./palette";
 
 let theme = createMuiTheme({
-  palette: bluegrey400_bluegrey800,
+  palette: bluegrey800_bluegrey400,
   props: {
     MuiTypography: {
       variantMapping: {

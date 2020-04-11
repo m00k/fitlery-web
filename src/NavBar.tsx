@@ -10,6 +10,7 @@ function NavBar() {
     <AppBar position="sticky">
       <Toolbar>
         <Button
+          color="secondary"
           variant="text"
           startIcon={<Timer />}
         >

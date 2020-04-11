@@ -1,6 +1,7 @@
 import Box from '@material-ui/core/Box';
-import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import React from 'react';
+import theme from '../theme/theme';
 import { ExerciseData } from './data';
 
 export default function Exercise(props: ExerciseData) {
@@ -9,15 +10,19 @@ export default function Exercise(props: ExerciseData) {
   return (
     <Box
       alignItems="center"
+      bgcolor={theme.palette.background.paper}
       boxShadow={2}
-      color="primary.contrastText"
+      borderRadius={1}
+      borderLeft={20}
+      borderColor={theme.palette.primary.light}
+      color={theme.palette.primary.main}
       display="flex"
-      height={80}
-      pl={4}
-      width={1}
-      
+      height={60}
+      mb={1/3}
+      p={1}
+      flex="1"
     >
-      <Typography variant="h5">
+      <Typography variant="subtitle1">
         {name}
       </Typography>
     </Box>

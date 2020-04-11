@@ -15,16 +15,12 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: '3rem',
     },
     card: {
+      [theme.breakpoints.up('xs')]: { gridColumn: 'span 12', },
+      // TODO: set in theme
+      [theme.breakpoints.up(theme.breakpoints.values.sm * 2 / 3)]: { gridColumn: 'span 6', },
+      [theme.breakpoints.up('md')]: { gridColumn: 'span 3', },
       backgroundColor: theme.palette.secondary.main,
-      [theme.breakpoints.up('xs')]: {
-        gridColumn: 'span 12',
-      },
-      [theme.breakpoints.up(theme.breakpoints.values.sm * 2 / 3)]: { // TODO: set in theme
-        gridColumn: 'span 6',
-      },
-      [theme.breakpoints.up('md')]: {
-        gridColumn: 'span 3',
-      },
+      borderRadius: 2,
       display: 'grid',
       gridTemplateRows: '3fr 2fr',
       paddingTop: theme.spacing(1),
@@ -34,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
       gridTemplateColumns: 'repeat(12, 1fr)',
       gridGap: theme.spacing(1),
       maxWidth: theme.breakpoints.values.md,
-      padding: theme.spacing(1),
+      padding: theme.spacing(1/2),
     },
     content: {
       backgroundColor: theme.palette.common.black,
