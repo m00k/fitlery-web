@@ -7,6 +7,7 @@ import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import ListIcon from '@material-ui/icons/List';
 import RestoreIcon from '@material-ui/icons/Restore';
 import React from 'react';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -17,9 +18,11 @@ const useStyles = makeStyles({
 export default function FtBottomNavigation() {
   const classes = useStyles();
   const [value, setValue] = React.useState('recents');
+  const history = useHistory();
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setValue(newValue);
+    history.push(`/${newValue}`);
   };
 
   return (

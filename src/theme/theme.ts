@@ -35,7 +35,8 @@ let theme = createMuiTheme({
       label: {
         color: secondary.light,
       }
-    }
+    },
+    
   }
 });
 theme = responsiveFontSizes(theme);

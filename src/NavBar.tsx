@@ -7,7 +7,7 @@ import React from 'react';
 
 function NavBar() {
   return (
-    <AppBar position="sticky">
+    <AppBar>
       <Toolbar>
         <Button
           color="secondary"
