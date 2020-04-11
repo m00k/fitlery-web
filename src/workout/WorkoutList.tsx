@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       backgroundColor: theme.palette.secondary.main,
       [theme.breakpoints.up('xs')]: {
+        gridColumn: 'span 12',
+      },
+      [theme.breakpoints.up(theme.breakpoints.values.sm * 2 / 3)]: { // TODO: set in theme
         gridColumn: 'span 6',
       },
       [theme.breakpoints.up('md')]: {
@@ -47,7 +50,6 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'center',
     },
-    
   }),
 );
 
