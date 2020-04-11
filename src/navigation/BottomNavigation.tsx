@@ -1,3 +1,4 @@
+import { Box } from '@material-ui/core';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,11 +23,13 @@ export default function FtBottomNavigation() {
   };
 
   return (
-    <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-      <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} />
-      <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
-      <BottomNavigationAction label="Workouts" value="workouts" icon={<FitnessCenterIcon />} />
-      <BottomNavigationAction label="Exercises" value="exercises" icon={<ListIcon />} />
-    </BottomNavigation>
+    <Box position='fixed' bottom={0} left={0} right={0}>
+      <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
+        <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} />
+        <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
+        <BottomNavigationAction label="Workouts" value="workouts" icon={<FitnessCenterIcon />} />
+        <BottomNavigationAction label="Exercises" value="exercises" icon={<ListIcon />} />
+      </BottomNavigation>
+    </Box>
   );
 }

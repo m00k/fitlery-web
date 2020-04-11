@@ -1,11 +1,11 @@
-import { Paper } from '@material-ui/core';
+import { Box, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import exercises from './exercise/data';
 import ExerciseList from './exercise/ExerciseList';
 import NavBar from './NavBar';
-import theme from './theme/theme';
 import FtBottomNavigation from './navigation/BottomNavigation';
+import theme from './theme/theme';
 // import WorkoutList from './workout/WorkoutList';
 
 const useStyles = makeStyles(() => ({
@@ -21,8 +21,19 @@ function App() {
   return (
     <Paper className={classes.paper}>
       <NavBar></NavBar>
-      {/* <WorkoutList></WorkoutList> */}
-      <ExerciseList {...{ exercises }}></ExerciseList>
+      <Box
+        bottom={56} // TODO
+        left={0}
+        right={0}
+        overflow='auto'
+        position='fixed'
+        top={56} // TODO
+        pl={'calc(-480px + 50vw)'} // TODO: theme.breakpoints.values.md / 2; -> grid
+        pr={'calc(-480px + 50vw)'} // TODO: theme.breakpoints.values.md / 2;
+      >
+        {/* <WorkoutList></WorkoutList> */}
+        <ExerciseList {...{ exercises }}></ExerciseList>
+      </Box>
       <FtBottomNavigation></FtBottomNavigation>
     </Paper>
   );

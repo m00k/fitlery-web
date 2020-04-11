@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'grid',
       gridTemplateColumns: 'repeat(12, 1fr)',
       gridGap: theme.spacing(1),
-      maxWidth: theme.breakpoints.values.md,
       padding: theme.spacing(1/2),
     },
     content: {
