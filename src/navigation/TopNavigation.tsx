@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Timer from '@material-ui/icons/Timer';
 import React from 'react';
 
-function NavBar() {
+function TopNavigation() {
   return (
     <AppBar>
       <Toolbar>
@@ -23,4 +23,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default TopNavigation;
