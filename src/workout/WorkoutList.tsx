@@ -1,28 +1,35 @@
-import Container from '@material-ui/core/Container';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import useTheme from '@material-ui/core/styles/useTheme';
+import { style } from '@material-ui/system';
 import React from 'react';
-import { workouts } from './data';
+import styled from 'styled-components';
+import { WorkoutData, workouts } from './data';
 import Workout from './Workout';
 
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(12, 1fr)',
-      gridGap: theme.spacing(1),
-    },
-  }),
-);
+const gridGap = style({
+  prop: 'gridGap',
+  themeKey: 'spacing',
+});
+
+const gridTemplateColumns = style({
+  prop: 'gridTemplateColumns',
+  themeKey: 'spacing',
+});
+
+const Grid = styled(Box)`${gridGap}${gridTemplateColumns}`;
 
 export default function WorkoutList() {
-  const classes = useStyles();
-
+  const theme = useTheme();
   return (
-    <Container className={classes.container} disableGutters>
-      {workouts.map((workout) => (
-        <Workout workout={workout}></Workout>
+    <Grid
+      display='grid'
+      gridTemplateColumns='repeat(12, 1fr)'
+      gridGap={theme.spacing(1)}
+    >
+      {workouts.map((workout: WorkoutData) => (
+        <Workout key={workout.title} workout={workout}></Workout>
       ))}
-    </Container>
+    </Grid>
   );
 }
