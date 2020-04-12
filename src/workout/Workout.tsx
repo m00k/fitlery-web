@@ -1,8 +1,11 @@
 import Avatar from '@material-ui/core/Avatar';
-import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import useTheme from '@material-ui/core/styles/useTheme';
 import Typography from '@material-ui/core/Typography';
+import { style } from '@material-ui/system';
 import React from 'react';
+import styled from 'styled-components';
 import { WorkoutData } from './data';
 
 
@@ -15,17 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: theme.typography.fontWeightBold,
       gridRow: 'span 3',
       padding: '3rem',
-    },
-    card: {
-      [theme.breakpoints.up('xs')]: { gridColumn: 'span 12', },
-      // TODO: set in theme
-      [theme.breakpoints.up(theme.breakpoints.values.sm * 2 / 3)]: { gridColumn: 'span 6', },
-      [theme.breakpoints.up('md')]: { gridColumn: 'span 3', },
-      backgroundColor: theme.palette.secondary.main,
-      borderRadius: 2,
-      display: 'grid',
-      gridTemplateRows: '3fr 2fr',
-      paddingTop: theme.spacing(1),
     },
     content: {
       backgroundColor: theme.palette.common.black,
@@ -44,12 +36,38 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const gridColumn = style({
+  prop: 'gridColumn',
+  themeKey: 'breakpoints',
+});
+
+const gridTemplateColumns = style({
+  prop: 'gridTemplateColumns',
+  themeKey: 'spacing',
+});
+
+const gridTemplateRows = style({
+  prop: 'gridTemplateRows',
+  themeKey: 'spacing',
+});
+
+const GridItem = styled(Box)`${gridColumn}${gridTemplateColumns}${gridTemplateRows}`;
+
 const Workout = (props: { workout: WorkoutData }) => {
   const { workout } = props;
+  const theme = useTheme();
   const classes = useStyles();
 
   return (
-    <Paper key={workout.title} className={classes.card}>
+    <GridItem
+      key={workout.title}
+      bgcolor={theme.palette.secondary.main}
+      borderRadius={2}
+      display='grid'
+      gridColumn={['span 6', 'span 4', 'span 3']}
+      gridTemplateRows='3fr 2fr'
+      pt={theme.spacing(1)}
+    >
       <div className={classes.header}>
         <Avatar className={classes.avatar}>
           {workout.short}
@@ -63,7 +81,7 @@ const Workout = (props: { workout: WorkoutData }) => {
           {workout.description}
         </Typography>
       </div>
-    </Paper>
+    </GridItem>
   );
 }
 
