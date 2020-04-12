@@ -1,11 +1,12 @@
 import Box from '@material-ui/core/Box';
+import useTheme from '@material-ui/core/styles/useTheme';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import theme from '../theme/theme';
 import { ExerciseData } from './data';
 
 export default function Exercise(props: ExerciseData) {
   const { name } = props;
+  const theme = useTheme();
 
   return (
     <Box
