@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.secondary.dark,
       fontSize: theme.typography.h2.fontSize,
       fontWeight: theme.typography.fontWeightBold,
-      gridRow: 'span 3',
-      padding: '3rem',
+      gridRow: 'span 4',
+      padding: theme.spacing(7),
     },
     content: {
       backgroundColor: theme.palette.common.black,
@@ -27,11 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
       gridRow: 'span 2',
       overflow: 'hidden',
       marginTop: theme.spacing(1),
-    },
-    header: {
-      display: 'grid',
-      alignItems: 'center',
-      justifyContent: 'center',
     },
   }),
 );
@@ -65,14 +60,18 @@ const Workout = (props: { workout: WorkoutData }) => {
       borderRadius={1}
       display='grid'
       gridColumn={['span 6', 'span 4', 'span 3']}
-      gridTemplateRows='3fr 2fr'
-      pt={theme.spacing(1)}
+      gridTemplateRows='4fr 2fr'
+      pt={1}
     >
-      <div className={classes.header}>
+      <Box
+        display='grid'
+        alignItems='center'
+        justifyContent='center'
+      >
         <Avatar className={classes.avatar}>
           {workout.short}
         </Avatar>
-      </div>
+      </Box>
       <div className={classes.content}>
         <Typography variant="subtitle1" noWrap>
           {workout.title}
