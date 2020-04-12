@@ -62,7 +62,7 @@ const Workout = (props: { workout: WorkoutData }) => {
     <GridItem
       key={workout.title}
       bgcolor={theme.palette.secondary.main}
-      borderRadius={2}
+      borderRadius={1}
       display='grid'
       gridColumn={['span 6', 'span 4', 'span 3']}
       gridTemplateRows='3fr 2fr'

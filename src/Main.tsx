@@ -16,11 +16,11 @@ const Main = ({ children }: any) => {
       display='flex'
       flexDirection='column'
       alignItems='center'
+      m={1/2}
     >
       <Box
         width={1}
         maxWidth={theme.breakpoints.values.md}
-        m={1}
       >
         {children}
       </Box>
