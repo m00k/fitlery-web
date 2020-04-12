@@ -1,7 +1,6 @@
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import ListIcon from '@material-ui/icons/List';
@@ -9,11 +8,6 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import React from 'react';
 import { useHistory } from "react-router-dom";
 
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-  },
-});
 
 const navActions = [
   { 
@@ -38,14 +32,13 @@ const navActions = [
   },
 ];
 
-export default function FtBottomNavigation() {
-  const classes = useStyles();
+const FtBottomNavigation = () => {
   const [value, setValue] = React.useState('recents');
   const history = useHistory();
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setValue(newValue);
-    history.push(`/${newValue}`);
+    history.push(`/${newValue}`); // TODO: this doesn't belong here, also this requires BottomNav to be inside <BrowserRouter/>
   };
 
   return (
@@ -58,7 +51,6 @@ export default function FtBottomNavigation() {
       <BottomNavigation
         value={value}
         onChange={handleChange}
-        className={classes.root}
       >
         {navActions.map(action => 
           <BottomNavigationAction
@@ -72,3 +64,5 @@ export default function FtBottomNavigation() {
     </Box>
   );
 }
+
+export default FtBottomNavigation;

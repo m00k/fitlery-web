@@ -16,9 +16,9 @@ const App = () => {
       height={'100vh'}
       bgcolor={theme.palette.primary.dark}
     >
-      <TopNavigation></TopNavigation>
-      <Main>
-        <BrowserRouter>
+      <BrowserRouter>
+        <TopNavigation></TopNavigation>
+        <Main>
           <Switch>
             <Route path="/workouts">
               <WorkoutList />
@@ -27,9 +27,9 @@ const App = () => {
               <ExerciseList {...{ exercises }}></ExerciseList>
             </Route>
           </Switch>
-          <BottomNavigation></BottomNavigation>
-        </BrowserRouter>
-      </Main>
+        </Main>
+        <BottomNavigation></BottomNavigation>
+      </BrowserRouter>
     </Box>
   );
 }

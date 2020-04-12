@@ -4,22 +4,26 @@ import React from "react";
 
 const Main = ({ children }: any) => {
   const theme = useTheme();
-  const plr = `calc(50vw - ${theme.breakpoints.values.md / 2}px)`;
-  const bottom = (theme.overrides?.MuiBottomNavigation?.root as any).height;
-  const top = (theme.overrides?.MuiToolbar?.root as any).height;
-
+  const navHeight = (theme.overrides?.MuiBottomNavigation?.root as any).height;
   return (
     <Box
-      bottom={bottom}
+      bottom={navHeight}
+      top={navHeight}
       left={0}
       right={0}
       overflow='auto'
       position='fixed'
-      top={top}
-      pl={plr}
-      pr={plr}
+      display='flex'
+      flexDirection='column'
+      alignItems='center'
     >
-      {children}
+      <Box
+        width={1}
+        maxWidth={theme.breakpoints.values.md}
+        m={1}
+      >
+        {children}
+      </Box>
     </Box>
   );
 }

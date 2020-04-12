@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'grid',
       gridTemplateColumns: 'repeat(12, 1fr)',
       gridGap: theme.spacing(1),
-      padding: theme.spacing(1/2),
     },
     content: {
       backgroundColor: theme.palette.common.black,

@@ -3,7 +3,7 @@ import palette from "./palette";
 
 const primary = palette.primary as SimplePaletteColorOptions;
 const secondary = palette.secondary as SimplePaletteColorOptions;
-const TOOLBAR_HEIGHT = 48; // dense muitoolbar height 48
+export const TOOLBAR_HEIGHT = 48; // MuiToolbar variant dense
 
 let theme = createMuiTheme({
   palette,
@@ -40,11 +40,6 @@ let theme = createMuiTheme({
       label: {
         color: secondary.light,
       }
-    },
-    MuiToolbar: {
-      root: {
-        height: TOOLBAR_HEIGHT, // used in Main()
-      },
     },
   },
 });
