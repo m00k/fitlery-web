@@ -20,7 +20,7 @@ const Main = ({ children }: any) => {
     >
       <Box
         width={1}
-        maxWidth={theme.breakpoints.values.md}
+        maxWidth={theme.breakpoints.values.lg}
       >
         {children}
       </Box>
