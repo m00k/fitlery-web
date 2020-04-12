@@ -1,10 +1,10 @@
-export interface Workout {
+export interface WorkoutData {
   short: string;
   title: string;
   description: string;
 }
 
-export const workouts: Workout[] = [
+export const workouts: WorkoutData[] = [
   { 
     short: '18',
     title: '18min',
