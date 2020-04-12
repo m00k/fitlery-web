@@ -15,6 +15,29 @@ const useStyles = makeStyles({
   },
 });
 
+const navActions = [
+  { 
+    label: "Recents",
+    value: "recents",
+    icon: <RestoreIcon />,
+  },
+  { 
+    label: "Favorites",
+    value: "favorites",
+    icon: <FavoriteIcon />,
+  },
+  { 
+    label: "Workouts",
+    value: "workouts",
+    icon: <FitnessCenterIcon />,
+  },
+  { 
+    label: "Exercises",
+    value: "exercises",
+    icon: <ListIcon />,
+  },
+];
+
 export default function FtBottomNavigation() {
   const classes = useStyles();
   const [value, setValue] = React.useState('recents');
@@ -26,12 +49,26 @@ export default function FtBottomNavigation() {
   };
 
   return (
-    <Box position='fixed' bottom={0} left={0} right={0}>
-      <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-        <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Workouts" value="workouts" icon={<FitnessCenterIcon />} />
-        <BottomNavigationAction label="Exercises" value="exercises" icon={<ListIcon />} />
+    <Box
+      height={48} // TODO same as MuiToolbar -> how to get value from theme?
+      position='fixed'
+      bottom={0}
+      left={0}
+      right={0}
+    >
+      <BottomNavigation
+        value={value}
+        onChange={handleChange}
+        className={classes.root}
+      >
+        {navActions.map(action => 
+          <BottomNavigationAction
+            key={action.value}
+            label={action.label}
+            value={action.value}
+            icon={action.icon}
+          />
+        )}
       </BottomNavigation>
     </Box>
   );
