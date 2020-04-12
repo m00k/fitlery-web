@@ -1,5 +1,5 @@
 import { Box, Paper } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import exercises from './exercise/data';
@@ -16,19 +16,17 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function Main({ children }: any) { // TODO: extract
-  const t = useTheme();
-  console.log('###############', t.props?.MuiToolbar);
+const Main = ({height, children}: any) => {
   const plr=`calc(50vw - ${theme.breakpoints.values.md/2}px)`;
 
   return (
     <Box
-      bottom={48} // TODO
+      bottom={height}
       left={0}
       right={0}
       overflow='auto'
       position='fixed'
-      top={48} // TODO
+      top={height}
       pl={plr}
       pr={plr}
     >
@@ -39,19 +37,19 @@ function Main({ children }: any) { // TODO: extract
 
 function App() {
   const classes = useStyles();
-
+  
   return (
     <Paper className={classes.paper}>
-      <NavBar></NavBar>
+      <NavBar ></NavBar>
       <BrowserRouter>
         <Switch>
           <Route path="/workouts">
-            <Main>
+            <Main  height={48}>
               <WorkoutList />
             </Main>
           </Route>
           <Route path="/exercises">
-            <Main>
+            <Main height={48}>
               <ExerciseList {...{ exercises }}></ExerciseList>
             </Main>
           </Route>
