@@ -50,7 +50,6 @@ export default function FtBottomNavigation() {
 
   return (
     <Box
-      height={48} // TODO same as MuiToolbar -> how to get value from theme?
       position='fixed'
       bottom={0}
       left={0}

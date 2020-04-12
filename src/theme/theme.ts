@@ -3,6 +3,7 @@ import palette from "./palette";
 
 const primary = palette.primary as SimplePaletteColorOptions;
 const secondary = palette.secondary as SimplePaletteColorOptions;
+const TOOLBAR_HEIGHT = 48; // dense muitoolbar height 48
 
 let theme = createMuiTheme({
   palette,
@@ -15,7 +16,7 @@ let theme = createMuiTheme({
       },
     },
     MuiToolbar: {
-      variant: 'dense', // TODO: dense means 48px -> can we get this value from the theme somehow?
+      variant: 'dense', // TOOLBAR_HEIGHT
     }
   },
   typography: {
@@ -27,6 +28,7 @@ let theme = createMuiTheme({
     MuiBottomNavigation: {
       root: {
         backgroundColor: primary.main,
+        height: TOOLBAR_HEIGHT,
       },
     },
     MuiBottomNavigationAction: {
@@ -38,6 +40,11 @@ let theme = createMuiTheme({
       label: {
         color: secondary.light,
       }
+    },
+    MuiToolbar: {
+      root: {
+        height: TOOLBAR_HEIGHT, // used in Main()
+      },
     },
   },
 });
