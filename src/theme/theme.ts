@@ -14,6 +14,9 @@ let theme = createMuiTheme({
         h3: 'h3',
       },
     },
+    MuiToolbar: {
+      variant: 'dense', // TODO: dense means 48px -> can we get this value from the theme somehow?
+    }
   },
   typography: {
     caption: {
@@ -36,8 +39,7 @@ let theme = createMuiTheme({
         color: secondary.light,
       }
     },
-    
-  }
+  },
 });
 theme = responsiveFontSizes(theme);
 
