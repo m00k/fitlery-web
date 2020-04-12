@@ -1,5 +1,6 @@
+import Box from "@material-ui/core/Box";
+import useTheme from "@material-ui/core/styles/useTheme";
 import React from "react";
-import { Box, useTheme } from "@material-ui/core";
 
 const Main = ({ children }: any) => {
   const theme = useTheme();

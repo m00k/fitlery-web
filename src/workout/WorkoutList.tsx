@@ -1,5 +1,8 @@
-import { Avatar, Container, Paper, Typography } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { workouts } from './data';
 
