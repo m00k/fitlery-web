@@ -1,5 +1,5 @@
-import { Paper } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import exercises from './exercise/data';
@@ -9,18 +9,13 @@ import BottomNavigation from './navigation/BottomNavigation';
 import TopNavigation from './navigation/TopNavigation';
 import WorkoutList from './workout/WorkoutList';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    minHeight: '100vh',
-    backgroundColor: theme.palette.primary.dark,
-  }
-}));
-
 const App = () => {
-  const classes = useStyles();
-
+  const theme = useTheme();
   return (
-    <Paper className={classes.paper}>
+    <Box
+      height={'100vh'}
+      bgcolor={theme.palette.primary.dark}
+    >
       <TopNavigation></TopNavigation>
       <Main>
         <BrowserRouter>
@@ -35,7 +30,7 @@ const App = () => {
           <BottomNavigation></BottomNavigation>
         </BrowserRouter>
       </Main>
-    </Paper>
+    </Box>
   );
 }
 
