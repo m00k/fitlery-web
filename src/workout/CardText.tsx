@@ -1,7 +1,7 @@
 import useTheme from '@material-ui/core/styles/useTheme';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import Grid from '../shared/GridItem';
+import Grid from '../shared/Grid';
 
 const CardText = (props: any) => {
   const { workout } = props;

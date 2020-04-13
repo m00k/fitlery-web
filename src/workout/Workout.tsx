@@ -6,7 +6,6 @@ import { WorkoutData } from './data';
 
 
 const Workout = (props: { workout: WorkoutData }) => {
-
   return (
     <Card {...props}>
       <CardAvatar {...props} />

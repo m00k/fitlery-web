@@ -8,6 +8,7 @@ import Main from './Main';
 import BottomNavigation from './navigation/BottomNavigation';
 import TopNavigation from './navigation/TopNavigation';
 import WorkoutList from './workout/WorkoutList';
+import Player from './player/Player';
 
 const App = () => {
   const theme = useTheme();
@@ -21,6 +22,7 @@ const App = () => {
       <Main>
         <Route path="/workouts" component={WorkoutList} />
         <Route path="/exercises" render={() => <ExerciseList {...{ exercises }}></ExerciseList>} />
+        <Route path="/recents" component={Player} />
       </Main>
       <BottomNavigation />
     </Box>

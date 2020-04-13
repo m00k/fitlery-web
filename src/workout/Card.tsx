@@ -1,6 +1,6 @@
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
-import Grid from '../shared/GridItem';
+import Grid from '../shared/Grid';
 
 
 const Card = (props: any) => {
