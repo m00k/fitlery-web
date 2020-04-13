@@ -16,37 +16,29 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.secondary.dark,
       fontSize: theme.typography.h2.fontSize,
       fontWeight: theme.typography.fontWeightBold,
-      gridRow: 'span 4',
+      gridRow: 'span 5',
       padding: theme.spacing(7),
-    },
-    content: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.secondary.contrastText,
-      opacity: .6,
-      padding: theme.spacing(1),
-      gridRow: 'span 2',
-      overflow: 'hidden',
-      marginTop: theme.spacing(1),
     },
   }),
 );
 
 const gridColumn = style({
   prop: 'gridColumn',
-  themeKey: 'breakpoints',
+});
+
+const gridRow = style({
+  prop: 'gridRow',
 });
 
 const gridTemplateColumns = style({
   prop: 'gridTemplateColumns',
-  themeKey: 'spacing',
 });
 
 const gridTemplateRows = style({
   prop: 'gridTemplateRows',
-  themeKey: 'spacing',
 });
 
-const GridItem = styled(Box)`${gridColumn}${gridTemplateColumns}${gridTemplateRows}`;
+const GridItem = styled(Box)`${gridColumn}${gridRow}${gridTemplateColumns}${gridTemplateRows}`;
 
 const Workout = (props: { workout: WorkoutData }) => {
   const { workout } = props;
@@ -56,12 +48,11 @@ const Workout = (props: { workout: WorkoutData }) => {
   return (
     <GridItem
       key={workout.title}
-      bgcolor={theme.palette.secondary.main}
+      bgcolor={theme.palette.primary.main}
       borderRadius={1}
       display='grid'
       gridColumn={['span 6', 'span 4', 'span 3']}
-      gridTemplateRows='4fr 2fr'
-      pt={1}
+      gridTemplateRows='5fr 2fr'
     >
       <Box
         display='grid'
@@ -72,14 +63,20 @@ const Workout = (props: { workout: WorkoutData }) => {
           {workout.short}
         </Avatar>
       </Box>
-      <div className={classes.content}>
+      <GridItem
+        bgcolor={theme.palette.primary.dark}
+        color={theme.palette.secondary.contrastText}
+        p ={1}
+        gridRow={'span 2'}
+        overflow='hidden'
+      >
         <Typography variant="subtitle1" noWrap>
           {workout.title}
         </Typography>
         <Typography variant="caption" component="p" noWrap>
           {workout.description}
         </Typography>
-      </div>
+      </GridItem>
     </GridItem>
   );
 }
