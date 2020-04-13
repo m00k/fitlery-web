@@ -1,14 +1,14 @@
 import useTheme from '@material-ui/core/styles/useTheme';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import GridItem from './GridItem';
+import Grid from '../shared/GridItem';
 
 const CardText = (props: any) => {
   const { workout } = props;
   const theme = useTheme();
 
   return (
-    <GridItem
+    <Grid
       bgcolor={theme.palette.primary.dark}
       color={theme.palette.secondary.contrastText}
       p={1}
@@ -22,7 +22,7 @@ const CardText = (props: any) => {
       <Typography variant="caption" component="p" noWrap>
         {workout.description}
       </Typography>
-    </GridItem>
+    </Grid>
   );
 };
 

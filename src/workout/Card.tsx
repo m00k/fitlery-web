@@ -1,6 +1,6 @@
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
-import GridItem from './GridItem';
+import Grid from '../shared/GridItem';
 
 
 const Card = (props: any) => {
@@ -8,7 +8,7 @@ const Card = (props: any) => {
   const { children, workout } = props;
 
   return (
-    <GridItem
+    <Grid
       key={workout.title}
       bgcolor={theme.palette.primary.main}
       borderRadius={1}
@@ -18,7 +18,7 @@ const Card = (props: any) => {
       boxShadow={8}
     >
       {children}
-    </GridItem>
+    </Grid>
   );
 };
 

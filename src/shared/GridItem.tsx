@@ -6,7 +6,8 @@ const gridColumn = style({prop: 'gridColumn'});
 const gridRow = style({prop: 'gridRow'});
 const gridTemplateColumns = style({prop: 'gridTemplateColumns'});
 const gridTemplateRows = style({prop: 'gridTemplateRows'});
+const gridGap = style({prop: 'gridGap'});
 
-const GridItem = styled(Box)`${gridColumn}${gridRow}${gridTemplateColumns}${gridTemplateRows}`;
+const Grid = styled(Box)`${gridColumn}${gridRow}${gridTemplateColumns}${gridTemplateRows}${gridGap}`;
 
-export default GridItem;
+export default Grid;
