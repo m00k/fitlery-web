@@ -2,16 +2,12 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Box from '@material-ui/core/Box';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { navigationActions } from './navigation-actions'
+import { navigationActions } from './navigation-actions';
 
-const FtBottomNavigation = () => {
-  const [value, setValue] = React.useState('workouts');
-  const history = useHistory();
-
+const FtBottomNavigation = (props: any) => {
+  const { path: value, onChange } = props;
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
-    setValue(newValue);
-    history.push(`/${newValue}`); // TODO: this doesn't belong here, also this requires BottomNav to be inside <BrowserRouter/>
+    onChange(newValue);
   };
 
   return (

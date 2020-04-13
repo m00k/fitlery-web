@@ -7,22 +7,22 @@ import RestoreIcon from '@material-ui/icons/Restore';
 export const navigationActions = [
   { 
     label: "Recents",
-    value: "recents",
+    value: "/recents",
     icon: <RestoreIcon />,
   },
   { 
     label: "Favorites",
-    value: "favorites",
+    value: "/favorites",
     icon: <FavoriteIcon />,
   },
   { 
     label: "Workouts",
-    value: "workouts",
+    value: "/workouts",
     icon: <FitnessCenterIcon />,
   },
   { 
     label: "Exercises",
-    value: "exercises",
+    value: "/exercises",
     icon: <ListIcon />,
   },
 ];
