@@ -53,6 +53,7 @@ const Workout = (props: { workout: WorkoutData }) => {
       display='grid'
       gridColumn={['span 6', 'span 4', 'span 3']}
       gridTemplateRows='5fr 2fr'
+      boxShadow={8}
     >
       <Box
         display='grid'
@@ -69,6 +70,7 @@ const Workout = (props: { workout: WorkoutData }) => {
         p ={1}
         gridRow={'span 2'}
         overflow='hidden'
+        style={{ opacity: .8 }}
       >
         <Typography variant="subtitle1" noWrap>
           {workout.title}

@@ -15,7 +15,7 @@ export default function Exercise(props: ExerciseData) {
       boxShadow={2}
       borderRadius={1}
       borderLeft={20}
-      borderColor={theme.palette.primary.light}
+      borderColor={theme.palette.primary.main}
       color={theme.palette.primary.main}
       display="flex"
       height={60}
