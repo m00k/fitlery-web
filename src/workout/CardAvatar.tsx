@@ -1,24 +1,10 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    avatar: {
-      backgroundColor: theme.palette.background.paper,
-      color: theme.palette.secondary.dark,
-      fontSize: theme.typography.h2.fontSize,
-      fontWeight: theme.typography.fontWeightBold,
-      gridRow: 'span 5',
-      padding: theme.spacing(7),
-    },
-  }),
-);
+import useTheme from '@material-ui/core/styles/useTheme';
+import React from 'react';
 
 const CardAvatar = (props: any) => {
-  const classes = useStyles();
   const { workout } = props;
+  const theme = useTheme();
 
   return (
     <Box
@@ -26,9 +12,19 @@ const CardAvatar = (props: any) => {
       alignItems='center'
       justifyContent='center'
     >
-      <Avatar className={classes.avatar}>
+      <Box
+        bgcolor={theme.palette.background.paper}
+        color={theme.palette.secondary.dark}
+        fontSize={theme.typography.h2.fontSize}
+        fontWeight={theme.typography.fontWeightBold}
+        borderRadius='50%'
+        lineHeight='112px'
+        width={112}
+        height={112}
+        textAlign='center'
+      >
         {workout.short}
-      </Avatar>
+      </Box>
     </Box>
   );
 };
