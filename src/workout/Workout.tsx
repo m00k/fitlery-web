@@ -6,13 +6,11 @@ import { WorkoutData } from './data';
 
 
 const Workout = (props: { workout: WorkoutData }) => {
-  const { workout } = props;
 
-  // TODO render props or context?
   return (
-    <Card workout={workout}>
-      <CardAvatar workout={workout} />
-      <CardText workout={workout} />
+    <Card {...props}>
+      <CardAvatar {...props} />
+      <CardText {...props} />
     </Card>
   );
 }
