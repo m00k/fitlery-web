@@ -1,13 +1,17 @@
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Box from '@material-ui/core/Box';
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { navigationActions } from './navigation-actions';
 
-const FtBottomNavigation = (props: any) => {
-  const { path: value, onChange } = props;
+const FtBottomNavigation = () => {
+  const history = useHistory();
+  const [value, setValue] = useState(history.location.pathname);
+
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
-    onChange(newValue);
+    setValue(newValue);
+    history.push(newValue);
   };
 
   return (
@@ -21,7 +25,7 @@ const FtBottomNavigation = (props: any) => {
         value={value}
         onChange={handleChange}
       >
-        {navigationActions.map(action => 
+        {navigationActions.map(action =>
           <BottomNavigationAction
             key={action.value}
             label={action.label}
