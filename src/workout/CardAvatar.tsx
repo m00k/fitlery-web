@@ -11,6 +11,8 @@ const CardAvatar = (props: any) => {
       display='grid'
       alignItems='center'
       justifyContent='center'
+      bgcolor={theme.palette.primary.main}
+      p={1}
     >
       <Box
         bgcolor={theme.palette.background.paper}
@@ -18,9 +20,9 @@ const CardAvatar = (props: any) => {
         fontSize={theme.typography.h2.fontSize}
         fontWeight={theme.typography.fontWeightBold}
         borderRadius='50%'
-        lineHeight='112px'
-        width={112}
-        height={112}
+        lineHeight='112px' // TODO: magic numbers 
+        width={112} // TODO: magic numbers 
+        height={112} // TODO: magic numbers 
         textAlign='center'
       >
         {workout.short}
