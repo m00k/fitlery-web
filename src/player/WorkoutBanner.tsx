@@ -12,14 +12,8 @@ const WorkoutBanner = (props: any) => {
       gridTemplateColumns="128px 1fr" // TODO: magic numbers 
       width={1}
     >
-      <CardAvatar
-        workout={workout}
-      >
-      </CardAvatar>
-      <CardText
-        workout={workout}
-      >
-      </CardText>
+      <CardAvatar workout={workout}/>
+      <CardText workout={workout}/>
     </Grid>
 
   );

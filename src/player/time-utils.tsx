@@ -14,10 +14,12 @@ const format = (time: Time): string => {
   const m = time.m.toString().padStart(2, '0');
   const s = time.s.toString().padStart(2, '0');
   const ds = Math.floor(time.ms / 100).toString();
-  return `${h}:${m}:${s}.${ds}`;
+  return time.h > 0
+    ? `${h}:${m}:${s}.${ds}`
+    : `${m}:${s}.${ds}`;
 };
 
-const toTimeString = (timeMs: number) => format(fromNumber(timeMs)); 
+const toTimeString = (timeMs: number) => format(fromNumber(timeMs));
 
 const timeUtils = {
   fromNumber,
