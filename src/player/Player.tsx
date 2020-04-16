@@ -16,26 +16,29 @@ const Controls = () => {
     <Grid
       alignItems="center"
       display="grid"
+      justifyContent="center"
       gridTemplateColumns="1fr 2fr 1fr"
-      justifyItems="center"
       minHeight={80}
       width={200}
       bgcolor={theme.palette.background.paper}
     >
       <IconButton
-        color="primary">
+        color="primary"
+      >
         <SkipPreviousIcon
           style={{ fontSize: '2.5rem' }}
         />
       </IconButton>
       <IconButton
-        color="primary">
+        color="primary"
+      >
         <PlayArrowIcon
           style={{ fontSize: '4rem' }}
         />
       </IconButton>
       <IconButton
-        color="primary">
+        color="primary"
+      >
         <SkipNextIcon
           style={{ fontSize: '2.5rem' }}
         />
