@@ -1,5 +1,5 @@
 import useTheme from '@material-ui/core/styles/useTheme';
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '../shared/Grid';
 import { workouts } from '../workout/data';
 import Controls from './Controls';
@@ -8,6 +8,7 @@ import WorkoutBanner from './WorkoutBanner';
 export type PlayerState = 'playing' | 'paused' | 'stopped';
 
 const Player = () => {
+  const [state, setState] = useState<PlayerState>('stopped');
   const theme = useTheme();
 
   return (
@@ -23,7 +24,10 @@ const Player = () => {
         workout={workouts[0]} // TODO
       >
       </WorkoutBanner>
-      <Controls />
+      <Controls
+        state={state}
+        onClick={(s: PlayerState) => setState(s)}
+      />
     </Grid>
   );
 }

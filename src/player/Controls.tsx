@@ -4,7 +4,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import React, { useState } from 'react';
+import React from 'react';
 import Grid from '../shared/Grid';
 import { PlayerState } from './Player';
 
@@ -39,9 +39,14 @@ const Next = () =>
   </IconButton>
 ;
 
-const Controls = () => {
+interface ControlsProps {
+  state: PlayerState;
+  onClick: (p: PlayerState) => void
+}
+
+const Controls = (props: ControlsProps) => {
+  const { state, onClick } = props;
   const theme = useTheme();
-  const [state, setState] = useState<PlayerState>('stopped');
 
   return (
     <Grid
@@ -56,8 +61,8 @@ const Controls = () => {
       <Prev />
       {
         state !== 'playing'
-          ? <Play onClick={() => setState('playing')}/>
-          : <Pause onClick={() => setState('paused')}/>
+          ? <Play onClick={() => onClick('playing')}/>
+          : <Pause onClick={() => onClick('paused')}/>
       }
       <Next />
     </Grid>
