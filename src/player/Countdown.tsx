@@ -1,29 +1,16 @@
 import useTheme from '@material-ui/core/styles/useTheme';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Grid from '../shared/Grid';
 import time from './time-utils';
 
 export interface CountdownProps {
-  ms: number;
+  msLeft: number;
 }
 
 const Countdown = (props: CountdownProps) => {
-  const { ms } = props
-  const INTERVAL = 100;
-  const [remaining, setRemaining] = useState(ms || 0);
+  const { msLeft } = props
   const theme = useTheme();
   
-  useEffect(() => {
-    function progress() {
-      if (remaining < INTERVAL) {
-        clearInterval(timer);
-      }
-      setRemaining(remaining => Math.max(remaining - INTERVAL, 0));
-    }
-    const timer = setInterval(progress, 100);
-    return () => clearInterval(timer);
-  });
-
   return (
     <Grid
       alignItems="center"
@@ -34,7 +21,7 @@ const Countdown = (props: CountdownProps) => {
       fontSize="3rem"
       justifyContent="center"
     >
-      {time.toTimeString(remaining)}
+      {time.toTimeString(msLeft)}
     </Grid>
   );
 };

@@ -51,13 +51,13 @@ const Controls = (props: ControlsProps) => {
       width={200}
       bgcolor={theme.palette.background.paper}
     >
-      <Prev />
+      <Prev onClick={() => onClick('prev')} />
       {
-        state !== 'playing'
-          ? <Play onClick={() => onClick('playing')} />
-          : <Pause onClick={() => onClick('paused')} />
+        state !== 'play'
+          ? <Play onClick={() => onClick('play')} />
+          : <Pause onClick={() => onClick('pause')} />
       }
-      <Next />
+      <Next onClick={() => onClick('next')} />
     </Grid>
   );
 }

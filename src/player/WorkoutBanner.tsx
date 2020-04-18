@@ -9,10 +9,11 @@ import { PlayerState } from './Player';
 interface WorkoutBannerProps {
   workout: WorkoutData;
   playerState: PlayerState;
+  msLeft: number;
 }
 
 const WorkoutBanner = (props: any) => {
-  const { workout, playerState } = props;
+  const { workout, playerState, msLeft } = props;
 
   return (
     <Grid
@@ -21,9 +22,9 @@ const WorkoutBanner = (props: any) => {
       width={1}
     >
       <CardAvatar workout={workout}/>
-      {playerState === 'stopped'
+      {playerState === 'stop'
         ? <CardText workout={workout}/>
-        : <Countdown ms={60000}/>
+        : <Countdown msLeft={msLeft}/>
       }
     </Grid>
   );
