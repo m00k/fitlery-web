@@ -5,6 +5,7 @@ import { workouts } from '../workout/data';
 import Controls from './Controls';
 import WorkoutBanner from './WorkoutBanner';
 
+export type PlayerState = 'playing' | 'paused' | 'stopped';
 
 const Player = () => {
   const theme = useTheme();

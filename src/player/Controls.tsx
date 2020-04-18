@@ -1,13 +1,13 @@
 import { IconButton } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
+import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PauseIcon from '@material-ui/icons/Pause';
 import React, { useState } from 'react';
 import Grid from '../shared/Grid';
+import { PlayerState } from './Player';
 
-export type PlayerState = 'playing' | 'paused' | 'stopped';
 
 const Play = (props: any) =>
   <IconButton
