@@ -22,6 +22,7 @@ const Player = () => {
     >
       <WorkoutBanner
         workout={workouts[0]} // TODO
+        playerState={state}
       >
       </WorkoutBanner>
       <Controls
