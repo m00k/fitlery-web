@@ -9,35 +9,28 @@ import Grid from '../shared/Grid';
 import { PlayerState } from './Player';
 
 
-const Play = (props: any) =>
-  <IconButton
-    color="primary"
-    onClick={props.onClick}
-  >  
-    <PlayArrowIcon style={{ fontSize: '4rem' }}/>
-  </IconButton>
-;
+interface ControlButtonProps {
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
 
-const Pause = (props: any) =>
-  <IconButton
-    color="primary"
-    onClick={props.onClick}
-  >
-    <PauseIcon style={{ fontSize: '4rem' }}/>
-  </IconButton>
-;
+const ControlButtonFactory = (icon: JSX.Element) => {
+  return (props: ControlButtonProps) => {
+    const { onClick } = props;
+    return (
+      <IconButton
+        color="primary"
+        onClick={onClick}
+      >
+        {icon}
+      </IconButton>
+    );
+  };
+};
 
-const Prev = () =>
-  <IconButton color="primary">
-    <SkipPreviousIcon style={{ fontSize: '2.5rem' }}/>
-  </IconButton>
-;
-
-const Next = () =>
-  <IconButton color="primary">
-    <SkipNextIcon style={{ fontSize: '2.5rem' }}/>
-  </IconButton>
-;
+const Play = ControlButtonFactory(<PlayArrowIcon style={{ fontSize: '4rem' }} />);
+const Pause = ControlButtonFactory(<PauseIcon style={{ fontSize: '4rem' }} />);
+const Prev = ControlButtonFactory(<SkipPreviousIcon style={{ fontSize: '2.5rem' }} />);
+const Next = ControlButtonFactory(<SkipNextIcon style={{ fontSize: '2.5rem' }} />);
 
 interface ControlsProps {
   state: PlayerState;
@@ -61,8 +54,8 @@ const Controls = (props: ControlsProps) => {
       <Prev />
       {
         state !== 'playing'
-          ? <Play onClick={() => onClick('playing')}/>
-          : <Pause onClick={() => onClick('paused')}/>
+          ? <Play onClick={() => onClick('playing')} />
+          : <Pause onClick={() => onClick('paused')} />
       }
       <Next />
     </Grid>
