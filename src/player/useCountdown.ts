@@ -17,19 +17,21 @@ const useCountdown = (settings: CountdownSettings) => {
 
   const start = () => setIsRunning(true);
   const pause = () => setIsRunning(false);
-  const clear = () => window.clearTimeout(clearRef.current);
   const reset = () => setMsLeft(ms);
+  const clear = () => window.clearTimeout(clearRef.current);
 
   useEffect(() => {
+    const update = () => {
+      const newMsLeft = Math.max(msLeft - intervalMs, 0);
+      if (newMsLeft <= 0) {
+        setIsRunning(false);
+        onZero();
+      }
+      setMsLeft(newMsLeft);
+    };
+
     if (isRunning) {
-      clearRef.current = setTimeout(() => {
-        if (msLeft <= 0) {
-          setIsRunning(false);
-          onZero();
-        } else {
-          setMsLeft(prevMsLeft => Math.max(prevMsLeft - intervalMs, 0));
-        }
-      }, intervalMs);
+      clearRef.current = setTimeout(update, intervalMs);
       return clear;
     }
   }, [intervalMs, isRunning, msLeft, onZero]);

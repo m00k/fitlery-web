@@ -51,7 +51,7 @@ const Controls = (props: ControlsProps) => {
       width={200}
       bgcolor={theme.palette.background.paper}
     >
-      <Prev onClick={() => onClick('prev')} />
+      <Prev onClick={() => onClick('prev')}/>
       {
         state !== 'play'
           ? <Play onClick={() => onClick('play')} />

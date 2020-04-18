@@ -35,10 +35,15 @@ const Player = () => {
       <Controls
         state={state}
         onClick={(s: PlayerState) => {
-          setState(s);
-          if (s === 'play') start();
-          if (s === 'pause' ) pause();
-          if (s === 'prev' ) reset();
+          if (s === 'play') { 
+            start();
+            setState(s);
+          } else if (s === 'pause' ) {
+            pause();
+            setState(s);
+          } else if (s === 'prev' ) {
+            reset();
+          }
         }}
       />
     </Grid>
