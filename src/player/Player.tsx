@@ -15,7 +15,7 @@ const Player = () => {
     console.log('####################', 'on zero');
     setState('pause');
   }
-  const msTotal = 60000;
+  const msTotal = 3000;
   const [msLeft, , start, pause, reset] = useCountdown({onZero, ms: msTotal});
 
   return (
