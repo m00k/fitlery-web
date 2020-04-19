@@ -15,7 +15,8 @@ const Player = () => {
     console.log('####################', 'on zero');
     setState('pause');
   }
-  const [msLeft, , start, pause, reset] = useCountdown({onZero, ms: 3000});
+  const msTotal = 60000;
+  const [msLeft, , start, pause, reset] = useCountdown({onZero, ms: msTotal});
 
   return (
     <Grid
@@ -29,7 +30,8 @@ const Player = () => {
       <WorkoutBanner
         workout={workouts[0]} // TODO
         playerState={state}
-        msLeft={msLeft}
+        msLeft={msLeft} // TODO: context or store
+        msTotal={msTotal}
       >
       </WorkoutBanner>
       <Controls
