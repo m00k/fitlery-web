@@ -17,7 +17,7 @@ interface WorkoutBannerProps {
 
 const WorkoutBanner: React.FunctionComponent<WorkoutBannerProps> = (props: WorkoutBannerProps) => {
   const { workout, playerState, msLeft, msTotal } = props;
-  const percentDone = 1 - msLeft / msTotal;
+  const fractionDone = 1 - msLeft / msTotal;
 
   return (
     <Grid
@@ -27,7 +27,7 @@ const WorkoutBanner: React.FunctionComponent<WorkoutBannerProps> = (props: Worko
     >
       {playerState === 'stop'
         ? <CardAvatar workout={workout}/>
-        : <PieCountdown percentDone={percentDone}/>
+        : <PieCountdown fractionDone={fractionDone}/>
       }
       {playerState === 'stop'
         ? <CardText workout={workout}/>

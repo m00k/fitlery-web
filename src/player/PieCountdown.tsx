@@ -1,28 +1,14 @@
-import Box from '@material-ui/core/Box';
+import Box, { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React, { useMemo } from 'react';
 
-const calcPoint = (r: number = 1, cx: number = 0, cy: number = 0, percent: number) => {
-  return [
-    cx + Math.sin(2 * Math.PI * percent) * r,
-    cy - Math.cos(2 * Math.PI * percent) * r,
-  ];
-};
 
-const useArc: (...args: any) => D = (pFrom: number, pTo: number, r: number = 1, cx: number = 0, cy: number = 0) => {
-  return useMemo(() => {
-    const calcPointR = calcPoint.bind(null, r, cx, cy);
-    const [startX, startY] = calcPointR(pFrom);
-    const [endX, endY] = calcPointR(pTo);
-    const largeArcFlag = Math.round(pTo - pFrom) as 0 | 1;
-    return {
-      startX,
-      startY,
-      endX,
-      endY,
-      largeArcFlag,
-    };
-  }, [pFrom, pTo, r, cx, cy]);
+interface ArcProps extends React.SVGProps<SVGPathElement> {
+  fStart: number;
+  fEnd: number;
+  r?: number;
+  cx?: number;
+  cy?: number;
 }
 
 interface D {
@@ -33,16 +19,31 @@ interface D {
   largeArcFlag: 0 | 1;
 }
 
-interface ArcProps extends React.SVGProps<SVGPathElement> {
-  from: number;
-  to: number;
-  r?: number;
-  cx?: number;
-  cy?: number;
+const calcPoint = (r: number = 1, cx: number = 0, cy: number = 0, percent: number) => {
+  return [
+    cx + Math.sin(2 * Math.PI * percent) * r,
+    cy - Math.cos(2 * Math.PI * percent) * r,
+  ];
+};
+
+const useArc: (...args: any) => D = (fStart: number, fEnd: number, r: number = 1, cx: number = 0, cy: number = 0) => {
+  return useMemo(() => {
+    const calcPointR = calcPoint.bind(null, r, cx, cy);
+    const [startX, startY] = calcPointR(fStart);
+    const [endX, endY] = calcPointR(fEnd);
+    const largeArcFlag = Math.round(fEnd - fStart) as 0 | 1;
+    return {
+      startX,
+      startY,
+      endX,
+      endY,
+      largeArcFlag,
+    };
+  }, [fStart, fEnd, r, cx, cy]);
 }
 
 const Arc = (props: ArcProps) => {
-  const { from, to, r = 1, cx = 0, cy = 0, fill = 'currentColor' } = props;
+  const { fStart: from, fEnd: to, r = 1, cx = 0, cy = 0, fill = 'currentColor' } = props;
   const { startX, startY, endX, endY, largeArcFlag } = useArc(from, to, r, cx, cy);
   const d =
     `M ${startX} ${startY} ` +
@@ -57,8 +58,12 @@ const Arc = (props: ArcProps) => {
   );
 };
 
-const PieCountdown = (props: any) => {
-  const { percentDone } = props;
+interface PieCountdownProps extends BoxProps {
+  fractionDone: number;
+}
+
+const PieCountdown = (props: PieCountdownProps) => {
+  const { fractionDone } = props;
   const theme = useTheme();
 
   return (
@@ -76,13 +81,13 @@ const PieCountdown = (props: any) => {
         <>
           <Arc
             fill={theme.palette.primary.light}
-            from={0}
-            to={percentDone}
+            fStart={0}
+            fEnd={fractionDone}
           />
           <Arc
             fill={theme.palette.background.paper}
-            from={percentDone}
-            to={1}
+            fStart={fractionDone}
+            fEnd={1}
           />
         </>
       </svg>
