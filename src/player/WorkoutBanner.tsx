@@ -4,7 +4,7 @@ import CardAvatar from '../workout/CardAvatar';
 import CardText from '../workout/CardText';
 import { WorkoutData } from '../workout/data';
 import Countdown from './Countdown';
-import GoAvatar from './GoAvatar';
+import PieCountdown from './PieCountdown';
 import { PlayerState } from './Player';
 
 interface WorkoutBannerProps {
@@ -27,7 +27,7 @@ const WorkoutBanner: React.FunctionComponent<WorkoutBannerProps> = (props: Worko
     >
       {playerState === 'stop'
         ? <CardAvatar workout={workout}/>
-        : <GoAvatar percentDone={percentDone}/>
+        : <PieCountdown percentDone={percentDone}/>
       }
       {playerState === 'stop'
         ? <CardText workout={workout}/>

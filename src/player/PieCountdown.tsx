@@ -54,7 +54,7 @@ const Arc = (props: any) => {
   );
 };
 
-const GoAvatar = (props: any) => {
+const PieCountdown = (props: any) => {
   const { percentDone } = props;
   const theme = useTheme();
 
@@ -91,4 +91,4 @@ const GoAvatar = (props: any) => {
   );
 };
 
-export default GoAvatar;
+export default PieCountdown;
