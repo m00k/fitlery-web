@@ -57,11 +57,6 @@ const Arc = (props: ArcProps) => {
   );
 };
 
-const Background = () => {
-  const theme = useTheme();
-  return <circle r="1" fill={theme.palette.background.paper} />;
-}
-
 const PieCountdown = (props: any) => {
   const { percentDone } = props;
   const theme = useTheme();
@@ -78,21 +73,18 @@ const PieCountdown = (props: any) => {
         width="100%"
         viewBox="-1 -1 2 2"
       >
-        {!percentDone
-          ? <Background />
-          : <>
-            <Arc
-              fill={theme.palette.primary.light}
-              from={0}
-              to={percentDone}
-            />
-            <Arc
-              fill={theme.palette.background.paper}
-              from={percentDone}
-              to={1}
-            />
-          </>
-        }
+        <>
+          <Arc
+            fill={theme.palette.primary.light}
+            from={0}
+            to={percentDone}
+          />
+          <Arc
+            fill={theme.palette.background.paper}
+            from={percentDone}
+            to={1}
+          />
+        </>
       </svg>
     </Box>
   );
