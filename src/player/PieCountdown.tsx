@@ -1,6 +1,6 @@
 import Box, { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
-import React from 'react';
+import React, { useRef } from 'react';
 import Arc from './Arc';
 
 
@@ -45,9 +45,10 @@ interface PieCountdownProps extends BoxProps {
 const PieCountdown = (props: PieCountdownProps) => {
   const { fractionDone } = props;
   const theme = useTheme();
+  let firstRender = useRef<boolean>(true);
 
   const bgDoneProps: BackgroundProps = {
-    text: !fractionDone ? 'Ready' : 'Go!',
+    text: (!firstRender.current && !fractionDone) ? 'Ready' : 'Go!',
     bgcolor: theme.palette.background.paper,
     color: theme.palette.secondary.dark,
     style: fractionDone > 0 ? { clipPath: "url(#clip-left)" } : {}, // TODO: webkit vendor prefix
@@ -59,6 +60,8 @@ const PieCountdown = (props: PieCountdownProps) => {
     color: theme.palette.secondary.contrastText,
     style: fractionDone < 1 ? { clipPath: "url(#clip-done)" } : {}, // TODO: webkit vendor prefix
   };
+
+  firstRender.current = false;
 
   return (
     <Box // TODO (cb): box vs grid?
