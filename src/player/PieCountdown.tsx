@@ -1,6 +1,6 @@
 import Box, { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import Arc from './Arc';
 
 
@@ -14,6 +14,12 @@ interface BackgroundProps {
 const Background = (props: BackgroundProps) => {
   const { bgcolor, color, style, text } = props;
   const theme = useTheme();
+  // TODO: still magic numbers
+  const { height, p } = useMemo(() => {
+    const p = theme.spacing(1);
+    const height = p * 14;
+    return { height, p };
+   }, [theme]);
 
   return (
     <Box
@@ -22,14 +28,14 @@ const Background = (props: BackgroundProps) => {
       fontSize={theme.typography.h2.fontSize}
       fontWeight={theme.typography.fontWeightBold}
       borderRadius='50%'
-      lineHeight='112px' // TODO: magic numbers 
-      width={112} // TODO: magic numbers 
-      height={112} // TODO: magic numbers 
+      lineHeight={`${height}px`} // TODO: magic numbers 
+      width={height} // TODO: magic numbers 
+      height={height} // TODO: magic numbers 
       textAlign='center'
-      bottom={theme.spacing(1)}
-      top={theme.spacing(1)}
-      left={theme.spacing(1)}
-      right={theme.spacing(1)}
+      bottom={p}
+      top={p}
+      left={p}
+      right={p}
       position="absolute"
       style={style} // TODO: webkit vendor prefix
     >
@@ -63,35 +69,46 @@ const PieCountdown = (props: PieCountdownProps) => {
 
   firstRender.current = false;
 
+  // TODO: still magic numbers
+  const { height, cx, cy, r } = useMemo(() => {
+   const s = theme.spacing(1);
+   const height = s * 16;
+   const cx = s * 7; 
+   const cy = s * 7;
+   const r = s * 7;
+   return { height, cx, cy, r };
+  }, [theme]);
+
   return (
     <Box // TODO (cb): box vs grid?
       display="grid"
       alignItems="center"
       justifyContent="center"
       bgcolor={theme.palette.primary.main}
-      p={1}
       position="relative"
+      height={height}
     >
       <Background {...bgDoneProps} />
       <Background {...bgLeftProps} />
       <svg
-        width="112px" // TODO: magic numbers
-        viewBox="-1 -1 2 2"
+        width="0"
+        height="0"
+      // viewBox="-1 -1 2 2"
       >
         <clipPath id="clip-done">
           <Arc
-            cx={56} // TODO: magic numbers
-            cy={56} // TODO: magic numbers
-            r={56} // TODO: magic numbers
+            cx={cx}
+            cy={cy}
+            r={r}
             fStart={0}
             fEnd={fractionDone}
           />
         </clipPath>
         <clipPath id="clip-left">
           <Arc
-            cx={56} // TODO: magic numbers
-            cy={56} // TODO: magic numbers
-            r={56} // TODO: magic numbers
+            cx={cx}
+            cy={cy}
+            r={r}
             fStart={fractionDone}
             fEnd={1}
           />
