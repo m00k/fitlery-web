@@ -26,7 +26,7 @@ const WorkoutBanner: React.FunctionComponent<WorkoutBannerProps> = (props: Worko
       width={1}
     >
       {playerState === 'stop'
-        ? <CardAvatar workout={workout}/>
+        ? <CardAvatar text={workout.short}/>
         : <PieCountdown fractionDone={fractionDone}/>
       }
       {playerState === 'stop'

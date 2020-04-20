@@ -5,10 +5,15 @@ import CardText from './CardText';
 import { WorkoutData } from './data';
 
 
-const Workout = (props: { workout: WorkoutData }) => {
+interface WorkoutProps {
+  workout: WorkoutData;
+}
+
+const Workout = (props: WorkoutProps ) => {
+  const { workout } = props;
   return (
     <Card {...props}>
-      <CardAvatar {...props} />
+      <CardAvatar text={workout.short} />
       <CardText {...props} />
     </Card>
   );

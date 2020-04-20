@@ -46,7 +46,7 @@ const Arc = (props: ArcProps) => {
     `M ${startX} ${startY} ` +
     `A ${r} ${r} 0 ${largeArcFlag} 1 ${endX} ${endY} ` +
     `L ${cx} ${cy}`
-    ;
+  ;
   return (
     <path
       fill={fill}

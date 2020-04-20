@@ -3,7 +3,7 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 
 const CardAvatar = (props: any) => {
-  const { workout } = props;
+  const { text } = props;
   const theme = useTheme();
 
   return (
@@ -25,7 +25,7 @@ const CardAvatar = (props: any) => {
         height={112} // TODO: magic numbers 
         textAlign='center'
       >
-        {workout.short}
+        {text}
       </Box>
     </Box>
   );
