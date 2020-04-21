@@ -1,47 +1,66 @@
-import Box, { BoxProps } from '@material-ui/core/Box';
+import { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
-import React, { useMemo, useRef } from 'react';
+import React, { useRef } from 'react';
 import Arc from './Arc';
 
 
-interface BackgroundProps {
+interface PieSliceProps {
   text: string;
   bgcolor: string;
   color: string;
-  style: {};
+  setClipPath: boolean;
+  size: number;
+  fractionStart: number;
+  fractionEnd: number;
 }
 
-const Background = (props: BackgroundProps) => {
-  const { bgcolor, color, style, text } = props;
+const PieSlice = (props: PieSliceProps) => {
+  const { text, bgcolor, color, setClipPath, size, fractionStart, fractionEnd } = props;
   const theme = useTheme();
-  // TODO: still magic numbers
-  const { height, p } = useMemo(() => {
-    const p = theme.spacing(1);
-    const height = p * 14;
-    return { height, p };
-   }, [theme]);
-
+  const viewBoxSize = 100;
+  const id = `clip${Math.floor(1000000 * Math.random())}`;
   return (
-    <Box
-      bgcolor={bgcolor}
-      color={color}
-      fontSize={theme.typography.h2.fontSize}
-      fontWeight={theme.typography.fontWeightBold}
-      borderRadius='50%'
-      lineHeight={`${height}px`} // TODO: magic numbers 
-      width={height} // TODO: magic numbers 
-      height={height} // TODO: magic numbers 
-      textAlign='center'
-      bottom={p}
-      top={p}
-      left={p}
-      right={p}
-      position="absolute"
-      style={style} // TODO: webkit vendor prefix
+    <svg
+      x={theme.spacing(1)}
+      y={theme.spacing(1)}
+      width={size - theme.spacing(2)}
+      height={size - theme.spacing(2)}
+      viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
     >
-      {text}
-    </Box>
-  );
+      <g
+        clipPath={setClipPath ? `url(#${id})` : ``} // TODO: webkit vendor prefix?
+      >
+        <circle
+          cx="50%"
+          cy="50%"
+          r="50%"
+          fill={bgcolor}
+        >
+        </circle>
+        <text
+          x="50%"
+          y="50%"
+          dominantBaseline="middle"
+          fill={color}
+          fontSize={2 / 3 * viewBoxSize / 2}
+          fontWeight="700"
+          textAnchor="middle"
+          fontFamily="Roboto"
+        >
+          {text}
+        </text>
+      </g>
+      <clipPath id={id}>
+        <Arc
+          cx={50}
+          cy={50}
+          r={viewBoxSize / 2}
+          fStart={fractionStart}
+          fEnd={fractionEnd}
+        />
+      </clipPath>
+    </svg>
+  )
 }
 
 interface PieCountdownProps extends BoxProps {
@@ -51,70 +70,53 @@ interface PieCountdownProps extends BoxProps {
 const PieCountdown = (props: PieCountdownProps) => {
   const { fractionDone } = props;
   const theme = useTheme();
+  const size = 16 * theme.spacing(1);
   let firstRender = useRef<boolean>(true);
 
-  const bgDoneProps: BackgroundProps = {
-    text: (!firstRender.current && !fractionDone) ? 'Ready' : 'Go!',
-    bgcolor: theme.palette.background.paper,
-    color: theme.palette.secondary.dark,
-    style: fractionDone > 0 ? { clipPath: "url(#clip-left)" } : {}, // TODO: webkit vendor prefix
-  };
-
-  const bgLeftProps: BackgroundProps = {
+  const pieDoneProps: PieSliceProps = {
+    // TODO: text, clipPath are the only ones changing
     text: fractionDone === 1 ? 'Done' : 'Go!',
+    setClipPath: (fractionDone < 1),
     bgcolor: theme.palette.primary.light,
     color: theme.palette.secondary.contrastText,
-    style: fractionDone < 1 ? { clipPath: "url(#clip-done)" } : {}, // TODO: webkit vendor prefix
+    size,
+    fractionStart: 0,
+    fractionEnd: fractionDone,
+  };
+
+  const pieLeftProps: PieSliceProps = {
+    // TODO: text, clipPath are the only ones changing
+    text: (!firstRender.current && !fractionDone) ? 'Ready' : 'Go!',
+    setClipPath: fractionDone > 0,
+    bgcolor: theme.palette.background.paper,
+    color: theme.palette.secondary.dark,
+    size,
+    fractionStart: fractionDone,
+    fractionEnd: 1,
   };
 
   firstRender.current = false;
 
-  // TODO: still magic numbers
-  const { height, cx, cy, r } = useMemo(() => {
-   const s = theme.spacing(1);
-   const height = s * 16;
-   const cx = s * 7; 
-   const cy = s * 7;
-   const r = s * 7;
-   return { height, cx, cy, r };
-  }, [theme]);
-
   return (
-    <Box // TODO (cb): box vs grid?
-      display="grid"
-      alignItems="center"
-      justifyContent="center"
-      bgcolor={theme.palette.primary.main}
-      position="relative"
-      height={height}
+    <svg
+      width={size}
+      height={size}
     >
-      <Background {...bgDoneProps} />
-      <Background {...bgLeftProps} />
-      <svg
-        width="0"
-        height="0"
-      // viewBox="-1 -1 2 2"
+      <rect
+        width="100%"
+        height="100%"
+        fill={theme.palette.primary.main}
       >
-        <clipPath id="clip-done">
-          <Arc
-            cx={cx}
-            cy={cy}
-            r={r}
-            fStart={0}
-            fEnd={fractionDone}
-          />
-        </clipPath>
-        <clipPath id="clip-left">
-          <Arc
-            cx={cx}
-            cy={cy}
-            r={r}
-            fStart={fractionDone}
-            fEnd={1}
-          />
-        </clipPath>
-      </svg>
-    </Box>
+      </rect>
+      <PieSlice
+        {...pieLeftProps}
+      >
+      </PieSlice>
+      <PieSlice
+        {...pieDoneProps}
+      >
+      </PieSlice>
+    </svg>
   );
 };
 
