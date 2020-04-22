@@ -2,18 +2,19 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import Arc from './Arc';
 
+
 export interface PieSliceProps {
   text: string;
   bgcolor: string;
   color: string;
-  setClipPath: boolean;
+  clipIf: boolean;
   size: number;
   fractionStart: number;
   fractionEnd: number;
 }
 
 const PieSlice = (props: PieSliceProps) => {
-  const { text, bgcolor, color, setClipPath, size, fractionStart, fractionEnd } = props;
+  const { text, bgcolor, color, clipIf: setClipPath, size, fractionStart, fractionEnd } = props;
   const theme = useTheme();
   const viewBoxSize = 100;
   const id = `clip${Math.floor(1000000 * Math.random())}`;

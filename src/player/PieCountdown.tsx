@@ -1,27 +1,24 @@
 import { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React, { useRef } from 'react';
-import PieSlice, { PieSliceProps } from './PieSlice';
+import PieSlice from './PieSlice';
 
 
 const PieSliceLeft = (props: any) => {
   const { fractionDone, size } = props; // TODO: size from parent width
   const theme = useTheme();
   let firstRender = useRef<boolean>(true);
-  const pieSliceLeftProps: PieSliceProps = {
-    // TODO: text, clipPath are the only ones changing
-    text: (!firstRender.current && !fractionDone) ? 'Ready' : 'Go!',
-    setClipPath: fractionDone > 0,
-    bgcolor: theme.palette.background.paper,
-    color: theme.palette.secondary.dark,
-    size,
-    fractionStart: fractionDone,
-    fractionEnd: 1,
-  };
+  const text = (!firstRender.current && !fractionDone) ? 'Ready' : 'Go!';
   firstRender.current = false;
   return (
     <PieSlice
-      {...pieSliceLeftProps}
+      text={text}
+      clipIf={fractionDone > 0}
+      size={size}
+      bgcolor={theme.palette.background.paper}
+      color={theme.palette.secondary.dark}
+      fractionStart={fractionDone}
+      fractionEnd={1}
     />
   );
 }
@@ -29,19 +26,15 @@ const PieSliceLeft = (props: any) => {
 const PieSliceDone = (props: any) => {
   const { fractionDone, size } = props;
   const theme = useTheme();
-  const pieSliceDoneProps: PieSliceProps = {
-    // TODO: text, clipPath are the only ones changing
-    text: fractionDone === 1 ? 'Done' : 'Go!',
-    setClipPath: (fractionDone < 1),
-    bgcolor: theme.palette.primary.light,
-    color: theme.palette.secondary.contrastText,
-    size,
-    fractionStart: 0,
-    fractionEnd: fractionDone,
-  };
   return (
     <PieSlice
-      {...pieSliceDoneProps}
+      text={fractionDone === 1 ? 'Done' : 'Go!'}
+      clipIf={(fractionDone < 1)}
+      size={size}
+      bgcolor={theme.palette.primary.light}
+      color={theme.palette.secondary.contrastText}
+      fractionStart={0}
+      fractionEnd={fractionDone}
     />
   );
 }
