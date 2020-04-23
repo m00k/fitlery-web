@@ -1,3 +1,4 @@
+import useTheme from "@material-ui/core/styles/useTheme";
 import React, { ReactNode } from 'react';
 import Grid from '../shared/Grid';
 import CardAvatar from '../workout/CardAvatar';
@@ -18,16 +19,21 @@ interface WorkoutBannerProps {
 const WorkoutBanner: React.FunctionComponent<WorkoutBannerProps> = (props: WorkoutBannerProps) => {
   const { workout, playerState, msLeft, msTotal } = props;
   const fractionDone = 1 - msLeft / msTotal;
+  const theme = useTheme();
+  const size = theme.spacing(16);
 
   return (
     <Grid
       display="grid"
-      gridTemplateColumns="128px 1fr" // TODO: magic numbers 
+      gridTemplateColumns={`${size}px 1fr`} // TODO: magic numbers 
       width={1}
     >
       {playerState === 'stop'
         ? <CardAvatar text={workout.short}/>
-        : <PieCountdown fractionDone={fractionDone}/>
+        : <PieCountdown
+            fractionDone={fractionDone}
+            size={size}
+          />
       }
       {playerState === 'stop'
         ? <CardText workout={workout}/>

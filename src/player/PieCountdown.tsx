@@ -41,12 +41,12 @@ const PieSliceDone = (props: any) => {
 
 export interface PieCountdownProps extends BoxProps {
   fractionDone: number;
+  size: number
 }
 
 const PieCountdown = (props: PieCountdownProps) => {
-  const { fractionDone } = props;
+  const { fractionDone, size } = props;
   const theme = useTheme();
-  const size = 16 * theme.spacing(1);  
 
   return (
     <svg
