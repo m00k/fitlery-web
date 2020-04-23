@@ -1,4 +1,3 @@
-import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import Arc from './Arc';
 
@@ -14,17 +13,14 @@ export interface PieSliceProps {
 }
 
 const PieSlice = (props: PieSliceProps) => {
-  const { text, bgcolor, color, clipIf: setClipPath, size, fractionStart, fractionEnd } = props;
-  const theme = useTheme();
-  const viewBoxSize = 100;
+  const { text, bgcolor, color, clipIf: setClipPath, fractionStart, fractionEnd } = props;
+  const VIEWBOX_SIZE = 100;
   const id = `clip${Math.floor(1000000 * Math.random())}`;
   return (
     <svg
-      x={theme.spacing(1)}
-      y={theme.spacing(1)}
-      width={size - theme.spacing(2)}
-      height={size - theme.spacing(2)}
-      viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
+      width="100%"
+      height="100%"
+      viewBox={`0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}`}
     >
       <g
         clipPath={setClipPath ? `url(#${id})` : ``} // TODO: webkit vendor prefix?
@@ -41,7 +37,7 @@ const PieSlice = (props: PieSliceProps) => {
           y="50%"
           dominantBaseline="middle"
           fill={color}
-          fontSize={2 / 3 * viewBoxSize / 2}
+          fontSize={2 / 3 * VIEWBOX_SIZE / 2}
           fontWeight="700"
           textAnchor="middle"
           fontFamily="Roboto"
@@ -53,7 +49,7 @@ const PieSlice = (props: PieSliceProps) => {
         <Arc
           cx={50}
           cy={50}
-          r={viewBoxSize / 2}
+          r={VIEWBOX_SIZE / 2}
           fStart={fractionStart}
           fEnd={fractionEnd}
         />

@@ -1,6 +1,6 @@
-import { BoxProps } from '@material-ui/core/Box';
+import Box, { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
-import React, { useRef } from 'react';
+import React, { PropsWithChildren, useRef } from 'react';
 import PieSlice from './PieSlice';
 
 
@@ -39,6 +39,16 @@ const PieSliceDone = (props: any) => {
   );
 }
 
+const WithMargin = ({ children }: PropsWithChildren<any>) => {
+  return (
+    <Box
+      m={1}
+      position="absolute">
+      {children}
+    </Box>
+  );
+}
+
 export interface PieCountdownProps extends BoxProps {
   fractionDone: number;
   size: number
@@ -49,19 +59,19 @@ const PieCountdown = (props: PieCountdownProps) => {
   const theme = useTheme();
 
   return (
-    <svg
+    <Box
       width={size} // TODO: 100%
       height={size}
+      bgcolor={theme.palette.primary.main}
+      position="relative"
     >
-      <rect
-        width="100%"
-        height="100%"
-        fill={theme.palette.primary.main}
-      >
-      </rect>
-      <PieSliceLeft {...{fractionDone, size}} />
-      <PieSliceDone {...{fractionDone, size}} />
-    </svg>
+      <WithMargin>
+        <PieSliceLeft {...{ fractionDone, size }} />
+      </WithMargin>
+      <WithMargin>
+        <PieSliceDone {...{ fractionDone, size }} />
+      </WithMargin>
+    </Box >
   );
 };
 
