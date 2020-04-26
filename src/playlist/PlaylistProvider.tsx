@@ -1,6 +1,7 @@
 // https://dev.to/pubudu/build-a-redux-like-store-with-react-context-hooks-8a6
 // https://dev.to/stephencweiss/usereducer-with-typescript-2kf
 import React, { createContext, Dispatch, useContext, useReducer } from 'react';
+import exercises from '../exercise/data'; // TODO: real data
 
 const NOT_FOUND = -1;
 
@@ -71,8 +72,8 @@ interface PlaylistState {
 }
 
 const initialState: PlaylistState = {
-  workoutName: 'n/a',
-  exercises: [],
+  workoutName: '18', // TODO: real data
+  exercises, // TODO: real data
   currentExerciseIndex: NOT_FOUND,
   playerState:'stopped',
 }

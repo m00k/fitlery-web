@@ -1,9 +1,10 @@
 import React from 'react';
-import { ExerciseData } from './data';
+import { usePlaylistStore } from '../playlist/PlaylistProvider';
 import Exercise from './Exercise';
 
-export default function ExerciseList(props: {exercises: ExerciseData[]}) {
-  const { exercises } = props;
+export default function ExerciseList() {
+  const [playlistState, ] = usePlaylistStore();
+  const { exercises } = playlistState;
   return (
     <>
       {exercises.map(exercise =>
