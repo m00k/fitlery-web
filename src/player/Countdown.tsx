@@ -3,6 +3,8 @@ import React from 'react';
 import Grid from '../shared/Grid';
 import time from './time-utils';
 
+// TODO: mode -> stop/go
+
 export interface CountdownProps {
   msLeft: number;
 }

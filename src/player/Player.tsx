@@ -1,22 +1,37 @@
 import useTheme from '@material-ui/core/styles/useTheme';
-import React, { useState } from 'react';
+import React from 'react';
+import { PlaylistActionType, usePlaylistStore } from '../playlist/PlaylistContext';
 import Grid from '../shared/Grid';
 import { workouts } from '../workout/data';
 import Controls from './Controls';
-import WorkoutBanner from './WorkoutBanner';
 import useCountdown from './useCountdown';
+import WorkoutBanner from './WorkoutBanner';
 
-export type PlayerState = 'play' | 'pause' | 'stop' | 'prev' | 'next';
 
 const Player = () => {
   const theme = useTheme();
-  const [state, setState] = useState<PlayerState>('stop');
+  const [playlistState, dispatch] = usePlaylistStore();
+  const { playerState } = playlistState;
+
   const onZero = () => {
     console.log('####################', 'on zero');
-    setState('pause');
+    dispatch.pause();
   }
   const msTotal = 3000;
   const [msLeft, , start, pause, reset] = useCountdown({onZero, ms: msTotal});
+  
+  const handleControlsAction = (action: PlaylistActionType) => {
+    if (action === 'play') { 
+      start();
+      dispatch.play();
+    } else if (action === 'pause' ) {
+      pause();
+      dispatch.pause();
+    } else if (action === 'prev' ) {
+      reset();
+      dispatch.prev();
+    }
+  }
 
   return (
     <Grid
@@ -29,24 +44,14 @@ const Player = () => {
     >
       <WorkoutBanner
         workout={workouts[0]} // TODO
-        playerState={state}
+        playerState={playerState}
         msLeft={msLeft} // TODO: context or store
         msTotal={msTotal}
       >
       </WorkoutBanner>
       <Controls
-        state={state}
-        onClick={(s: PlayerState) => {
-          if (s === 'play') { 
-            start();
-            setState(s);
-          } else if (s === 'pause' ) {
-            pause();
-            setState(s);
-          } else if (s === 'prev' ) {
-            reset();
-          }
-        }}
+        state={playerState}
+        onClick={handleControlsAction}
       />
     </Grid>
   );

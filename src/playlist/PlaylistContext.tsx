@@ -1,12 +1,12 @@
 // https://dev.to/pubudu/build-a-redux-like-store-with-react-context-hooks-8a6
 // https://dev.to/stephencweiss/usereducer-with-typescript-2kf
-import React, { createContext, Dispatch, FunctionComponent, Provider, useContext, useReducer } from 'react';
+import React, { createContext, Dispatch, useContext, useReducer } from 'react';
 
 const NOT_FOUND = -1;
 
-type PlayerState = 'playing' | 'paused' | 'stopped';
-type PlaylistActionType = 'play' | 'pause' | 'stop' | 'prev' | 'next';
-type PlaylistActionDispatchers = {[A in PlaylistActionType]: (payload?: any) => void};
+export type PlayerState = 'playing' | 'paused' | 'stopped';
+export type PlaylistActionType = 'play' | 'pause' | 'stop' | 'prev' | 'next';
+export type PlaylistActionDispatchers = {[A in PlaylistActionType]: (payload?: any) => void};
 
 export interface PlaylistAction {
   type: PlaylistActionType;
@@ -43,23 +43,23 @@ export type PlaylistActions =
 // https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards
 // https://dev.to/krumpet/generic-type-guard-in-typescript-258l
 // https://dev.to/aexol/typescript-tutorial-infer-keyword-2cn
-function isPlaylistActionPlay(action: PlaylistAction): action is PlaylistActionPlay{
+function isPlaylistActionPlay(action: PlaylistAction): action is PlaylistActionPlay {
   return action.type === 'play';
 }
 
-function isPlaylistActionPause(action: PlaylistAction): action is PlaylistActionPause{
+function isPlaylistActionPause(action: PlaylistAction): action is PlaylistActionPause {
   return action.type === 'pause';
 }
 
-function isPlaylistActionStop(action: PlaylistAction): action is PlaylistActionStop{
+function isPlaylistActionStop(action: PlaylistAction): action is PlaylistActionStop {
   return action.type === 'stop';
 }
 
-function isPlaylistActionPrev(action: PlaylistAction): action is PlaylistActionPrev{
+function isPlaylistActionPrev(action: PlaylistAction): action is PlaylistActionPrev {
   return action.type === 'prev';
 }
 
-function isPlaylistActionNext(action: PlaylistAction): action is PlaylistActionNext{
+function isPlaylistActionNext(action: PlaylistAction): action is PlaylistActionNext {
   return action.type === 'next';
 }
 
@@ -124,7 +124,8 @@ const createActionDispatchers = (dispatch: Dispatch<PlaylistAction>): PlaylistAc
 
 const PlaylistContext = createContext<[PlaylistState, PlaylistActionDispatchers]>([initialState, createActionDispatchers(() => { })]);
 
-export const PlaylistProvider: FunctionComponent<Provider<[PlaylistState, Dispatch<PlaylistAction>]>> = ({children}: any) => {
+// TODO: type
+export const PlaylistProvider = ({children}: any) => {
   const [playlist, dispatch] = useReducer<PlaylistReducer>(playlistReducer, initialState);
   const dispatchers: PlaylistActionDispatchers = createActionDispatchers(dispatch);
   return (

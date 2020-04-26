@@ -1,12 +1,12 @@
 import useTheme from "@material-ui/core/styles/useTheme";
 import React, { ReactNode } from 'react';
+import { PlayerState } from "../playlist/PlaylistContext";
 import Grid from '../shared/Grid';
 import CardAvatar from '../workout/CardAvatar';
 import CardText from '../workout/CardText';
 import { WorkoutData } from '../workout/data';
 import Countdown from './Countdown';
 import PieCountdown from './PieCountdown';
-import { PlayerState } from './Player';
 
 interface WorkoutBannerProps {
   workout: WorkoutData;
@@ -28,14 +28,14 @@ const WorkoutBanner: React.FunctionComponent<WorkoutBannerProps> = (props: Worko
       gridTemplateColumns={`${size}px 1fr`} // TODO: magic numbers 
       width={1}
     >
-      {playerState === 'stop'
+      {playerState === 'stopped'
         ? <CardAvatar text={workout.short}/>
         : <PieCountdown
             fractionDone={fractionDone}
             size={size}
           />
       }
-      {playerState === 'stop'
+      {playerState === 'stopped'
         ? <CardText workout={workout}/>
         : <Countdown msLeft={msLeft}/>
       }
