@@ -23,7 +23,7 @@ const PieSlice = (props: PieSliceProps) => {
       viewBox={`0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}`}
     >
       <g
-        clipPath={setClipPath ? `url(#${id})` : ``} // TODO: webkit vendor prefix?
+        clipPath={setClipPath ? `url(#${id})` : ``}
       >
         <circle
           cx="50%"
