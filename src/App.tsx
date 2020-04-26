@@ -6,7 +6,7 @@ import ExerciseList from './exercise/ExerciseList';
 import Main from './Main';
 import BottomNavigation from './navigation/BottomNavigation';
 import TopNavigation from './navigation/TopNavigation';
-import Player from './player/Player';
+import Playlist from './playlist/Playlist';
 import WorkoutList from './workout/WorkoutList';
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
       <Main>
         <Route path="/workouts" component={WorkoutList} />
         <Route path="/exercises" component={ExerciseList} />
-        <Route path="/recents" component={Player} />
+        <Route path="/recents" component={Playlist} />
       </Main>
       <BottomNavigation />
     </Box>
