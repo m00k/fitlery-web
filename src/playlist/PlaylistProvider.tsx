@@ -137,9 +137,12 @@ export const PlaylistProvider = ({children}: any) => {
 
 export const usePlaylistStore = () => useContext<[PlaylistState, PlaylistActionDispatchers]>(PlaylistContext);
 
-// TODO: possible usage in consumer - context vs. hook
+// TODO: possible usage in consumer - context vs. hook:
 // const PlaylistStore = useContext(PlaylistContext)
 // vs.
 // make context private and expose via custom hook
 
-// TODO: if hook - [state, dispatch] vs [state, play, pause, stop, ...]
+// TODO: dispatch vs dispatchers:
+// dispatch(new ActionX) or dispatch(actionXCreator())
+// vs.
+// dispatch.x()

@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import { PlaylistProvider } from './playlist/PlaylistContext';
+import { PlaylistProvider } from './playlist/PlaylistProvider';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme/theme';
 

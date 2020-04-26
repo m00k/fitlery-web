@@ -1,6 +1,6 @@
 import useTheme from "@material-ui/core/styles/useTheme";
 import React, { ReactNode } from 'react';
-import { PlayerState } from "../playlist/PlaylistContext";
+import { PlayerState } from "../playlist/PlaylistProvider";
 import Grid from '../shared/Grid';
 import CardAvatar from '../workout/CardAvatar';
 import CardText from '../workout/CardText';

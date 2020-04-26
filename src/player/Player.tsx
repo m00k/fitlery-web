@@ -1,6 +1,6 @@
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
-import { PlaylistActionType, usePlaylistStore } from '../playlist/PlaylistContext';
+import { PlaylistActionType, usePlaylistStore } from '../playlist/PlaylistProvider';
 import Grid from '../shared/Grid';
 import { workouts } from '../workout/data';
 import Controls from './Controls';

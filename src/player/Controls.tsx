@@ -5,7 +5,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import React from 'react';
-import { PlayerState, PlaylistActionType } from '../playlist/PlaylistContext';
+import { PlayerState, PlaylistActionType } from '../playlist/PlaylistProvider';
 import Grid from '../shared/Grid';
 
 interface ControlButtonProps {
