@@ -1,10 +1,12 @@
 // https://dev.to/pubudu/build-a-redux-like-store-with-react-context-hooks-8a6
 // https://dev.to/stephencweiss/usereducer-with-typescript-2kf
-import React, { createContext, Dispatch, FunctionComponent, useReducer, Provider } from 'react';
+import React, { createContext, Dispatch, FunctionComponent, Provider, useContext, useReducer } from 'react';
 
 const NOT_FOUND = -1;
+
 type PlayerState = 'playing' | 'paused' | 'stopped';
 type PlaylistActionType = 'play' | 'pause' | 'stop' | 'prev' | 'next';
+type PlaylistActionDispatchers = {[A in PlaylistActionType]: (payload?: any) => void};
 
 export interface PlaylistAction {
   type: PlaylistActionType;
@@ -25,6 +27,7 @@ export interface PlaylistActionStop extends PlaylistAction {
 export interface PlaylistActionPrev extends PlaylistAction {
   type: 'prev';
 }
+
 export interface PlaylistActionNext extends PlaylistAction {
   type: 'next';
 }
@@ -109,15 +112,29 @@ const playlistReducer: PlaylistReducer = (state: PlaylistState, action: Playlist
   return state;
 }
 
+const createActionDispatchers = (dispatch: Dispatch<PlaylistAction>): PlaylistActionDispatchers => {
+  return {
+    play: () => dispatch({type: 'play'}),
+    pause: () => dispatch({type: 'pause'}),
+    stop: () => dispatch({type: 'stop'}),
+    prev: () => dispatch({type: 'prev'}),
+    next: () => dispatch({type: 'next'}),
+  };
+}
+
+const PlaylistContext = createContext<[PlaylistState, PlaylistActionDispatchers]>([initialState, createActionDispatchers(() => { })]);
+
 export const PlaylistProvider: FunctionComponent<Provider<[PlaylistState, Dispatch<PlaylistAction>]>> = ({children}: any) => {
   const [playlist, dispatch] = useReducer<PlaylistReducer>(playlistReducer, initialState);
-  const PlaylistContext = createContext<[PlaylistState, Dispatch<PlaylistAction>]>([playlist, dispatch]);
+  const dispatchers: PlaylistActionDispatchers = createActionDispatchers(dispatch);
   return (
-    <PlaylistContext.Provider value={[playlist, dispatch]}>
+    <PlaylistContext.Provider value={[playlist, dispatchers]}>
       {children}
     </PlaylistContext.Provider>
   );
 }
+
+export const usePlaylistStore = () => useContext<[PlaylistState, PlaylistActionDispatchers]>(PlaylistContext);
 
 // TODO: possible usage in consumer - context vs. hook
 // const PlaylistStore = useContext(PlaylistContext)
