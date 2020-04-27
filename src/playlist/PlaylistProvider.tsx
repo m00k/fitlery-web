@@ -85,7 +85,11 @@ const playlistReducer: PlaylistReducer = (state: PlaylistState, action: Playlist
     const currentExerciseIndex = state.currentExerciseIndex > NOT_FOUND
       ? state.currentExerciseIndex
       : 0;
-    return { ...state, currentExerciseIndex, playerState: 'playing' }
+    return { 
+      ...state,
+      currentExerciseIndex,
+      playerState: 'playing'
+    }
   }
   
   if (isPlaylistActionPause(action)) {
@@ -104,7 +108,7 @@ const playlistReducer: PlaylistReducer = (state: PlaylistState, action: Playlist
   }
 
   if (isPlaylistActionNext(action)) {
-    const currentExerciseIndex = state.currentExerciseIndex < (state.currentExerciseIndex.length - 1)
+    const currentExerciseIndex = state.currentExerciseIndex < (state.exercises.length - 1)
       ? state.currentExerciseIndex + 1
       : 0;
     return { ...state, currentExerciseIndex }
@@ -137,13 +141,3 @@ export const PlaylistProvider = ({children}: any) => {
 }
 
 export const usePlaylistStore = () => useContext<[PlaylistState, PlaylistActionDispatchers]>(PlaylistContext);
-
-// TODO: possible usage in consumer - context vs. hook:
-// const PlaylistStore = useContext(PlaylistContext)
-// vs.
-// make context private and expose via custom hook
-
-// TODO: dispatch vs dispatchers:
-// dispatch(new ActionX) or dispatch(actionXCreator())
-// vs.
-// dispatch.x()

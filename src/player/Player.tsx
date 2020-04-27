@@ -21,15 +21,23 @@ const Player = () => {
   const [msLeft, , start, pause, reset] = useCountdown({onZero, ms: msTotal});
   
   const handleControlsAction = (action: PlaylistActionType) => {
-    if (action === 'play') { 
-      start();
-      dispatch.play();
-    } else if (action === 'pause' ) {
-      pause();
-      dispatch.pause();
-    } else if (action === 'prev' ) {
-      reset();
-      dispatch.prev();
+    switch (action) {
+      case 'play':
+        start();
+        dispatch.play();
+        break;
+      case 'pause':
+        pause();
+        dispatch.pause();
+        break;
+      case 'prev':
+        reset();
+        dispatch.prev();
+        break;
+      case 'next':
+        reset();
+        dispatch.next();
+        break;
     }
   }
 

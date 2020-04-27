@@ -10,7 +10,11 @@ export default function ExerciseList(props: any) {
   return (
     <Box {...props}>
       {exercises.map((exercise: ExerciseData, i: number) =>
-        <Exercise key={exercise.name} exercise={exercise} current={i === ci}></Exercise>
+        <Exercise
+          key={exercise.name}
+          exercise={exercise}
+          current={i === ci}
+        />
       )}
     </Box>
   );
