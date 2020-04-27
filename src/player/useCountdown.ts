@@ -22,12 +22,15 @@ const useCountdown = (settings: CountdownSettings) => {
 
   useEffect(() => {
     const update = () => {
-      const newMsLeft = Math.max(msLeft - intervalMs, 0);
-      if (newMsLeft <= 0) {
-        setIsRunning(false);
-        onZero();
-      }
-      setMsLeft(newMsLeft);
+      setMsLeft((prevMsLeft:number) => {
+        const msLeft = Math.max(prevMsLeft - intervalMs, 0);
+        if (msLeft <= 0) {
+          setIsRunning(false);
+          onZero();
+          return 0;
+        }
+        return msLeft;
+      });
     };
 
     if (isRunning) {
