@@ -104,14 +104,19 @@ const playlistReducer: PlaylistReducer = (state: PlaylistState, action: Playlist
     const currentExerciseIndex = state.currentExerciseIndex > 0
       ? state.currentExerciseIndex - 1
       : 0;
-    return { ...state, currentExerciseIndex }
+    const playerState = 'playing';
+    return { ...state, currentExerciseIndex, playerState }
   }
 
   if (isPlaylistActionNext(action)) {
-    const currentExerciseIndex = state.currentExerciseIndex < (state.exercises.length - 1)
-      ? state.currentExerciseIndex + 1
-      : 0;
-    return { ...state, currentExerciseIndex }
+    const isLast = state.currentExerciseIndex >= (state.exercises.length - 1);
+    const currentExerciseIndex = isLast
+      ? 0
+      : state.currentExerciseIndex + 1;
+    const playerState = isLast
+      ? 'stopped'
+      : 'playing';
+    return { ...state, currentExerciseIndex, playerState }
   }
 
   return state;

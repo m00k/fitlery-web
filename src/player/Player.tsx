@@ -13,9 +13,9 @@ const Player = () => {
   const [playlistState, dispatch] = usePlaylistStore();
   const { playerState } = playlistState;
 
+
   const onZero = () => {
     console.log('####################', 'on zero');
-    dispatch.pause();
   }
   const msTotal = 3000;
   const [msLeft, , start, pause, reset] = useCountdown({onZero, ms: msTotal});
@@ -32,10 +32,12 @@ const Player = () => {
         break;
       case 'prev':
         reset();
+        start();
         dispatch.prev();
         break;
       case 'next':
         reset();
+        start();
         dispatch.next();
         break;
     }
