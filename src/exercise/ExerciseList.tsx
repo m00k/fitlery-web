@@ -2,14 +2,15 @@ import { Box } from '@material-ui/core';
 import React from 'react';
 import { usePlaylistStore } from '../playlist/PlaylistProvider';
 import Exercise from './Exercise';
+import { ExerciseData } from './data';
 
 export default function ExerciseList(props: any) {
   const [playlistState, ] = usePlaylistStore();
-  const { exercises } = playlistState;
+  const { exercises, currentExerciseIndex: ci } = playlistState;
   return (
     <Box {...props}>
-      {exercises.map(exercise =>
-        <Exercise key={exercise.name} {...exercise}></Exercise>
+      {exercises.map((exercise: ExerciseData, i: number) =>
+        <Exercise key={exercise.name} exercise={exercise} current={i === ci}></Exercise>
       )}
     </Box>
   );

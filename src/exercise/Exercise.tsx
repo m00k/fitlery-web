@@ -4,9 +4,15 @@ import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { ExerciseData } from './data';
 
-export default function Exercise(props: ExerciseData) {
-  const { name } = props;
+export interface ExerciseProps {
+  exercise: ExerciseData;
+  current: boolean;
+}
+
+export default function Exercise(props: ExerciseProps) {
+  const { exercise, current=false } = props;
   const theme = useTheme();
+  const variant = current ? 'h4' : 'h5';
 
   return (
     <Box
@@ -23,8 +29,8 @@ export default function Exercise(props: ExerciseData) {
       p={1}
       flex="1"
     >
-      <Typography variant="subtitle1">
-        {name}
+      <Typography variant={variant}>
+        {exercise.name}
       </Typography>
     </Box>
   );
