@@ -4,40 +4,27 @@ import { PlaylistActionType, usePlaylistStore } from '../playlist/PlaylistProvid
 import Grid from '../shared/Grid';
 import { workouts } from '../workout/data';
 import Controls from './Controls';
-import useCountdown from './useCountdown';
 import WorkoutBanner from './WorkoutBanner';
 
 
 const Player = () => {
   const theme = useTheme();
   const [playlistState, dispatch] = usePlaylistStore();
-  const { playerState } = playlistState;
-
-
-  const onZero = () => {
-    console.log('####################', 'on zero');
-  }
-  const msTotal = 3000;
-  const [msLeft, , start, pause, reset] = useCountdown({onZero, ms: msTotal});
+  const { countdown, playerState } = playlistState;
+  const { msLeft, msTotal } = countdown;
   
   const handleControlsAction = (action: PlaylistActionType) => {
     switch (action) {
       case 'play':
-        start();
         dispatch.play();
         break;
       case 'pause':
-        pause();
         dispatch.pause();
         break;
       case 'prev':
-        reset();
-        start();
         dispatch.prev();
         break;
       case 'next':
-        reset();
-        start();
         dispatch.next();
         break;
     }
