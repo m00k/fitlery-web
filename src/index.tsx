@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import { PlaylistProvider } from './playlist/PlaylistProvider';
+import { PlayerStoreProvider } from './player/PlayerStoreProvider';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme/theme';
 
@@ -14,9 +14,9 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <PlaylistProvider>
+        <PlayerStoreProvider>
           <App />
-        </PlaylistProvider>
+        </PlayerStoreProvider>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,

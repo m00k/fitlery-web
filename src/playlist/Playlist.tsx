@@ -1,7 +1,6 @@
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import ExerciseList from '../exercise/ExerciseList';
-import Player from '../player/Player';
 
 // TODO: HACK
 // expose all those magic numbers via theme
@@ -15,10 +14,7 @@ const Playlist = () => {
   const overflow = 'auto';
   const style = { marginTop, height, overflow };
   return (
-    <>
-      <Player />
-      <ExerciseList style={style}/>
-    </>
+    <ExerciseList style={style}/>
   );
 }
 

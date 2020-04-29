@@ -1,11 +1,12 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
-import { usePlaylistStore } from '../playlist/PlaylistProvider';
-import Exercise from './Exercise';
+import { usePlayerStore } from '../player/PlayerStoreProvider';
 import { ExerciseData } from './data';
+import Exercise from './Exercise';
 
 export default function ExerciseList(props: any) {
-  const [playlistState, ] = usePlaylistStore();
+  const [playerState, ] = usePlayerStore(); // TODO (cb): fix
+  const { playlistState } = playerState;
   const { items: exercises, currentItemIndex: ci } = playlistState;
   return (
     <Box {...props}>
