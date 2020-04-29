@@ -109,17 +109,17 @@ const initialCountDownState: CountdownState = {
 }
 
 interface PlaylistState {
-  workoutName: any;
-  exercises: any[];
-  currentExerciseIndex: any;
+  name: any;
+  items: any[];
+  currentItemIndex: number;
   playerState: PlayerState;
   countdown: CountdownState;
 }
 
 const initialState: PlaylistState = {
-  workoutName: '18', // TODO: real data
-  exercises, // TODO: real data
-  currentExerciseIndex: NOT_FOUND,
+  name: '18', // TODO: real data
+  items: exercises, // TODO: real data
+  currentItemIndex: NOT_FOUND,
   playerState: 'stopped',
   countdown: initialCountDownState,
 }
@@ -127,31 +127,31 @@ const initialState: PlaylistState = {
 type PlaylistReducer = (state: PlaylistState, action: PlaylistAction) => PlaylistState
 
 const isFirstIndex = (state: PlaylistState): boolean => {
-  return state.currentExerciseIndex === 0;
+  return state.currentItemIndex === 0;
 }
 
 const isLastIndex = (state: PlaylistState): boolean => {
-  return state.currentExerciseIndex >= (state.exercises.length - 1);
+  return state.currentItemIndex >= (state.items.length - 1);
 }
 
 const isValidIndex = (state: PlaylistState): boolean => {
-  const { currentExerciseIndex, exercises } = state;
+  const { currentItemIndex: currentExerciseIndex, items: exercises } = state;
   return currentExerciseIndex > NOT_FOUND && currentExerciseIndex < exercises.length;
 }
 
 const prev = (state: PlaylistState): PlaylistState => {
   const currentExerciseIndex = isFirstIndex(state)
     ? 0
-    : state.currentExerciseIndex - 1;
-  return reset({ ...state, currentExerciseIndex });
+    : state.currentItemIndex - 1;
+  return reset({ ...state, currentItemIndex: currentExerciseIndex });
 }
 
 const next = (state: PlaylistState): PlaylistState => {
   if (isLastIndex(state)) {
     return state; // TODO (stop) ?
   }
-  const currentExerciseIndex = state.currentExerciseIndex + 1;
-  return reset({ ...state, currentExerciseIndex });
+  const currentExerciseIndex = state.currentItemIndex + 1;
+  return reset({ ...state, currentItemIndex: currentExerciseIndex });
 }
 
 const onZeroTick = (state: PlaylistState): PlaylistState => {
@@ -162,11 +162,11 @@ const onZeroTick = (state: PlaylistState): PlaylistState => {
 
 const play = (state: PlaylistState): PlaylistState => {
   const currentExerciseIndex = isValidIndex(state)
-    ? state.currentExerciseIndex
+    ? state.currentItemIndex
     : 0;
   return {
     ...state,
-    currentExerciseIndex,
+    currentItemIndex: currentExerciseIndex,
     playerState: 'playing',
     countdown: { ...state.countdown, isRunning: true }
   }
@@ -239,7 +239,6 @@ const playlistReducer: PlaylistReducer = (state: PlaylistState, action: Playlist
 }
 
 const createActionDispatchers = (dispatch: Dispatch<PlaylistAction>): PlaylistActionDispatchers & CountdownActionDispatchers => {
-  // TODO: trigger countdown side effect here?
   return {
     play: () => dispatch({ type: 'play' }),
     pause: () => dispatch({ type: 'pause' }),

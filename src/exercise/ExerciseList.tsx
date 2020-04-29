@@ -6,7 +6,7 @@ import { ExerciseData } from './data';
 
 export default function ExerciseList(props: any) {
   const [playlistState, ] = usePlaylistStore();
-  const { exercises, currentExerciseIndex: ci } = playlistState;
+  const { items: exercises, currentItemIndex: ci } = playlistState;
   return (
     <Box {...props}>
       {exercises.map((exercise: ExerciseData, i: number) =>
