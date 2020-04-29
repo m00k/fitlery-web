@@ -5,8 +5,8 @@ import Grid from '../shared/Grid';
 import CardAvatar from '../workout/CardAvatar';
 import CardText from '../workout/CardText';
 import { WorkoutData } from '../workout/data';
-import Countdown from './Countdown';
-import PieCountdown from './PieCountdown';
+import Countdown from '../countdown/Countdown';
+import PieCountdown from '../countdown/PieCountdown';
 
 interface WorkoutBannerProps {
   workout: WorkoutData;
