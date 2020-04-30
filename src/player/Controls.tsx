@@ -6,7 +6,7 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import React from 'react';
 import Grid from '../shared/Grid';
-import { PlayerActionType, PlayState } from './state';
+import { PlaylistActionType, PlayState } from './PlaylistStoreProvider';
 
 interface ControlButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -32,12 +32,12 @@ const Prev = ControlButtonFactory(<SkipPreviousIcon style={{ fontSize: '2.5rem' 
 const Next = ControlButtonFactory(<SkipNextIcon style={{ fontSize: '2.5rem' }} />);
 
 interface ControlsProps {
-  state: PlayState;
-  onClick: (p: PlayerActionType) => void
+  playState: PlayState;
+  onClick: (p: PlaylistActionType) => void
 }
 
 const Controls = (props: ControlsProps) => {
-  const { state, onClick } = props;
+  const { playState, onClick } = props;
   const theme = useTheme();
 
   return (
@@ -52,7 +52,7 @@ const Controls = (props: ControlsProps) => {
     >
       <Prev onClick={() => onClick('prev')}/>
       {
-        state !== 'playing'
+        playState !== 'playing'
           ? <Play onClick={() => onClick('play')} />
           : <Pause onClick={() => onClick('pause')} />
       }

@@ -1,34 +1,45 @@
 import useTheme from '@material-ui/core/styles/useTheme';
-import React from 'react';
-import Playlist from '../playlist/Playlist';
+import React, { useEffect } from 'react';
+import { useCountdownStore } from '../countdown/CountdownStoreProvider';
 import Grid from '../shared/Grid';
 import { workouts } from '../workout/data';
 import Banner from './Banner';
 import Controls from './Controls';
-import { PlayerActionType } from './state';
-import { usePlayerStore } from './PlayerStoreProvider';
+import Playlist from './Playlist';
+import { PlaylistActionType, usePlaylistStore } from './PlaylistStoreProvider';
 
 
 const Player = () => {
   const theme = useTheme();
-  const [playerState, dispatch] = usePlayerStore();
-  const { countdownState, playState } = playerState;
+  const [playlistState, playlistDispatch] = usePlaylistStore();
+  const { playState } = playlistState;
+  const [countdownState, countdownDispatch] = useCountdownStore();
   const { msLeft, msTotal } = countdownState;
 
-  // TODO: move to controls?
-  const handleControlsAction = (action: PlayerActionType) => {
+  // TODO (cb): hook, combined reducer, rtk, ... ?
+  useEffect(() => {
+    if(msLeft === 0) {
+      playlistDispatch.next();
+      countdownDispatch.reset();
+    }
+  }, [playlistDispatch, msLeft, countdownDispatch]);
+  const handleControlsAction = (action: PlaylistActionType) => {
     switch (action) {
       case 'play':
-        dispatch.play();
+        playlistDispatch.play();
+        countdownDispatch.start();
         break;
       case 'pause':
-        dispatch.pause();
+        playlistDispatch.pause();
+        countdownDispatch.pause();
         break;
       case 'prev':
-        dispatch.prev();
+        playlistDispatch.prev();
+        countdownDispatch.reset();
         break;
       case 'next':
-        dispatch.next();
+        playlistDispatch.next();
+        countdownDispatch.reset();
         break;
     }
   }
@@ -51,7 +62,7 @@ const Player = () => {
         >
         </Banner>
         <Controls
-          state={playState}
+          playState={playState}
           onClick={handleControlsAction}
         />
       </Grid>

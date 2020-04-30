@@ -1,12 +1,12 @@
 import useTheme from "@material-ui/core/styles/useTheme";
 import React, { ReactNode } from 'react';
+import Countdown from '../countdown/Countdown';
+import PieCountdown from '../countdown/PieCountdown';
 import Grid from '../shared/Grid';
 import CardAvatar from '../workout/CardAvatar';
 import CardText from '../workout/CardText';
 import { WorkoutData } from '../workout/data';
-import Countdown from '../countdown/Countdown';
-import PieCountdown from '../countdown/PieCountdown';
-import { PlayState } from "./state";
+import { PlayState } from "./PlaylistStoreProvider";
 
 interface BannerProps {
   workout: WorkoutData; // TODO (cb)

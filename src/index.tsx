@@ -4,7 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import { PlayerStoreProvider } from './player/PlayerStoreProvider';
+import { CountdownStoreProvider } from './countdown/CountdownStoreProvider';
+import { PlaylistStoreProvider } from './player/PlaylistStoreProvider';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme/theme';
 
@@ -14,9 +15,11 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <PlayerStoreProvider>
-          <App />
-        </PlayerStoreProvider>
+        <CountdownStoreProvider>
+          <PlaylistStoreProvider>
+            <App />
+          </PlaylistStoreProvider>
+        </CountdownStoreProvider>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
