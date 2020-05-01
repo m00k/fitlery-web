@@ -12,7 +12,8 @@ const Player = () => {
   const theme = useTheme();
   const [ state, dispatch ] = usePlayerStore();
   const { countdownState, playlistState } = state;
-  const { playState } = playlistState;
+  const { currentItemIndex, items, playState } = playlistState;
+  const currentItem = items[currentItemIndex];
   const { msLeft, msTotal } = countdownState;
 
   return (
@@ -30,6 +31,7 @@ const Player = () => {
           playState={playState}
           msLeft={msLeft} // TODO: context or store
           msTotal={msTotal}
+          currentItem={currentItem}
         >
         </Banner>
         <Controls

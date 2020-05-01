@@ -6,19 +6,22 @@ import Grid from '../shared/Grid';
 import CardAvatar from '../workout/CardAvatar';
 import CardText from '../workout/CardText';
 import { WorkoutData } from '../workout/data';
-import { PlayState } from "./store/";
+import { PlayState, PlaylistItemData } from "./store/";
 
 interface BannerProps {
-  workout: WorkoutData; // TODO (cb)
+  workout: WorkoutData; // TODO (cb): playlist name, description
   playState: PlayState;
   msLeft: number;
   msTotal: number;
   children?: ReactNode;
+  currentItem: PlaylistItemData;
 }
 
 const Banner: React.FunctionComponent<BannerProps> = (props: BannerProps) => {
-  const { workout, playState, msLeft, msTotal } = props;
+  const { workout, currentItem, playState, msLeft, msTotal } = props;
   const fractionDone = 1 - msLeft / msTotal;
+  const isBreak = currentItem && !!currentItem.tags && currentItem.tags.includes('break');
+  const text = isBreak ? 'Ready' : 'Go!';
   const theme = useTheme();
   const size = theme.spacing(16);
 
@@ -36,9 +39,9 @@ const Banner: React.FunctionComponent<BannerProps> = (props: BannerProps) => {
         : <>
             <PieCountdown
               fractionDone={fractionDone}
-              invertColors={false}
+              invertColors={isBreak}
               size={size}
-              text='Go!' // TODO
+              text={text}
             />
             <Countdown msLeft={msLeft} />
           </>

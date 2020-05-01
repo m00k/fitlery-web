@@ -1,16 +1,18 @@
-import Box from '@material-ui/core/Box';
+import { Box, Typography } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
-import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { ExerciseData } from './data';
+import { PlaylistItemData } from './store';
 
-export interface ExerciseProps {
-  exercise: ExerciseData;
+
+export interface PlaylistItemProps {
+  item: PlaylistItemData
+  current: boolean;
 }
 
-export default function Exercise(props: ExerciseProps) {
-  const { exercise } = props;
+export default function PlaylistItem(props: PlaylistItemProps) {
+  const { current, item } = props;
   const theme = useTheme();
+  const variant = current ? 'h4' : 'h5';
 
   return (
     <Box
@@ -27,8 +29,8 @@ export default function Exercise(props: ExerciseProps) {
       p={1}
       flex="1"
     >
-      <Typography>
-        {exercise.name}
+      <Typography variant={variant}>
+        {item.name}
       </Typography>
     </Box>
   );
