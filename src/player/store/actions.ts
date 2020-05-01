@@ -40,7 +40,7 @@ export function isPlaylistActionPause(action: PlaylistAction): action is Playlis
 }
 
 export function isPlaylistActionStop(action: PlaylistAction): action is PlaylistActionStop {
-  return action.type === 'pause';
+  return action.type === 'stop';
 }
 
 export function isPlaylistActionPrev(action: PlaylistAction): action is PlaylistActionPrev {

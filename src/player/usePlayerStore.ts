@@ -1,4 +1,4 @@
-import { Dispatch, useEffect } from 'react';
+import { Dispatch, useEffect, useRef } from 'react';
 import { CountdownState, useCountdownStore } from '../countdown/store';
 import { PlaylistActionType, PlaylistState, usePlaylistStore } from './store';
 
@@ -11,14 +11,30 @@ const usePlayerStore = (): [PlayerState, Dispatch<PlaylistActionType>] => {
   const [playlistState, playlistDispatch] = usePlaylistStore();
   const [countdownState, countdownDispatch] = useCountdownStore();
   const { msLeft } = countdownState;
+  const isZero = msLeft === 0;
   const state = { countdownState, playlistState };
+  const { currentItemIndex, items } = playlistState;
+  const isLastItem = currentItemIndex === items.length - 1;
+
+  const stop = useRef(() => {
+    playlistDispatch.stop();
+    countdownDispatch.stop();
+  });
+
+  const reset = useRef(() => {
+    playlistDispatch.next();
+    countdownDispatch.reset();
+  });
 
   useEffect(() => {
-    if(msLeft === 0) {
-      playlistDispatch.next();
-      countdownDispatch.reset();
+    if (isZero) {
+      if (isLastItem) {
+        stop.current();
+      } else {
+        reset.current();
+      }
     }
-  }, [msLeft, countdownDispatch, playlistDispatch]);
+  }, [isZero, isLastItem]);
 
   const dispatch = (action: PlaylistActionType) => {
     switch (action) {
