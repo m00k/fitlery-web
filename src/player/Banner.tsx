@@ -29,15 +29,19 @@ const Banner: React.FunctionComponent<BannerProps> = (props: BannerProps) => {
       width={1}
     >
       {playState === 'stopped'
-        ? <CardAvatar text={workout.short}/>
-        : <PieCountdown
-            fractionDone={fractionDone}
-            size={size}
-          />
-      }
-      {playState === 'stopped'
-        ? <CardText workout={workout}/>
-        : <Countdown msLeft={msLeft}/>
+        ? <>
+            <CardAvatar text={workout.short} />
+            <CardText workout={workout} />
+          </>
+        : <>
+            <PieCountdown
+              fractionDone={fractionDone}
+              invertColors={false}
+              size={size}
+              text='Go!' // TODO
+            />
+            <Countdown msLeft={msLeft} />
+          </>
       }
     </Grid>
   );

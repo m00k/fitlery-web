@@ -1,43 +1,8 @@
 import Box, { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
-import React, { PropsWithChildren, useRef } from 'react';
+import React, { PropsWithChildren } from 'react';
 import PieSlice from './PieSlice';
 
-
-const PieSliceLeft = (props: any) => {
-  const { fractionDone, size } = props; // TODO: size from parent width
-  const theme = useTheme();
-  let firstRender = useRef<boolean>(true);
-  const text = (!firstRender.current && !fractionDone) ? 'Ready' : 'Go!';
-  firstRender.current = false;
-  return (
-    <PieSlice
-      text={text}
-      clipIf={fractionDone > 0}
-      size={size}
-      bgcolor={theme.palette.background.paper}
-      color={theme.palette.secondary.dark}
-      fractionStart={fractionDone}
-      fractionEnd={1}
-    />
-  );
-}
-
-const PieSliceDone = (props: any) => {
-  const { fractionDone, size } = props;
-  const theme = useTheme();
-  return (
-    <PieSlice
-      text={fractionDone === 1 ? 'Done' : 'Go!'}
-      clipIf={(fractionDone < 1)}
-      size={size}
-      bgcolor={theme.palette.primary.light}
-      color={theme.palette.secondary.contrastText}
-      fractionStart={0}
-      fractionEnd={fractionDone}
-    />
-  );
-}
 
 const WithMargin = ({ children }: PropsWithChildren<any>) => {
   return (
@@ -49,14 +14,31 @@ const WithMargin = ({ children }: PropsWithChildren<any>) => {
   );
 }
 
+const useColors = (invertColors: boolean) => {
+  const theme = useTheme();
+  const light = {
+    bgcolor: theme.palette.background.paper,
+    color: theme.palette.secondary.dark,
+  };
+  const dark = {
+    bgcolor: theme.palette.primary.light,
+    color: theme.palette.secondary.contrastText,
+  };
+  const [left, done] = invertColors ? [dark, light] : [light, dark];
+  return [left, done];
+}
+
 export interface PieCountdownProps extends BoxProps {
   fractionDone: number;
+  invertColors: boolean;
   size: number
+  text: string;
 }
 
 const PieCountdown = (props: PieCountdownProps) => {
-  const { fractionDone, size } = props;
+  const { fractionDone, invertColors, size, text } = props;
   const theme = useTheme();
+  const [left, done] = useColors(invertColors);
 
   return (
     <Box
@@ -66,10 +48,26 @@ const PieCountdown = (props: PieCountdownProps) => {
       position="relative"
     >
       <WithMargin>
-        <PieSliceLeft {...{ fractionDone, size }} />
+        <PieSlice
+          bgcolor={left.bgcolor}
+          color={left.color}
+          clipIf={fractionDone > 0}
+          fractionStart={fractionDone}
+          fractionEnd={1}
+          size={size}
+          text={text}
+        />
       </WithMargin>
       <WithMargin>
-        <PieSliceDone {...{ fractionDone, size }} />
+        <PieSlice
+          bgcolor={done.bgcolor}
+          color={done.color}
+          clipIf={(fractionDone < 1)}
+          fractionStart={0}
+          fractionEnd={fractionDone}
+          size={size}
+          text={text}
+        />
       </WithMargin>
     </Box >
   );
