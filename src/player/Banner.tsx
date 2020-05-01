@@ -6,7 +6,7 @@ import Grid from '../shared/Grid';
 import CardAvatar from '../workout/CardAvatar';
 import CardText from '../workout/CardText';
 import { WorkoutData } from '../workout/data';
-import { PlayState } from "./PlaylistStoreProvider";
+import { PlayState } from "./store/";
 
 interface BannerProps {
   workout: WorkoutData; // TODO (cb)

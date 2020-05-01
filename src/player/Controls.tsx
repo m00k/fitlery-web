@@ -6,7 +6,7 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import React from 'react';
 import Grid from '../shared/Grid';
-import { PlaylistActionType, PlayState } from './PlaylistStoreProvider';
+import { PlaylistActionType, PlayState } from './store/';
 
 interface ControlButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;

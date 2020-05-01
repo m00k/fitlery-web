@@ -1,6 +1,6 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
-import { usePlaylistStore } from '../player/PlaylistStoreProvider';
+import { usePlaylistStore } from '../player/store/';
 import { ExerciseData } from './data';
 import Exercise from './Exercise';
 
