@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import { CountdownStoreProvider } from './countdown/CountdownStoreProvider';
+import { CountdownStoreProvider } from './countdown/store';
 import { PlaylistStoreProvider } from './player/PlaylistStoreProvider';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme/theme';

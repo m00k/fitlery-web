@@ -1,5 +1,5 @@
 import { Dispatch, useEffect } from 'react';
-import { CountdownState, useCountdownStore } from '../countdown/CountdownStoreProvider';
+import { CountdownState, useCountdownStore } from '../countdown/store';
 import { PlaylistActionType, PlaylistState, usePlaylistStore } from './PlaylistStoreProvider';
 
 export interface PlayerState {
