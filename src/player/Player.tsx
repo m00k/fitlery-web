@@ -6,6 +6,7 @@ import Banner from './Banner';
 import Controls from './Controls';
 import Playlist, { isBreak } from './Playlist';
 import PlaylistItem from './PlaylistItem';
+import { PlaylistItemData } from './store';
 import usePlayerStore from './usePlayerStore';
 
 
@@ -15,7 +16,13 @@ const Player = () => {
   const { countdownState, playlistState } = state;
   const { currentItemIndex, items, playState } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
+  if (isBreak(currentItem)) {
+    const nextItem = items.find((item: PlaylistItemData, index: number) => index >= currentItemIndex && !isBreak(item));
+    currentItem.name = `next up: ${nextItem?.name}`;
+  }
   const { msLeft, msTotal } = countdownState;
+  const itemsWoBreaks = items
+    .filter(item => !isBreak(item));
 
   return (
     <>
@@ -46,7 +53,9 @@ const Player = () => {
           isNext={false}
         />
       </Grid>
-      <Playlist></Playlist>
+      <Playlist
+        items={itemsWoBreaks}
+      />
     </>
   );
 }

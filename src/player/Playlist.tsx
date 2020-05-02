@@ -2,42 +2,15 @@ import { Box } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import PlaylistItem from './PlaylistItem';
-import { PlaylistItemData, usePlaylistStore } from './store';
+import { PlaylistItemData } from './store';
 
 export function isBreak(item: PlaylistItemData) {
   return item && !!item.tags && item.tags.includes('break');
 }
 
-function isCurrent(index: number, currentItemIndex: number) {
-  return index === currentItemIndex;
-}
-
-function isNext(index: number, currentItemIndex: number) {
-  return index === currentItemIndex + 1;
-}
-
-function show(item: PlaylistItemData, index: number, currentItemIndex: number) {
-  return index > currentItemIndex && !isBreak(item);
-}
-
-const Item = ({item, index, currentItemIndex}: {item: PlaylistItemData, index: number, currentItemIndex: number}) => {
-  if (!show(item, index, currentItemIndex)) {
-    return null;
-  }
-
-  return <PlaylistItem
-          item={item}
-          isBreak={isBreak(item)}
-          isCurrent={isCurrent(index, currentItemIndex)}
-          isNext={isNext(index, currentItemIndex)}
-        />
-}
-
 // TODO: HACK
 // clean up all those magic numbers
-const Playlist = () => {
-  const [playlistState,] = usePlaylistStore(); // TODO (cb): fix
-  const { items, currentItemIndex } = playlistState;
+const Playlist = ({items}: {items: PlaylistItemData[]}) => {
   const theme = useTheme();
   const currentItemHeight = "120px"
   const navHeight = (theme.overrides?.MuiBottomNavigation?.root as any).height;
@@ -48,7 +21,14 @@ const Playlist = () => {
 
   return (
     <Box {...style}>
-      {items.map( (item: PlaylistItemData, index: number) => <Item key={item.name} {...{ item, index, currentItemIndex }} /> )}
+      {items.map(item => 
+        <PlaylistItem key={item.name}
+          item={item}
+          isBreak={false}
+          isCurrent={false}
+          isNext={false}
+        />
+      )}
     </Box>
   );
 }

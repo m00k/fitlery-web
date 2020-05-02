@@ -14,10 +14,11 @@ export interface PlaylistItemProps{
 export default function PlaylistItem(props: PlaylistItemProps) {
   const { isBreak, isCurrent, isNext, item } = props;
   const theme = useTheme();
-  const text = isBreak ? 'get ready' : item.name;
+  const text = item.name;
   const bgcolor = isCurrent ? theme.palette.primary.main : theme.palette.background.paper;
   const color = isCurrent ? theme.palette.background.paper : theme.palette.primary.main;
   const height = isCurrent ? 120 : 60; // TODO: fix this mess
+  const fontSize = isCurrent ? (!isBreak ? "3rem" : "2rem") : "1.5rem";
 
   return (
     <Box
@@ -41,7 +42,7 @@ export default function PlaylistItem(props: PlaylistItemProps) {
           textAlign: isCurrent ? "center" : "initial",
           fontWeight: isNext ? "bold" : "initial",
           textTransform: "uppercase",
-          fontSize: isCurrent ? "3rem" : "1.5rem"
+          fontSize
         }}
         variant="h4"
       >
