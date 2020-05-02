@@ -3,22 +3,21 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { PlaylistItemData } from './store';
 
+export function isBreak(item: PlaylistItemData) {
+  return item && !!item.tags && item.tags.includes('break');
+}
 
 export interface PlaylistItemProps{
   item: PlaylistItemData
-  isBreak: boolean;
   isCurrent: boolean;
-  isNext: boolean;
 }
 
 export default function PlaylistItem(props: PlaylistItemProps) {
-  const { isBreak, isCurrent, isNext, item } = props;
+  const { isCurrent, item } = props;
   const theme = useTheme();
-  const text = item.name;
-  const bgcolor = isCurrent ? theme.palette.primary.main : theme.palette.background.paper;
-  const color = isCurrent ? theme.palette.background.paper : theme.palette.primary.main;
-  const height = isCurrent ? 120 : 60; // TODO: fix this mess
-  const fontSize = isCurrent ? (!isBreak ? "3rem" : "2rem") : "1.5rem";
+  const bgcolor = theme.palette.background.paper;
+  const color = theme.palette.primary.main;
+  const height = 60; // TODO: fix this mess
 
   return (
     <Box
@@ -33,15 +32,12 @@ export default function PlaylistItem(props: PlaylistItemProps) {
       p={1}
       width={1}
     >
-      <Box component="span"
-        style={{
-          textAlign: isCurrent ? "center" : "initial",
-          fontWeight: isNext ? "bold" : "initial",
-          textTransform: "uppercase",
-          fontSize
-        }}
+      <Box
+        component="span"
+        fontWeight={isCurrent ? 'bold' : 'initial'}
+        fontSize='1.5rem'
       >
-        {text}
+        {item.name.toUpperCase()}
       </Box>
     </Box>
   );
