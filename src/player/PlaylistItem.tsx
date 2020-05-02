@@ -6,13 +6,13 @@ import { PlaylistItemData } from './store';
 
 export interface PlaylistItemProps {
   item: PlaylistItemData
-  current: boolean;
+  isCurrent: boolean;
+  isNext: boolean;
 }
 
 export default function PlaylistItem(props: PlaylistItemProps) {
-  const { current, item } = props;
+  const { isCurrent, isNext, item } = props;
   const theme = useTheme();
-  const variant = current ? 'h4' : 'h5';
 
   return (
     <Box
@@ -29,7 +29,10 @@ export default function PlaylistItem(props: PlaylistItemProps) {
       p={1}
       flex="1"
     >
-      <Typography variant={variant}>
+      <Typography
+        style={{flex: 1, textAlign: isCurrent ? "center" : "initial", fontWeight: isCurrent || isNext ? "bold" : "initial"}}
+        variant="h4"
+      >
         {item.name}
       </Typography>
     </Box>

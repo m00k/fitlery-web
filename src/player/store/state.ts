@@ -1,30 +1,32 @@
+const BREAK_MS = 30 * 1000;
+const WORK_MS = 60 * 1000;
 const exercises: PlaylistItemData[] = [
   {
     name: 'break 0',
-    durationMs: 3 * 1000,
+    durationMs: BREAK_MS,
     tags: ['break'],
   },
   { 
     name: 'Wall Sit',
-    durationMs: 6 * 1000,
+    durationMs: WORK_MS,
   },
   {
     name: 'break 1',
-    durationMs: 3 * 1000,
+    durationMs: BREAK_MS,
     tags: ['break'],
   },
   { 
     name: 'Lunge',
-    durationMs: 6 * 1000,
+    durationMs: WORK_MS,
   },
   {
     name: 'break 2',
-    durationMs: 3 * 1000,
+    durationMs: BREAK_MS,
     tags: ['break'],
   },
   { 
     name: 'Plank',
-    durationMs: 6 * 1000,
+    durationMs: WORK_MS,
   },
 ];
 

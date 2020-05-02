@@ -39,6 +39,7 @@ const pause = (state: PlaylistState): PlaylistState => {
 const stop = (state: PlaylistState): PlaylistState => {
   return {
     ...state,
+    currentItemIndex: NOT_FOUND,
     playState: 'stopped',
   }
 }

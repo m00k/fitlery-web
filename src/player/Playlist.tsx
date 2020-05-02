@@ -1,14 +1,55 @@
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import PlaylistItem from './PlaylistItem';
 import { PlaylistItemData, usePlaylistStore } from './store';
 
+function isBreak(item: PlaylistItemData) {
+  return item && !!item.tags && item.tags.includes('break');
+}
+
+function isCurrent(index: number, currentItemIndex: number) {
+  return index === currentItemIndex;
+}
+
+function isNext(index: number, currentItemIndex: number) {
+  return index === currentItemIndex + 1;
+}
+
+function show(item: PlaylistItemData, index: number, currentItemIndex: number) {
+  return !isBreak(item) || isCurrent(index, currentItemIndex);
+}
+
+const Item = ({item, index, currentItemIndex}: {item: PlaylistItemData, index: number, currentItemIndex: number}) => {
+  const theme = useTheme();
+
+  if (!show(item, index, currentItemIndex)) {
+    return null;
+  }
+
+  return isBreak(item)
+    ? <Typography
+        style={{
+          color: theme.palette.secondary.contrastText,
+          flex: 1,
+          textAlign: "center",
+        }}
+        variant="h5"
+      >
+        break
+      </Typography>
+    : <PlaylistItem
+        item={item}
+        isCurrent={isCurrent(index, currentItemIndex)}
+        isNext={isNext(index, currentItemIndex)}
+      />
+}
+
 // TODO: HACK
 // clean up all those magic numbers
 const Playlist = () => {
-  const [playlistState, ] = usePlaylistStore(); // TODO (cb): fix
-  const { items, currentItemIndex: ci } = playlistState;
+  const [playlistState,] = usePlaylistStore(); // TODO (cb): fix
+  const { items, currentItemIndex } = playlistState;
   const theme = useTheme();
   const navHeight = (theme.overrides?.MuiBottomNavigation?.root as any).height;
   const mainMargin = .5;
@@ -20,13 +61,7 @@ const Playlist = () => {
 
   return (
     <Box {...style}>
-      {items.map((item: PlaylistItemData, i: number) =>
-        <PlaylistItem
-          key={item.name}
-          item={item}
-          current={i === ci}
-        />
-      )}
+      {items.map( (item: PlaylistItemData, index: number) => <Item key={item.name} {...{ item, index, currentItemIndex }} /> )}
     </Box>
   );
 }
