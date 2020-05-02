@@ -11,13 +11,12 @@ const Main = ({ children }: any) => {
       top={navHeight}
       left={0}
       right={0}
-      overflow='auto'
-      position='fixed'
-      display='flex'
-      flexDirection='column'
-      alignItems='center'
-      ml={1/2}
-      mr={1/2}
+      overflow="auto"
+      position="fixed"
+      display="grid"
+      alignItems="center"
+      justifyItems="center"
+      justifyContent="stretch"
     >
       <Box
         width={1}
