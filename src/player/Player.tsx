@@ -12,7 +12,7 @@ import usePlayerStore from './usePlayerStore';
 
 const Player = () => {
   const theme = useTheme();
-  const [ state, dispatch ] = usePlayerStore();
+  const [state, dispatch] = usePlayerStore();
   const { countdownState, playlistState } = state;
   const { currentItemIndex, items, playState } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
@@ -26,33 +26,24 @@ const Player = () => {
 
   return (
     <>
-      <Grid
-        alignItems="center"
-        display="grid"
-        justifyItems="center"
-        width={1}
-        bgcolor={theme.palette.background.paper} // TODO
-        boxShadow={8}
+      <Banner
+        workout={workouts[0]} // TODO
+        playState={playState}
+        msLeft={msLeft} // TODO: context or store
+        msTotal={msTotal}
+        currentItem={currentItem}
       >
-        <Banner
-          workout={workouts[0]} // TODO
-          playState={playState}
-          msLeft={msLeft} // TODO: context or store
-          msTotal={msTotal}
-          currentItem={currentItem}
-        >
-        </Banner>
-        <Controls
-          playState={playState}
-          onClick={dispatch}
-        />
-        <PlaylistItem
-          item={currentItem}
-          isBreak={isBreak(currentItem)}
-          isCurrent={true}
-          isNext={false}
-        />
-      </Grid>
+      </Banner>
+      <Controls
+        playState={playState}
+        onClick={dispatch}
+      />
+      <PlaylistItem
+        item={currentItem}
+        isBreak={isBreak(currentItem)}
+        isCurrent={true}
+        isNext={false}
+      />
       <Playlist
         items={itemsWoBreaks}
       />
