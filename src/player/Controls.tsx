@@ -12,7 +12,7 @@ interface ControlButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-const ControlButtonFactory = (icon: JSX.Element) => {
+const withIconButton = (icon: JSX.Element) => {
   return (props: ControlButtonProps) => {
     const { onClick } = props;
     return (
@@ -26,10 +26,22 @@ const ControlButtonFactory = (icon: JSX.Element) => {
   };
 };
 
-const Play = ControlButtonFactory(<PlayArrowIcon style={{ fontSize: '4rem' }} />);
-const Pause = ControlButtonFactory(<PauseIcon style={{ fontSize: '4rem' }} />);
-const Prev = ControlButtonFactory(<SkipPreviousIcon style={{ fontSize: '2.5rem' }} />);
-const Next = ControlButtonFactory(<SkipNextIcon style={{ fontSize: '2.5rem' }} />);
+const Play = withIconButton(<PlayArrowIcon style={{ fontSize: '4rem' }} />);
+const Pause = withIconButton(<PauseIcon style={{ fontSize: '4rem' }} />);
+const Prev = withIconButton(<SkipPreviousIcon style={{ fontSize: '2.5rem' }} />);
+const Next = withIconButton(<SkipNextIcon style={{ fontSize: '2.5rem' }} />);
+
+const useGridStyles = () => {
+  const theme = useTheme();
+  return {
+      alignItems: 'center',
+      display: 'grid',
+      justifyContent: 'center',
+      gridTemplateColumns: '1fr 2fr 1fr',
+      minHeight: 80,
+      bgcolor: theme.palette.background.paper,
+  };
+}
 
 interface ControlsProps {
   playState: PlayState;
@@ -38,16 +50,10 @@ interface ControlsProps {
 
 const Controls = (props: ControlsProps) => {
   const { playState, onClick } = props;
-  const theme = useTheme();
 
   return (
     <Grid
-      alignItems="center"
-      display="grid"
-      justifyContent="center"
-      gridTemplateColumns="1fr 2fr 1fr"
-      minHeight={80}
-      bgcolor={theme.palette.background.paper}
+      {...useGridStyles()}
     >
       <Prev onClick={() => onClick('prev')}/>
       {
