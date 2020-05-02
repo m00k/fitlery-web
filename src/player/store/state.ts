@@ -28,6 +28,69 @@ const exercises: PlaylistItemData[] = [
     name: 'Plank',
     durationMs: WORK_MS,
   },
+  {
+    name: 'break 3',
+    durationMs: BREAK_MS,
+    tags: ['break'],
+  },
+  { 
+    name: 'Reverse Crunch',
+    durationMs: WORK_MS,
+  },
+  {
+    name: 'break 4',
+    durationMs: BREAK_MS,
+    tags: ['break'],
+  },
+  { 
+    name: 'Shadow Boxing',
+    durationMs: WORK_MS,
+  },
+  {
+    name: 'break 5',
+    durationMs: BREAK_MS,
+    tags: ['break'],
+  },
+  { 
+    name: 'Side Plank',
+    durationMs: WORK_MS,
+  },
+  {
+    name: 'break 6',
+    durationMs: BREAK_MS,
+    tags: ['break'],
+  },
+  { 
+    name: 'Side Plank (Left)',
+    durationMs: WORK_MS,
+  },
+  {
+    name: 'break 7',
+    durationMs: BREAK_MS,
+    tags: ['break'],
+  },
+  { 
+    name: 'Side Plank (Right)',
+    durationMs: WORK_MS,
+  },
+  {
+    name: 'break 8',
+    durationMs: BREAK_MS,
+    tags: ['break'],
+  },
+  { 
+    name: 'Knee Strikes',
+    durationMs: WORK_MS,
+  },
+  {
+    name: 'break 9',
+    durationMs: BREAK_MS,
+    tags: ['break'],
+  },
+  { 
+    name: 'Knee High Running',
+    durationMs: WORK_MS,
+  },
 ];
 
 const NOT_FOUND = -1;

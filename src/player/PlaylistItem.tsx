@@ -20,7 +20,8 @@ export default function PlaylistItem(props: PlaylistItemProps) {
       bgcolor={theme.palette.background.paper}
       boxShadow={2}
       borderRadius={1}
-      borderLeft={20}
+      borderLeft={theme.spacing(3)}
+      pr={3}
       borderColor={theme.palette.primary.main}
       color={theme.palette.primary.main}
       display="flex"
