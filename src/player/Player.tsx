@@ -1,6 +1,4 @@
-import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
-import Grid from '../shared/Grid';
 import { workouts } from '../workout/data';
 import Banner from './Banner';
 import Controls from './Controls';
@@ -11,7 +9,6 @@ import usePlayerStore from './usePlayerStore';
 
 
 const Player = () => {
-  const theme = useTheme();
   const [state, dispatch] = usePlayerStore();
   const { countdownState, playlistState } = state;
   const { currentItemIndex, items, playState } = playlistState;

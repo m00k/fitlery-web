@@ -1,4 +1,4 @@
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { PlaylistItemData } from './store';
@@ -24,30 +24,25 @@ export default function PlaylistItem(props: PlaylistItemProps) {
     <Box
       alignItems="center"
       bgcolor={bgcolor}
-      boxShadow={2}
-      borderRadius={1}
       borderLeft={theme.spacing(3)}
       pr={3}
       borderColor={theme.palette.primary.main}
       color={color}
-      display="flex"
+      display="grid"
       height={height}
       p={1}
       width={1}
-      flex="1"
     >
-      <Typography
+      <Box component="span"
         style={{
-          flex: 1,
           textAlign: isCurrent ? "center" : "initial",
           fontWeight: isNext ? "bold" : "initial",
           textTransform: "uppercase",
           fontSize
         }}
-        variant="h4"
       >
         {text}
-      </Typography>
+      </Box>
     </Box>
   );
 }
