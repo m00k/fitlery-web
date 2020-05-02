@@ -4,16 +4,27 @@ import React from 'react';
 import { isBreak } from './PlaylistItem';
 import { usePlaylistStore, PlaylistItemData } from './store';
 
+const nextItem = (items: PlaylistItemData[], currentItemIndex: number) => {
+  const nextItemIndex = items
+    .findIndex((item: PlaylistItemData, index: number) => index >= currentItemIndex && !isBreak(item));
+  return items[nextItemIndex];
+}
 
-export default function PlaylistItemCurrent() {
+const useStyles = () => {
   const [playlistState] = usePlaylistStore();
   const { currentItemIndex, items } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
-  const nextItemIndex = items.findIndex((item: PlaylistItemData, index: number) => index >= currentItemIndex && !isBreak(item));
-  const nextItem = items[nextItemIndex];
-  const text = isBreak(currentItem)
-    ? `next up: ${nextItem?.name}`
-    : currentItem.name;
+  const fontSize = isBreak(currentItem) ? "2rem" : "3rem";
+  const text = currentItemIndex > -1
+    ? isBreak(currentItem)
+      ? `next up: ${nextItem(items, currentItemIndex).name}`
+      : currentItem.name
+    : 'get ready'
+  return [fontSize, text];
+}
+
+export default function PlaylistItemCurrent() {
+  const [fontSize, text] = useStyles();
   const theme = useTheme();
   const bgcolor = theme.palette.primary.main;
   const color = theme.palette.background.paper;
@@ -35,7 +46,7 @@ export default function PlaylistItemCurrent() {
         style={{
           textAlign: "center",
           textTransform: "uppercase",
-          fontSize: isBreak(currentItem) ? "2rem" : "3rem"
+          fontSize,
         }}
         variant="h4"
       >
