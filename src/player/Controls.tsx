@@ -47,7 +47,6 @@ const Controls = (props: ControlsProps) => {
       justifyContent="center"
       gridTemplateColumns="1fr 2fr 1fr"
       minHeight={80}
-      width={200}
       bgcolor={theme.palette.background.paper}
     >
       <Prev onClick={() => onClick('prev')}/>
