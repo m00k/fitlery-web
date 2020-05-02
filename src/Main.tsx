@@ -16,7 +16,8 @@ const Main = ({ children }: any) => {
       display='flex'
       flexDirection='column'
       alignItems='center'
-      m={1/2}
+      ml={1/2}
+      mr={1/2}
     >
       <Box
         width={1}
