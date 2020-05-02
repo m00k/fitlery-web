@@ -1,5 +1,5 @@
 export const MS_INTERVAL = 100; // TODO
-const MS_TOTAL = 3000; // TODO
+const MS_TOTAL = 10000; // TODO
 
 export interface CountdownState {
   msLeft: number;

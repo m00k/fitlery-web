@@ -1,31 +1,33 @@
 import { Box, Typography } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
-import React from 'react';
+import React, { Attributes } from 'react';
 import { PlaylistItemData } from './store';
 
 
-export interface PlaylistItemProps {
+export interface PlaylistItemProps extends Attributes {
   item: PlaylistItemData
+  isBreak: boolean;
   isCurrent: boolean;
   isNext: boolean;
 }
 
 export default function PlaylistItem(props: PlaylistItemProps) {
-  const { isCurrent, isNext, item } = props;
+  const { isBreak, isCurrent, isNext, item } = props;
   const theme = useTheme();
+  const text = isBreak ? 'get ready' : item.name;
 
   return (
     <Box
       alignItems="center"
-      bgcolor={theme.palette.background.paper}
+      bgcolor={isCurrent ? theme.palette.primary.main : theme.palette.background.paper}
       boxShadow={2}
       borderRadius={1}
       borderLeft={theme.spacing(3)}
       pr={3}
       borderColor={theme.palette.primary.main}
-      color={theme.palette.primary.main}
+      color={isCurrent ? theme.palette.background.paper : theme.palette.primary.main}
       display="flex"
-      height={60}
+      height={isCurrent ? 80 : 60} // TODO: fix this mess
       mb={1/3}
       p={1}
       flex="1"
@@ -34,7 +36,7 @@ export default function PlaylistItem(props: PlaylistItemProps) {
         style={{flex: 1, textAlign: isCurrent ? "center" : "initial", fontWeight: isCurrent || isNext ? "bold" : "initial"}}
         variant="h4"
       >
-        {item.name}
+        {text}
       </Typography>
     </Box>
   );
