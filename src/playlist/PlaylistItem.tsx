@@ -7,6 +7,31 @@ export function isBreak(item: PlaylistItemData) {
   return item && !!item.tags && item.tags.includes('break');
 }
 
+const useStyles = (isCurrent: boolean) => {
+  const theme = useTheme();
+  const bgcolor = theme.palette.background.paper;
+  const color = theme.palette.primary.main;
+  const height = theme.variables.playlist.item.height;
+  const root = {
+    alignItems: 'center',
+    color,
+    bgcolor,
+    borderColor: theme.palette.primary.main,
+    borderLeft: theme.spacing(3),
+    display: 'grid',
+    height,
+    p: 1,
+    pr: 3,
+    width: 1,
+  };
+  const inner = {
+    fontSize: '1.5rem',
+    fontWeight: isCurrent ? 'bold' : 'initial',
+  };
+
+  return { root, inner };
+}
+
 export interface PlaylistItemProps{
   item: PlaylistItemData
   isCurrent: boolean;
@@ -14,28 +39,15 @@ export interface PlaylistItemProps{
 
 export default function PlaylistItem(props: PlaylistItemProps) {
   const { isCurrent, item } = props;
-  const theme = useTheme();
-  const bgcolor = theme.palette.background.paper;
-  const color = theme.palette.primary.main;
-  const height = 60; // TODO: fix this mess
+  const {root, inner} = useStyles(isCurrent);
 
   return (
     <Box
-      alignItems="center"
-      bgcolor={bgcolor}
-      borderLeft={theme.spacing(3)}
-      pr={3}
-      borderColor={theme.palette.primary.main}
-      color={color}
-      display="grid"
-      height={height}
-      p={1}
-      width={1}
+      {...root}
     >
       <Box
         component="span"
-        fontWeight={isCurrent ? 'bold' : 'initial'}
-        fontSize='1.5rem'
+        {...inner}
       >
         {item.name?.toUpperCase()}
       </Box>

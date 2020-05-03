@@ -22,7 +22,10 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       playlist: {
         currentItem: {
           height: Number,
-        }
+        },
+        item: {
+          height: Number,
+        },
       }
     }
   }
@@ -45,7 +48,10 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       playlist: {
         currentItem: {
           height: Number,
-        }
+        },
+        item: {
+          height: Number,
+        },
       }
     }
   }
@@ -72,7 +78,10 @@ const variables = {
   playlist: {
     currentItem: {
       height: SPACING * 15,
-    }
+    },
+    item: {
+      height: SPACING * 7.5,
+    },
   },
 };
 
