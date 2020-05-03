@@ -18,10 +18,9 @@ const useCombinedStore = (): [CombinedState, Dispatch<PlayerActionType>] => {
   const { msLeft } = countdownState;
   const isZero = msLeft === 0;
   const { currentItemIndex, items } = playlistState;
-  const isLastItem = currentItemIndex === items.length - 1;
   const currentItem = items[Math.max(currentItemIndex, 0)];
-  const nextItem = items[Math.min(currentItemIndex + 1, items.length - 1)];
-  const prevItem = items[Math.max(currentItemIndex - 1, 0)];
+  const nextItem = items[currentItemIndex + 1];
+  const prevItem = items[currentItemIndex - 1];
 
   // never stale
   const stop = useRef(() => {
@@ -32,14 +31,14 @@ const useCombinedStore = (): [CombinedState, Dispatch<PlayerActionType>] => {
 
   useEffect(() => {
     if (isZero) {
-      if (isLastItem) {
+      if (!nextItem) {
         stop.current();
       } else {
         playlistDispatch.next();
         countdownDispatch.set(nextItem.durationMs);
       }
     }
-  }, [isZero, isLastItem, playlistDispatch, countdownDispatch, nextItem]);
+  }, [isZero, nextItem, playlistDispatch, countdownDispatch]);
 
   const dispatch = (action: PlayerActionType) => {
     switch (action) {
@@ -56,13 +55,15 @@ const useCombinedStore = (): [CombinedState, Dispatch<PlayerActionType>] => {
         countdownDispatch.pause();
         break;
       case 'prev':
-        if (currentItemIndex > 0) {
+        if (prevItem) {
           playlistDispatch.prev();
           countdownDispatch.set(prevItem.durationMs);
+        } else {
+          countdownDispatch.reset();
         }
         break;
       case 'next':
-        if (!isLastItem) {
+        if (nextItem) {
           playlistDispatch.next();
           countdownDispatch.set(nextItem.durationMs);
         }
