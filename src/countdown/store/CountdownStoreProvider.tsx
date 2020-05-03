@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, useContext, useEffect, useReducer } from "react";
-import { CountdownAction, CountdownActionType } from "./actions";
+import { CountdownAction, CountdownActionSetPayload, CountdownActionType } from "./actions";
 import countdownReducer, { CountdownReducer } from "./reducer";
 import { CountdownState, initialState, MS_INTERVAL } from "./state";
 
@@ -10,7 +10,7 @@ const createActionDispatchers = (dispatch: Dispatch<CountdownAction>): Countdown
     stop: () => dispatch({ type: 'stop' }),
     pause: () => dispatch({ type: 'pause' }),
     tick: () => dispatch({ type: 'tick' }),
-    set: () => dispatch({ type: 'set' }),
+    set: (payload: CountdownActionSetPayload) => dispatch({ type: 'set', payload }),
     reset: () => dispatch({ type: 'reset' }),
   };
 }

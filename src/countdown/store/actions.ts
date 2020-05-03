@@ -2,6 +2,7 @@ export type CountdownActionType = 'set' | 'start' | 'stop' | 'pause' | 'reset' |
 
 export interface CountdownAction {
   type: CountdownActionType;
+  payload?: any;
 }
 
 export interface CountdownActionStart extends CountdownAction {
@@ -16,8 +17,14 @@ export interface CountdownActionPause extends CountdownAction {
   type: 'pause';
 }
 
+export interface CountdownActionSetPayload {
+  msLeft: number;
+  msTotal: number;
+}
+
 export interface CountdownActionSet extends CountdownAction {
   type: 'set';
+  payload: CountdownActionSetPayload;
 }
 
 export interface CountdownActionReset extends CountdownAction {

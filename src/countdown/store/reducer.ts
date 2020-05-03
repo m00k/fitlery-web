@@ -1,4 +1,4 @@
-import { CountdownAction, isCountdownActionPause, isCountdownActionReset, isCountdownActionSet, isCountdownActionStart, isCountdownActionStop, isCountdownActionTick } from "./actions"
+import { CountdownAction, isCountdownActionPause, isCountdownActionReset, isCountdownActionSet, isCountdownActionStart, isCountdownActionStop, isCountdownActionTick, CountdownActionSet } from "./actions"
 import { CountdownState, MS_INTERVAL } from "./state"
 
 export type CountdownReducer = (state: CountdownState, action: CountdownAction) => CountdownState
@@ -22,6 +22,15 @@ const tick = (state: CountdownState): CountdownState => {
     : { ...state, msLeft: Math.max(0, msLeft - MS_INTERVAL) };
 }
 
+const set = (state: CountdownState, action: CountdownActionSet): CountdownState => {
+  const { msLeft, msTotal } = action.payload;
+  return {
+    ...state,
+    msLeft,
+    msTotal,
+  };
+}
+
 const reset = (state: CountdownState): CountdownState => {
   return { ...state, msLeft: state.msTotal };
 }
@@ -43,8 +52,7 @@ const countdownReducer: CountdownReducer = (state: CountdownState, action: Count
     return reset(state);
   }
   if (isCountdownActionSet(action)) {
-    // TODO: set total, interval(?)
-    return state;
+    return set(state, action);
   }
   return state;
 }
