@@ -1,5 +1,5 @@
-const BREAK_MS = 30 * 1000;
-const WORK_MS = 60 * 1000;
+const BREAK_MS = 3 * 1000;
+const WORK_MS = 6 * 1000;
 const exercises: PlaylistItemData[] = [
   {
     ...createBreak(BREAK_MS)

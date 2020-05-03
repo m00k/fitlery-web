@@ -14,21 +14,20 @@ const useCombinedStore = (): [CombinedState, Dispatch<PlayerActionType>] => {
   const [playlistState, playlistDispatch] = usePlaylistStore();
   const [countdownState, countdownDispatch] = useCountdownStore();
   const [playerState, playerDispatch] = usePlayerStore();
+  const state = { countdownState, playlistState, playerState };
   const { msLeft } = countdownState;
   const isZero = msLeft === 0;
-  const state = { countdownState, playlistState, playerState };
   const { currentItemIndex, items } = playlistState;
   const isLastItem = currentItemIndex === items.length - 1;
+  const currentItem = items[Math.max(currentItemIndex, 0)];
+  const nextItem = items[Math.min(currentItemIndex + 1, items.length - 1)];
+  const prevItem = items[Math.max(currentItemIndex - 1, 0)];
 
+  // never stale
   const stop = useRef(() => {
     playerDispatch.stop();
     playlistDispatch.setCurrent(NOT_FOUND); 
     countdownDispatch.stop();
-  });
-
-  const reset = useRef(() => {
-    playlistDispatch.next();
-    countdownDispatch.reset();
   });
 
   useEffect(() => {
@@ -36,10 +35,11 @@ const useCombinedStore = (): [CombinedState, Dispatch<PlayerActionType>] => {
       if (isLastItem) {
         stop.current();
       } else {
-        reset.current();
+        playlistDispatch.next();
+        countdownDispatch.set(nextItem.durationMs);
       }
     }
-  }, [isZero, isLastItem]);
+  }, [isZero, isLastItem, playlistDispatch, countdownDispatch, nextItem]);
 
   const dispatch = (action: PlayerActionType) => {
     switch (action) {
@@ -47,6 +47,7 @@ const useCombinedStore = (): [CombinedState, Dispatch<PlayerActionType>] => {
         playerDispatch.play();
         if (playlistState.currentItemIndex === NOT_FOUND) {
           playlistDispatch.setCurrent(0);
+          countdownDispatch.set(currentItem.durationMs);
         }
         countdownDispatch.start();
         break;
@@ -55,14 +56,16 @@ const useCombinedStore = (): [CombinedState, Dispatch<PlayerActionType>] => {
         countdownDispatch.pause();
         break;
       case 'prev':
-        playerDispatch.prev();
-        playlistDispatch.prev();
-        countdownDispatch.reset();
+        if (currentItemIndex > 0) {
+          playlistDispatch.prev();
+          countdownDispatch.set(prevItem.durationMs);
+        }
         break;
       case 'next':
-        playerDispatch.next();
-        playlistDispatch.next();
-        countdownDispatch.reset();
+        if (!isLastItem) {
+          playlistDispatch.next();
+          countdownDispatch.set(nextItem.durationMs);
+        }
         break;
     }
   }
