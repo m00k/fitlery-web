@@ -8,12 +8,12 @@ export const workouts: WorkoutData[] = [
   { 
     short: '18',
     title: '18min',
-    description: '12 excercises 60s/30s go/break'
+    description: '12 exercises that will make the 12 labors of hercules look like a walk in the park'
   },
   { 
     short: 'TB',
     title: 'TABATA',
-    description: '12 excercises 30s/10s go/break'
+    description: 'Hakuna Tabata?'
   },
   { 
     short: 'MP',
