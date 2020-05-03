@@ -5,9 +5,14 @@ import Grid from '../shared/Grid';
 import Box from '@material-ui/core/Box';
 
 
+export interface CardTextProps {
+  title: string;
+  description: string;
+}
+
 // TODO: generic title, description
-const CardText = (props: any) => {
-  const { workout } = props;
+const CardText = (props: CardTextProps) => {
+  const { title, description } = props;
   const theme = useTheme();
 
   return (
@@ -24,14 +29,14 @@ const CardText = (props: any) => {
         <Typography
           variant="subtitle1"
           noWrap>
-          {workout.title}
+          {title}
         </Typography>
         <Typography
           variant="caption"
           component="p"
           noWrap
         >
-          {workout.description}
+          {description}
         </Typography>
       </Box>
     </Grid>

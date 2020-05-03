@@ -6,7 +6,7 @@ import Grid from '../shared/Grid';
 import CardAvatar from '../workout/CardAvatar';
 import CardText from '../workout/CardText';
 import { WorkoutData } from '../workout/data';
-import { PlayState, PlaylistItemData } from "./store/";
+import { PlaylistItemData, PlayState } from "./store/";
 
 
 interface BannerProps {
@@ -42,7 +42,7 @@ const Banner: React.FunctionComponent<BannerProps> = (props: BannerProps) => {
       {playState === 'stopped'
         ? <>
             <CardAvatar text={workout.short} />
-            <CardText workout={workout} />
+            <CardText {...workout}/>
           </>
         : <>
             <PieCountdown

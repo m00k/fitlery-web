@@ -1,13 +1,10 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import Grid from '../shared/Grid';
 
 
-const Card = (props: any) => {
-  const { children, workout } = props;
-
+const Card = ({ children }: PropsWithChildren<any>) => {
   return (
     <Grid
-      key={workout.title}
       borderRadius={1}
       display='grid'
       gridColumn={['span 6', 'span 4', 'span 3']}

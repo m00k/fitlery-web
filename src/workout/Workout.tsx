@@ -14,7 +14,7 @@ const Workout = (props: WorkoutProps ) => {
   return (
     <Card {...props}>
       <CardAvatar text={workout.short} />
-      <CardText {...props} />
+      <CardText {...workout} />
     </Card>
   );
 }
