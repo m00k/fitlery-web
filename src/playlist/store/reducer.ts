@@ -13,17 +13,8 @@ const isLastIndex = (state: PlaylistState): boolean => {
   return state.currentItemIndex >= (state.items.length - 1);
 }
 
-const isValidIndex = (state: PlaylistState, index?: number): boolean => {
-  index = index || state.currentItemIndex;
-  const {items} = state;
-  return index > NOT_FOUND && index < items.length;
-}
-
 const setCurrent = (state: PlaylistState, action: PlaylistAction): PlaylistState => {
   const { index } = action.payload;
-  if (!isValidIndex(state, index)) {
-    return state;
-  }
   return {
     ...state,
     currentItemIndex: index,

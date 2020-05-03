@@ -1,52 +1,52 @@
-export type PlaylistActionType = 'play' | 'pause' | 'stop' | 'prev' | 'next';
-export interface PlaylistAction {
-  type: PlaylistActionType;
+export type PlayerActionType = 'play' | 'pause' | 'stop' | 'prev' | 'next';
+export interface PlayerAction {
+  type: PlayerActionType;
 }
 
-export interface PlaylistActionPlay extends PlaylistAction {
+export interface PlayerActionPlay extends PlayerAction {
   type: 'play';
 }
 
-export interface PlaylistActionPause extends PlaylistAction {
+export interface PlayerActionPause extends PlayerAction {
   type: 'pause';
 }
 
-export interface PlaylistActionStop extends PlaylistAction {
+export interface PlayerActionStop extends PlayerAction {
   type: 'stop';
 }
 
-export interface PlaylistActionPrev extends PlaylistAction {
+export interface PlayerActionPrev extends PlayerAction {
   type: 'prev';
 }
 
-export interface PlaylistActionNext extends PlaylistAction {
+export interface PlayerActionNext extends PlayerAction {
   type: 'next';
 }
 
-export type PlaylistActions =
-  | PlaylistActionPlay
-  | PlaylistActionPause
-  | PlaylistActionStop
-  | PlaylistActionPrev
-  | PlaylistActionNext
+export type PlayerActions =
+  | PlayerActionPlay
+  | PlayerActionPause
+  | PlayerActionStop
+  | PlayerActionPrev
+  | PlayerActionNext
   ;
 
-export function isPlaylistActionPlay(action: PlaylistAction): action is PlaylistActionPlay {
+export function isPlayerActionPlay(action: PlayerAction): action is PlayerActionPlay {
   return action.type === 'play';
 }
 
-export function isPlaylistActionPause(action: PlaylistAction): action is PlaylistActionPause {
+export function isPlayerActionPause(action: PlayerAction): action is PlayerActionPause {
   return action.type === 'pause';
 }
 
-export function isPlaylistActionStop(action: PlaylistAction): action is PlaylistActionStop {
+export function isPlayerActionStop(action: PlayerAction): action is PlayerActionStop {
   return action.type === 'stop';
 }
 
-export function isPlaylistActionPrev(action: PlaylistAction): action is PlaylistActionPrev {
+export function isPlayerActionPrev(action: PlayerAction): action is PlayerActionPrev {
   return action.type === 'prev';
 }
 
-export function isPlaylistActionNext(action: PlaylistAction): action is PlaylistActionNext {
+export function isPlayerActionNext(action: PlayerAction): action is PlayerActionNext {
   return action.type === 'next';
 }

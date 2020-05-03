@@ -6,7 +6,7 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import React from 'react';
 import Grid from '../shared/Grid';
-import { PlaylistActionType, PlayState } from './store/';
+import { PlayerActionType, PlayState } from './store/';
 
 interface ControlButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -45,7 +45,7 @@ const useGridStyles = () => {
 
 interface ControlsProps {
   playState: PlayState;
-  onClick: (p: PlaylistActionType) => void
+  onClick: (p: PlayerActionType) => void
 }
 
 const Controls = (props: ControlsProps) => {

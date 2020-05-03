@@ -4,15 +4,16 @@ import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
 import { workouts } from '../workout/data';
 import Banner from './Banner';
 import Controls from './Controls';
-import usePlayerStore from './usePlayerStore';
+import useCombinedStore from './useCombinedStore';
 
 
 const Player = () => {
-  const [state, dispatch] = usePlayerStore();
-  const { countdownState, playlistState } = state;
-  const { currentItemIndex, items, playState } = playlistState;
+  const [state, dispatch] = useCombinedStore();
+  const { countdownState, playlistState, playerState } = state;
+  const { currentItemIndex, items } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
   const { msLeft, msTotal } = countdownState;
+  const { playState } = playerState;
 
   return (
     <>

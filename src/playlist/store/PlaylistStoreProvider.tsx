@@ -8,7 +8,7 @@ export type PlaylistActionDispatchers = { [A in PlaylistActionType]: (payload?: 
 
 const createActionDispatchers = (dispatch: Dispatch<PlaylistAction>): PlaylistActionDispatchers => {
   return {
-    setCurrent: () => dispatch({ type: 'setCurrent' }),
+    setCurrent: (index: number) => dispatch({ type: 'setCurrent', payload: {index} }),
     prev: () => dispatch({ type: 'prev' }),
     next: () => dispatch({ type: 'next' }),
   };
