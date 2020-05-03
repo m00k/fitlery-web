@@ -37,7 +37,7 @@ export default function PlaylistItem(props: PlaylistItemProps) {
         fontWeight={isCurrent ? 'bold' : 'initial'}
         fontSize='1.5rem'
       >
-        {item.name.toUpperCase()}
+        {item.name?.toUpperCase()}
       </Box>
     </Box>
   );

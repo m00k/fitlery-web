@@ -2,90 +2,70 @@ const BREAK_MS = 30 * 1000;
 const WORK_MS = 60 * 1000;
 const exercises: PlaylistItemData[] = [
   {
-    name: 'break 0',
-    durationMs: BREAK_MS,
-    tags: ['break'],
+    ...createBreak(BREAK_MS)
   },
   { 
     name: 'Wall Sit',
     durationMs: WORK_MS,
   },
   {
-    name: 'break 1',
-    durationMs: BREAK_MS,
-    tags: ['break'],
+    ...createBreak(BREAK_MS)
   },
   { 
     name: 'Lunge',
     durationMs: WORK_MS,
   },
   {
-    name: 'break 2',
-    durationMs: BREAK_MS,
-    tags: ['break'],
+    ...createBreak(BREAK_MS)
   },
   { 
     name: 'Plank',
     durationMs: WORK_MS,
   },
   {
-    name: 'break 3',
-    durationMs: BREAK_MS,
-    tags: ['break'],
+    ...createBreak(BREAK_MS)
   },
   { 
     name: 'Reverse Crunch',
     durationMs: WORK_MS,
   },
   {
-    name: 'break 4',
-    durationMs: BREAK_MS,
-    tags: ['break'],
+    ...createBreak(BREAK_MS)
   },
   { 
     name: 'Shadow Boxing',
     durationMs: WORK_MS,
   },
   {
-    name: 'break 5',
-    durationMs: BREAK_MS,
-    tags: ['break'],
+    ...createBreak(BREAK_MS)
   },
   { 
     name: 'Side Plank',
     durationMs: WORK_MS,
   },
   {
-    name: 'break 6',
-    durationMs: BREAK_MS,
-    tags: ['break'],
+    ...createBreak(BREAK_MS)
   },
   { 
     name: 'Side Plank (Left)',
     durationMs: WORK_MS,
   },
   {
-    name: 'break 7',
-    durationMs: BREAK_MS,
-    tags: ['break'],
+    ...createBreak(BREAK_MS)
   },
   { 
     name: 'Side Plank (Right)',
     durationMs: WORK_MS,
   },
   {
-    name: 'break 8',
-    durationMs: BREAK_MS,
-    tags: ['break'],
+    ...createBreak(BREAK_MS)
   },
   { 
     name: 'Knee Strikes',
     durationMs: WORK_MS,
   },
   {
-    name: 'break 9',
-    durationMs: BREAK_MS,
-    tags: ['break'],
+    ...createBreak(BREAK_MS)
   },
   { 
     name: 'Knee High Running',
@@ -108,7 +88,14 @@ export const initialState: PlaylistState = {
 }
 
 export interface PlaylistItemData {
-  name: string;
+  name?: string;
   durationMs: number;
   tags?: string[];
+}
+
+function createBreak(durationMs: number): PlaylistItemData {
+  return {
+    durationMs,
+    tags: ['break'],
+  };
 }
