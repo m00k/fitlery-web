@@ -1,6 +1,8 @@
 import { Dispatch, useEffect, useRef } from 'react';
 import { CountdownState, useCountdownStore } from '../countdown/store';
-import { PlaylistActionType, PlaylistState, usePlaylistStore } from './store';
+import { NOT_FOUND, usePlaylistStore } from '../playlist/store';
+import { PlaylistActionType, PlaylistState } from './store';
+
 
 export interface PlayerState {
   countdownState: CountdownState;
@@ -17,7 +19,7 @@ const usePlayerStore = (): [PlayerState, Dispatch<PlaylistActionType>] => {
   const isLastItem = currentItemIndex === items.length - 1;
 
   const stop = useRef(() => {
-    playlistDispatch.stop();
+    playlistDispatch.setCurrent(NOT_FOUND); 
     countdownDispatch.stop();
   });
 
@@ -39,11 +41,12 @@ const usePlayerStore = (): [PlayerState, Dispatch<PlaylistActionType>] => {
   const dispatch = (action: PlaylistActionType) => {
     switch (action) {
       case 'play':
-        playlistDispatch.play();
+        if (playlistState.currentItemIndex === NOT_FOUND) {
+          playlistDispatch.setCurrent(0);
+        }
         countdownDispatch.start();
         break;
       case 'pause':
-        playlistDispatch.pause();
         countdownDispatch.pause();
         break;
       case 'prev':

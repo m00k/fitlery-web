@@ -1,9 +1,9 @@
 import React from 'react';
+import Playlist from '../playlist/Playlist';
+import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
 import { workouts } from '../workout/data';
 import Banner from './Banner';
 import Controls from './Controls';
-import Playlist from './Playlist';
-import PlaylistItemCurrent from './PlaylistItemCurrent';
 import usePlayerStore from './usePlayerStore';
 
 

@@ -1,7 +1,7 @@
 import { isPlaylistActionNext, isPlaylistActionPrev, isPlaylistActionsetCurrent, PlaylistAction } from "./actions";
 import { PlaylistState } from "./state";
 
-const NOT_FOUND = -1;
+export const NOT_FOUND = -1;
 
 export type PlaylistReducer = (state: PlaylistState, action: PlaylistAction) => PlaylistState
 
