@@ -20,7 +20,7 @@ const PieCountdown = (props: PieCountdownProps) => {
 
   return (
     <Box
-      width={size} // TODO: 100%
+      width={size}
       height={size}
       bgcolor={theme.palette.primary.main}
       position="relative"
@@ -32,7 +32,6 @@ const PieCountdown = (props: PieCountdownProps) => {
           clipIf={fractionDone > 0}
           fractionStart={fractionDone}
           fractionEnd={1}
-          size={size}
           text={text}
         />
       </WithMargin>
@@ -43,7 +42,6 @@ const PieCountdown = (props: PieCountdownProps) => {
           clipIf={(fractionDone < 1)}
           fractionStart={0}
           fractionEnd={fractionDone}
-          size={size}
           text={text}
         />
       </WithMargin>

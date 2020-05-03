@@ -7,7 +7,6 @@ export interface PieSliceProps {
   bgcolor: string;
   color: string;
   clipIf: boolean;
-  size: number;
   fractionStart: number;
   fractionEnd: number;
 }

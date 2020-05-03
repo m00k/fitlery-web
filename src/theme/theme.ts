@@ -10,6 +10,9 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       avatar: {
         height: number,
       },
+      countdown: {
+        height: number,
+      },
       navbar: {
         height: number, // React.CSSProperties['height'] -> string | number | undefined
       },
@@ -30,6 +33,9 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       avatar: {
         height: number,
       },
+      countdown: {
+        height: number,
+      },
       navbar: {
         height: number,
       },
@@ -47,12 +53,15 @@ declare module '@material-ui/core/styles/createMuiTheme' {
 
 const primary = palette.primary as SimplePaletteColorOptions;
 const secondary = palette.secondary as SimplePaletteColorOptions;
-const SPACING = 8; // TODO: find better way
+const SPACING = 8; // TODO: reuse from default mui theme?
 const TOOLBAR_HEIGHT = SPACING * 6; // MuiToolbar variant dense
 
 const variables = {
   avatar: {
     height: SPACING * 14,
+  },
+  countdown: {
+    height: SPACING * 16,
   },
   navbar: {
     height: TOOLBAR_HEIGHT,

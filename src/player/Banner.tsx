@@ -8,6 +8,7 @@ import CardText from '../workout/CardText';
 import { WorkoutData } from '../workout/data';
 import { PlayState, PlaylistItemData } from "./store/";
 
+
 interface BannerProps {
   workout: WorkoutData; // TODO (cb): playlist name, description
   playState: PlayState;
@@ -17,18 +18,25 @@ interface BannerProps {
   currentItem: PlaylistItemData;
 }
 
-const Banner: React.FunctionComponent<BannerProps> = (props: BannerProps) => {
-  const { workout, currentItem, playState, msLeft, msTotal } = props;
+const useCountdownProps = (props: BannerProps) => {
+  const { currentItem, msLeft, msTotal } = props;
   const fractionDone = 1 - msLeft / msTotal;
   const isBreak = currentItem && !!currentItem.tags && currentItem.tags.includes('break');
   const text = isBreak ? 'Ready' : 'Go!';
   const theme = useTheme();
-  const size = theme.spacing(16);
+  const size = theme.variables.countdown.height;
+  
+  return {fractionDone, invertColors: isBreak, isBreak, size, text};
+}
+
+const Banner: React.FunctionComponent<BannerProps> = (props: BannerProps) => {
+  const { workout, playState, msLeft } = props;
+  const countdownProps = useCountdownProps(props);
 
   return (
     <Grid
       display="grid"
-      gridTemplateColumns={`${size}px 1fr`} // TODO: magic numbers 
+      gridTemplateColumns={`${countdownProps.size}px 1fr`}
       width={1}
     >
       {playState === 'stopped'
@@ -38,10 +46,7 @@ const Banner: React.FunctionComponent<BannerProps> = (props: BannerProps) => {
           </>
         : <>
             <PieCountdown
-              fractionDone={fractionDone}
-              invertColors={isBreak}
-              size={size}
-              text={text}
+              {...countdownProps}
             />
             <Countdown msLeft={msLeft} />
           </>

@@ -4,6 +4,8 @@ import React from 'react';
 import Grid from '../shared/Grid';
 import Box from '@material-ui/core/Box';
 
+
+// TODO: generic title, description
 const CardText = (props: any) => {
   const { workout } = props;
   const theme = useTheme();
