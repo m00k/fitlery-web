@@ -15,7 +15,7 @@ const useStyles = () => {
   const inner: BoxProps = {
     bgcolor: theme.palette.background.paper,
     color: theme.palette.secondary.dark,
-    fontSize: theme.typography.h2.fontSize,
+    fontSize: theme.typography.h1.fontSize,
     fontWeight: theme.typography.fontWeightBold,
     borderRadius: '50%',
     lineHeight: `${theme.variables.avatar.height}px`,

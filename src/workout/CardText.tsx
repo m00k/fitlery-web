@@ -17,15 +17,17 @@ const CardText = (props: CardTextProps) => {
 
   return (
     <Grid
-      display="grid"
       alignItems="center"
       bgcolor={theme.palette.primary.dark}
       color={theme.palette.secondary.contrastText}
-      p={1}
+      display="grid"
       gridRow={'span 2'}
       overflow='hidden'
+      p={1}
     >
-      <Box>
+      <Box
+        minWidth={0}
+      >
         <Typography
           variant="subtitle1"
           noWrap>
