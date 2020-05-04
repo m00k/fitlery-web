@@ -5,7 +5,7 @@ import { isBreakItem } from './PlaylistItem';
 import { NOT_FOUND, usePlaylistStore } from './store';
 
 
-const useInnerProps = () => {
+const useInnerStyles = () => {
   const [playlistState] = usePlaylistStore();
   const { currentItemIndex, items } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
@@ -23,7 +23,7 @@ const useInnerProps = () => {
   return {style, text};
 }
 
-const useRootProps = () => {
+const useRootStyles = () => {
   const theme = useTheme();
   const bgcolor = theme.palette.primary.main;
   const color = theme.palette.background.paper;
@@ -43,12 +43,12 @@ const useRootProps = () => {
 }
 
 export default function PlaylistItemCurrent() {
-  const rootProps = useRootProps();
-  const {style, text} = useInnerProps();
+  const rootStyles = useRootStyles();
+  const {style, text} = useInnerStyles();
 
   return (
     <Box
-      {...rootProps}
+      {...rootStyles}
     >
       <Typography
         style={style}
