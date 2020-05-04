@@ -15,7 +15,7 @@ const useStyles = () => {
   const navHeightTopBottom = `${theme.variables.navbar.height * 2}px`;
   const playerHeight = `${theme.variables.player.height}px`;
   const currentItemHeight = `${theme.variables.playlist.currentItem.height}px`;
-  const height = `calc(100vh - ${navHeightTopBottom} - ${playerHeight} - ${currentItemHeight})`;
+  const height = `calc(100vh - ${navHeightTopBottom} - ${playerHeight} - ${currentItemHeight})`; // TODO: include in theme?
   const overflow = 'auto';
   return { height, overflow };
 }
@@ -23,13 +23,13 @@ const useStyles = () => {
 const useStoreData = () => {
   const [playlistState] = usePlaylistStore();
   const { currentItemIndex, items } = playlistState;
-  const currentItemIndexSafe = Math.max(currentItemIndex, 0);
+  const currentItemIndexOrZero = Math.max(currentItemIndex, 0);
   const taggedItems = [
-      ...items.slice(0, Math.max(currentItemIndexSafe, 0)),
-      ...items.slice(currentItemIndexSafe, currentItemIndexSafe + 2).map(highlightItem),
-      ...items.slice(currentItemIndexSafe + 2),
+      ...items.slice(0, currentItemIndexOrZero),
+      ...items.slice(currentItemIndexOrZero, currentItemIndexOrZero + 2).map(highlightItem), // highlight one break item and one work item, don't know which is which
+      ...items.slice(currentItemIndexOrZero + 2),
      ]
-    .filter(item => !isBreakItem(item)); // in this order -> indexes;
+    .filter(item => !isBreakItem(item)); // filter out break items, naturally removing the unwanted, highlighted break item
 
   return { taggedItems };
 }
