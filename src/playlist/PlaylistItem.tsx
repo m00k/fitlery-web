@@ -3,8 +3,8 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { PlaylistItemData } from './store';
 
-export function isBreak(item: PlaylistItemData) {
-  return item && !!item.tags && item.tags.includes('break');
+export function isBreakItem(item: PlaylistItemData) {
+  return item && !!item.tags && item.tags.isBreak;
 }
 
 const useStyles = (isCurrent: boolean) => {

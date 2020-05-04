@@ -29,14 +29,14 @@ export const initialState: PlaylistState = {
 export interface PlaylistItemData {
   name: string;
   durationMs: number;
-  tags?: string[];
+  tags?: {[key: string]: any};
 }
 
 function createPair(name: string): [PlaylistItemData, PlaylistItemData] {
   const b = {
     name: `next up: ${name}`,
     durationMs: BREAK_MS,
-    tags: ['break'],
+    tags: {isBreak: true},
   };
   const w = {
     name,

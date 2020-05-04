@@ -2,6 +2,7 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import React, { ReactNode } from 'react';
 import Countdown from '../countdown/Countdown';
 import PieCountdown from '../countdown/PieCountdown';
+import { isBreakItem } from "../playlist/PlaylistItem";
 import { PlaylistItemData } from "../playlist/store";
 import Grid from '../shared/Grid';
 import CardAvatar from '../workout/CardAvatar';
@@ -22,12 +23,12 @@ interface BannerProps {
 const useCountdownProps = (props: BannerProps) => {
   const { currentItem, msLeft, msTotal } = props;
   const fractionDone = 1 - msLeft / msTotal;
-  const isBreak = currentItem && !!currentItem.tags && currentItem.tags.includes('break');
+  const isBreak = isBreakItem(currentItem);
   const text = isBreak ? 'Ready' : 'Go!';
   const theme = useTheme();
   const size = theme.variables.countdown.height;
   
-  return {fractionDone, invertColors: isBreak, isBreak, size, text};
+  return {fractionDone, invertColors: isBreak, size, text};
 }
 
 const Banner: React.FunctionComponent<BannerProps> = (props: BannerProps) => {
