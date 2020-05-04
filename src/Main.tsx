@@ -8,15 +8,14 @@ const Main = ({ children }: any) => {
   return (
     <Box
       bottom={navHeight}
-      top={navHeight}
+      display="grid"
       left={0}
+      justifyItems="center"
+      justifyContent="stretch"
       right={0}
       overflow="auto"
       position="fixed"
-      display="grid"
-      alignItems="center"
-      justifyItems="center"
-      justifyContent="stretch"
+      top={navHeight}
     >
       <Box
         width={1}
