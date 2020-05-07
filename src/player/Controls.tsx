@@ -44,16 +44,18 @@ const useGridStyles = () => {
 }
 
 interface ControlsProps {
+  style: React.CSSProperties; // TODO: there has to be a better way
   playState: PlayState;
   onClick: (p: PlayerActionType) => void
 }
 
 const Controls = (props: ControlsProps) => {
-  const { playState, onClick } = props;
+  const { playState, onClick, style } = props;
 
   return (
     <Grid
       {...useGridStyles()}
+      style={style}
     >
       <Prev onClick={() => onClick('prev')}/>
       {

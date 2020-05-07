@@ -25,30 +25,30 @@ const useInnerStyles = () => {
 
 const useRootStyles = () => {
   const theme = useTheme();
-  const bgcolor = theme.palette.primary.main;
+  const bgcolor = theme.palette.primary.light; // main;
   const color = theme.palette.background.paper;
-  const height = theme.variables.playlist.currentItem.height;
   const props: BoxProps = {
     alignItems: 'center',
     bgcolor: bgcolor,
-    borderLeft: theme.spacing(3),
-    pr: 3,
-    borderColor: theme.palette.primary.main,
     color: color,
     display: 'grid',
-    height: height,
+    pl: 1,
+    pr: 1,
+    boxShadow: 4,
     width: 1,
   };
   return props;
 }
 
-export default function PlaylistItemCurrent() {
-  const rootStyles = useRootStyles();
+export default function PlaylistItemCurrent(props: any) {
+  const root = useRootStyles();
   const {style, text} = useInnerStyles();
 
+  // TODO: what a mess
   return (
     <Box
-      {...rootStyles}
+      {...root}
+      style={props.style}
     >
       <Typography
         style={style}

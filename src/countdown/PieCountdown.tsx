@@ -9,21 +9,20 @@ import WithMargin from './WithMargin';
 export interface PieCountdownProps extends BoxProps {
   fractionDone: number;
   invertColors: boolean;
-  size: number
   text: string;
+  style?: any;
 }
 
 const PieCountdown = (props: PieCountdownProps) => {
-  const { fractionDone, invertColors, size, text } = props;
+  const { fractionDone, invertColors, text, style } = props;
   const theme = useTheme();
   const [left, done] = useColors(invertColors);
 
   return (
     <Box
-      width={size}
-      height={size}
       bgcolor={theme.palette.primary.main}
       position="relative"
+      style={style}
     >
       <WithMargin>
         <PieSlice

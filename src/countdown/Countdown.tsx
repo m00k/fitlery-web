@@ -7,10 +7,11 @@ import time from './time-utils';
 
 export interface CountdownProps {
   msLeft: number;
+  style?: any;
 }
 
 const Countdown = (props: CountdownProps) => {
-  const { msLeft } = props
+  const { msLeft, style } = props
   const theme = useTheme();
   
   return (
@@ -22,6 +23,7 @@ const Countdown = (props: CountdownProps) => {
       fontWeight={theme.typography.fontWeightBold}
       fontSize="3rem"
       justifyContent="center"
+      style={style}
     >
       {time.toTimeString(msLeft)}
     </Grid>

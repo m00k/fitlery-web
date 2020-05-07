@@ -1,5 +1,4 @@
 import { Box } from '@material-ui/core';
-import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import PlaylistItem, { isBreakItem } from './PlaylistItem';
 import { PlaylistItemData, usePlaylistStore } from './store';
@@ -8,16 +7,6 @@ import { PlaylistItemData, usePlaylistStore } from './store';
 const highlightItem = (item: PlaylistItemData) => {
   const tags = { ...item.tags, highlight: true };
   return {...item, tags};
-}
-
-const useStyles = () => {
-  const theme = useTheme();
-  const navHeightTopBottom = `${theme.variables.navbar.height * 2}px`;
-  const playerHeight = `${theme.variables.player.height}px`;
-  const currentItemHeight = `${theme.variables.playlist.currentItem.height}px`;
-  const height = `calc(100vh - ${navHeightTopBottom} - ${playerHeight} - ${currentItemHeight})`; // TODO: include in theme?
-  const overflow = 'auto';
-  return { height, overflow };
 }
 
 const useStoreData = () => {
@@ -34,12 +23,15 @@ const useStoreData = () => {
   return { taggedItems };
 }
 
-const Playlist = () => {
+const Playlist = (props: any) => {
   const { taggedItems } = useStoreData();
-  const styles = useStyles();
-
   return (
-    <Box {...styles}>
+    <Box
+      style={{
+        ...props.style,
+        overflow: "auto",
+      }}
+    >
       {taggedItems.map(item =>
         <PlaylistItem
           key={item.name}

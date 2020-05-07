@@ -27,11 +27,14 @@ const useStyles = () => {
 }
 
 const CardAvatar = (props: any) => {
-  const { text } = props;
+  const { text, style } = props;
   const { root, inner } = useStyles();
 
   return (
-    <Box {...root}>
+    <Box 
+      {...root}
+      style={style}
+    >
       <Box {...inner}>
         {text}
       </Box>

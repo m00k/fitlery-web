@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 export interface CardTextProps {
   title: string;
   description: string;
+  style?: React.CSSProperties;
 }
 
 // TODO: generic title, description
@@ -21,9 +22,10 @@ const CardText = (props: CardTextProps) => {
       bgcolor={theme.palette.primary.dark}
       color={theme.palette.secondary.contrastText}
       display="grid"
-      gridRow={'span 2'}
+      // gridRow={'span 2'}
       overflow='hidden'
       p={1}
+      gridArea="text"
     >
       <Box
         minWidth={0}
