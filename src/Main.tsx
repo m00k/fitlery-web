@@ -5,6 +5,7 @@ import React from "react";
 const Main = ({ children }: any) => {
   const theme = useTheme();
   const navHeight = (theme.overrides?.MuiBottomNavigation?.root as any).height;
+
   return (
     <Box
       bottom={navHeight}
@@ -18,8 +19,8 @@ const Main = ({ children }: any) => {
       top={navHeight}
     >
       <Box
-        width={1}
         maxWidth={theme.breakpoints.values.lg}
+        width={1}
       >
         {children}
       </Box>

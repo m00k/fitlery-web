@@ -17,11 +17,17 @@ const PieCountdown = (props: PieCountdownProps) => {
   const { fractionDone, invertColors, text, style } = props;
   const theme = useTheme();
   const [left, done] = useColors(invertColors);
+  console.log('#########', 'pie', style);
 
   return (
     <Box
       bgcolor={theme.palette.primary.main}
       position="relative"
+      display="grid"
+      alignItems="center"
+      justifyContent="center"
+      width="100%"
+      height="100%"
       style={style}
     >
       <WithMargin>

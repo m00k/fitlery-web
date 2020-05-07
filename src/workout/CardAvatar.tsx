@@ -6,22 +6,13 @@ import React from 'react';
 const useStyles = () => {
   const theme = useTheme();
   const root: BoxProps = {
-    display: 'grid',
-    alignItems: 'center',
-    justifyContent: 'center',
     bgcolor: theme.palette.primary.main,
+    display: 'grid',
     p: 1,
   };
   const inner: BoxProps = {
     bgcolor: theme.palette.background.paper,
     color: theme.palette.secondary.dark,
-    fontSize: theme.typography.h1.fontSize,
-    fontWeight: theme.typography.fontWeightBold,
-    borderRadius: '50%',
-    lineHeight: `${theme.variables.avatar.height}px`,
-    width: theme.variables.avatar.height,
-    height: theme.variables.avatar.height,
-    textAlign: 'center',
   };
   return { root, inner };
 }
@@ -29,15 +20,38 @@ const useStyles = () => {
 const CardAvatar = (props: any) => {
   const { text, style } = props;
   const { root, inner } = useStyles();
+  const VIEWBOX_SIZE = 100;
 
   return (
-    <Box 
+    <Box
       {...root}
       style={style}
     >
-      <Box {...inner}>
-        {text}
-      </Box>
+      <svg
+        width="100%"
+        height="100%"
+        viewBox={`0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}`}
+      >
+        <circle
+          cx="50%"
+          cy="50%"
+          r="50%"
+          fill={inner.bgcolor}
+        >
+        </circle>
+        <text
+          x="50%"
+          y="50%"
+          dominantBaseline="middle"
+          fill={inner.color}
+          fontSize={4 / 5 * VIEWBOX_SIZE / 2}
+          fontWeight="700"
+          textAnchor="middle"
+          fontFamily="Roboto"
+        >
+          {text}
+        </text>
+      </svg>
     </Box>
   );
 };

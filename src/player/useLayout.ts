@@ -36,7 +36,7 @@ export const useLayout = () => {
         "list list list list list"
       `,
       gridTemplateColumns: "repeat(3, 115px) repeat(2, 1fr)",
-      gridTemplateRows: `136px 88px 120px calc(100vh - ${theme.variables.navbar.height * 2}px - 136px - 88px - 120px)`,
+      gridTemplateRows: `120px 104px 120px calc(100vh - ${theme.variables.navbar.height * 2}px - 120px - 104px - 120px)`,
     }
   };
 
