@@ -13,7 +13,7 @@ export interface CardTextProps {
 
 // TODO: generic title, description
 const CardText = (props: CardTextProps) => {
-  const { title, description } = props;
+  const { title, description, style } = props;
   const theme = useTheme();
 
   return (
@@ -25,7 +25,7 @@ const CardText = (props: CardTextProps) => {
       // gridRow={'span 2'}
       overflow='hidden'
       p={1}
-      gridArea="text"
+      style={style} // TODO: fix this mess
     >
       <Box
         minWidth={0}

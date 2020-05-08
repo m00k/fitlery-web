@@ -12,9 +12,26 @@ interface WorkoutProps {
 const Workout = (props: WorkoutProps ) => {
   const { workout } = props;
   return (
-    <Card {...props}>
-      <CardAvatar text={workout.short} />
-      <CardText {...workout} />
+    <Card
+      {...props}
+      style={{
+        display: "grid",
+        gridTemplateColumns: "100%",
+        gridTemplateRows: "auto 1fr",
+      }}
+    >
+      <CardAvatar
+        text={workout.short}
+        style={{
+          gridColumn: 1
+        }}
+      />
+      <CardText
+        style={{
+          gridColumn: 1
+        }}
+        {...workout}
+      />
     </Card>
   );
 }
