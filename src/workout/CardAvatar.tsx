@@ -1,7 +1,17 @@
 import Box, { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
+export interface AvatarProps {
+  text: string;
+}
+
+export type AvatarStyles = CSSProperties;
+
+export interface AvatarPropsAndStyles {
+  props: AvatarProps;
+  style: AvatarStyles;
+}
 
 const useStyles = () => {
   const theme = useTheme();
@@ -17,8 +27,8 @@ const useStyles = () => {
   return { root, inner };
 }
 
-const CardAvatar = (props: any) => {
-  const { text, style } = props;
+const CardAvatar: React.FunctionComponent<AvatarPropsAndStyles> = ({props, style}) => {
+  const { text } = props;
   const { root, inner } = useStyles();
   const VIEWBOX_SIZE = 100;
 

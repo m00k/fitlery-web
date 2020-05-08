@@ -5,18 +5,25 @@ import { isBreakItem } from "../playlist/PlaylistItem";
 import { PlaylistItemData } from "../playlist/store";
 import CardAvatar from '../workout/CardAvatar';
 import CardText from '../workout/CardText';
-import { WorkoutData } from '../workout/data';
 import { PlayState } from "./store/";
 
-
-interface BannerProps {
-  workout: WorkoutData; // TODO: playlist name, description
+export interface BannerProps {
+  title: string;
+  description: string;
   playState: PlayState;
   msLeft: number;
   msTotal: number;
   children?: ReactNode;
   currentItem: PlaylistItemData;
-  style?: any; // TODO: what a mess
+}
+
+export interface BannerStyles {
+  [key: string]: React.CSSProperties;
+}
+
+export interface BannerPropsAndStyles {
+  props: BannerProps;
+  styles: BannerStyles;
 }
 
 const useCountdownProps = (props: BannerProps) => {
@@ -28,19 +35,19 @@ const useCountdownProps = (props: BannerProps) => {
   return { fractionDone, invertColors: isBreak, text };
 }
 
-const Banner: React.FunctionComponent<BannerProps> = (props: BannerProps) => {
-  const { workout, playState, msLeft, style } = props;
-  const countdownProps = useCountdownProps(props);
+const Banner: React.FunctionComponent<BannerPropsAndStyles> = ({ props, styles }: BannerPropsAndStyles) => {
+  const { title, description, playState, msLeft } = props;
+  const countdownProps = useCountdownProps(props);  
 
   return playState === 'stopped'
     ? (<>
-        <CardAvatar text={workout.short} style={style.avatar} />
-        <CardText {...workout} style={style.text} />
-      </>)
+      <CardAvatar props={{text: title}} style={styles.avatar} />
+      <CardText props={{title, description}} style={styles.text} />
+    </>)
     : (<>
-        <PieCountdown {...countdownProps} style={style.avatar} />
-        <Countdown msLeft={msLeft} style={style.text}/>
-      </>);
+      <PieCountdown props={countdownProps} style={styles.avatar} />
+      <Countdown props={{msLeft}} style={styles.text} />
+    </>);
 };
 
 

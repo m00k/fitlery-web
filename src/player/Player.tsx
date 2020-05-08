@@ -1,36 +1,45 @@
+import { Box } from '@material-ui/core';
 import React from 'react';
 import Playlist from '../playlist/Playlist';
 import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
 import { workouts } from '../workout/data';
-import Banner from './Banner';
+import Banner, { BannerProps } from './Banner';
 import Controls from './Controls';
-import useCombinedStore from './useCombinedStore';
+import useCombinedStore, { CombinedState } from './useCombinedStore';
 import { useLayout } from './useLayout';
-import { Box } from '@material-ui/core';
 
 
-const Player = () => {
-  const [state, dispatch] = useCombinedStore();
+const useBannerProps = (state: CombinedState): BannerProps => {
   const { countdownState, playlistState, playerState } = state;
   const { currentItemIndex, items } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
   const { msLeft, msTotal } = countdownState;
   const { playState } = playerState;
+  const workout = workouts[0]; // TODO
+  return {
+    playState,
+    msLeft,
+    msTotal,
+    currentItem,
+    title: workout.short,
+    description: workout.description,
+  }
+}
+
+const Player = () => {
+  const [state, dispatch] = useCombinedStore();
+  const { playerState } = state;
+  const { playState } = playerState;
   const styles = useLayout();
 
-  
   return (
     <Box
       id="the-box"
-      style={styles.root}
+      {...styles.root}
     >
       <Banner
-        workout={workouts[0]} // TODO
-        playState={playState}
-        msLeft={msLeft} // TODO: context or store
-        msTotal={msTotal}
-        currentItem={currentItem}
-        style={styles}
+        props={useBannerProps(state)}
+        styles={styles}
       >
       </Banner>
       <Controls

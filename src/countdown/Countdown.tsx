@@ -1,17 +1,20 @@
 import useTheme from '@material-ui/core/styles/useTheme';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import Grid from '../shared/Grid';
 import time from './time-utils';
 
-// TODO: mode -> stop/go
 
 export interface CountdownProps {
   msLeft: number;
-  style?: any;
 }
 
-const Countdown = (props: CountdownProps) => {
-  const { msLeft, style } = props
+export interface CountdownPropsAndStyles {
+  props: CountdownProps;
+  style: React.CSSProperties;
+}
+
+const Countdown: FunctionComponent<CountdownPropsAndStyles> = ({ props, style }) => {
+  const { msLeft } = props
   const theme = useTheme();
   
   return (

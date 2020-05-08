@@ -1,6 +1,6 @@
 import Box, { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import PieSlice from './PieSlice';
 import useColors from './useColors';
 import WithMargin from './WithMargin';
@@ -10,14 +10,17 @@ export interface PieCountdownProps extends BoxProps {
   fractionDone: number;
   invertColors: boolean;
   text: string;
-  style?: any;
 }
 
-const PieCountdown = (props: PieCountdownProps) => {
-  const { fractionDone, invertColors, text, style } = props;
+export interface PieCountdownPropsAndStyles {
+  props: PieCountdownProps;
+  style: React.CSSProperties;
+}
+
+const PieCountdown: FunctionComponent<PieCountdownPropsAndStyles> = ({props, style}) => {
+  const { fractionDone, invertColors, text } = props;
   const theme = useTheme();
   const [left, done] = useColors(invertColors);
-  console.log('#########', 'pie', style);
 
   return (
     <Box

@@ -21,7 +21,7 @@ const Workout = (props: WorkoutProps ) => {
       }}
     >
       <CardAvatar
-        text={workout.short}
+        props={{text: workout.short}}
         style={{
           gridColumn: 1
         }}
@@ -30,7 +30,7 @@ const Workout = (props: WorkoutProps ) => {
         style={{
           gridColumn: 1
         }}
-        {...workout}
+        props={{...workout}}
       />
     </Card>
   );
