@@ -7,10 +7,11 @@ import { WorkoutData } from './data';
 
 interface WorkoutProps {
   workout: WorkoutData;
+  onClick?: () => void;
 }
 
 const Workout = (props: WorkoutProps ) => {
-  const { workout } = props;
+  const { workout, onClick } = props;
   return (
     <Card
       {...props}
@@ -19,6 +20,7 @@ const Workout = (props: WorkoutProps ) => {
         gridTemplateColumns: "100%",
         gridTemplateRows: "auto 1fr",
       }}
+      onClick={onClick}
     >
       <CardAvatar
         props={{text: workout.short}}

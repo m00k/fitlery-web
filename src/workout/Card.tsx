@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import Grid from '../shared/Grid';
 
 
-const Card = ({ children }: PropsWithChildren<any>) => {
+const Card = ({ children, onClick }: PropsWithChildren<any>) => {
   return (
     <Grid
       borderRadius={1}
@@ -10,6 +10,7 @@ const Card = ({ children }: PropsWithChildren<any>) => {
       gridColumn={['span 6', 'span 4', 'span 3']}
       gridTemplateRows='5fr 2fr'
       boxShadow={8}
+      onClick={onClick} // TODO: threading that through the hierarchy is no fun
     >
       {children}
     </Grid>
