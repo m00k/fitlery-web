@@ -1,4 +1,4 @@
-import { Box } from '@material-ui/core';
+import { Box, BoxProps } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { PlaylistItemData } from './store';
@@ -12,7 +12,7 @@ const useStyles = (isCurrent: boolean) => {
   const bgcolor = theme.palette.background.paper;
   const color = theme.palette.primary.main;
   const height = theme.variables.playlist.item.height;
-  const root = {
+  const root: BoxProps = {
     alignItems: 'center',
     color,
     bgcolor,
@@ -24,7 +24,7 @@ const useStyles = (isCurrent: boolean) => {
     pr: 3,
     width: 1,
   };
-  const inner = {
+  const inner: BoxProps = {
     fontSize: '1.5rem',
     fontWeight: isCurrent ? 'bold' : 'initial',
   };

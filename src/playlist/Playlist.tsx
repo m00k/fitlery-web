@@ -27,9 +27,9 @@ const Playlist = (props: any) => {
   const { taggedItems } = useStoreData();
   return (
     <Box
+      overflow="auto"
       style={{
-        ...props.style,
-        overflow: "auto",
+        ...props.style
       }}
     >
       {taggedItems.map(item =>
