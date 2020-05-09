@@ -1,11 +1,18 @@
-export type PlaylistActionType = 'setCurrent' | 'prev' | 'next';
+import { PlaylistData } from "./state";
+
+export type PlaylistActionType = 'set' | 'setCurrentItem' | 'prev' | 'next';
 export interface PlaylistAction {
   type: PlaylistActionType;
   payload?: any;
 }
 
-export interface PlaylistActionsetCurrent extends PlaylistAction {
-  type: 'setCurrent';
+export interface PlaylistActionSet extends PlaylistAction {
+  type: 'set';
+  payload: PlaylistData;
+}
+
+export interface PlaylistActionSetCurrentItem extends PlaylistAction {
+  type: 'setCurrentItem';
   payload: { index: number };
 }
 
@@ -18,13 +25,17 @@ export interface PlaylistActionNext extends PlaylistAction {
 }
 
 export type PlaylistActions =
-  | PlaylistActionsetCurrent
+  | PlaylistActionSetCurrentItem
   | PlaylistActionPrev
   | PlaylistActionNext
   ;
 
-export function isPlaylistActionsetCurrent(action: PlaylistAction): action is PlaylistActionsetCurrent {
-  return action.type === 'setCurrent';
+  export function isPlaylistActionSet(action: PlaylistAction): action is PlaylistActionSet {
+    return action.type === 'set';
+  }
+
+export function isPlaylistActionSetCurrentItem(action: PlaylistAction): action is PlaylistActionSetCurrentItem {
+  return action.type === 'setCurrentItem';
 }
 
 export function isPlaylistActionPrev(action: PlaylistAction): action is PlaylistActionPrev {

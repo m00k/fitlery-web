@@ -1,14 +1,15 @@
 import React, { createContext, Dispatch, useContext, useReducer } from 'react';
 import { PlaylistAction, PlaylistActionType } from './actions';
 import { PlaylistReducer, playlistReducer } from './reducer';
-import { initialState, PlaylistState } from './state';
+import { initialState, PlaylistData, PlaylistState } from './state';
 
 
 export type PlaylistActionDispatchers = { [A in PlaylistActionType]: (payload?: any) => void };
 
 const createActionDispatchers = (dispatch: Dispatch<PlaylistAction>): PlaylistActionDispatchers => {
   return {
-    setCurrent: (index: number) => dispatch({ type: 'setCurrent', payload: {index} }),
+    set: (playlist: PlaylistData) => dispatch({ type: 'set', payload: playlist }),
+    setCurrentItem: (index: number) => dispatch({ type: 'setCurrentItem', payload: {index} }),
     prev: () => dispatch({ type: 'prev' }),
     next: () => dispatch({ type: 'next' }),
   };

@@ -17,14 +17,20 @@ const exercises: PlaylistItemData[] = [
 
 const NOT_FOUND = -1;
 
-export interface PlaylistState {
+// TODO: naming conventions: interfaces vs models
+export interface PlaylistData {
   name: string;
+  description?: string;
   items: PlaylistItemData[];
+}
+
+export interface PlaylistState extends PlaylistData {
   currentItemIndex: number;
 }
 
 export const initialState: PlaylistState = {
   name: '18', // TODO: real data
+  description: 'TODO: real data',
   items: exercises, // TODO: real data
   currentItemIndex: NOT_FOUND,
 }

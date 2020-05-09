@@ -25,7 +25,7 @@ const useCombinedStore = (): [CombinedState, Dispatch<PlayerActionType>] => {
   const play = () => {
     playerDispatch.play();
     if (playlistState.currentItemIndex === NOT_FOUND) {
-      playlistDispatch.setCurrent(0);
+      playlistDispatch.setCurrentItem(0);
       countdownDispatch.set(currentItem.durationMs);
     }
     countdownDispatch.start();
@@ -33,7 +33,7 @@ const useCombinedStore = (): [CombinedState, Dispatch<PlayerActionType>] => {
 
   const stop = () => {
     playerDispatch.stop();
-    playlistDispatch.setCurrent(NOT_FOUND); 
+    playlistDispatch.setCurrentItem(NOT_FOUND); 
     countdownDispatch.stop();
   };
 

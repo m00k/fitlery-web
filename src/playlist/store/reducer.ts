@@ -1,4 +1,4 @@
-import { isPlaylistActionNext, isPlaylistActionPrev, isPlaylistActionsetCurrent, PlaylistAction } from "./actions";
+import { isPlaylistActionNext, isPlaylistActionPrev, isPlaylistActionSet, isPlaylistActionSetCurrentItem, PlaylistAction } from "./actions";
 import { PlaylistState } from "./state";
 
 export const NOT_FOUND = -1;
@@ -13,7 +13,14 @@ const isLastIndex = (state: PlaylistState): boolean => {
   return state.currentItemIndex >= (state.items.length - 1);
 }
 
-const setCurrent = (state: PlaylistState, action: PlaylistAction): PlaylistState => {
+const set = (state: PlaylistState, action: PlaylistAction): PlaylistState => {
+  return {
+    ...state,
+    ...action.payload
+  }
+}
+
+const setCurrentItem = (state: PlaylistState, action: PlaylistAction): PlaylistState => {
   const { index } = action.payload;
   return {
     ...state,
@@ -43,8 +50,11 @@ const next = (state: PlaylistState): PlaylistState => {
 }
 
 export const playlistReducer: PlaylistReducer = (state: PlaylistState, action: PlaylistAction) => {
-  if (isPlaylistActionsetCurrent(action)) {
-    return setCurrent(state, action);
+  if (isPlaylistActionSet(action)) {
+    return set(state, action);
+  }
+  if (isPlaylistActionSetCurrentItem(action)) {
+    return setCurrentItem(state, action);
   }
   if (isPlaylistActionPrev(action)) {
     return prev(state);
