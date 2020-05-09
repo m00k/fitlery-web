@@ -8,6 +8,7 @@ import CardText from '../workout/CardText';
 import { PlayState } from "./store/";
 
 export interface BannerProps {
+  short: string;
   title: string;
   description: string;
   playState: PlayState;
@@ -36,13 +37,13 @@ const useCountdownProps = (props: BannerProps) => {
 }
 
 const Banner: React.FunctionComponent<BannerPropsAndStyles> = ({ props, styles }: BannerPropsAndStyles) => {
-  const { title, description, playState, msLeft } = props;
+  const { short, title, description, playState, msLeft } = props;
   const countdownProps = useCountdownProps(props);  
 
   return playState === 'stopped'
     ? (<>
-      <CardAvatar props={{text: title}} style={styles.avatar} />
-      <CardText props={{title, description}} style={styles.text} />
+      <CardAvatar props={{text: short}} style={styles.avatar} />
+      <CardText props={{title, description}} style={{...styles.text, whiteSpace: "normal"}} />
     </>)
     : (<>
       <PieCountdown props={countdownProps} style={styles.avatar} />

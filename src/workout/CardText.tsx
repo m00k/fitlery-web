@@ -1,6 +1,6 @@
 import useTheme from '@material-ui/core/styles/useTheme';
 import Typography from '@material-ui/core/Typography';
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import Grid from '../shared/Grid';
 import Box from '@material-ui/core/Box';
 
@@ -25,22 +25,25 @@ const CardText: React.FunctionComponent<CardTextPropsAndStyles> = ({ props, styl
       bgcolor={theme.palette.primary.dark}
       color={theme.palette.secondary.contrastText}
       display="grid"
-      overflow='hidden'
+      overflow="hidden"
       p={1}
-      style={style} // TODO: fix this mess
+      whiteSpace="nowrap"
+      style={style}
     >
       <Box
         minWidth={0}
       >
         <Typography
           variant="subtitle1"
-          noWrap>
+          noWrap
+        >
           {title}
         </Typography>
         <Typography
           variant="caption"
           component="p"
           noWrap
+          style={{whiteSpace:"inherit"}} // overrides nowrap
         >
           {description}
         </Typography>

@@ -15,14 +15,15 @@ const useBannerProps = (state: CombinedState): BannerProps => {
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
   const { msLeft, msTotal } = countdownState;
   const { playState } = playerState;
-  const workout = workouts[0]; // TODO
+  const { short, title, description } = workouts[0];
   return {
     playState,
     msLeft,
     msTotal,
     currentItem,
-    title: workout.short,
-    description: workout.description,
+    short,
+    title,
+    description,
   }
 }
 
