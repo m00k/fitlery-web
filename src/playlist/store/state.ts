@@ -19,6 +19,7 @@ const NOT_FOUND = -1;
 
 // TODO: naming conventions: interfaces vs models
 export interface PlaylistData {
+  short: string;
   name: string;
   description?: string;
   items: PlaylistItemData[];
@@ -28,10 +29,12 @@ export interface PlaylistState extends PlaylistData {
   currentItemIndex: number;
 }
 
+// TODO: real data
 export const initialState: PlaylistState = {
-  name: '18', // TODO: real data
+  short: '18',
+  name: '18min',
   description: 'TODO: real data',
-  items: exercises, // TODO: real data
+  items: exercises, 
   currentItemIndex: NOT_FOUND,
 }
 
