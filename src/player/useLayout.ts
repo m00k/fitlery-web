@@ -1,11 +1,29 @@
 import { useTheme, useMediaQuery } from '@material-ui/core';
 
+const usePageMediaQuery = () => {
+  const theme = useTheme();
+  const [downsm, upsm, upmd] = [
+    theme.breakpoints.down('sm'),
+    theme.breakpoints.up('sm'),
+    theme.breakpoints.up('md')
+  ];
+  const mqs = [
+    { bp: downsm, matches: useMediaQuery(downsm) },
+    { bp: upsm, matches: useMediaQuery(upsm) },
+    { bp: upmd, matches: useMediaQuery(upmd) },
+  ];
+  const mq = mqs.filter(mq => mq.matches).map(mq => mq.bp).slice(-1)[0] || downsm;
+  return [mq, downsm, upsm, upmd];
+};
 
+// TODO: responsive row heights
 // TODO: magic numbers => theme, you know the drill...
 export const useLayout = () => {
   const theme = useTheme();
+  const [mq, downsm, upsm, upmd] = usePageMediaQuery();
+
   const rootStyles: {[key: string]: any} = {
-    downsm: {
+    [downsm]: {
       display: "grid",
       gridTemplateAreas: `
         "avatar text text text text"
@@ -16,7 +34,7 @@ export const useLayout = () => {
       gridTemplateColumns: "128px repeat(4, 1fr)",
       gridTemplateRows: `128px 88px 120px calc(100vh - ${theme.variables.navbar.height * 2}px - 128px - 88px - 120px)`,
     },
-    upsm: {
+    [upsm]: {
       display: "grid",
       gridTemplateAreas: `
         "avatar avatar text text text"
@@ -27,7 +45,7 @@ export const useLayout = () => {
       gridTemplateColumns: "repeat(2, 112px) repeat(3, 1fr)",
       gridTemplateRows: `136px 88px 120px calc(100vh - ${theme.variables.navbar.height * 2}px - 136px - 88px - 120px)`, // TODO: prevent < 0
     },
-    upmd: {
+    [upmd]: {
       display: "grid",
       gridTemplateAreas: `
         "avatar avatar avatar text text"
@@ -40,29 +58,23 @@ export const useLayout = () => {
     }
   };
 
-  let mq = 'downsm';
-  mq = useMediaQuery(theme.breakpoints.down('sm')) ? 'downsm' : mq;
-  mq = useMediaQuery(theme.breakpoints.up('sm')) ? 'upsm' : mq;
-  mq = useMediaQuery(theme.breakpoints.up('md')) ? 'upmd' : mq;
-
   console.log('###################', mq);
 
   const root = rootStyles[mq];
-
   const avatar = {
-    gridArea: "avatar"
+    gridArea: "avatar",
   };
   const text = {
-    gridArea: "text"
+    gridArea: "text",
   };
   const current = {
-    gridArea: "current"
+    gridArea: "current",
   };
   const controls = {
-    gridArea: "controls"
+    gridArea: "controls",
   };
   const list = {
-    gridArea: "list"
+    gridArea: "list",
   };
   const styles = {
     avatar,
