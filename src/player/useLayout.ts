@@ -1,42 +1,45 @@
-import { useTheme, useMediaQuery } from '@material-ui/core';
+import { useMediaQuery, useTheme } from '@material-ui/core';
 
-// TODO (cb): useMemo()
-const usePageMediaQuery = () => {
+// TODO: useMemo
+const useMediaQueries = () => {
   const theme = useTheme();
-  const [downsm, upsm, upmd] = [
-    theme.breakpoints.down('sm'),
+  const [upxs, upsm, upmd] = [
+    theme.breakpoints.up('xs'),
     theme.breakpoints.up('sm'),
     theme.breakpoints.up('md')
   ];
-  const mqs = [
-    { mq: downsm, matches: useMediaQuery(downsm, {defaultMatches: true}) },
+  return [upxs, upsm, upmd];
+};
+
+const useActiveMediaQuery = () => {
+  const [upxs, upsm, upmd] = useMediaQueries();
+  const mqis = [
+    { mq: upxs, matches: useMediaQuery(upxs) },
     { mq: upsm, matches: useMediaQuery(upsm) },
     { mq: upmd, matches: useMediaQuery(upmd) },
   ];
-  const active = mqs
+  const mq = mqis
     .filter(mqi => mqi.matches)
     .map(mqi => mqi.mq)
     .slice(-1)
-    [0] || downsm;
-  console.log('################', 'mq', active);
-  return [active, downsm, upsm, upmd];
-};
+    [0] || upxs;
+  return mq;
+}
 
-const useRowHeights = () => {
-  const [mq, downsm, upsm, upmd] = usePageMediaQuery();
+const useRowHeights = (mq: string, upxs: string, upsm: string, upmd: string) => {
   const theme = useTheme();
   const text = {
-    [downsm]: theme.spacing(16),
+    [upxs]: theme.spacing(16),
     [upsm]: theme.spacing(17),
     [upmd]: theme.spacing(15),
   }[mq];
   const controls = {
-    [downsm]: theme.spacing(11),
+    [upxs]: theme.spacing(11),
     [upsm]: theme.spacing(11),
     [upmd]: theme.spacing(13),
   }[mq];
   const current = {
-    [downsm]: theme.spacing(15),
+    [upxs]: theme.spacing(15),
     [upsm]: theme.spacing(15),
     [upmd]: theme.spacing(15),
   }[mq];
@@ -45,13 +48,14 @@ const useRowHeights = () => {
 
 export const useLayout = () => {
   const theme = useTheme();
-  const [mq, downsm, upsm, upmd] = usePageMediaQuery();
-  const [textHeight, controlsHeight, currentHeight] = useRowHeights();
+  const mq = useActiveMediaQuery();
+  const [upxs, upsm, upmd] = useMediaQueries();
+  const [textHeight, controlsHeight, currentHeight] = useRowHeights(mq, upxs, upsm, upmd);
   const totalHeight = textHeight + controlsHeight + currentHeight;
-  const listHeight = `minmax(0, calc(100vh - ${theme.variables.navbar.height * 2}px - ${totalHeight}px))`;
+  const listHeight = `calc(100vh - ${theme.variables.navbar.height * 2}px - ${totalHeight}px)`; // TODO: prevent <= 0 
 
   const rootStyles: {[key: string]: any} = {
-    [downsm]: {
+    [upxs]: {
       display: "grid",
       gridTemplateAreas: `
         "avatar text text text text"
@@ -71,7 +75,7 @@ export const useLayout = () => {
         "list list list list list"
       `,
       gridTemplateColumns: `repeat(2, ${(textHeight + controlsHeight) / 2}px) repeat(3, 1fr)`,
-      gridTemplateRows: `${textHeight}px ${controlsHeight}px ${currentHeight}px ${listHeight}`, // TODO: prevent < 0
+      gridTemplateRows: `${textHeight}px ${controlsHeight}px ${currentHeight}px ${listHeight}`,
     },
     [upmd]: {
       display: "grid",
