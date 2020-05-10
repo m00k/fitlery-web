@@ -4,13 +4,13 @@ import { NOT_FOUND, PlaylistState, usePlaylistStore } from '../playlist/store';
 import { PlayerActionType, PlayerState, usePlayerStore } from './store';
 
 
-export interface CombinedState {
+export interface PlayerPageState {
   countdownState: CountdownState;
   playlistState: PlaylistState;
   playerState: PlayerState;
 }
 
-const useCombinedStore = (): [CombinedState, Dispatch<PlayerActionType>] => {
+const usePlayerPageStore = (): [PlayerPageState, Dispatch<PlayerActionType>] => {
   const [playlistState, playlistDispatch] = usePlaylistStore();
   const [countdownState, countdownDispatch] = useCountdownStore();
   const [playerState, playerDispatch] = usePlayerStore();
@@ -86,4 +86,4 @@ const useCombinedStore = (): [CombinedState, Dispatch<PlayerActionType>] => {
   return [state, dispatch];
 }
 
-export default useCombinedStore;
+export default usePlayerPageStore;

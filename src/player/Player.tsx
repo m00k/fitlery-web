@@ -4,11 +4,11 @@ import Playlist from '../playlist/Playlist';
 import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
 import Banner, { BannerProps } from './Banner';
 import Controls from './Controls';
-import useCombinedStore, { CombinedState } from './useCombinedStore';
+import usePlayerPageStore, { PlayerPageState } from './usePlayerPageStore';
 import { useLayout } from './useLayout';
 
 
-const useBannerProps = (state: CombinedState): BannerProps => {
+const useBannerProps = (state: PlayerPageState): BannerProps => {
   const { countdownState, playlistState, playerState } = state;
   const { currentItemIndex, items } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
@@ -29,7 +29,7 @@ const useBannerProps = (state: CombinedState): BannerProps => {
 // TODO: stop when navigating away
 // TODO: handle empty
 const Player = () => {
-  const [state, dispatch] = useCombinedStore();
+  const [state, dispatch] = usePlayerPageStore();
   const { playerState } = state;
   const { playState } = playerState;
   const styles = useLayout();
