@@ -1,7 +1,8 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
+import usePlayerPageStore from '../player/usePlayerPageStore';
 import PlaylistItem, { isBreakItem } from './PlaylistItem';
-import { PlaylistItemData, usePlaylistStore } from './store';
+import { PlaylistItemData } from './store';
 
 
 const highlightItem = (item: PlaylistItemData) => {
@@ -10,7 +11,8 @@ const highlightItem = (item: PlaylistItemData) => {
 }
 
 const useStoreData = () => {
-  const [playlistState] = usePlaylistStore();
+  const [playerPageState, dispatch] = usePlayerPageStore();
+  const { playlistState } = playerPageState;
   const { currentItemIndex, items } = playlistState;
   const currentItemIndexOrZero = Math.max(currentItemIndex, 0);
   const taggedItems = [
@@ -20,11 +22,11 @@ const useStoreData = () => {
      ]
     .filter(item => !isBreakItem(item)); // filter out break items, naturally removing the unwanted, highlighted break item
 
-  return { taggedItems };
+  return { taggedItems, dispatch };
 }
 
 const Playlist = (props: any) => {
-  const { taggedItems } = useStoreData();
+  const { taggedItems, dispatch } = useStoreData();
   return (
     <Box
       overflow="auto"
@@ -32,11 +34,12 @@ const Playlist = (props: any) => {
         ...props.style
       }}
     >
-      {taggedItems.map(item =>
+      {taggedItems.map((item, i) =>
         <PlaylistItem
           key={item.name}
           item={item as PlaylistItemData}
           isCurrent={item.tags?.highlight}
+          onClick={() => dispatch.setCurrentItem(i*2)}
         />
       )}
     </Box>

@@ -10,6 +10,7 @@ export default function ExerciseList(props: any) {
         <Exercise
           key={exercise.name}
           exercise={exercise}
+          onClick={() => console.log('#####################', 'TODO', exercise.name)}
         />
       )}
     </Box>

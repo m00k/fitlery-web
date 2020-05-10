@@ -31,15 +31,17 @@ const useStyles = () => {
 
 export interface ExerciseProps {
   exercise: ExerciseData;
+  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void | undefined;
 }
 
 export default function Exercise(props: ExerciseProps) {
-  const { exercise } = props;
+  const { exercise, onClick } = props;
   const { root, inner } = useStyles();
 
   return (
     <Box
       {...root}
+      onClick={onClick}
     >
       <span
         style={{...inner}}

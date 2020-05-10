@@ -35,15 +35,17 @@ const useStyles = (isCurrent: boolean) => {
 export interface PlaylistItemProps{
   item: PlaylistItemData
   isCurrent: boolean;
+  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void | undefined;
 }
 
 export default function PlaylistItem(props: PlaylistItemProps) {
-  const { isCurrent, item } = props;
+  const { isCurrent, item, onClick } = props;
   const {root, inner} = useStyles(isCurrent);
 
   return (
     <Box
       {...root}
+      onClick={onClick}
     >
       <Box
         component="span"

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { CountdownState, useCountdownStore } from '../countdown/store';
-import { NOT_FOUND, PlaylistActionSet, PlaylistData, PlaylistState, usePlaylistStore } from '../playlist/store';
+import { NOT_FOUND, PlaylistActionSet, PlaylistActionType, PlaylistData, PlaylistState, usePlaylistStore } from '../playlist/store';
 import { PlayerAction, PlayerActionType, PlayerState, usePlayerStore } from './store';
 
 
@@ -11,7 +11,7 @@ export interface PlayerPageState {
 }
 
 export type PlayerPageAction = PlayerAction | PlaylistActionSet;
-export type PlayerPageActionDispatchers = { [A in PlayerActionType | 'set']: (payload?: any) => void };
+export type PlayerPageActionDispatchers = { [A in PlayerActionType | Partial<PlaylistActionType>]: (payload?: any) => void };
 
 const usePlayerPageStore = (): [PlayerPageState, PlayerPageActionDispatchers] => {
   const [playlistState, playlistDispatch] = usePlaylistStore();
@@ -68,6 +68,16 @@ const usePlayerPageStore = (): [PlayerPageState, PlayerPageActionDispatchers] =>
     }
   };
 
+  const setCurrentItem = (index: number) => {
+    // TODO: validate
+    if (currentItemIndex === index) {
+      next();
+    } else {
+      playlistDispatch.setCurrentItem(index);
+      countdownDispatch.set(playlistState.items[index].durationMs);
+    }
+  };
+
   useEffect(() => {
     if (isZero) {
       next();
@@ -78,6 +88,7 @@ const usePlayerPageStore = (): [PlayerPageState, PlayerPageActionDispatchers] =>
   // TODO: calling this one a dispatcher is a little far fetched...
   const dispatch: PlayerPageActionDispatchers = {
     set,
+    setCurrentItem,
     play,
     pause,
     stop,
