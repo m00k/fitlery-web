@@ -1,5 +1,7 @@
-import { Box } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+import Fab from '@material-ui/core/Fab';
 import useTheme from '@material-ui/core/styles/useTheme';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ExerciseList from '../exercise/ExerciseList';
@@ -27,20 +29,20 @@ export default function WorkoutDetail() {
   return (
     <Box>
       <Box
-        display='grid'
+        display="grid"
         gridTemplateAreas={`"avatar text"`}
         gridTemplateColumns={`${theme.variables.avatar.height}px auto`}
       >
         <CardAvatar
           props={{text: short}}
           style={{
-            gridArea: 'avatar',
+            gridArea: "avatar",
           }}
         />
         <CardText
           props={{title, description}}
           style={{
-            gridArea: 'text',
+            gridArea: "text",
             whiteSpace: "normal",
           }}
         />
@@ -48,6 +50,21 @@ export default function WorkoutDetail() {
       <ExerciseList
         exercises={exercises}
       />
+      <Fab
+        color="secondary"
+        style={{
+          position: "fixed",
+          bottom: theme.variables.navbar.height + theme.spacing(1),
+          right: theme.spacing(2),
+        }}
+        onClick={handleClick}
+      >
+        <PlayArrowIcon
+          style={{
+            fontSize: "4rem"
+          }}
+        />
+      </Fab>
     </Box>
   );
 }
