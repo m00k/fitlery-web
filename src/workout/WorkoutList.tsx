@@ -1,7 +1,7 @@
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { usePlaylistStore } from '../playlist/store';
+import usePlayerPageStore from '../player/usePlayerPageStore';
 import Grid from '../shared/Grid';
 import { WorkoutData, workouts } from './data';
 import toPlaylistData from './toPlaylistData';
@@ -10,12 +10,12 @@ import Workout from './Workout';
 export default function WorkoutList() {
   const theme = useTheme();
   const history = useHistory();
-  const [, playlistDispatch] = usePlaylistStore();
+  const [, playerPageDispatch] = usePlayerPageStore();
   
   const handleClick = (workout: WorkoutData) => {
     console.log(toPlaylistData(workout));
     const playlist = toPlaylistData(workout);
-    playlistDispatch.set(playlist);
+    playerPageDispatch.set(playlist);
     history.push('/recents'); // TODO: magic strings
   }
 

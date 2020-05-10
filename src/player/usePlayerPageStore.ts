@@ -1,7 +1,7 @@
-import { Dispatch, useEffect } from 'react';
+import { useEffect } from 'react';
 import { CountdownState, useCountdownStore } from '../countdown/store';
-import { NOT_FOUND, PlaylistState, usePlaylistStore } from '../playlist/store';
-import { PlayerActionType, PlayerState, usePlayerStore } from './store';
+import { NOT_FOUND, PlaylistActionSet, PlaylistData, PlaylistState, usePlaylistStore } from '../playlist/store';
+import { PlayerAction, PlayerActionType, PlayerState, usePlayerStore } from './store';
 
 
 export interface PlayerPageState {
@@ -10,7 +10,10 @@ export interface PlayerPageState {
   playerState: PlayerState;
 }
 
-const usePlayerPageStore = (): [PlayerPageState, Dispatch<PlayerActionType>] => {
+export type PlayerPageAction = PlayerAction | PlaylistActionSet;
+export type PlayerPageActionDispatchers = { [A in PlayerActionType | 'set']: (payload?: any) => void };
+
+const usePlayerPageStore = (): [PlayerPageState, PlayerPageActionDispatchers] => {
   const [playlistState, playlistDispatch] = usePlaylistStore();
   const [countdownState, countdownDispatch] = useCountdownStore();
   const [playerState, playerDispatch] = usePlayerStore();
@@ -21,6 +24,11 @@ const usePlayerPageStore = (): [PlayerPageState, Dispatch<PlayerActionType>] => 
   const currentItem = items[Math.max(currentItemIndex, 0)];
   const nextItem = items[currentItemIndex + 1];
   const prevItem = items[currentItemIndex - 1];
+
+  const set = (playlist: PlaylistData) => {
+    stop();
+    playlistDispatch.set(playlist);
+  };
 
   const play = () => {
     playerDispatch.play();
@@ -66,22 +74,16 @@ const usePlayerPageStore = (): [PlayerPageState, Dispatch<PlayerActionType>] => 
     }
   }, [isZero]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const dispatch = (action: PlayerActionType) => {
-    switch (action) {
-      case 'play':
-        play();
-        break;
-      case 'pause':
-        pause();
-        break;
-      case 'prev':
-        prev();
-        break;
-      case 'next':
-        next();
-        break;
-    }
-  }
+
+  // TODO: calling this one a dispatcher is a little far fetched...
+  const dispatch: PlayerPageActionDispatchers = {
+    set,
+    play,
+    pause,
+    stop,
+    prev,
+    next,
+  };
 
   return [state, dispatch];
 }

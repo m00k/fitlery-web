@@ -4,8 +4,9 @@ import Playlist from '../playlist/Playlist';
 import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
 import Banner, { BannerProps } from './Banner';
 import Controls from './Controls';
-import usePlayerPageStore, { PlayerPageState } from './usePlayerPageStore';
+import { PlayerActionType } from './store';
 import { useLayout } from './useLayout';
+import usePlayerPageStore, { PlayerPageState } from './usePlayerPageStore';
 
 
 const useBannerProps = (state: PlayerPageState): BannerProps => {
@@ -33,6 +34,7 @@ const Player = () => {
   const { playerState } = state;
   const { playState } = playerState;
   const styles = useLayout();
+  const handleClick = (type: PlayerActionType) => dispatch[type]();
 
   return (
     <Box
@@ -46,7 +48,7 @@ const Player = () => {
       </Banner>
       <Controls
         playState={playState}
-        onClick={dispatch}
+        onClick={handleClick}
         style={styles.controls}
       />
       <PlaylistItemCurrent
