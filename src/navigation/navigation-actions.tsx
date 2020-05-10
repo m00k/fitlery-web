@@ -1,10 +1,14 @@
-import React from 'react';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
-import ListIcon from '@material-ui/icons/List';
 import RestoreIcon from '@material-ui/icons/Restore';
+import React from 'react';
 
 export const navigationActions = [
+  { 
+    label: "Workouts",
+    value: "/workouts",
+    icon: <FitnessCenterIcon />,
+  },
   { 
     label: "Recents",
     value: "/recents",
@@ -15,14 +19,10 @@ export const navigationActions = [
     value: "/favorites",
     icon: <FavoriteIcon />,
   },
-  { 
-    label: "Workouts",
-    value: "/workouts",
-    icon: <FitnessCenterIcon />,
-  },
-  { 
-    label: "Exercises",
-    value: "/exercises",
-    icon: <ListIcon />,
-  },
+  // TODO: use or lose
+  // { 
+  //   label: "Exercises",
+  //   value: "/exercises",
+  //   icon: <ListIcon />,
+  // },
 ];

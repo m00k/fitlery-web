@@ -9,21 +9,26 @@ import TopNavigation from './navigation/TopNavigation';
 import Player from './player/Player';
 import WorkoutDetail from './workout/WorkoutDetail';
 import WorkoutList from './workout/WorkoutList';
+import UnderConstruction from './shared/UnderConstruction';
 
-const App = () => {
+const App = () => { 
   const theme = useTheme();
 
+  // TODO: rtfm router
   return (
     <Box
       height={'100vh'}
       bgcolor={theme.palette.primary.dark}
     >
-      <TopNavigation></TopNavigation>
+      <TopNavigation />
       <Main>
         <Route path="/workouts/:title" component={WorkoutDetail} />
         <Route exact path="/workouts" component={WorkoutList} />
+        <Route exact path="/player" component={Player} />
         <Route path="/exercises" component={ExerciseList} />
-        <Route path="/recents" component={Player} />
+        <Route path="/recents" component={UnderConstruction} />
+        <Route path="/favorites" component={UnderConstruction} />
+        <Route exact path ="/" component={WorkoutList} />
       </Main>
       <BottomNavigation />
     </Box>

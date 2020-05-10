@@ -16,7 +16,7 @@ export default function WorkoutList() {
     console.log(toPlaylistData(workout));
     const playlist = toPlaylistData(workout);
     playerPageDispatch.set(playlist);
-    history.push('/recents'); // TODO: magic strings
+    history.push('/player'); // TODO: magic strings
   }
 
   return (
