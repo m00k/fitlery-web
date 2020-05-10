@@ -1,14 +1,23 @@
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { usePlaylistStore } from '../playlist/store';
 import Grid from '../shared/Grid';
 import { WorkoutData, workouts } from './data';
-import Workout from './Workout';
 import toPlaylistData from './toPlaylistData';
-
+import Workout from './Workout';
 
 export default function WorkoutList() {
   const theme = useTheme();
-  const handleClick = (workout: WorkoutData) => console.log(toPlaylistData(workout)); // TODO: set playlist and navigateto player
+  const history = useHistory();
+  const [, playlistDispatch] = usePlaylistStore();
+  
+  const handleClick = (workout: WorkoutData) => {
+    console.log(toPlaylistData(workout));
+    const playlist = toPlaylistData(workout);
+    playlistDispatch.set(playlist);
+    history.push('/recents'); // TODO: magic strings
+  }
 
   return (
     <Grid

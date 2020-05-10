@@ -2,7 +2,6 @@ import { Box } from '@material-ui/core';
 import React from 'react';
 import Playlist from '../playlist/Playlist';
 import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
-import { workouts } from '../workout/data';
 import Banner, { BannerProps } from './Banner';
 import Controls from './Controls';
 import useCombinedStore, { CombinedState } from './useCombinedStore';
@@ -15,7 +14,7 @@ const useBannerProps = (state: CombinedState): BannerProps => {
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
   const { msLeft, msTotal } = countdownState;
   const { playState } = playerState;
-  const { short, title, description } = workouts[0];
+  const { short, name: title, description } = playlistState;
   return {
     playState,
     msLeft,
@@ -27,6 +26,8 @@ const useBannerProps = (state: CombinedState): BannerProps => {
   }
 }
 
+// TODO: stop when navigating away
+// TODO: handle empty
 const Player = () => {
   const [state, dispatch] = useCombinedStore();
   const { playerState } = state;

@@ -1,5 +1,5 @@
 import { isPlaylistActionNext, isPlaylistActionPrev, isPlaylistActionSet, isPlaylistActionSetCurrentItem, PlaylistAction } from "./actions";
-import { PlaylistState } from "./state";
+import { initialState, PlaylistState } from "./state";
 
 export const NOT_FOUND = -1;
 
@@ -15,8 +15,8 @@ const isLastIndex = (state: PlaylistState): boolean => {
 
 const set = (state: PlaylistState, action: PlaylistAction): PlaylistState => {
   return {
-    ...state,
-    ...action.payload
+    ...initialState,
+    ...action.payload,
   }
 }
 
