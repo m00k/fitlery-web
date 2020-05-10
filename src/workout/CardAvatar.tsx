@@ -10,7 +10,7 @@ export type AvatarStyles = CSSProperties;
 
 export interface AvatarPropsAndStyles {
   props: AvatarProps;
-  style: AvatarStyles;
+  style?: AvatarStyles;
 }
 
 const useStyles = () => {

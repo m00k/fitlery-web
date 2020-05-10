@@ -38,7 +38,7 @@ const Player = () => {
 
   return (
     <Box
-      id="the-box"
+      id="the-box" // TODO
       {...styles.root}
     >
       <Banner

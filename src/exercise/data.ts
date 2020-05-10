@@ -1,9 +1,10 @@
 export interface ExerciseData {
   name: string;
-  // TODO: duration, category
+  // TODO: category, tags
 }
 
-const exercises: ExerciseData[] = [
+// TODO: real data
+export const exercises: ExerciseData[] = [
   { 
     name: 'Wall Sit',
   },
@@ -53,5 +54,3 @@ const exercises: ExerciseData[] = [
     name: 'Squats',
   },
 ];
-
-export default exercises;

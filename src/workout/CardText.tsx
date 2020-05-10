@@ -12,7 +12,7 @@ export interface CardTextProps {
 
 export interface CardTextPropsAndStyles {
   props: CardTextProps,
-  style: React.CSSProperties,
+  style?: React.CSSProperties,
 }
 
 const CardText: React.FunctionComponent<CardTextPropsAndStyles> = ({ props, style }) => {
