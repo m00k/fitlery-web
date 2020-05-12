@@ -1,8 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 import Grid from '../shared/Grid';
 
+interface CardProps {
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+}
 
-const Card = ({ children, onClick }: PropsWithChildren<any>) => {
+const Card = ({ children, onClick }: PropsWithChildren<CardProps>) => {
   return (
     <Grid
       borderRadius={1}

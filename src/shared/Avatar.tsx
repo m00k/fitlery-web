@@ -27,7 +27,7 @@ const useStyles = () => {
   return { root, inner };
 }
 
-const CardAvatar: React.FC<AvatarPropsAndStyles> = ({props, style}) => {
+const Avatar: React.FC<AvatarPropsAndStyles> = ({props, style}) => {
   const { text } = props;
   const { root, inner } = useStyles();
   const VIEWBOX_SIZE = 100;
@@ -66,4 +66,4 @@ const CardAvatar: React.FC<AvatarPropsAndStyles> = ({props, style}) => {
   );
 };
 
-export default CardAvatar;
+export default Avatar;

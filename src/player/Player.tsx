@@ -28,7 +28,7 @@ const buildBannerProps = (state: PlayerPageState, { avatar, text }: BannerStyles
   }
 }
 
-// TODO: stop when navigating away
+// TODO: dispatch stop when navigating away
 // TODO: handle empty
 const Player = () => {
   const [state, dispatch] = usePlayerPageStore();

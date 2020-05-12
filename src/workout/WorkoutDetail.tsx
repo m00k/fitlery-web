@@ -6,7 +6,7 @@ import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ExerciseList from '../exercise/ExerciseList';
 import usePlayerPageStore from '../player/usePlayerPageStore';
-import CardAvatar from './CardAvatar';
+import Avatar from '../shared/Avatar';
 import CardText from './CardText';
 import { workouts } from './data';
 import toPlaylistData from './toPlaylistData';
@@ -37,7 +37,7 @@ export default function WorkoutDetail() {
         gridTemplateAreas={`"avatar text"`}
         gridTemplateColumns={`${theme.variables.avatar.height}px auto`}
       >
-        <CardAvatar
+        <Avatar
           props={{text: short}}
           style={{
             gridArea: "avatar",

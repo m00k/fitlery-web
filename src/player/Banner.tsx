@@ -3,7 +3,7 @@ import Countdown from '../countdown/Countdown';
 import PieCountdown, { PieCountdownProps } from '../countdown/PieCountdown';
 import { isBreakItem } from "../playlist/PlaylistItem";
 import { PlaylistItemData } from "../playlist/store";
-import CardAvatar from '../workout/CardAvatar';
+import Avatar from '../shared/Avatar';
 import CardText from '../workout/CardText';
 import { PlayState } from "./store/";
 
@@ -38,7 +38,7 @@ const Banner: React.FC<BannerProps> = ({ styles, ...props }: BannerProps) => {
 
   return playState === 'stopped'
     ? (<>
-      <CardAvatar props={{text: short}} style={styles.avatar} />
+      <Avatar props={{text: short}} style={styles.avatar} />
       <CardText props={{title, description}} style={{...styles.text, whiteSpace: "normal"}} />
     </>)
     : (<>
