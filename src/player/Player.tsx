@@ -2,14 +2,14 @@ import { Box } from '@material-ui/core';
 import React from 'react';
 import Playlist from '../playlist/Playlist';
 import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
-import Banner, { Props } from './Banner';
+import Banner, { BannerProps, BannerStyles } from './Banner';
 import Controls from './Controls';
 import { PlayerActionType } from './store';
 import { useLayout } from './useLayout';
 import usePlayerPageStore, { PlayerPageState } from './usePlayerPageStore';
 
 
-const useBannerProps = (state: PlayerPageState): Props => {
+const buildBannerProps = (state: PlayerPageState, { avatar, text }: BannerStyles): BannerProps => {
   const { countdownState, playlistState, playerState } = state;
   const { currentItemIndex, items } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
@@ -24,6 +24,7 @@ const useBannerProps = (state: PlayerPageState): Props => {
     short,
     title,
     description,
+    styles: { avatar, text },
   }
 }
 
@@ -35,6 +36,7 @@ const Player = () => {
   const { playState } = playerState;
   const styles = useLayout();
   const handleClick = (type: PlayerActionType) => dispatch[type]();
+  const bannerProps = buildBannerProps(state, styles);
 
   return (
     <Box
@@ -42,8 +44,7 @@ const Player = () => {
       {...styles.root}
     >
       <Banner
-        props={useBannerProps(state)}
-        styles={styles}
+        {...{...bannerProps}}
       >
       </Banner>
       <Controls
