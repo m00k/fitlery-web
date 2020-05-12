@@ -7,7 +7,7 @@ import { WorkoutData } from './data';
 
 interface WorkoutProps {
   workout: WorkoutData;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const Workout: React.FC<WorkoutProps> = ({ workout, onClick }) => {
@@ -16,7 +16,7 @@ const Workout: React.FC<WorkoutProps> = ({ workout, onClick }) => {
       onClick={onClick}
     >
       <Avatar
-        props={{text: workout.short}}
+        text={workout.short}
         style={{
           gridColumn: 1
         }}

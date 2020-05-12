@@ -1,16 +1,10 @@
 import Box, { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
-import React, { CSSProperties } from 'react';
+import React from 'react';
 
 export interface AvatarProps {
   text: string;
-}
-
-export type AvatarStyles = CSSProperties;
-
-export interface AvatarPropsAndStyles {
-  props: AvatarProps;
-  style?: AvatarStyles;
+  style?: React.CSSProperties;
 }
 
 const useStyles = () => {
@@ -27,7 +21,7 @@ const useStyles = () => {
   return { root, inner };
 }
 
-const Avatar: React.FC<AvatarPropsAndStyles> = ({props, style}) => {
+const Avatar: React.FC<AvatarProps> = ({style, ...props}) => {
   const { text } = props;
   const { root, inner } = useStyles();
   const VIEWBOX_SIZE = 100;

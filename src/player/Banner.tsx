@@ -35,10 +35,14 @@ const buildPieCountdownProps = ({ currentItem, msLeft, msTotal }: Pick<BannerPro
 const Banner: React.FC<BannerProps> = ({ styles, ...props }: BannerProps) => {
   const { short, title, description, playState, msLeft } = props;
   const countdownProps = buildPieCountdownProps(props);  
+  const avatarProps = { text: short, style: styles.avatar };
 
   return playState === 'stopped'
     ? (<>
-      <Avatar props={{text: short}} style={styles.avatar} />
+      <Avatar
+        text={short}
+        style={styles.avatar}
+      />
       <CardText props={{title, description}} style={{...styles.text, whiteSpace: "normal"}} />
     </>)
     : (<>

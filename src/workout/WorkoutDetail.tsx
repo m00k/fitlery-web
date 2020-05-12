@@ -38,7 +38,7 @@ export default function WorkoutDetail() {
         gridTemplateColumns={`${theme.variables.avatar.height}px auto`}
       >
         <Avatar
-          props={{text: short}}
+          text={short}
           style={{
             gridArea: "avatar",
           }}

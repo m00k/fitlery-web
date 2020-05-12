@@ -13,7 +13,6 @@ export default function WorkoutList() {
   const [, playerPageDispatch] = usePlayerPageStore();
   
   const handleClick = (workout: WorkoutData) => {
-    console.log(toPlaylistData(workout));
     const playlist = toPlaylistData(workout);
     playerPageDispatch.set(playlist);
     history.push('/player'); // TODO: magic strings
