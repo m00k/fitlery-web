@@ -15,7 +15,7 @@ export interface CardTextPropsAndStyles {
   style?: React.CSSProperties,
 }
 
-const CardText: React.FunctionComponent<CardTextPropsAndStyles> = ({ props, style }) => {
+const CardText: React.FC<CardTextPropsAndStyles> = ({ props, style }) => {
   const { title, description } = props;
   const theme = useTheme();
 

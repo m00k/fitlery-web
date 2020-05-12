@@ -1,13 +1,13 @@
 import React, { ReactNode } from 'react';
 import Countdown from '../countdown/Countdown';
-import PieCountdown from '../countdown/PieCountdown';
+import PieCountdown, { PieCountdownProps } from '../countdown/PieCountdown';
 import { isBreakItem } from "../playlist/PlaylistItem";
 import { PlaylistItemData } from "../playlist/store";
 import CardAvatar from '../workout/CardAvatar';
 import CardText from '../workout/CardText';
 import { PlayState } from "./store/";
 
-export interface BannerProps {
+export interface Props {
   short: string;
   title: string;
   description: string;
@@ -18,17 +18,16 @@ export interface BannerProps {
   currentItem: PlaylistItemData;
 }
 
-export interface BannerStyles {
+export interface Styles {
   [key: string]: React.CSSProperties;
 }
 
 export interface BannerPropsAndStyles {
-  props: BannerProps;
-  styles: BannerStyles;
+  props: Props;
+  styles: Styles;
 }
 
-const useCountdownProps = (props: BannerProps) => {
-  const { currentItem, msLeft, msTotal } = props;
+const buildPieCountdownProps = ({ currentItem, msLeft, msTotal }: Pick<Props, 'currentItem' | 'msLeft' | 'msTotal'>): PieCountdownProps => {
   const fractionDone = 1 - msLeft / msTotal;
   const isBreak = isBreakItem(currentItem);
   const text = isBreak ? 'Ready' : 'Go!';
@@ -36,9 +35,9 @@ const useCountdownProps = (props: BannerProps) => {
   return { fractionDone, invertColors: isBreak, text };
 }
 
-const Banner: React.FunctionComponent<BannerPropsAndStyles> = ({ props, styles }: BannerPropsAndStyles) => {
+const Banner: React.FC<BannerPropsAndStyles> = ({ props, styles }: BannerPropsAndStyles) => {
   const { short, title, description, playState, msLeft } = props;
-  const countdownProps = useCountdownProps(props);  
+  const countdownProps = buildPieCountdownProps(props);  
 
   return playState === 'stopped'
     ? (<>
@@ -47,7 +46,7 @@ const Banner: React.FunctionComponent<BannerPropsAndStyles> = ({ props, styles }
     </>)
     : (<>
       <PieCountdown props={countdownProps} style={styles.avatar} />
-      <Countdown props={{msLeft}} style={styles.text} />
+      <Countdown msLeft={msLeft} style={styles.text} />
     </>);
 };
 

@@ -27,7 +27,7 @@ const useStyles = () => {
   return { root, inner };
 }
 
-const CardAvatar: React.FunctionComponent<AvatarPropsAndStyles> = ({props, style}) => {
+const CardAvatar: React.FC<AvatarPropsAndStyles> = ({props, style}) => {
   const { text } = props;
   const { root, inner } = useStyles();
   const VIEWBOX_SIZE = 100;

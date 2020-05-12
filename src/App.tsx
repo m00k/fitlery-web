@@ -14,11 +14,14 @@ import UnderConstruction from './shared/UnderConstruction';
 const App = () => { 
   const theme = useTheme();
 
-  // TODO: rtfm router
+  // TODO: rtfm -> router
   return (
     <Box
       height={'100vh'}
       bgcolor={theme.palette.primary.dark}
+      style={{
+        touchAction: 'manipulation', // https://developers.google.com/web/updates/2013/12/300ms-tap-delay-gone-away
+      }}
     >
       <TopNavigation />
       <Main>

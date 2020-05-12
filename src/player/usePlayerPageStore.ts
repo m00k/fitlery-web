@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { CountdownState, useCountdownStore } from '../countdown/store';
-import { NOT_FOUND, PlaylistActionSet, PlaylistActionType, PlaylistData, PlaylistState, usePlaylistStore } from '../playlist/store';
+import { NOT_FOUND, PlaylistActionSet, PlaylistActionType, PlaylistData, PlaylistState, usePlaylistStore, PlaylistActionSetCurrentItem } from '../playlist/store';
 import { PlayerAction, PlayerActionType, PlayerState, usePlayerStore } from './store';
 
 
@@ -10,8 +10,8 @@ export interface PlayerPageState {
   playerState: PlayerState;
 }
 
-export type PlayerPageAction = PlayerAction | PlaylistActionSet;
-export type PlayerPageActionDispatchers = { [A in PlayerActionType | Partial<PlaylistActionType>]: (payload?: any) => void };
+export type PlayerPageAction = PlayerAction | PlaylistActionSet | PlaylistActionSetCurrentItem;
+export type PlayerPageActionDispatchers = { [A in PlayerActionType | Extract<PlaylistActionType, 'set' | 'setCurrentItem'>]: (payload?: any) => void };
 
 const usePlayerPageStore = (): [PlayerPageState, PlayerPageActionDispatchers] => {
   const [playlistState, playlistDispatch] = usePlaylistStore();
@@ -85,7 +85,7 @@ const usePlayerPageStore = (): [PlayerPageState, PlayerPageActionDispatchers] =>
   }, [isZero]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
-  // TODO: calling this one a dispatcher is a little far fetched...
+  // TODO: calling this one a dispatcher is maybe a little far fetched...
   const dispatch: PlayerPageActionDispatchers = {
     set,
     setCurrentItem,

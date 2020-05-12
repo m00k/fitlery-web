@@ -26,6 +26,10 @@ export default function WorkoutDetail() {
     history.push('/recents'); // TODO: magic strings
   }
 
+  // TODO: responsive
+  // TODO: edit break/work
+  // TODO: edit exercises
+  // TODO: edit exercises order drag/drop
   return (
     <Box>
       <Box

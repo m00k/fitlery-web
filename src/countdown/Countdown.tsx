@@ -4,16 +4,12 @@ import Grid from '../shared/Grid';
 import time from './time-utils';
 
 
-export interface CountdownProps {
+interface Props {
   msLeft: number;
-}
-
-export interface CountdownPropsAndStyles {
-  props: CountdownProps;
   style: React.CSSProperties;
 }
 
-const Countdown: FunctionComponent<CountdownPropsAndStyles> = ({ props, style }) => {
+const Countdown: FunctionComponent<Props> = ({ style, ...props }) => {
   const { msLeft } = props
   const theme = useTheme();
   

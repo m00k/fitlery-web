@@ -2,14 +2,14 @@ import { Box } from '@material-ui/core';
 import React from 'react';
 import Playlist from '../playlist/Playlist';
 import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
-import Banner, { BannerProps } from './Banner';
+import Banner, { Props } from './Banner';
 import Controls from './Controls';
 import { PlayerActionType } from './store';
 import { useLayout } from './useLayout';
 import usePlayerPageStore, { PlayerPageState } from './usePlayerPageStore';
 
 
-const useBannerProps = (state: PlayerPageState): BannerProps => {
+const useBannerProps = (state: PlayerPageState): Props => {
   const { countdownState, playlistState, playerState } = state;
   const { currentItemIndex, items } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
