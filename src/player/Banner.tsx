@@ -24,11 +24,11 @@ export interface BannerStyles {
   text: React.CSSProperties;
 }
 
-const buildPieCountdownProps = ({ currentItem, msLeft, msTotal }: Pick<BannerProps, 'currentItem' | 'msLeft' | 'msTotal'>): PieCountdownProps => {
+const buildPieCountdownProps = ({ currentItem, msLeft, msTotal, styles }: BannerProps): PieCountdownProps => {
   const fractionDone = 1 - msLeft / msTotal;
   const isBreak = isBreakItem(currentItem);
   const text = isBreak ? 'Ready' : 'Go!';
-  return { fractionDone, invertColors: isBreak, text };
+  return { fractionDone, invertColors: isBreak, text, style: styles.avatar };
 }
 
 const buildCardTextProps = ({styles, ...props}: BannerProps) => {
@@ -45,7 +45,7 @@ const buildCardTextProps = ({styles, ...props}: BannerProps) => {
 
 const Banner: React.FC<BannerProps> = ({ styles, ...props }: BannerProps) => {
   const { short, playState, msLeft } = props;
-  const countdownProps = buildPieCountdownProps(props);
+  const countdownProps = buildPieCountdownProps({ ...props, styles });
   const cardTextProps = buildCardTextProps({ styles, ...props });
 
   return playState === 'stopped'
@@ -54,11 +54,18 @@ const Banner: React.FC<BannerProps> = ({ styles, ...props }: BannerProps) => {
         text={short}
         style={styles.avatar}
       />
-      <CardText {...cardTextProps}/>
+      <CardText
+        {...cardTextProps}
+      />
     </>)
     : (<>
-      <PieCountdown props={countdownProps} style={styles.avatar} />
-      <Countdown msLeft={msLeft} style={styles.text} />
+      <PieCountdown
+        {...countdownProps}
+      />
+      <Countdown
+        msLeft={msLeft}
+        style={styles.text}
+      />
     </>);
 };
 

@@ -10,16 +10,12 @@ export interface PieCountdownProps extends BoxProps {
   fractionDone: number;
   invertColors: boolean;
   text: string;
-}
-
-export interface PieCountdownPropsAndStyles {
-  props: PieCountdownProps;
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
 }
 
 const PieSliceWithMargin = withMargin(PieSlice);
 
-const PieCountdown: FunctionComponent<PieCountdownPropsAndStyles> = ({ props, style }) => {
+const PieCountdown: FunctionComponent<PieCountdownProps> = ({ style, ...props }) => {
   const { fractionDone, invertColors, text } = props;
   const theme = useTheme();
   const [left, done] = useColors(invertColors);
