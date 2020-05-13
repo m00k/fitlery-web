@@ -3,7 +3,7 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import React, { FunctionComponent } from 'react';
 import PieSlice from './PieSlice';
 import useColors from './useColors';
-import WithMargin from './WithMargin';
+import withMargin from './withMargin';
 
 
 export interface PieCountdownProps extends BoxProps {
@@ -17,7 +17,9 @@ export interface PieCountdownPropsAndStyles {
   style: React.CSSProperties;
 }
 
-const PieCountdown: FunctionComponent<PieCountdownPropsAndStyles> = ({props, style}) => {
+const PieSliceWithMargin = withMargin(PieSlice);
+
+const PieCountdown: FunctionComponent<PieCountdownPropsAndStyles> = ({ props, style }) => {
   const { fractionDone, invertColors, text } = props;
   const theme = useTheme();
   const [left, done] = useColors(invertColors);
@@ -33,26 +35,22 @@ const PieCountdown: FunctionComponent<PieCountdownPropsAndStyles> = ({props, sty
       height="100%"
       style={style}
     >
-      <WithMargin>
-        <PieSlice
-          bgcolor={left.bgcolor}
-          color={left.color}
-          clipIf={fractionDone > 0}
-          fractionStart={fractionDone}
-          fractionEnd={1}
-          text={text}
-        />
-      </WithMargin>
-      <WithMargin>
-        <PieSlice
-          bgcolor={done.bgcolor}
-          color={done.color}
-          clipIf={(fractionDone < 1)}
-          fractionStart={0}
-          fractionEnd={fractionDone}
-          text={text}
-        />
-      </WithMargin>
+      <PieSliceWithMargin
+        bgcolor={left.bgcolor}
+        color={left.color}
+        clipIf={fractionDone > 0}
+        fractionStart={fractionDone}
+        fractionEnd={1}
+        text={text}
+      />
+      <PieSliceWithMargin
+        bgcolor={done.bgcolor}
+        color={done.color}
+        clipIf={(fractionDone < 1)}
+        fractionStart={0}
+        fractionEnd={fractionDone}
+        text={text}
+      />
     </Box >
   );
 };
