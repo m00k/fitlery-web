@@ -8,14 +8,10 @@ import Box from '@material-ui/core/Box';
 export interface CardTextProps {
   title: string;
   description: string;
+  style?: React.CSSProperties;
 }
 
-export interface CardTextPropsAndStyles {
-  props: CardTextProps,
-  style?: React.CSSProperties,
-}
-
-const CardText: React.FC<CardTextPropsAndStyles> = ({ props, style }) => {
+const CardText: React.FC<CardTextProps> = ({ style, ...props }) => {
   const { title, description } = props;
   const theme = useTheme();
 

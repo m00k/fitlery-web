@@ -8,8 +8,20 @@ import ExerciseList from '../exercise/ExerciseList';
 import usePlayerPageStore from '../player/usePlayerPageStore';
 import Avatar from '../shared/Avatar';
 import CardText from './CardText';
-import { workouts } from './data';
+import { WorkoutData, workouts } from './data';
 import toPlaylistData from './toPlaylistData';
+
+const buildCardTextProps = (workout: WorkoutData) => {
+  const { title, description } = workout;
+  return {
+    title,
+    description,
+    style: {
+      gridArea: "text",
+      whiteSpace: "normal",
+    } as React.CSSProperties // https://material-ui.com/guides/typescript/#using-createstyles-to-defeat-type-widening
+  };
+}
 
 export default function WorkoutDetail() {
   const theme = useTheme();
@@ -17,7 +29,8 @@ export default function WorkoutDetail() {
   const [, playerPageDispatch] = usePlayerPageStore();
   const { titleFromParams } = useParams();
   const workout = workouts.find(w => w.title === titleFromParams) || workouts[0]; // TODO from storage
-  const { short, title, description, exercises } = workout;
+  const { short, exercises } = workout;
+  const cardTextProps = buildCardTextProps(workout);
 
   const handleClick = () => {
     console.log(toPlaylistData(workout));
@@ -43,13 +56,7 @@ export default function WorkoutDetail() {
             gridArea: "avatar",
           }}
         />
-        <CardText
-          props={{title, description}}
-          style={{
-            gridArea: "text",
-            whiteSpace: "normal",
-          }}
-        />
+        <CardText {...cardTextProps} />
       </Box>
       <ExerciseList
         exercises={exercises}

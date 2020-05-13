@@ -28,13 +28,25 @@ const buildPieCountdownProps = ({ currentItem, msLeft, msTotal }: Pick<BannerPro
   const fractionDone = 1 - msLeft / msTotal;
   const isBreak = isBreakItem(currentItem);
   const text = isBreak ? 'Ready' : 'Go!';
-
   return { fractionDone, invertColors: isBreak, text };
 }
 
+const buildCardTextProps = ({styles, ...props}: BannerProps) => {
+  const { title, description } = props;
+  return {
+    title,
+    description,
+    style: {
+      ...styles.text,
+      whiteSpace: "normal"
+    } as React.CSSProperties // https://material-ui.com/guides/typescript/#using-createstyles-to-defeat-type-widening
+  };
+}
+
 const Banner: React.FC<BannerProps> = ({ styles, ...props }: BannerProps) => {
-  const { short, title, description, playState, msLeft } = props;
-  const countdownProps = buildPieCountdownProps(props);  
+  const { short, playState, msLeft } = props;
+  const countdownProps = buildPieCountdownProps(props);
+  const cardTextProps = buildCardTextProps({ styles, ...props });
 
   return playState === 'stopped'
     ? (<>
@@ -42,7 +54,7 @@ const Banner: React.FC<BannerProps> = ({ styles, ...props }: BannerProps) => {
         text={short}
         style={styles.avatar}
       />
-      <CardText props={{title, description}} style={{...styles.text, whiteSpace: "normal"}} />
+      <CardText {...cardTextProps}/>
     </>)
     : (<>
       <PieCountdown props={countdownProps} style={styles.avatar} />

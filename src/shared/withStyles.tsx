@@ -1,4 +1,4 @@
-import React, {ComponentType} from 'react';
+import React from 'react';
 
 export default function <P = {}>(
   WrappedComponent: React.ComponentType<P>,

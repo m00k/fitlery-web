@@ -10,7 +10,19 @@ interface WorkoutProps {
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
+const buildCardTextProps = ({ workout }: WorkoutProps) => {
+  const { title, description } = workout;
+  return {
+    title,
+    description,
+    style: {
+      gridColumn: 1
+    } as React.CSSProperties // https://material-ui.com/guides/typescript/#using-createstyles-to-defeat-type-widening
+  };
+}
+
 const Workout: React.FC<WorkoutProps> = ({ workout, onClick }) => {
+  const cardTextProps = buildCardTextProps({ workout });
   return (
     <Card
       onClick={onClick}
@@ -21,12 +33,7 @@ const Workout: React.FC<WorkoutProps> = ({ workout, onClick }) => {
           gridColumn: 1
         }}
       />
-      <CardText
-        style={{
-          gridColumn: 1
-        }}
-        props={{...workout}}
-      />
+      <CardText {...cardTextProps} />
     </Card>
   );
 }
