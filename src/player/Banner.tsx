@@ -31,7 +31,7 @@ const buildPieCountdownProps = ({ currentItem, msLeft, msTotal, styles }: Banner
   return { fractionDone, invertColors: isBreak, text, style: styles.avatar };
 }
 
-const buildCardTextProps = ({styles, ...props}: BannerProps) => {
+const buildCardTextProps = ({ styles, ...props }: BannerProps) => {
   const { title, description } = props;
   return {
     title,
