@@ -1,6 +1,6 @@
+import { Box } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React, { FunctionComponent } from 'react';
-import Grid from '../shared/Grid';
 import time from './time-utils';
 
 
@@ -14,7 +14,7 @@ const Countdown: FunctionComponent<Props> = ({ style, ...props }) => {
   const theme = useTheme();
   
   return (
-    <Grid
+    <Box
       alignItems="center"
       bgcolor={theme.palette.primary.dark}
       color={theme.palette.secondary.contrastText}
@@ -25,7 +25,7 @@ const Countdown: FunctionComponent<Props> = ({ style, ...props }) => {
       style={style}
     >
       {time.toTimeString(msLeft)}
-    </Grid>
+    </Box>
   );
 };
 

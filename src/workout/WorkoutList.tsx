@@ -1,8 +1,8 @@
+import { Box } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import usePlayerPageStore from '../player/usePlayerPageStore';
-import Grid from '../shared/Grid';
 import { WorkoutData, workouts } from './data';
 import toPlaylistData from './toPlaylistData';
 import Workout from './Workout';
@@ -19,7 +19,7 @@ export default function WorkoutList() {
   }
 
   return (
-    <Grid
+    <Box
       display='grid'
       gridTemplateColumns='repeat(12, 1fr)'
       gridGap={theme.spacing(1)}
@@ -31,6 +31,6 @@ export default function WorkoutList() {
           onClick={() => handleClick(workout)}
         />
       ))}
-    </Grid>
+    </Box>
   );
 }

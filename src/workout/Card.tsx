@@ -1,5 +1,5 @@
+import { Box } from '@material-ui/core';
 import React, { PropsWithChildren } from 'react';
-import Grid from '../shared/Grid';
 
 interface CardProps {
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -7,7 +7,7 @@ interface CardProps {
 
 const Card = ({ children, onClick }: PropsWithChildren<CardProps>) => {
   return (
-    <Grid
+    <Box
       borderRadius={1}
       display='grid'
       gridColumn={['span 6', 'span 4', 'span 3']}
@@ -16,7 +16,7 @@ const Card = ({ children, onClick }: PropsWithChildren<CardProps>) => {
       onClick={onClick} // TODO: threading that through the hierarchy is no fun
     >
       {children}
-    </Grid>
+    </Box>
   );
 };
 

@@ -1,11 +1,10 @@
-import { IconButton } from '@material-ui/core';
+import { Box, IconButton } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import React from 'react';
-import Grid from '../shared/Grid';
 import { PlayerActionType, PlayState } from './store/';
 
 interface ControlButtonProps {
@@ -31,7 +30,7 @@ const Pause = withIconButton(<PauseIcon style={{ fontSize: '4rem' }} />);
 const Prev = withIconButton(<SkipPreviousIcon style={{ fontSize: '2.5rem' }} />);
 const Next = withIconButton(<SkipNextIcon style={{ fontSize: '2.5rem' }} />);
 
-const useGridStyles = () => {
+const useBoxStyles = () => {
   const theme = useTheme();
   return {
       alignItems: 'center',
@@ -53,8 +52,8 @@ const Controls = (props: ControlsProps) => {
   const { playState, onClick, style } = props;
 
   return (
-    <Grid
-      {...useGridStyles()}
+    <Box
+      {...useBoxStyles()}
       style={style}
     >
       <Prev onClick={() => onClick('prev')}/>
@@ -64,7 +63,7 @@ const Controls = (props: ControlsProps) => {
           : <Pause onClick={() => onClick('pause')} />
       }
       <Next onClick={() => onClick('next')} />
-    </Grid>
+    </Box>
   );
 }
 
