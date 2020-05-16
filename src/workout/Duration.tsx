@@ -1,5 +1,6 @@
 import { Button, ButtonGroup, makeStyles, useTheme } from '@material-ui/core';
 import React from 'react';
+import DurationEdit from './DurationEdit';
 
 
 const useLabelStyles = makeStyles((theme) => ({
@@ -23,7 +24,7 @@ const useButtonStyles = makeStyles((theme) => ({
 }));
 
 const useButtonGroupStyles = makeStyles((theme) => ({
-  root : {
+  root: {
     display: 'grid',
     gridTemplateColumns: `2fr 1fr 1fr`,
     height: `${theme.variables.playlist.item.height}px`,
@@ -33,6 +34,8 @@ const useButtonGroupStyles = makeStyles((theme) => ({
 interface DurationProps {
   breakMs: number;
   workMs: number;
+  onSetBreakMs?: () => void | undefined;
+  onSetWorkMs?: () => void | undefined;
 }
 
 const Duration: React.FC<DurationProps> = ({ breakMs, workMs }) => {
@@ -43,40 +46,53 @@ const Duration: React.FC<DurationProps> = ({ breakMs, workMs }) => {
   const breakLabel = `${breakMs / 1000}s`;
   const workLabel = `${workMs / 1000}s`;
 
+  const [open, setOpen] = React.useState(false);
+  const handleDurationEditOpen = () => {
+    // TODO: work/break, init with ms
+    setOpen(true);
+  };
+
+  const handleDurationEditClose = (duration: number) => {
+    console.log('################', duration);
+    setOpen(false);
+  };
+
   return (
-    <ButtonGroup
-      variant="contained"
-      color="primary"
-      classes={{
-        root: buttonGroupClasses.root,
-      }}
-    >
-      <Button
-        color='secondary'
-        disableFocusRipple
-        disableTouchRipple
-        classes={{
-          root: labelClasses.root,
-          label: labelClasses.label,
-        }}
+    <>
+      <ButtonGroup
+        variant="contained"
+        color="primary"
+        className={buttonGroupClasses.root}
       >
-        Break/Work:
+        <Button
+          color='secondary'
+          disableFocusRipple
+          disableTouchRipple
+          classes={{
+            root: labelClasses.root,
+            label: labelClasses.label,
+          }}
+        >
+          Break/Work:
         </Button>
-      <Button
-        classes={{
-          root: buttonClasses.root,
-        }}
-      >
-        {breakLabel}
-      </Button>
-      <Button
-        classes={{
-          root: buttonClasses.root,
-        }}
-      >
-        {workLabel}
-      </Button>
-    </ButtonGroup>
+        <Button
+          className={buttonClasses.root}
+          onClick={handleDurationEditOpen}
+        >
+          {breakLabel}
+        </Button>
+        <Button
+          className={buttonClasses.root}
+          onClick={handleDurationEditOpen}
+        >
+          {workLabel}
+        </Button>
+      </ButtonGroup>
+      <DurationEdit
+        open={open}
+        onClose={handleDurationEditClose}
+      />
+    </>
   );
 }
 
