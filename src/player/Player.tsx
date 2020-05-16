@@ -35,13 +35,14 @@ const Player = () => {
   const { playerState } = state;
   const { playState } = playerState;
   const styles = useLayout();
+  const { avatar, text } = styles;
+  const bannerProps = buildBannerProps(state, { avatar, text });
   const handleClick = (type: PlayerActionType) => dispatch[type]();
-  const bannerProps = buildBannerProps(state, styles);
 
   return (
     <Box
       id="the-box" // TODO
-      {...styles.root}
+      style={styles.root}
     >
       <Banner
         {...{...bannerProps}}

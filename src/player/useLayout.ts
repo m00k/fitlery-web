@@ -1,8 +1,7 @@
-import { useMediaQuery, useTheme } from '@material-ui/core';
+import { Theme, useMediaQuery, useTheme } from '@material-ui/core';
 
-// TODO: useMemo
-const useMediaQueries = () => {
-  const theme = useTheme();
+// TODO: from global context
+const useMediaQueries = (theme: Theme) => {
   const [upxs, upsm, upmd] = [
     theme.breakpoints.up('xs'),
     theme.breakpoints.up('sm'),
@@ -11,8 +10,9 @@ const useMediaQueries = () => {
   return [upxs, upsm, upmd];
 };
 
-const useActiveMediaQuery = () => {
-  const [upxs, upsm, upmd] = useMediaQueries();
+// TODO: from global context
+const useActiveMediaQuery = (theme: Theme): string => {
+  const [upxs, upsm, upmd] = useMediaQueries(theme);
   const mqis = [
     { mq: upxs, matches: useMediaQuery(upxs) },
     { mq: upsm, matches: useMediaQuery(upsm) },
@@ -26,35 +26,22 @@ const useActiveMediaQuery = () => {
   return mq;
 }
 
-const useRowHeights = (mq: string, upxs: string, upsm: string, upmd: string) => {
-  const theme = useTheme();
-  const text = {
-    [upxs]: theme.spacing(16),
-    [upsm]: theme.spacing(17),
-    [upmd]: theme.spacing(15),
-  }[mq];
-  const controls = {
-    [upxs]: theme.spacing(11),
-    [upsm]: theme.spacing(11),
-    [upmd]: theme.spacing(13),
-  }[mq];
-  const current = {
-    [upxs]: theme.spacing(15),
-    [upsm]: theme.spacing(15),
-    [upmd]: theme.spacing(15),
-  }[mq];
+const useRowHeights = (theme: Theme, mq: string): number[] => {
+  const [upxs, upsm, upmd] = useMediaQueries(theme);
+  const [text, controls, current] = {
+    [upxs]: [16, 11, 15],
+    [upsm]: [17, 11, 15],
+    [upmd]: [15, 13, 15],
+  }[mq].map(s => theme.spacing(s));
   return [text, controls, current];
 };
 
-export const useLayout = () => {
-  const theme = useTheme();
-  const mq = useActiveMediaQuery();
-  const [upxs, upsm, upmd] = useMediaQueries();
-  const [textHeight, controlsHeight, currentHeight] = useRowHeights(mq, upxs, upsm, upmd);
+function useRootStyles(theme: Theme, mq: string): React.CSSProperties {
+  const [upxs, upsm, upmd] = useMediaQueries(theme);
+  const [textHeight, controlsHeight, currentHeight] = useRowHeights(theme, mq);
   const totalHeight = textHeight + controlsHeight + currentHeight;
   const listHeight = `calc(100vh - ${theme.variables.navbar.height * 2}px - ${totalHeight}px)`; // TODO: prevent <= 0 
-
-  const rootStyles: {[key: string]: any} = {
+  return {
     [upxs]: {
       display: "grid",
       gridTemplateAreas: `
@@ -88,9 +75,13 @@ export const useLayout = () => {
       gridTemplateColumns: `repeat(3, ${totalHeight / 3}px) repeat(2, 1fr)`,
       gridTemplateRows: `${textHeight}px ${controlsHeight}px ${currentHeight}px ${listHeight}`,
     }
-  };
+  }[mq];
+}
 
-  const root = rootStyles[mq];
+export const useLayout = (): {[key: string]: React.CSSProperties} => {
+  const theme = useTheme();
+  const mq = useActiveMediaQuery(theme);
+  const root = useRootStyles(theme, mq);
   const avatar = {
     gridArea: "avatar",
   };
