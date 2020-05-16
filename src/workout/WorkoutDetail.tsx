@@ -9,6 +9,7 @@ import usePlayerPageStore from '../player/usePlayerPageStore';
 import Avatar from '../shared/Avatar';
 import CardText from './CardText';
 import { WorkoutData, workouts } from './data';
+import Duration from './Duration';
 import toPlaylistData from './toPlaylistData';
 
 const buildCardTextProps = (workout: WorkoutData) => {
@@ -29,7 +30,7 @@ export default function WorkoutDetail() {
   const [, playerPageDispatch] = usePlayerPageStore();
   const { titleFromParams } = useParams();
   const workout = workouts.find(w => w.title === titleFromParams) || workouts[0]; // TODO from storage
-  const { short, exercises } = workout;
+  const { short, exercises, breakMs, workMs } = workout;
   const cardTextProps = buildCardTextProps(workout);
 
   const handleClick = () => {
@@ -39,15 +40,13 @@ export default function WorkoutDetail() {
     history.push('/recents'); // TODO: magic strings
   }
 
-  // TODO: responsive
-  // TODO: edit break/work
   // TODO: edit exercises
   // TODO: edit exercises order drag/drop
   return (
     <Box>
       <Box
         display="grid"
-        gridTemplateAreas={`"avatar text"`}
+        gridTemplateAreas='"avatar text"'
         gridTemplateColumns={`${theme.variables.avatar.height}px auto`}
       >
         <Avatar
@@ -58,6 +57,10 @@ export default function WorkoutDetail() {
         />
         <CardText {...cardTextProps} />
       </Box>
+      <Duration
+        breakMs={breakMs}
+        workMs={workMs}
+      />
       <ExerciseList
         exercises={exercises}
       />
