@@ -2,9 +2,9 @@ import { Box } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import usePlayerPageStore from '../player/usePlayerPageStore';
-import { WorkoutData, workouts } from './data';
-import toPlaylistData from './toPlaylistData';
+import usePlayerPageStore from '../../player/usePlayerPageStore';
+import { WorkoutData, workouts } from '../data';
+import toPlaylistData from '../toPlaylistData';
 import Workout from './Workout';
 
 export default function WorkoutList() {

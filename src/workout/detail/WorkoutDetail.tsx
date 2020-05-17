@@ -4,13 +4,13 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import ExerciseList from '../exercise/ExerciseList';
-import usePlayerPageStore from '../player/usePlayerPageStore';
-import Avatar from '../shared/Avatar';
-import CardText from '../shared/CardText';
-import { WorkoutData, workouts } from './data';
+import ExerciseList from '../../exercise/ExerciseList';
+import usePlayerPageStore from '../../player/usePlayerPageStore';
+import Avatar from '../../shared/Avatar';
+import CardText from '../../shared/CardText';
+import { WorkoutData, workouts } from '../data';
 import Duration from './Duration';
-import toPlaylistData from './toPlaylistData';
+import toPlaylistData from '../toPlaylistData';
 
 const buildCardTextProps = (workout: WorkoutData) => {
   const { title, description } = workout;

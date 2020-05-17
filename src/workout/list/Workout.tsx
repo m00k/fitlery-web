@@ -1,8 +1,8 @@
 import React from 'react';
-import Avatar from '../shared/Avatar';
-import Card from '../shared/Card';
-import CardText from '../shared/CardText';
-import { WorkoutData } from './data';
+import Avatar from '../../shared/Avatar';
+import Card from '../../shared/Card';
+import CardText from '../../shared/CardText';
+import { WorkoutData } from '../data';
 
 
 interface WorkoutProps {

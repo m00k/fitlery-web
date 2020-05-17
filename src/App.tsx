@@ -7,8 +7,8 @@ import Main from './Main';
 import BottomNavigation from './navigation/BottomNavigation';
 import TopNavigation from './navigation/TopNavigation';
 import Player from './player/Player';
-import WorkoutDetail from './workout/WorkoutDetail';
-import WorkoutList from './workout/WorkoutList';
+import WorkoutDetail from './workout/detail/WorkoutDetail';
+import WorkoutList from './workout/list/WorkoutList';
 import UnderConstruction from './shared/UnderConstruction';
 
 const App = () => { 
