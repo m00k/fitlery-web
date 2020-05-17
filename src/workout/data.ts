@@ -1,15 +1,6 @@
-import { ExerciseData } from "../exercise/data";
+import { WorkoutData } from "./store/state";
 
 const SEC = 1000;
-
-export interface WorkoutData {
-  short: string;
-  title: string;
-  description: string;
-  workMs: number,
-  breakMs: number,
-  exercises: ExerciseData[];
-}
 
 // TODO: storage
 export const workouts: WorkoutData[] = [

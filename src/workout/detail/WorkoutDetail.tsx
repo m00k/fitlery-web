@@ -8,9 +8,10 @@ import ExerciseList from '../../exercise/ExerciseList';
 import usePlayerPageStore from '../../player/usePlayerPageStore';
 import Avatar from '../../shared/Avatar';
 import CardText from '../../shared/CardText';
-import { WorkoutData, workouts } from '../data';
-import Duration from './Duration';
+import { workouts } from '../data';
+import { WorkoutData } from '../store/state';
 import toPlaylistData from '../toPlaylistData';
+import Duration from './Duration';
 
 const buildCardTextProps = (workout: WorkoutData) => {
   const { title, description } = workout;

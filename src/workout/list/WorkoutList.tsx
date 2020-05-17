@@ -3,7 +3,8 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import usePlayerPageStore from '../../player/usePlayerPageStore';
-import { WorkoutData, workouts } from '../data';
+import { workouts } from '../data';
+import { WorkoutData } from '../store/state';
 import toPlaylistData from '../toPlaylistData';
 import Workout from './Workout';
 

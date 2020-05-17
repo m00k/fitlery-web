@@ -1,6 +1,6 @@
-import { WorkoutData } from "./data";
-import { PlaylistData, PlaylistItemData } from "../playlist/store";
 import { ExerciseData } from "../exercise/data";
+import { PlaylistData, PlaylistItemData } from "../playlist/store";
+import { WorkoutData } from "./store/state";
 
 function toPlaylistItemData(workMs: number, breakMs: number, name: string): [PlaylistItemData, PlaylistItemData] {
   const b = {

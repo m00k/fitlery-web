@@ -9,6 +9,7 @@ import { PlayerStoreProvider } from './player/store';
 import { PlaylistStoreProvider } from './playlist/store';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme/theme';
+import { WorkoutStoreProvider } from './workout/store';
 
 
 ReactDOM.render(
@@ -19,7 +20,9 @@ ReactDOM.render(
         <CountdownStoreProvider>
           <PlaylistStoreProvider>
             <PlayerStoreProvider>
-              <App />
+              <WorkoutStoreProvider>
+                <App />
+              </WorkoutStoreProvider>
             </PlayerStoreProvider>
           </PlaylistStoreProvider>
         </CountdownStoreProvider>
