@@ -1,4 +1,4 @@
-import { Box, BoxProps } from '@material-ui/core';
+import { Box, BoxProps, Chip } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { PlaylistItemData } from './store';
@@ -19,6 +19,7 @@ const useStyles = (isCurrent: boolean) => {
     borderColor: theme.palette.primary.main,
     borderLeft: theme.spacing(3),
     display: 'grid',
+    gridTemplateColumns: '1fr min-content',
     height,
     p: 1,
     pr: 3,
@@ -27,6 +28,9 @@ const useStyles = (isCurrent: boolean) => {
   const inner: BoxProps = {
     fontSize: '1.5rem',
     fontWeight: isCurrent ? 'bold' : 'initial',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
   };
 
   return { root, inner };
@@ -40,7 +44,7 @@ export interface PlaylistItemProps{
 
 export default function PlaylistItem(props: PlaylistItemProps) {
   const { isCurrent, item, onClick } = props;
-  const {root, inner} = useStyles(isCurrent);
+  const { root, inner } = useStyles(isCurrent);
 
   return (
     <Box
@@ -53,6 +57,11 @@ export default function PlaylistItem(props: PlaylistItemProps) {
       >
         {item.name?.toUpperCase()}
       </Box>
+      <Chip
+        variant={isCurrent ? 'default' : 'outlined'}
+        color='primary'
+        label='30/60'
+      />
     </Box>
   );
 }

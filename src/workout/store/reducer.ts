@@ -44,7 +44,6 @@ const select = (state: WorkoutState, action: WorkoutAction): WorkoutState => {
 }
 
 const update = (state: WorkoutState, action: WorkoutAction): WorkoutState => {
-  debugger;
   if ( state.currentItemIndex === NOT_FOUND ) {
     return state;
   }

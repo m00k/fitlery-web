@@ -40,7 +40,6 @@ export default function WorkoutDetail() {
   const cardTextProps = buildCardTextProps(workout);
 
   const handleClick = () => {
-    console.log(toPlaylistData(workout));
     const playlist = toPlaylistData(workout);
     playerPageDispatch.set(playlist);
     history.push('/player'); // TODO: magic strings
@@ -80,7 +79,7 @@ export default function WorkoutDetail() {
         style={{
           position: "fixed",
           bottom: theme.variables.navbar.height + theme.spacing(1),
-          right: theme.spacing(2),
+          right: theme.spacing(1),
         }}
         onClick={handleClick}
       >

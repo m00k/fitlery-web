@@ -11,7 +11,7 @@ export const bluegrey800: SimplePaletteColorOptions = {
   main: '#37474f',
   light: '#62727b',
   dark: '#102027',
-  contrastText: '#000000',
+  contrastText: '#ffffff',
 };
 
 export const grey900: SimplePaletteColorOptions = {

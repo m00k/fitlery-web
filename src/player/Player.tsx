@@ -1,5 +1,7 @@
-import { Box } from '@material-ui/core';
+import { Box, Fab, useTheme } from '@material-ui/core';
+import SettingsIcon from '@material-ui/icons/Settings';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Playlist from '../playlist/Playlist';
 import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
 import Banner, { BannerProps, BannerStyles } from './Banner';
@@ -31,13 +33,24 @@ const buildBannerProps = (state: PlayerPageState, { avatar, text }: BannerStyles
 // TODO: dispatch stop when navigating away
 // TODO: handle empty
 const Player = () => {
+  const theme = useTheme();  
+  const history = useHistory();
+  const styles = useLayout();
   const [state, dispatch] = usePlayerPageStore();
+  const { playlistState } = state;
+  if (!playlistState || !playlistState.items.length) {
+    history.push(`/workouts`);
+    return null;
+  }
   const { playerState } = state;
   const { playState } = playerState;
-  const styles = useLayout();
   const { avatar, text } = styles;
   const bannerProps = buildBannerProps(state, { avatar, text });
   const handleClick = (type: PlayerActionType) => dispatch[type]();
+
+  const handleSettingsClick = () => {
+    history.push(`/workouts/${bannerProps.short}`); // TODO: bad idea: encoding missing, uniqueness questionable, ...
+  }
 
   return (
     <Box
@@ -59,6 +72,19 @@ const Player = () => {
       <Playlist
         style={styles.list}
       />
+      {playState === 'stopped' && <Fab
+        color="secondary"
+        size='medium'
+        style={{
+          position: "fixed",
+          top: theme.variables.navbar.height + theme.spacing(1),
+          right: theme.spacing(1),
+        }}
+        onClick={handleSettingsClick}
+      >
+        <SettingsIcon
+        />
+      </Fab>}
     </Box>
   );
 }
