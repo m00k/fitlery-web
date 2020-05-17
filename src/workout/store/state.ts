@@ -1,4 +1,5 @@
 import { ExerciseData } from "../../exercise/data";
+import { workouts } from "../data";
 
 const NOT_FOUND = -1;
 
@@ -18,6 +19,6 @@ export interface WorkoutState {
 }
 
 export const initialState: WorkoutState = {
-  items: [], 
+  items: workouts,  // TODO: real data
   currentItemIndex: NOT_FOUND,
 }

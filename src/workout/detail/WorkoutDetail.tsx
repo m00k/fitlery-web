@@ -3,12 +3,12 @@ import Fab from '@material-ui/core/Fab';
 import useTheme from '@material-ui/core/styles/useTheme';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import ExerciseList from '../../exercise/ExerciseList';
 import usePlayerPageStore from '../../player/usePlayerPageStore';
 import Avatar from '../../shared/Avatar';
 import CardText from '../../shared/CardText';
-import { workouts } from '../data';
+import { useWorkoutStore } from '../store';
 import { WorkoutData } from '../store/state';
 import toPlaylistData from '../toPlaylistData';
 import Duration from './Duration';
@@ -25,12 +25,17 @@ const buildCardTextProps = (workout: WorkoutData) => {
   };
 }
 
+// TODO: find selected workout by url param if app is loaded on this route
 export default function WorkoutDetail() {
   const theme = useTheme();
   const history = useHistory();
   const [, playerPageDispatch] = usePlayerPageStore();
-  const { titleFromParams } = useParams();
-  const workout = workouts.find(w => w.title === titleFromParams) || workouts[0]; // TODO from storage
+  const [workoutState, workoutDispatch] = useWorkoutStore();
+  let workout = workoutState.items[workoutState.currentItemIndex];
+  if (!workout) {
+    history.push(`/workouts`);
+    return null;
+  }
   const { short, exercises, breakMs, workMs } = workout;
   const cardTextProps = buildCardTextProps(workout);
 
@@ -38,8 +43,11 @@ export default function WorkoutDetail() {
     console.log(toPlaylistData(workout));
     const playlist = toPlaylistData(workout);
     playerPageDispatch.set(playlist);
-    history.push('/recents'); // TODO: magic strings
+    history.push('/player'); // TODO: magic strings
   }
+
+  const handleSetBreakMs = (breakMs: number) => workoutDispatch.update({ ...workout, breakMs });
+  const handleSetWorkMs = (workMs: number) => workoutDispatch.update({ ...workout, workMs });
 
   // TODO: edit exercises
   // TODO: edit exercises order drag/drop
@@ -61,8 +69,8 @@ export default function WorkoutDetail() {
       <Duration
         breakMs={breakMs}
         workMs={workMs}
-        onSetBreakMs={(duration) => console.log('###################', 'TODO', 'breakMs', duration)}
-        onSetWorkMs={(duration) => console.log('###################', 'TODO', 'workkMs', duration)}
+        onSetBreakMs={handleSetBreakMs}
+        onSetWorkMs={handleSetWorkMs}
       />
       <ExerciseList
         exercises={exercises}
