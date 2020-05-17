@@ -7,7 +7,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import ExerciseList from '../exercise/ExerciseList';
 import usePlayerPageStore from '../player/usePlayerPageStore';
 import Avatar from '../shared/Avatar';
-import CardText from './CardText';
+import CardText from '../shared/CardText';
 import { WorkoutData, workouts } from './data';
 import Duration from './Duration';
 import toPlaylistData from './toPlaylistData';

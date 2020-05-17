@@ -1,7 +1,7 @@
 import React from 'react';
 import Avatar from '../shared/Avatar';
-import Card from './Card';
-import CardText from './CardText';
+import Card from '../shared/Card';
+import CardText from '../shared/CardText';
 import { WorkoutData } from './data';
 
 
