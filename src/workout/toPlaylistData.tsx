@@ -6,11 +6,16 @@ function toPlaylistItemData(workMs: number, breakMs: number, name: string): [Pla
   const b = {
     name: `next up: ${name}`,
     durationMs: breakMs,
-    tags: {isBreak: true},
+    tags: {
+      isBreak: true,
+    },
   };
   const w = {
     name,
     durationMs: workMs,
+    tags: {
+      breakWork: `${breakMs/1000}/${workMs/1000}`,
+    }
   };
   return [b, w];
 }

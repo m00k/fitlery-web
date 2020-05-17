@@ -60,7 +60,7 @@ export default function PlaylistItem(props: PlaylistItemProps) {
       <Chip
         variant={isCurrent ? 'default' : 'outlined'}
         color='primary'
-        label='30/60'
+        label={item.tags?.breakWork}
       />
     </Box>
   );

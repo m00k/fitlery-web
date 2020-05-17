@@ -73,17 +73,16 @@ const Player = () => {
         style={styles.list}
       />
       {playState === 'stopped' && <Fab
-        color="secondary"
+        color="primary"
         size='medium'
         style={{
           position: "fixed",
-          top: theme.variables.navbar.height + theme.spacing(1),
-          right: theme.spacing(1),
+          top: theme.variables.navbar.height + theme.spacing(.5),
+          right: theme.spacing(.5),
         }}
         onClick={handleSettingsClick}
       >
-        <SettingsIcon
-        />
+        <SettingsIcon />
       </Fab>}
     </Box>
   );
