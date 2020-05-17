@@ -60,6 +60,8 @@ export default function WorkoutDetail() {
       <Duration
         breakMs={breakMs}
         workMs={workMs}
+        onSetBreakMs={(duration) => console.log('###################', 'TODO', 'breakMs', duration)}
+        onSetWorkMs={(duration) => console.log('###################', 'TODO', 'workkMs', duration)}
       />
       <ExerciseList
         exercises={exercises}
@@ -74,9 +76,7 @@ export default function WorkoutDetail() {
         onClick={handleClick}
       >
         <PlayArrowIcon
-          style={{
-            fontSize: "4rem"
-          }}
+          fontSize='large'
         />
       </Fab>
     </Box>
