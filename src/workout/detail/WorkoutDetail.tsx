@@ -12,6 +12,7 @@ import { useWorkoutStore } from '../store';
 import { WorkoutData } from '../store/state';
 import toPlaylistData from '../toPlaylistData';
 import Duration from './Duration';
+import NumberInput from '../../shared/NumberInput';
 
 const buildCardTextProps = (workout: WorkoutData) => {
   const { title, description } = workout;
@@ -45,8 +46,8 @@ export default function WorkoutDetail() {
     history.push('/player'); // TODO: magic strings
   }
 
-  const handleSetBreakMs = (breakMs: number) => workoutDispatch.update({ ...workout, breakMs });
-  const handleSetWorkMs = (workMs: number) => workoutDispatch.update({ ...workout, workMs });
+  const handleSetBreakMs = (breakSec: number) => workoutDispatch.update({ ...workout, breakMs: breakSec * 1000 });
+  const handleSetWorkMs = (workSec: number) => workoutDispatch.update({ ...workout, workMs: workSec * 1000});
 
   // TODO: edit exercises
   // TODO: edit exercises order drag/drop
@@ -65,6 +66,20 @@ export default function WorkoutDetail() {
         />
         <CardText {...cardTextProps} />
       </Box>
+      <NumberInput
+        value={breakMs / 1000}
+        min={0}
+        max={6000}
+        step={15}
+        onChange={handleSetBreakMs}
+      />
+      <NumberInput
+        value={workMs / 1000}
+        min={0}
+        max={6000}
+        step={15}
+        onChange={handleSetWorkMs}
+      />
       <Duration
         breakMs={breakMs}
         workMs={workMs}
