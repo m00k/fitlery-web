@@ -1,44 +1,47 @@
-import { Box } from '@material-ui/core';
+import { useTheme, makeStyles } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import React from 'react';
-import DurationEdit from './DurationEdit';
-import DurationView from './DurationView';
+import NumberInput, { NumberInputProps } from '../../shared/NumberInput';
 
 
-interface DurationProps {
-  breakMs: number;
-  workMs: number;
-  onSetBreakMs: (ms: number) => void;
-  onSetWorkMs: (ms: number) => void;
+const useStyles = makeStyles((theme) => ({
+  label: {
+    alignItems: 'center',
+    backgroundColor: theme.palette.secondary.dark,
+    color: theme.palette.secondary.contrastText,
+    display: 'grid',
+    fontSize: theme.typography.h5.fontSize,
+    fontWeight: theme.typography.h5.fontWeight,
+    height: '100%',
+    padding: theme.spacing(1),
+    textTransform: 'uppercase',
+  },
+}));
+
+interface DurationProps extends NumberInputProps{
+  label: string;
 }
 
-const Duration: React.FC<DurationProps> = ({ breakMs, workMs, onSetBreakMs, onSetWorkMs }) => {
-  const [duration, setDuration] = React.useState(0);
-  const [open, setOpen] = React.useState(false);
-  const changeHandler = React.useRef((ms: number) => {});
-
-  const handleDurationEditOpen = (duration: number, handler: (ms: number) => void) => {
-    setDuration(duration / 1000);
-    changeHandler.current = handler;
-    setOpen(true);
-  };
-  const handleDurationEditClose = (duration: number) => {
-    setOpen(false);
-    changeHandler.current(duration * 1000);
-  };
-
+const Duration: React.FC<DurationProps> = ({ label, ...props }) => {
+  const theme = useTheme();
+  const classes = useStyles(theme);
   return (
-    <Box>
-      <DurationView
-        breakMs={breakMs}
-        workMs={workMs}
-        onClickBreak={(duration: number) => handleDurationEditOpen(duration, onSetBreakMs)}
-        onClickWork={(duration: number) => handleDurationEditOpen(duration, onSetWorkMs)}
+    <Box
+      alignItems='center'
+      bgcolor={theme.palette.background.paper}
+      display='grid'
+      gridTemplateColumns='minmax(150px, 300px) minmax(min-content, 300px)'
+      height={theme.variables.playlist.item.height}
+      marginBottom={.5}
+    >
+      <Box
+        className={classes.label}
+      >
+        {label}
+      </Box>
+      <NumberInput
+        {...props}
       />
-      {open && <DurationEdit
-        value={duration}
-        open={true}
-        onClose={handleDurationEditClose}
-      />}
     </Box>
   );
 }

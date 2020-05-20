@@ -12,7 +12,6 @@ import { useWorkoutStore } from '../store';
 import { WorkoutData } from '../store/state';
 import toPlaylistData from '../toPlaylistData';
 import Duration from './Duration';
-import NumberInput from '../../shared/NumberInput';
 
 const buildCardTextProps = (workout: WorkoutData) => {
   const { title, description } = workout;
@@ -66,25 +65,21 @@ export default function WorkoutDetail() {
         />
         <CardText {...cardTextProps} />
       </Box>
-      <NumberInput
+      <Duration
+        label='Break [sec]'
         value={breakMs / 1000}
         min={0}
         max={6000}
         step={15}
         onChange={handleSetBreakMs}
       />
-      <NumberInput
+      <Duration
+        label='Work [sec]'
         value={workMs / 1000}
         min={0}
         max={6000}
         step={15}
         onChange={handleSetWorkMs}
-      />
-      <Duration
-        breakMs={breakMs}
-        workMs={workMs}
-        onSetBreakMs={handleSetBreakMs}
-        onSetWorkMs={handleSetWorkMs}
       />
       <ExerciseList
         exercises={exercises}

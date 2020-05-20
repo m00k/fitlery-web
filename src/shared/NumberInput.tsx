@@ -11,7 +11,6 @@ const useButtonGroupStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     display: 'grid',
     gridTemplateColumns: `2fr 4fr 2fr 1fr`,
-    height: `${theme.variables.playlist.item.height}px`, // TODO: from outside
   }
 }));
 
@@ -65,7 +64,7 @@ const NumberInput: React.FC<NumberInputProps> = (props) => {
         <RemoveIcon />
       </IconButton>
       <Typography
-        variant='h3'
+        variant='h4'
         style={{
           textAlign: 'center',
         }}
