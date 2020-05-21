@@ -1,14 +1,14 @@
-import { IconButton } from '@material-ui/core';
-import MoreVerticon from '@material-ui/icons/MoreVert';
 import React from 'react';
 import Avatar from '../../shared/Avatar';
 import Card from '../../shared/Card';
 import CardText from '../../shared/CardText';
 import { WorkoutData } from '../store/state';
+import ContextMenu, { ContextMenuOption } from './ContextMenu';
 
-interface WorkoutProps {
+export interface WorkoutProps {
   workout: WorkoutData;
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onCardClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onContextMenuClick?: (menuOption: ContextMenuOption) => void;
 }
 
 const buildCardTextProps = ({ workout }: WorkoutProps) => {
@@ -22,11 +22,12 @@ const buildCardTextProps = ({ workout }: WorkoutProps) => {
   };
 }
 
-const Workout: React.FC<WorkoutProps> = ({ workout, onClick }) => {
+const Workout: React.FC<WorkoutProps> = (props) => {
+  const { workout, onCardClick, onContextMenuClick } = props;
   const cardTextProps = buildCardTextProps({ workout });
   return (
     <Card
-      onClick={onClick}
+      onClick={onCardClick}
     >
       <Avatar
         text={workout.short}
@@ -37,11 +38,9 @@ const Workout: React.FC<WorkoutProps> = ({ workout, onClick }) => {
       <CardText
         {...cardTextProps}
       >
-        <IconButton
-          color='secondary'
-        >
-          <MoreVerticon />
-        </IconButton>
+        <ContextMenu
+          onClick={onContextMenuClick}
+        />
       </CardText>
     </Card>
   );

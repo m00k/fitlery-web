@@ -7,6 +7,7 @@ import { useWorkoutStore } from '../store';
 import { WorkoutData } from '../store/state';
 import toPlaylistData from '../toPlaylistData';
 import Workout from './Workout';
+import { ContextMenuOption } from './ContextMenu';
 
 
 export default function WorkoutList() {
@@ -16,11 +17,26 @@ export default function WorkoutList() {
   const [workoutState, workoutDispatch] = useWorkoutStore();
   const { items: workouts } = workoutState;
   
-  const handleClick = (workout: WorkoutData, index: number) => {
+  const handleCardClick = (workout: WorkoutData, index: number) => {
     workoutDispatch.select(index);
     const playlist = toPlaylistData(workout);
     playerPageDispatch.set(playlist);
     history.push(`/player`); // TODO: magic strings
+  }
+
+  const handleContextMenuClick = (workout: WorkoutData, index: number, menuOption: ContextMenuOption) => {
+    switch (menuOption) {
+      case 'delete':
+        console.log('// TODO: confirm dialog, then delete', workout);
+        break;
+      case 'edit':
+        workoutDispatch.select(index);
+        const { title } = workout;
+        history.push(`/workouts/${title}`); // TODO: bad idea: encoding missing, uniqueness questionable, ...
+        break;
+      default:
+        throw Error(`unknowkn menu option ${menuOption}`);
+    }
   }
 
   return (
@@ -34,7 +50,8 @@ export default function WorkoutList() {
         <Workout
           key={workout.title}
           workout={workout}
-          onClick={() => handleClick(workout, index)}
+          onCardClick={() => handleCardClick(workout, index)}
+          onContextMenuClick={handleContextMenuClick.bind(globalThis, workout, index)}
         />
       ))}
     </Box>
