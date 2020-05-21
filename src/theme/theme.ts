@@ -21,11 +21,14 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       },
       playlist: {
         currentItem: {
-          height: Number,
+          height: number,
         },
         item: {
-          height: Number,
+          height: number,
         },
+      },
+      root: {
+        backgroundColor: string,
       }
     }
   }
@@ -43,15 +46,18 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         height: number,
       },
       player: {
-        height: Number,
+        height: number,
       },
       playlist: {
         currentItem: {
-          height: Number,
+          height: number,
         },
         item: {
-          height: Number,
+          height: number,
         },
+      },
+      root: {
+        backgroundColor: string,
       }
     }
   }
@@ -83,6 +89,9 @@ const variables = {
       height: SPACING * 7.5,
     },
   },
+  root: {
+    backgroundColor: '#102027e6', // theme.palette.primary.dark w/ alpha .9
+  }
 };
 
 const props: ComponentProps<any> | undefined = {
