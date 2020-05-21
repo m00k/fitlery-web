@@ -3,7 +3,7 @@ import Fab from '@material-ui/core/Fab';
 import useTheme from '@material-ui/core/styles/useTheme';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import ExerciseList from '../../exercise/ExerciseList';
 import usePlayerPageStore from '../../player/usePlayerPageStore';
 import Avatar from '../../shared/Avatar';
@@ -25,19 +25,22 @@ const buildCardTextProps = (workout: WorkoutData) => {
   };
 }
 
-// TODO: find selected workout by url param if app is loaded on this route
 export default function WorkoutDetail() {
   const theme = useTheme();
   const history = useHistory();
   const [, playerPageDispatch] = usePlayerPageStore();
   const [workoutState, workoutDispatch] = useWorkoutStore();
-  let workout = workoutState.items[workoutState.currentItemIndex];
+  const { items: workouts, currentItemIndex } = workoutState;
+  let workout = workouts[currentItemIndex];
+  const { title } = useParams();
   if (!workout) {
-    // TODO
-    // history.push(`/workouts`);
-    // return null;
-    // HACK
-    workoutDispatch.select(0);
+    const index = workouts.findIndex(w => w.title === title);
+    if (index > -1) {
+      // HACK
+      setTimeout(() => workoutDispatch.select(index));
+    } else {
+      history.push(`/workouts`);
+    }
     return null;
   }
   const { short, exercises, breakMs, workMs } = workout;
