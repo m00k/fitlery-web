@@ -2,6 +2,7 @@ import { createMuiTheme, responsiveFontSizes, SimplePaletteColorOptions } from "
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { ComponentProps } from "react";
 import palette from "./palette";
+import { Overrides } from "@material-ui/core/styles/overrides";
 
 // https://material-ui.com/guides/typescript/#augmenting-your-props-using-withstyles
 declare module '@material-ui/core/styles/createMuiTheme' {
@@ -113,7 +114,7 @@ const typography = {
   }
 };
 
-const overrides = {
+const overrides: Overrides = {
   MuiBottomNavigation: {
     root: {
       backgroundColor: primary.main,
@@ -130,6 +131,18 @@ const overrides = {
       color: secondary.light,
     }
   },
+  MuiListItemIcon: {
+    root: {
+      color: secondary.light,
+      minWidth: '32px',
+    }
+  },
+  MuiMenu: {
+    paper: {
+      backgroundColor: primary.dark,
+      color: secondary.light,
+    }
+  }
 };
 
 
