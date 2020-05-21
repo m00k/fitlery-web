@@ -1,5 +1,4 @@
-import { Box, makeStyles, Typography, useTheme } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
+import { Box, IconButton, makeStyles, Typography, useTheme } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import ReplayIcon from '@material-ui/icons/Replay';
@@ -8,16 +7,20 @@ import React, { useEffect, useRef } from 'react';
 const useButtonGroupStyles = makeStyles((theme) => ({
   root: {
     alignItems: 'center',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: 'inherit',
     display: 'grid',
-    gridTemplateColumns: `2fr 4fr 2fr 1fr`,
+    gridTemplateColumns: `60px minmax(50px, 4fr) 60px 32px`,
+    height: '100%',
   }
 }));
 
 const useButtonStyles = makeStyles((theme) => ({
   root: {
+    color: theme.palette.secondary.light,
     fontSize: theme.typography.h5.fontSize,
     fontWeight: theme.typography.h5.fontWeight,
+    height: '100%',
+    marginLeft: '1px',
     textTransform: 'none',
   },
 }));
@@ -66,6 +69,11 @@ const NumberInput: React.FC<NumberInputProps> = (props) => {
       <Typography
         variant='h4'
         style={{
+          backgroundColor: '#fff',
+          borderRadius: theme.shape.borderRadius,
+          display: 'grid',
+          alignItems: 'center',
+          height: '100%',
           textAlign: 'center',
         }}
       >

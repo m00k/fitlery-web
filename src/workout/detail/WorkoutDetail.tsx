@@ -33,7 +33,11 @@ export default function WorkoutDetail() {
   const [workoutState, workoutDispatch] = useWorkoutStore();
   let workout = workoutState.items[workoutState.currentItemIndex];
   if (!workout) {
-    history.push(`/workouts`);
+    // TODO
+    // history.push(`/workouts`);
+    // return null;
+    // HACK
+    workoutDispatch.select(0);
     return null;
   }
   const { short, exercises, breakMs, workMs } = workout;
@@ -56,6 +60,7 @@ export default function WorkoutDetail() {
         display="grid"
         gridTemplateAreas='"avatar text"'
         gridTemplateColumns={`${theme.variables.avatar.height}px auto`}
+        mb={.3}
       >
         <Avatar
           text={short}
