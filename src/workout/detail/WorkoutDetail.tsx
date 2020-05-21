@@ -2,7 +2,7 @@ import Box from '@material-ui/core/Box';
 import Fab from '@material-ui/core/Fab';
 import useTheme from '@material-ui/core/styles/useTheme';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ExerciseList from '../../exercise/ExerciseList';
 import usePlayerPageStore from '../../player/usePlayerPageStore';
@@ -33,25 +33,27 @@ export default function WorkoutDetail() {
   const { items: workouts, currentItemIndex } = workoutState;
   let workout = workouts[currentItemIndex];
   const { title } = useParams();
-  if (!workout) {
-    const index = workouts.findIndex(w => w.title === title);
-    if (index > -1) {
-      // HACK
-      setTimeout(() => workoutDispatch.select(index));
-    } else {
-      history.push(`/workouts`);
+  useEffect(() => {
+    if (!workout) {
+      const index = workouts.findIndex(w => w.title === title);
+      if (index > -1) {
+        workoutDispatch.select(index);
+      } else {
+        history.push(`/workouts`);
+      }
     }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  if (!workout) {
     return null;
   }
   const { short, exercises, breakMs, workMs } = workout;
   const cardTextProps = buildCardTextProps(workout);
 
-  const handleClick = () => {
+  const handleDone = () => {
     const playlist = toPlaylistData(workout);
     playerPageDispatch.set(playlist);
     history.push('/player'); // TODO: magic strings
   }
-
   const handleSetBreakMs = (breakSec: number) => workoutDispatch.update({ ...workout, breakMs: breakSec * 1000 });
   const handleSetWorkMs = (workSec: number) => workoutDispatch.update({ ...workout, workMs: workSec * 1000});
 
@@ -99,7 +101,7 @@ export default function WorkoutDetail() {
           bottom: theme.variables.navbar.height + theme.spacing(1),
           right: theme.spacing(1),
         }}
-        onClick={handleClick}
+        onClick={handleDone}
       >
         <PlayArrowIcon
           fontSize='large'
