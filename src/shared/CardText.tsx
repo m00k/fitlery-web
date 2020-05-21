@@ -4,15 +4,16 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = (rootStyle?: React.CSSProperties) => makeStyles((theme) => ({
   root: {
-    alignItems: 'center',
+    alignContent: 'center',
     backgroundColor: theme.palette.primary.dark,
     color: theme.palette.secondary.contrastText,
     display: 'grid',
     overflow: 'hidden',
     padding: theme.spacing(1),
     whiteSpace: 'nowrap',
+    ...rootStyle,
   },
   description: {
     whiteSpace: 'inherit',
@@ -28,32 +29,27 @@ export interface CardTextProps {
 const CardText: React.FC<CardTextProps> = ({ style, ...props }) => {
   const { title, description } = props;
   const theme = useTheme();
-  const classes = useStyles(theme);
+  const classes = useStyles(style)(theme);
 
   return (
-    <div
+    <Box
       className={classes.root}
-      style={style}
     >
-      <Box
-        minWidth={0}
+      <Typography
+        variant="subtitle1"
+        noWrap
       >
-        <Typography
-          variant="subtitle1"
-          noWrap
-        >
-          {title}
-        </Typography>
-        <Typography
-          className={classes.description}
-          variant="caption"
-          component="p"
-          noWrap
-        >
-          {description}
-        </Typography>
-      </Box>
-    </div>
+        {title}
+      </Typography>
+      <Typography
+        className={classes.description}
+        variant="caption"
+        component="p"
+        noWrap
+      >
+        {description}
+      </Typography>
+    </Box>
   );
 };
 
