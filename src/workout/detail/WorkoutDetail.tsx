@@ -5,12 +5,10 @@ import CloseIcon from '@material-ui/icons/Close';
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ExerciseList from '../../exercise/ExerciseList';
-import usePlayerPageStore from '../../player/usePlayerPageStore';
 import Avatar from '../../shared/Avatar';
 import CardText, { CardTextProps } from '../../shared/CardText';
 import { useWorkoutStore } from '../store';
 import { WorkoutData } from '../store/state';
-import toPlaylistData from '../toPlaylistData';
 import Duration from './Duration';
 
 const buildCardTextProps = (workout: WorkoutData): CardTextProps => {
@@ -39,7 +37,6 @@ const CardActionSecondary: React.FC<{onClick: () => void}> = ({ onClick }) => {
 export default function WorkoutDetail() {
   const theme = useTheme();
   const history = useHistory();
-  const [, playerPageDispatch] = usePlayerPageStore();
   const [workoutState, workoutDispatch] = useWorkoutStore();
   const { items: workouts, currentItemIndex } = workoutState;
   let workout = workouts[currentItemIndex];
@@ -58,11 +55,7 @@ export default function WorkoutDetail() {
     return null;
   }
   const cardTextProps = buildCardTextProps(workout);
-  const handleDone = () => {
-    const playlist = toPlaylistData(workout);
-    playerPageDispatch.set(playlist);
-    history.push('/player'); // TODO: magic strings
-  }
+  const handleClose = () => history.push('/');
   
   const { short, exercises, breakMs, workMs } = workout;
   const handleSetBreakMs = (breakSec: number) => workoutDispatch.update({ ...workout, breakMs: breakSec * 1000 });
@@ -88,7 +81,7 @@ export default function WorkoutDetail() {
           {...cardTextProps}
         >
           <CardActionSecondary
-            onClick={handleDone}
+            onClick={handleClose}
           />
         </CardText>
       </Box>

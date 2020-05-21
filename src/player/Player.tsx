@@ -17,7 +17,7 @@ const buildBannerProps = (state: PlayerPageState, { avatar, text }: BannerStyles
   const { msLeft, msTotal } = countdownState;
   const { playState } = playerState;
   const { short, name: title, description } = playlistState;
-  const onClose = () => history.push(`/workouts`);
+  const onClose = () => history.push(`/`);
 
   return {
     playState,
