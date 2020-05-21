@@ -1,9 +1,10 @@
+import { IconButton } from '@material-ui/core';
+import MoreVerticon from '@material-ui/icons/MoreVert';
 import React from 'react';
 import Avatar from '../../shared/Avatar';
 import Card from '../../shared/Card';
 import CardText from '../../shared/CardText';
 import { WorkoutData } from '../store/state';
-
 
 interface WorkoutProps {
   workout: WorkoutData;
@@ -33,7 +34,15 @@ const Workout: React.FC<WorkoutProps> = ({ workout, onClick }) => {
           gridColumn: 1
         }}
       />
-      <CardText {...cardTextProps} />
+      <CardText
+        {...cardTextProps}
+      >
+        <IconButton
+          color='secondary'
+        >
+          <MoreVerticon />
+        </IconButton>
+      </CardText>
     </Card>
   );
 }

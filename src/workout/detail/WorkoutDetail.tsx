@@ -1,19 +1,19 @@
+import { IconButton } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import Fab from '@material-ui/core/Fab';
 import useTheme from '@material-ui/core/styles/useTheme';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import CloseIcon from '@material-ui/icons/Close';
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ExerciseList from '../../exercise/ExerciseList';
 import usePlayerPageStore from '../../player/usePlayerPageStore';
 import Avatar from '../../shared/Avatar';
-import CardText from '../../shared/CardText';
+import CardText, { CardTextProps } from '../../shared/CardText';
 import { useWorkoutStore } from '../store';
 import { WorkoutData } from '../store/state';
 import toPlaylistData from '../toPlaylistData';
 import Duration from './Duration';
 
-const buildCardTextProps = (workout: WorkoutData) => {
+const buildCardTextProps = (workout: WorkoutData): CardTextProps => {
   const { title, description } = workout;
   return {
     title,
@@ -21,8 +21,19 @@ const buildCardTextProps = (workout: WorkoutData) => {
     style: {
       gridArea: "text",
       whiteSpace: "normal",
-    } as React.CSSProperties // https://material-ui.com/guides/typescript/#using-createstyles-to-defeat-type-widening
+    }
   };
+}
+
+const CardActionSecondary: React.FC<{onClick: () => void}> = ({ onClick }) => {
+  return (
+    <IconButton
+      color="secondary"
+      onClick={onClick}
+    >
+      <CloseIcon />
+    </IconButton>
+  );
 }
 
 export default function WorkoutDetail() {
@@ -46,14 +57,14 @@ export default function WorkoutDetail() {
   if (!workout) {
     return null;
   }
-  const { short, exercises, breakMs, workMs } = workout;
   const cardTextProps = buildCardTextProps(workout);
-
   const handleDone = () => {
     const playlist = toPlaylistData(workout);
     playerPageDispatch.set(playlist);
     history.push('/player'); // TODO: magic strings
   }
+  
+  const { short, exercises, breakMs, workMs } = workout;
   const handleSetBreakMs = (breakSec: number) => workoutDispatch.update({ ...workout, breakMs: breakSec * 1000 });
   const handleSetWorkMs = (workSec: number) => workoutDispatch.update({ ...workout, workMs: workSec * 1000});
 
@@ -73,7 +84,13 @@ export default function WorkoutDetail() {
             gridArea: "avatar",
           }}
         />
-        <CardText {...cardTextProps} />
+        <CardText
+          {...cardTextProps}
+        >
+          <CardActionSecondary
+            onClick={handleDone}
+          />
+        </CardText>
       </Box>
       <Duration
         label='Break [sec]'
@@ -94,19 +111,6 @@ export default function WorkoutDetail() {
       <ExerciseList
         exercises={exercises}
       />
-      <Fab
-        color="secondary"
-        style={{
-          position: "fixed",
-          bottom: theme.variables.navbar.height + theme.spacing(1),
-          right: theme.spacing(1),
-        }}
-        onClick={handleDone}
-      >
-        <PlayArrowIcon
-          fontSize='large'
-        />
-      </Fab>
     </Box>
   );
 }
