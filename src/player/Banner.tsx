@@ -1,3 +1,5 @@
+import { IconButton } from '@material-ui/core';
+import SettingsIcon from '@material-ui/icons/Settings';
 import React, { ReactNode } from 'react';
 import Countdown from '../countdown/Countdown';
 import PieCountdown, { PieCountdownProps } from '../countdown/PieCountdown';
@@ -17,6 +19,7 @@ export interface BannerProps {
   children?: ReactNode;
   currentItem: PlaylistItemData;
   styles: BannerStyles;
+  onCardTextClick: () => void;
 }
 
 export interface BannerStyles {
@@ -44,7 +47,7 @@ const buildCardTextProps = ({ styles, ...props }: BannerProps) => {
 }
 
 const Banner: React.FC<BannerProps> = ({ styles, ...props }: BannerProps) => {
-  const { short, playState, msLeft } = props;
+  const { short, playState, msLeft, onCardTextClick } = props;
   const countdownProps = buildPieCountdownProps({ ...props, styles });
   const cardTextProps = buildCardTextProps({ styles, ...props });
 
@@ -56,7 +59,14 @@ const Banner: React.FC<BannerProps> = ({ styles, ...props }: BannerProps) => {
       />
       <CardText
         {...cardTextProps}
-      />
+      >
+        <IconButton
+          color="secondary"
+          onClick={onCardTextClick}
+        >
+          <SettingsIcon />
+        </IconButton>
+      </CardText>
     </>)
     : (<>
       <PieCountdown

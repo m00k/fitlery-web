@@ -1,5 +1,4 @@
-import { Box, Fab, useTheme } from '@material-ui/core';
-import SettingsIcon from '@material-ui/icons/Settings';
+import { Box } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Playlist from '../playlist/Playlist';
@@ -11,13 +10,16 @@ import { useLayout } from './useLayout';
 import usePlayerPageStore, { PlayerPageState } from './usePlayerPageStore';
 
 
-const buildBannerProps = (state: PlayerPageState, { avatar, text }: BannerStyles): BannerProps => {
+const buildBannerProps = (state: PlayerPageState, { avatar, text }: BannerStyles, history: ReturnType<typeof useHistory>): BannerProps => {
   const { countdownState, playlistState, playerState } = state;
   const { currentItemIndex, items } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
   const { msLeft, msTotal } = countdownState;
   const { playState } = playerState;
   const { short, name: title, description } = playlistState;
+  const onCardTextClick = () => {
+    history.push(`/workouts/${short}`); // TODO: bad idea: encoding missing, uniqueness questionable, ...
+  }
   return {
     playState,
     msLeft,
@@ -27,13 +29,13 @@ const buildBannerProps = (state: PlayerPageState, { avatar, text }: BannerStyles
     title,
     description,
     styles: { avatar, text },
+    onCardTextClick,
   }
 }
 
 // TODO: dispatch stop when navigating away
 // TODO: handle empty
 const Player = () => {
-  const theme = useTheme();  
   const history = useHistory();
   const styles = useLayout();
   const [state, dispatch] = usePlayerPageStore();
@@ -45,12 +47,8 @@ const Player = () => {
   const { playerState } = state;
   const { playState } = playerState;
   const { avatar, text } = styles;
-  const bannerProps = buildBannerProps(state, { avatar, text });
-  const handleClick = (type: PlayerActionType) => dispatch[type]();
-
-  const handleSettingsClick = () => {
-    history.push(`/workouts/${bannerProps.short}`); // TODO: bad idea: encoding missing, uniqueness questionable, ...
-  }
+  const bannerProps = buildBannerProps(state, { avatar, text }, history);
+  const handleControlsClick = (type: PlayerActionType) => dispatch[type]();
 
   return (
     <Box
@@ -58,12 +56,12 @@ const Player = () => {
       style={styles.root}
     >
       <Banner
-        {...{...bannerProps}}
+        {...bannerProps}
       >
       </Banner>
       <Controls
         playState={playState}
-        onClick={handleClick}
+        onClick={handleControlsClick}
         style={styles.controls}
       />
       <PlaylistItemCurrent
@@ -72,18 +70,6 @@ const Player = () => {
       <Playlist
         style={styles.list}
       />
-      {playState === 'stopped' && <Fab
-        color="primary"
-        size='medium'
-        style={{
-          position: "fixed",
-          top: theme.variables.navbar.height + theme.spacing(.5),
-          right: theme.spacing(.5),
-        }}
-        onClick={handleSettingsClick}
-      >
-        <SettingsIcon />
-      </Fab>}
     </Box>
   );
 }
