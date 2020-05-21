@@ -1,8 +1,7 @@
-import { IconButton, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import Typography from '@material-ui/core/Typography';
-import MoreVerticon from '@material-ui/icons/MoreVert';
 import React from 'react';
 
 const useStyles = (rootStyle?: React.CSSProperties) => makeStyles((theme) => ({
@@ -34,7 +33,7 @@ export interface CardTextProps {
   style?: React.CSSProperties;
 }
 
-const CardText: React.FC<CardTextProps> = ({ style, ...props }) => {
+const CardText: React.FC<CardTextProps> = ({ style, children, ...props }) => {
   const { title, description } = props;
   const theme = useTheme();
   const classes = useStyles(style)(theme);
@@ -42,6 +41,7 @@ const CardText: React.FC<CardTextProps> = ({ style, ...props }) => {
   return (
     <Box
       className={classes.root}
+      onClick={(ev) => ev.stopPropagation()}
     >
       <Typography
         variant='subtitle1'
@@ -67,12 +67,7 @@ const CardText: React.FC<CardTextProps> = ({ style, ...props }) => {
           right: -theme.spacing(1),
         }}
       >
-        <IconButton
-          color='secondary'
-          onClick={(ev) => ev.stopPropagation()}
-        >
-          <MoreVerticon />
-        </IconButton>
+        {children}
       </Box>
     </Box>
   );
