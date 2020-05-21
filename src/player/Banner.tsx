@@ -1,5 +1,5 @@
 import { IconButton } from '@material-ui/core';
-import SettingsIcon from '@material-ui/icons/Settings';
+import CloseIcon from '@material-ui/icons/Close';
 import React, { ReactNode } from 'react';
 import Countdown from '../countdown/Countdown';
 import PieCountdown, { PieCountdownProps } from '../countdown/PieCountdown';
@@ -19,7 +19,7 @@ export interface BannerProps {
   children?: ReactNode;
   currentItem: PlaylistItemData;
   styles: BannerStyles;
-  onCardTextClick: () => void;
+  onClose: () => void;
 }
 
 export interface BannerStyles {
@@ -47,7 +47,7 @@ const buildCardTextProps = ({ styles, ...props }: BannerProps) => {
 }
 
 const Banner: React.FC<BannerProps> = ({ styles, ...props }: BannerProps) => {
-  const { short, playState, msLeft, onCardTextClick } = props;
+  const { short, playState, msLeft, onClose } = props;
   const countdownProps = buildPieCountdownProps({ ...props, styles });
   const cardTextProps = buildCardTextProps({ styles, ...props });
 
@@ -62,9 +62,9 @@ const Banner: React.FC<BannerProps> = ({ styles, ...props }: BannerProps) => {
       >
         <IconButton
           color="secondary"
-          onClick={onCardTextClick}
+          onClick={onClose}
         >
-          <SettingsIcon />
+          <CloseIcon />
         </IconButton>
       </CardText>
     </>)

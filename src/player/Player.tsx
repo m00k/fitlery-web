@@ -17,9 +17,8 @@ const buildBannerProps = (state: PlayerPageState, { avatar, text }: BannerStyles
   const { msLeft, msTotal } = countdownState;
   const { playState } = playerState;
   const { short, name: title, description } = playlistState;
-  const onCardTextClick = () => {
-    history.push(`/workouts/${short}`); // TODO: bad idea: encoding missing, uniqueness questionable, ...
-  }
+  const onClose = () => history.push(`/workouts`);
+
   return {
     playState,
     msLeft,
@@ -29,7 +28,7 @@ const buildBannerProps = (state: PlayerPageState, { avatar, text }: BannerStyles
     title,
     description,
     styles: { avatar, text },
-    onCardTextClick,
+    onClose,
   }
 }
 
