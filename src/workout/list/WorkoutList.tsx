@@ -28,6 +28,7 @@ export default function WorkoutList() {
       display='grid'
       gridTemplateColumns='repeat(12, 1fr)'
       gridGap={theme.spacing(1)}
+      m={1}
     >
       {workouts.map((workout: WorkoutData, index: number) => (
         <Workout
