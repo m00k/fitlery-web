@@ -142,9 +142,16 @@ const overrides: Overrides = {
       backgroundColor: primary.dark,
       color: secondary.light,
     }
+  },
+  MuiFab: {
+    root: {
+      '&$disabled': {
+        backgroundColor: primary.main,
+        color: primary.dark,
+      }
+    }
   }
 };
-
 
 
 let theme: Theme = createMuiTheme({
