@@ -1,6 +1,7 @@
-import { Box, Fab, useTheme, makeStyles } from '@material-ui/core';
+import { Box, Fab, makeStyles, useTheme } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import React, { useState } from 'react';
+import EditText from '../shared/EditText';
 import { ExerciseData, exercises as sampleData } from './data';
 import Exercise from './Exercise';
 
@@ -35,6 +36,10 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
           onDelete={handleDelete.bind(globalThis, i)}
         />
       )}
+      {isAdd && <EditText
+        value='New Exercise'
+        onClose={() => setIsAdd(false)}
+      />}
       <Fab
         color='secondary'
         disabled={isAdd}

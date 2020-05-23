@@ -150,6 +150,12 @@ const overrides: Overrides = {
         color: primary.dark,
       }
     }
+  },
+  MuiInputBase: {
+    root: {
+      color: primary.main, // TODO: from default theme
+      fontSize: '1.5rem', // TODO: from default theme
+    }
   }
 };
 
