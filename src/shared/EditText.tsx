@@ -1,4 +1,4 @@
-import { IconButton, makeStyles, TextField } from '@material-ui/core';
+import { ClickAwayListener, IconButton, makeStyles, TextField } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import DoneIcon from '@material-ui/icons/Done';
@@ -38,28 +38,32 @@ export default function EditText(props: EditTextProps) {
   const { defaultValue, onClose } = props;
   const theme = useTheme();
   const classes = useStyles(theme);
-  const [ value, setValue ] = useState(defaultValue);
+  const [value, setValue] = useState(defaultValue);
   const handleClose = () => onClose && onClose(value);
 
   return (
-    <Box
-      className={classes.root}
+    <ClickAwayListener
+      onClickAway={handleClose}
     >
-      <TextField
-        className={classes.inner}
-        defaultValue={defaultValue}
-        onChange={event => setValue(event.target.value)}
+      <Box
+        className={classes.root}
       >
-        {value}
-      </TextField>
-      <IconButton
-        className={classes.action}
-        onClick={handleClose}
-      >
-        <DoneIcon
-          color='primary'
-        />
-      </IconButton>
-    </Box>
+        <TextField
+          className={classes.inner}
+          defaultValue={defaultValue}
+          onChange={event => setValue(event.target.value)}
+        >
+          {value}
+        </TextField>
+        <IconButton
+          className={classes.action}
+          onClick={handleClose}
+        >
+          <DoneIcon
+            color='primary'
+          />
+        </IconButton>
+      </Box>
+    </ClickAwayListener>
   );
 }
