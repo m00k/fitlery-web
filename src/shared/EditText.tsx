@@ -2,7 +2,7 @@ import { ClickAwayListener, IconButton, makeStyles, TextField } from '@material-
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import DoneIcon from '@material-ui/icons/Done';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,14 +32,15 @@ export interface EditTextProps {
   onClose?: (value: string) => void;
 }
 
-
-// TODO: click away listener
 export default function EditText(props: EditTextProps) {
   const { defaultValue, onClose } = props;
   const theme = useTheme();
   const classes = useStyles(theme);
   const [value, setValue] = useState(defaultValue);
+  const error = !value;
   const handleClose = () => onClose && onClose(value);
+  const inputRef = React.createRef<HTMLInputElement>();
+  useEffect(() => { inputRef.current && inputRef.current.focus(); }); // TODO: forward ref, give control to parent
 
   return (
     <ClickAwayListener
@@ -49,6 +50,8 @@ export default function EditText(props: EditTextProps) {
         className={classes.root}
       >
         <TextField
+          error={error}
+          inputRef={inputRef}
           className={classes.inner}
           defaultValue={defaultValue}
           onChange={event => setValue(event.target.value)}
@@ -57,6 +60,7 @@ export default function EditText(props: EditTextProps) {
         </TextField>
         <IconButton
           className={classes.action}
+          disabled={error}
           onClick={handleClose}
         >
           <DoneIcon
