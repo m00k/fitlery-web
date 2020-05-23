@@ -1,6 +1,7 @@
-import { makeStyles } from '@material-ui/core';
+import { IconButton, makeStyles, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import DragHandleIcon from '@material-ui/icons/DragHandle';
 import React from 'react';
 import { ExerciseData } from './data';
@@ -14,13 +15,13 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 1,
     color: theme.palette.primary.main,
     display: 'grid',
-    gridTemplateColumns: `${theme.spacing(4)}px auto`,
+    gridTemplateColumns: `${theme.spacing(4)}px auto min-content`,
     height: theme.variables.playlist.item.height,
     marginBottom: theme.spacing(.3),
   },
   inner: {
-    fontSize: theme.typography.h4.fontSize,
-    padding: theme.spacing(1),
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
   },
   drag: {
     backgroundColor: theme.palette.primary.main,
@@ -32,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'grab',
     }
   },
+  action: {
+    height: '100%',
+  }
 }));
 
 export interface ExerciseProps {
@@ -52,11 +56,19 @@ export default function Exercise(props: ExerciseProps) {
       <DragHandleIcon
         className={classes.drag}
       />
-      <span
+      <Typography
+        variant='h4'
         className={classes.inner}
       >
         {exercise.name}
-      </span>
+      </Typography>
+      <IconButton
+        className={classes.action}
+      >
+        <DeleteOutlineIcon
+          color='primary'
+        />
+      </IconButton>
     </Box>
   );
 }
