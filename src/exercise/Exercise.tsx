@@ -1,33 +1,38 @@
-import Box, { BoxProps } from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
+import DragHandleIcon from '@material-ui/icons/DragHandle';
 import React from 'react';
 import { ExerciseData } from './data';
 
-// TODO: duplicate of play list item
-const useStyles = () => {
-  const theme = useTheme();
-  const root: BoxProps = {
+
+const useStyles = makeStyles((theme) => ({
+  root: {
     alignItems: 'center',
-    bgcolor: theme.palette.background.paper,
-    boxShadow: 2,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[2],
     borderRadius: 1,
-    borderLeft: theme.spacing(3),
-    borderColor: theme.palette.primary.main,
     color: theme.palette.primary.main,
-    display: 'flex',
+    display: 'grid',
+    gridTemplateColumns: `${theme.spacing(4)}px auto`,
     height: theme.variables.playlist.item.height,
-    mb: 1/3,
-    p: 1,
-    flex: '1',
-  };
-  const inner: React.CSSProperties = {
-    fontSize: '1.5rem',
-  };
-  return {
-    root,
-    inner,
-  }
-}
+    marginBottom: theme.spacing(.3),
+  },
+  inner: {
+    fontSize: theme.typography.h4.fontSize,
+    padding: theme.spacing(1),
+  },
+  drag: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    height: '100%',
+    padding: theme.spacing(1),
+    width: '100%',
+    '&:hover': {
+      cursor: 'grab',
+    }
+  },
+}));
 
 export interface ExerciseProps {
   exercise: ExerciseData;
@@ -36,15 +41,19 @@ export interface ExerciseProps {
 
 export default function Exercise(props: ExerciseProps) {
   const { exercise, onClick } = props;
-  const { root, inner } = useStyles();
+  const theme = useTheme();
+  const classes = useStyles(theme);
 
   return (
     <Box
-      {...root}
+      className={classes.root}
       onClick={onClick}
     >
+      <DragHandleIcon
+        className={classes.drag}
+      />
       <span
-        style={{...inner}}
+        className={classes.inner}
       >
         {exercise.name}
       </span>
