@@ -40,18 +40,17 @@ const useStyles = makeStyles((theme) => ({
 
 export interface ExerciseProps {
   exercise: ExerciseData;
-  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void | undefined;
+  onDelete: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void | undefined;
 }
 
 export default function Exercise(props: ExerciseProps) {
-  const { exercise, onClick } = props;
+  const { exercise, onDelete } = props;
   const theme = useTheme();
   const classes = useStyles(theme);
 
   return (
     <Box
       className={classes.root}
-      onClick={onClick}
     >
       <DragHandleIcon
         className={classes.drag}
@@ -64,6 +63,7 @@ export default function Exercise(props: ExerciseProps) {
       </Typography>
       <IconButton
         className={classes.action}
+        onClick={onDelete}
       >
         <DeleteOutlineIcon
           color='primary'

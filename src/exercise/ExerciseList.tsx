@@ -3,8 +3,14 @@ import React from 'react';
 import { exercises as sampleData, ExerciseData } from './data';
 import Exercise from './Exercise';
 
-export default function ExerciseList(props: any) {
-  const { exercises=sampleData } = props;
+export interface ExerciseListProps {
+  exercises: ExerciseData[];
+  onDelete?: (exercises: ExerciseData[]) => void;
+}
+
+const ExerciseList: React.FC<ExerciseListProps> = (props) => {
+  const { exercises=sampleData, onDelete } = props; // TODO: remove sampleData
+  const handleDelete = (index: number) => onDelete && onDelete([...exercises.slice(0, index), ...exercises.slice(index + 1)]);
 
   return (
     <Box>
@@ -12,9 +18,11 @@ export default function ExerciseList(props: any) {
         <Exercise
           key={exercise.name}
           exercise={exercise}
-          onClick={() => console.log('#####################', 'TODO', exercise.name)}
+          onDelete={handleDelete.bind(globalThis, i)}
         />
       )}
     </Box>
   );
 }
+
+export default ExerciseList;

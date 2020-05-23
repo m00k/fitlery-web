@@ -10,6 +10,7 @@ import CardText, { CardTextProps } from '../../shared/CardText';
 import { useWorkoutStore } from '../store';
 import { WorkoutData } from '../store/state';
 import Duration from './Duration';
+import { ExerciseData } from '../../exercise/data';
 
 const buildCardTextProps = (workout: WorkoutData): CardTextProps => {
   const { title, description } = workout;
@@ -57,9 +58,11 @@ export default function WorkoutDetail() {
   const cardTextProps = buildCardTextProps(workout);
   const handleClose = () => history.push('/');
   
-  const { short, exercises, breakMs, workMs } = workout;
   const handleSetBreakMs = (breakSec: number) => workoutDispatch.update({ ...workout, breakMs: breakSec * 1000 });
   const handleSetWorkMs = (workSec: number) => workoutDispatch.update({ ...workout, workMs: workSec * 1000});
+  const handleDelete = (exercises: ExerciseData[]) => workoutDispatch.update({ ...workout, exercises });
+  
+  const { short, exercises, breakMs, workMs } = workout;
 
   // TODO: edit exercises
   // TODO: edit exercises order drag/drop
@@ -103,6 +106,7 @@ export default function WorkoutDetail() {
       />
       <ExerciseList
         exercises={exercises}
+        onDelete={handleDelete}
       />
     </Box>
   );
