@@ -19,13 +19,18 @@ const useStyles = makeStyles(() => {
 export interface ExerciseListProps {
   exercises: ExerciseData[];
   onDelete?: (exercises: ExerciseData[]) => void;
+  onAdd?: (exercise: ExerciseData) => void;
 }
 
 const ExerciseList: React.FC<ExerciseListProps> = (props) => {
-  const { exercises=sampleData, onDelete } = props; // TODO: remove sampleData
+  const { exercises=sampleData, onAdd, onDelete } = props; // TODO: remove sampleData
   const handleDelete = (index: number) => onDelete && onDelete([...exercises.slice(0, index), ...exercises.slice(index + 1)]);
   const [ isAdd, setIsAdd ] = useState(false);
   const classes = useStyles();
+  const handleAdd = (name: string) => {
+    setIsAdd(false);
+    onAdd && onAdd({ name });
+  };
 
   return (
     <Box>
@@ -37,8 +42,8 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
         />
       )}
       {isAdd && <EditText
-        value='New Exercise'
-        onClose={() => setIsAdd(false)}
+        defaultValue='New Exercise'
+        onClose={handleAdd}
       />}
       <Fab
         color='secondary'

@@ -2,7 +2,7 @@ import { IconButton, makeStyles, TextField } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import DoneIcon from '@material-ui/icons/Done';
-import React from 'react';
+import React, { useState } from 'react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,16 +28,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export interface EditTextProps {
-  value: string;
+  defaultValue: string;
   onClose?: (value: string) => void;
 }
 
 
 // TODO: click away listener
 export default function EditText(props: EditTextProps) {
-  const { value, onClose } = props;
+  const { defaultValue, onClose } = props;
   const theme = useTheme();
   const classes = useStyles(theme);
+  const [ value, setValue ] = useState(defaultValue);
   const handleClose = () => onClose && onClose(value);
 
   return (
@@ -46,7 +47,8 @@ export default function EditText(props: EditTextProps) {
     >
       <TextField
         className={classes.inner}
-        defaultValue='New Exercise'
+        defaultValue={defaultValue}
+        onChange={event => setValue(event.target.value)}
       >
         {value}
       </TextField>

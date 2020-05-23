@@ -60,7 +60,8 @@ export default function WorkoutDetail() {
   
   const handleSetBreakMs = (breakSec: number) => workoutDispatch.update({ ...workout, breakMs: breakSec * 1000 });
   const handleSetWorkMs = (workSec: number) => workoutDispatch.update({ ...workout, workMs: workSec * 1000});
-  const handleDelete = (exercises: ExerciseData[]) => workoutDispatch.update({ ...workout, exercises });
+  const handleAddExercise = (exercise: ExerciseData) => workoutDispatch.update({ ...workout, exercises: [...workout.exercises, exercise] });
+  const handleDeleteExercise = (exercises: ExerciseData[]) => workoutDispatch.update({ ...workout, exercises });
   
   const { short, exercises, breakMs, workMs } = workout;
 
@@ -106,7 +107,8 @@ export default function WorkoutDetail() {
       />
       <ExerciseList
         exercises={exercises}
-        onDelete={handleDelete}
+        onAdd={handleAddExercise}
+        onDelete={handleDeleteExercise}
       />
     </Box>
   );
