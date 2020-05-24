@@ -1,5 +1,3 @@
-import { IconButton } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
 import React, { ReactNode } from 'react';
 import Countdown from '../countdown/Countdown';
 import PieCountdown, { PieCountdownProps } from '../countdown/PieCountdown';
@@ -21,58 +19,79 @@ export interface BannerProps {
   onClose: () => void;
 }
 
-const buildPieCountdownProps = ({ currentItem, msLeft, msTotal }: BannerProps): PieCountdownProps => {
+export interface PlayerHeaderProps {
+  description: string;
+  short: string;
+  title: string;
+}
+
+const PlayerHeader: React.FC<PlayerHeaderProps> = (props) => {
+  const { description, short, title  } = props;
+  return (
+    <>
+      <Avatar
+        text={short}
+        gridArea='avatar'
+      />
+      <CardText
+        description={description}
+        gridArea='text'
+        title={title}
+      >
+      </CardText>
+    </>
+  );
+}
+
+const buildCountdownHeaderProps = ({ currentItem, msLeft, msTotal }: Pick<BannerProps, 'currentItem' | 'msLeft' | 'msTotal'>): CountdownHeaderProps => {
   const fractionDone = 1 - msLeft / msTotal;
   const isBreak = isBreakItem(currentItem);
   const text = isBreak ? 'Ready' : 'Go!';
   return {
     fractionDone,
     invertColors: isBreak,
-    text
+    msLeft,
+    text,
   };
 }
 
-const buildCardTextProps = (props: BannerProps) => {
-  const { title, description } = props;
-  return {
-    title,
-    description,
-    gridArea: 'text',
-  };
+export interface CountdownHeaderProps extends PieCountdownProps {
+  msLeft: number;
 }
 
-const Banner: React.FC<BannerProps> = (props) => {
-  const { short, playState, msLeft, onClose } = props;
-  const countdownProps = buildPieCountdownProps( props );
-  const cardTextProps = buildCardTextProps(props);
-
-  return playState === 'stopped'
-    ? (<>
-      <Avatar
-        text={short}
-        gridArea='avatar'
-      />
-      <CardText
-        {...cardTextProps}
-      >
-        <IconButton
-          color='secondary'
-          onClick={onClose}
-        >
-          <CloseIcon />
-        </IconButton>
-      </CardText>
-    </>)
-    : (<>
+const CountdownHeader: React.FC<CountdownHeaderProps> = (props) => {
+  const { msLeft } = props;
+  return (
+    <>
       <PieCountdown
-        {...countdownProps}
+        {...props}
         gridArea='avatar'
       />
       <Countdown
         msLeft={msLeft}
         gridArea='text'
       />
-    </>);
+    </>
+  );
+}
+
+const Banner: React.FC<BannerProps> = (props) => {
+  const { description, playState, short, title } = props;
+  const countdownHeaderProps = buildCountdownHeaderProps( props );
+
+  return playState === 'stopped'
+    ? (
+      <PlayerHeader
+        description={description}
+        short={short}
+        title={title}
+      />
+    )
+    : (
+      <CountdownHeader
+        {...countdownHeaderProps}
+      />
+    );
 };
 
 
