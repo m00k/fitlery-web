@@ -14,9 +14,9 @@ const Main = ({ children }: any) => {
       left={0}
       justifyItems='center'
       justifyContent='stretch'
-      right={0}
       overflow='auto'
       position='fixed'
+      right={0}
       top={navHeight}
     >
       <Box

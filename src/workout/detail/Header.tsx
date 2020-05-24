@@ -1,50 +1,10 @@
-import { Box, useTheme, IconButton } from '@material-ui/core';
-import React, { PropsWithChildren } from 'react';
+import { Box, useTheme } from '@material-ui/core';
+import React from 'react';
 import Avatar from '../../shared/Avatar';
-import CardText, { CardTextProps } from '../../shared/card/CardText';
-import CloseIcon from '@material-ui/icons/Close';
+import CardText from '../../shared/card/CardText';
 import { WorkoutData } from '../store';
+import HeaderAction from './HeaderAction';
 
-const CardActionSecondary: React.FC<{onClick: () => void}> = ({ onClick }) => {
-  return (
-    <IconButton
-      color="secondary"
-      onClick={onClick}
-    >
-      <CloseIcon />
-    </IconButton>
-  );
-}
-
-const Layout: React.FC = ({ children }: PropsWithChildren<{}>) => {
-  const theme = useTheme();
-  return <Box
-    display="grid"
-    gridTemplateAreas='"avatar text"'
-    gridTemplateColumns={`${theme.variables.avatar.height}px auto`}
-    mb={.3}
-  >
-    {children}
-  </Box>
-}
-
-const buildCardTextProps = (workout: WorkoutData): CardTextProps => {
-  const { title, description } = workout;
-  return {
-    title,
-    description,
-    style: {
-      gridArea: "text",
-      whiteSpace: "normal",
-    }
-  };
-}
-
-const useStyles = () => ({
-  avatar: {
-    gridArea: "avatar",
-  }
-})
 
 export interface HeaderProps {
   workout: WorkoutData;
@@ -53,24 +13,30 @@ export interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = (props) => {
   const { workout, onClose } = props;
-  const { short } = workout;
-  const cardTextProps = buildCardTextProps(workout);
+  const { description, short, title  } = workout;
   const handleClose = () => onClose && onClose();
-  const styles = useStyles();
+  const theme = useTheme();
   return (
-    <Layout>
+    <Box
+      display="grid"
+      gridTemplateAreas='"avatar text"'
+      gridTemplateColumns={`${theme.variables.avatar.height}px auto`}
+      mb={.3}
+    >
       <Avatar
         text={short}
-        style={styles.avatar}
+        gridArea='avatar'
       />
       <CardText
-        {...cardTextProps}
+        description={description}
+        title={title}
+        gridArea='text'
       >
-        <CardActionSecondary
-          onClick={handleClose}
+        <HeaderAction
+          onClose={handleClose}
         />
       </CardText>
-    </Layout>
+    </Box>
   );
 };
 
