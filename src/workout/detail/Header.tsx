@@ -1,7 +1,7 @@
 import { Box, useTheme, IconButton } from '@material-ui/core';
 import React, { PropsWithChildren } from 'react';
 import Avatar from '../../shared/Avatar';
-import CardText, { CardTextProps } from '../../shared/CardText';
+import CardText, { CardTextProps } from '../../shared/card/CardText';
 import CloseIcon from '@material-ui/icons/Close';
 import { WorkoutData } from '../store';
 

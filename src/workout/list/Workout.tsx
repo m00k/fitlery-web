@@ -1,7 +1,7 @@
 import React from 'react';
 import Avatar from '../../shared/Avatar';
-import Card from '../../shared/Card';
-import CardText from '../../shared/CardText';
+import Card from '../../shared/card/Card';
+import CardText from '../../shared/card/CardText';
 import { WorkoutData } from '../store/state';
 import ContextMenu, { ContextMenuOption } from './ContextMenu';
 

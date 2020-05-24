@@ -6,7 +6,7 @@ import PieCountdown, { PieCountdownProps } from '../countdown/PieCountdown';
 import { isBreakItem } from "../playlist/PlaylistItem";
 import { PlaylistItemData } from "../playlist/store";
 import Avatar from '../shared/Avatar';
-import CardText from '../shared/CardText';
+import CardText from '../shared/card/CardText';
 import { PlayState } from "./store/";
 
 export interface BannerProps {
