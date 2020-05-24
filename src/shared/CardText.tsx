@@ -17,8 +17,8 @@ const useRootProps = (rootProps: BoxProps): BoxProps => {
       "title title title title ."
       "desc desc desc desc desc"
     `,
-    gridTemplateColumns:'repeat(5, 1fr)',
-    p: 1,
+    gridTemplateColumns: 'repeat(5, 1fr)',
+    p: 2,
     position: 'relative', // accomodate for absolute positioning of
     ...rootProps,
   };
@@ -40,7 +40,6 @@ const CardText: React.FC<CardTextProps> = ({ children, title, description, ...ro
         {title}
       </CardTitle>
       <CardDescription
-        noWrap
       >
         {description}
       </CardDescription>

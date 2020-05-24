@@ -1,14 +1,16 @@
-import Box from '@material-ui/core/Box';
-import useTheme from '@material-ui/core/styles/useTheme';
-import React, { PropsWithChildren } from 'react';
+import Box, { BoxProps } from '@material-ui/core/Box';
+import React from 'react';
 
-const CardTextAction: React.FC<PropsWithChildren<any>> = ({ children }) => {
-  const theme = useTheme();
+export interface CardTextActionProps extends BoxProps { }
+
+const CardTextAction: React.FC<CardTextActionProps> = ({ children, ...rootProps }) => {
   return (
     <Box
+      data-testid='card-action'
       position='absolute'
+      right={0}
       top={0}
-      right={-theme.spacing(1)}
+      {...rootProps}
     >
       {children}
     </Box>

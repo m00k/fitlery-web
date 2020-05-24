@@ -1,17 +1,26 @@
-import Box from '@material-ui/core/Box';
+import Box, { BoxProps } from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 
-const CardTitle: React.FC<PropsWithChildren<any>> = ({ children }) => {
+export interface CardTitleProps extends BoxProps { }
+
+const CardTitle: React.FC<CardTitleProps> = ({ children, ...rootProps }) => {
   return (
     <Box
       data-testid='card-title'
       gridArea={'title'}
+      height='2em'
       minWidth={0}
+      overflow='hidden'
+      textOverflow='ellipsis'
+      {...rootProps}
     >
       <Typography
         variant='subtitle1'
-        noWrap
+        style={{
+          overflow: 'inherit',
+          textOverflow: 'inherit',
+        }}
       >
         {children}
       </Typography>
