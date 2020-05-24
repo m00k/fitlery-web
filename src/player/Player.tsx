@@ -3,14 +3,14 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Playlist from '../playlist/Playlist';
 import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
-import Banner, { BannerProps } from './Banner';
+import Header, { HeaderProps } from './Header';
 import Controls from './Controls';
 import { PlayerActionType } from './store';
 import { useLayout } from './useLayout';
 import usePlayerPageStore, { PlayerPageState } from './usePlayerPageStore';
 
 
-const buildBannerProps = (state: PlayerPageState, onClose: () => void): BannerProps => {
+const buildBannerProps = (state: PlayerPageState, onClose: () => void): HeaderProps => {
   const { countdownState, playlistState, playerState } = state;
   const { currentItemIndex, items } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
@@ -52,10 +52,10 @@ const Player = () => {
       data-testid='player'
       style={styles.root}
     >
-      <Banner
+      <Header
         {...bannerProps}
       >
-      </Banner>
+      </Header>
       <Controls
         gridArea='controls'
         playState={playState}
