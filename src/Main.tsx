@@ -1,6 +1,6 @@
-import Box from "@material-ui/core/Box";
-import useTheme from "@material-ui/core/styles/useTheme";
-import React from "react";
+import Box from '@material-ui/core/Box';
+import useTheme from '@material-ui/core/styles/useTheme';
+import React from 'react';
 
 const Main = ({ children }: any) => {
   const theme = useTheme();
@@ -8,18 +8,20 @@ const Main = ({ children }: any) => {
 
   return (
     <Box
+      data-testid='main'
       bottom={navHeight}
-      display="grid"
+      display='grid'
       left={0}
-      justifyItems="center"
-      justifyContent="stretch"
+      justifyItems='center'
+      justifyContent='stretch'
       right={0}
-      overflow="auto"
-      position="fixed"
+      overflow='auto'
+      position='fixed'
       top={navHeight}
     >
       <Box
         maxWidth={theme.breakpoints.values.lg}
+        position='relative'
         width={1}
       >
         {children}

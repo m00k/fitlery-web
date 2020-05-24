@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { isBreakItem } from "../playlist/PlaylistItem";
 import { PlaylistItemData } from "../playlist/store";
 import CountdownHeader, { CountdownHeaderProps } from './CountdownHeader';
+import HeaderAction from './HeaderAction';
 import PlayerHeader from './PlayerHeader';
 import { PlayState } from "./store";
 
@@ -30,9 +31,9 @@ const buildCountdownHeaderProps = ({ currentItem, msLeft, msTotal }: Pick<Header
 }
 
 const Header: React.FC<HeaderProps> = (props) => {
-  const { description, playState, short, title } = props;
+  const { description, playState, short, title, onClose } = props;
   const countdownHeaderProps = buildCountdownHeaderProps( props );
-  return playState === 'stopped'
+  const HeaderImpl = playState === 'stopped'
     ? (
       <PlayerHeader
         description={description}
@@ -45,6 +46,14 @@ const Header: React.FC<HeaderProps> = (props) => {
         {...countdownHeaderProps}
       />
     );
+  return (
+    <>
+      {HeaderImpl}
+      <HeaderAction
+        onClose={onClose}
+      />
+    </>
+  );
 };
 
 
