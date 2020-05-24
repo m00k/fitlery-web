@@ -1,4 +1,4 @@
-import { Box, useTheme } from '@material-ui/core';
+import { Box, useTheme, BoxProps } from '@material-ui/core';
 import React from 'react';
 import Avatar from '../../shared/Avatar';
 import CardText from '../../shared/card/CardText';
@@ -6,13 +6,12 @@ import { WorkoutData } from '../store';
 import HeaderAction from './HeaderAction';
 
 
-export interface HeaderProps {
+export interface HeaderProps extends BoxProps {
   workout: WorkoutData;
   onClose?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = (props) => {
-  const { workout, onClose } = props;
+const Header: React.FC<HeaderProps> = ({ workout, onClose, ...rootProps }) => {  
   const { description, short, title  } = workout;
   const handleClose = () => onClose && onClose();
   const theme = useTheme();
@@ -22,6 +21,7 @@ const Header: React.FC<HeaderProps> = (props) => {
       gridTemplateAreas='"avatar text"'
       gridTemplateColumns={`${theme.variables.avatar.height}px auto`}
       mb={.3}
+      {...rootProps}
     >
       <Avatar
         text={short}
