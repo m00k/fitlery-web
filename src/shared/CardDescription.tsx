@@ -2,7 +2,11 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import React, { PropsWithChildren } from 'react';
 
-const CardDescription: React.FC<PropsWithChildren<any>> = ({ children }) => {
+export interface CardDescriptionProps extends PropsWithChildren<any> {
+  noWrap?: boolean;
+}
+
+const CardDescription: React.FC<CardDescriptionProps> = ({ children, noWrap }) => {
   return (
     <Box
       gridArea={'desc'}
@@ -11,7 +15,7 @@ const CardDescription: React.FC<PropsWithChildren<any>> = ({ children }) => {
       <Typography
         variant='caption'
         component='p'
-        noWrap
+        noWrap={noWrap}
       >
         {children}
       </Typography>

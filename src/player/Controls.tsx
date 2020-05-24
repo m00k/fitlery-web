@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@material-ui/core';
+import { Box, BoxProps, IconButton } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
@@ -30,33 +30,30 @@ const Pause = withIconButton(<PauseIcon style={{ fontSize: '4rem' }} />);
 const Prev = withIconButton(<SkipPreviousIcon style={{ fontSize: '2.5rem' }} />);
 const Next = withIconButton(<SkipNextIcon style={{ fontSize: '2.5rem' }} />);
 
-const useBoxStyles = () => {
+const useProps = (rootProps: BoxProps) => {
   const theme = useTheme();
   return {
-      alignItems: 'center',
-      display: 'grid',
-      justifyContent: 'center',
-      gridTemplateColumns: '1fr 2fr 1fr',
-      minHeight: 80,
-      bgcolor: theme.palette.background.paper,
+    alignItems: 'center',
+    display: 'grid',
+    justifyContent: 'center',
+    gridTemplateColumns: '1fr 2fr 1fr',
+    minHeight: 80,
+    bgcolor: theme.palette.background.paper,
+    ...rootProps,
   };
 }
 
-interface ControlsProps {
-  style: React.CSSProperties; // TODO: there has to be a better way
+export interface ControlsProps extends Omit<BoxProps, 'onClick'> {
   playState: PlayState;
   onClick: (p: PlayerActionType) => void
 }
 
-const Controls = (props: ControlsProps) => {
-  const { playState, onClick, style } = props;
-
+const Controls: React.FC<ControlsProps> = ({ playState, onClick, ...rootProps }) => {
   return (
     <Box
-      {...useBoxStyles()}
-      style={style}
+      {...useProps(rootProps)}
     >
-      <Prev onClick={() => onClick('prev')}/>
+      <Prev onClick={() => onClick('prev')} />
       {
         playState !== 'playing'
           ? <Play onClick={() => onClick('play')} />

@@ -3,21 +3,20 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Playlist from '../playlist/Playlist';
 import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
-import Banner, { BannerProps, BannerStyles } from './Banner';
+import Banner, { BannerProps } from './Banner';
 import Controls from './Controls';
 import { PlayerActionType } from './store';
 import { useLayout } from './useLayout';
 import usePlayerPageStore, { PlayerPageState } from './usePlayerPageStore';
 
 
-const buildBannerProps = (state: PlayerPageState, { avatar, text }: BannerStyles, history: ReturnType<typeof useHistory>): BannerProps => {
+const buildBannerProps = (state: PlayerPageState, onClose: () => void): BannerProps => {
   const { countdownState, playlistState, playerState } = state;
   const { currentItemIndex, items } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
   const { msLeft, msTotal } = countdownState;
   const { playState } = playerState;
   const { short, name: title, description } = playlistState;
-  const onClose = () => history.push(`/`);
 
   return {
     playState,
@@ -27,7 +26,6 @@ const buildBannerProps = (state: PlayerPageState, { avatar, text }: BannerStyles
     short,
     title,
     description,
-    styles: { avatar, text },
     onClose,
   }
 }
@@ -45,8 +43,8 @@ const Player = () => {
   }
   const { playerState } = state;
   const { playState } = playerState;
-  const { avatar, text } = styles;
-  const bannerProps = buildBannerProps(state, { avatar, text }, history);
+  const onClose = () => history.push(`/`);
+  const bannerProps = buildBannerProps(state, onClose);
   const handleControlsClick = (type: PlayerActionType) => dispatch[type]();
 
   return (
@@ -59,15 +57,15 @@ const Player = () => {
       >
       </Banner>
       <Controls
+        gridArea='controls'
         playState={playState}
         onClick={handleControlsClick}
-        style={styles.controls}
       />
       <PlaylistItemCurrent
-        style={styles.current}
+        gridArea='current'
       />
       <Playlist
-        style={styles.list}
+        gridArea='list'
       />
     </Box>
   );

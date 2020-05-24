@@ -43,34 +43,34 @@ function useRootStyles(theme: Theme, mq: string): React.CSSProperties {
   const listHeight = `calc(100vh - ${theme.variables.navbar.height * 2}px - ${totalHeight}px)`; // TODO: prevent <= 0 
   return {
     [upxs]: {
-      display: "grid",
+      display: 'grid',
       gridTemplateAreas: `
-        "avatar text text text text"
-        "controls controls controls controls controls"
-        "current current current current current"
-        "list list list list list"
+        'avatar text text text text'
+        'controls controls controls controls controls'
+        'current current current current current'
+        'list list list list list'
       `,
       gridTemplateColumns: `${textHeight}px repeat(4, 1fr)`,
       gridTemplateRows: `${textHeight}px ${controlsHeight}px ${currentHeight}px ${listHeight}`,
     },
     [upsm]: {
-      display: "grid",
+      display: 'grid',
       gridTemplateAreas: `
-        "avatar avatar text text text"
-        "avatar avatar controls controls controls"
-        "current current current current current"
-        "list list list list list"
+        'avatar avatar text text text'
+        'avatar avatar controls controls controls'
+        'current current current current current'
+        'list list list list list'
       `,
       gridTemplateColumns: `repeat(2, ${(textHeight + controlsHeight) / 2}px) repeat(3, 1fr)`,
       gridTemplateRows: `${textHeight}px ${controlsHeight}px ${currentHeight}px ${listHeight}`,
     },
     [upmd]: {
-      display: "grid",
+      display: 'grid',
       gridTemplateAreas: `
-        "avatar avatar avatar text text"
-        "avatar avatar avatar controls controls"
-        "avatar avatar avatar current current"
-        "list list list list list"
+        'avatar avatar avatar text text'
+        'avatar avatar avatar controls controls'
+        'avatar avatar avatar current current'
+        'list list list list list'
       `,
       gridTemplateColumns: `repeat(3, ${totalHeight / 3}px) repeat(2, 1fr)`,
       gridTemplateRows: `${textHeight}px ${controlsHeight}px ${currentHeight}px ${listHeight}`,
@@ -82,28 +82,8 @@ export const useLayout = (): {[key: string]: React.CSSProperties} => {
   const theme = useTheme();
   const mq = useActiveMediaQuery(theme);
   const root = useRootStyles(theme, mq);
-  const avatar = {
-    gridArea: "avatar",
-  };
-  const text = {
-    gridArea: "text",
-  };
-  const current = {
-    gridArea: "current",
-  };
-  const controls = {
-    gridArea: "controls",
-  };
-  const list = {
-    gridArea: "list",
-  };
   const styles = {
-    avatar,
-    controls,
-    current,
-    list,
     root,
-    text,
   };
 
   return styles;

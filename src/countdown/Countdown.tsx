@@ -1,16 +1,14 @@
-import { Box } from '@material-ui/core';
+import { Box, BoxProps } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React, { FunctionComponent } from 'react';
 import time from './time-utils';
 
 
-interface Props {
+export interface CountdownProps extends BoxProps {
   msLeft: number;
-  style: React.CSSProperties;
 }
 
-const Countdown: FunctionComponent<Props> = ({ style, ...props }) => {
-  const { msLeft } = props
+const Countdown: FunctionComponent<CountdownProps> = ({ msLeft, ...rootProps }) => {
   const theme = useTheme();
   
   return (
@@ -22,7 +20,7 @@ const Countdown: FunctionComponent<Props> = ({ style, ...props }) => {
       fontWeight={theme.typography.fontWeightBold}
       fontSize="3rem"
       justifyContent="center"
-      style={style}
+      {...rootProps}
     >
       {time.toTimeString(msLeft)}
     </Box>

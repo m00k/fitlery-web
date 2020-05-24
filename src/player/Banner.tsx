@@ -18,50 +18,48 @@ export interface BannerProps {
   msTotal: number;
   children?: ReactNode;
   currentItem: PlaylistItemData;
-  styles: BannerStyles;
   onClose: () => void;
 }
 
-export interface BannerStyles {
-  avatar: React.CSSProperties;
-  text: React.CSSProperties;
-}
-
-const buildPieCountdownProps = ({ currentItem, msLeft, msTotal, styles }: BannerProps): PieCountdownProps => {
+const buildPieCountdownProps = ({ currentItem, msLeft, msTotal }: BannerProps): PieCountdownProps => {
   const fractionDone = 1 - msLeft / msTotal;
   const isBreak = isBreakItem(currentItem);
   const text = isBreak ? 'Ready' : 'Go!';
-  return { fractionDone, invertColors: isBreak, text, style: styles.avatar };
+  return {
+    fractionDone,
+    invertColors: isBreak,
+    text
+  };
 }
 
-const buildCardTextProps = ({ styles, ...props }: BannerProps) => {
+const buildCardTextProps = (props: BannerProps) => {
   const { title, description } = props;
   return {
     title,
     description,
     style: {
-      ...styles.text,
-      whiteSpace: "normal"
+      gridArea: 'text', // TODO
+      whiteSpace: 'normal',
     } as React.CSSProperties // https://material-ui.com/guides/typescript/#using-createstyles-to-defeat-type-widening
   };
 }
 
-const Banner: React.FC<BannerProps> = ({ styles, ...props }: BannerProps) => {
+const Banner: React.FC<BannerProps> = (props) => {
   const { short, playState, msLeft, onClose } = props;
-  const countdownProps = buildPieCountdownProps({ ...props, styles });
-  const cardTextProps = buildCardTextProps({ styles, ...props });
+  const countdownProps = buildPieCountdownProps( props );
+  const cardTextProps = buildCardTextProps(props);
 
   return playState === 'stopped'
     ? (<>
       <Avatar
         text={short}
-        style={styles.avatar}
+        gridArea='avatar'
       />
       <CardText
         {...cardTextProps}
       >
         <IconButton
-          color="secondary"
+          color='secondary'
           onClick={onClose}
         >
           <CloseIcon />
@@ -71,10 +69,11 @@ const Banner: React.FC<BannerProps> = ({ styles, ...props }: BannerProps) => {
     : (<>
       <PieCountdown
         {...countdownProps}
+        gridArea='avatar'
       />
       <Countdown
         msLeft={msLeft}
-        style={styles.text}
+        gridArea='text'
       />
     </>);
 };

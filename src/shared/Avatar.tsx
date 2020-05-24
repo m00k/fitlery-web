@@ -2,17 +2,17 @@ import Box, { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 
-export interface AvatarProps {
+export interface AvatarProps extends BoxProps {
   text: string;
-  style?: React.CSSProperties;
 }
 
-const useStyles = () => {
+const useProps = (props: BoxProps) => {
   const theme = useTheme();
   const root: BoxProps = {
     bgcolor: theme.palette.primary.main,
     display: 'grid',
     p: 1,
+    ...props,
   };
   const inner: BoxProps = {
     bgcolor: theme.palette.background.paper,
@@ -21,15 +21,14 @@ const useStyles = () => {
   return { root, inner };
 }
 
-const Avatar: React.FC<AvatarProps> = ({style, ...props}) => {
-  const { text } = props;
-  const { root, inner } = useStyles();
+const Avatar: React.FC<AvatarProps> = ({ text, ...props }) => {
+  const { root, inner } = useProps(props);
   const VIEWBOX_SIZE = 100;
 
   return (
     <Box
+      data-testid='avatar'
       {...root}
-      style={style}
     >
       <svg
         width="100%"

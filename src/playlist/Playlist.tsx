@@ -1,4 +1,4 @@
-import { Box } from '@material-ui/core';
+import { Box, BoxProps } from '@material-ui/core';
 import React from 'react';
 import usePlayerPageStore from '../player/usePlayerPageStore';
 import PlaylistItem, { isBreakItem } from './PlaylistItem';
@@ -21,18 +21,19 @@ const useStoreData = () => {
       ...items.slice(currentItemIndexOrZero + 2),
      ]
     .filter(item => !isBreakItem(item)); // filter out break items, naturally removing the unwanted, highlighted break item
-
   return { taggedItems, dispatch };
 }
 
-const Playlist = (props: any) => {
+export interface PlaylistProps extends BoxProps {
+  
+}
+
+const Playlist: React.FC<PlaylistProps> = (rootProps) => {
   const { taggedItems, dispatch } = useStoreData();
   return (
     <Box
-      overflow="auto"
-      style={{
-        ...props.style
-      }}
+      overflow='auto'
+      {...rootProps}
     >
       {taggedItems.map((item, i) =>
         <PlaylistItem

@@ -45,7 +45,9 @@ const CardText: React.FC<CardTextProps> = ({ style, children, ...props }) => {
       <CardTitle>
         {title}
       </CardTitle>
-      <CardDescription>
+      <CardDescription
+        noWrap
+      >
         {description}
       </CardDescription>
       <CardTextAction>

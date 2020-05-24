@@ -10,20 +10,20 @@ const useInnerStyles = () => {
   const { currentItemIndex, items } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
   const fontSize = isBreakItem(currentItem)
-    ? "2rem"
-    : "3rem";
+    ? '2rem'
+    : '3rem';
   const text = currentItemIndex === NOT_FOUND
     ? 'get ready'
     : currentItem.name;
   const style: React.CSSProperties = {
-    textAlign: "center",
-    textTransform: "uppercase",
+    textAlign: 'center',
+    textTransform: 'uppercase',
     fontSize,
   };
   return {style, text};
 }
 
-const useRootStyles = () => {
+const useRootStyles = (rootProps: BoxProps) => {
   const theme = useTheme();
   const bgcolor = theme.palette.primary.light; // main;
   const color = theme.palette.background.paper;
@@ -36,26 +36,31 @@ const useRootStyles = () => {
     pr: 1,
     boxShadow: 4,
     width: 1,
+    ...rootProps,
   };
   return props;
 }
 
-export default function PlaylistItemCurrent(props: any) {
-  const root = useRootStyles();
+export interface PlaylistItemCurrentProps extends BoxProps {
+
+}
+
+const PlaylistItemCurrent: React.FC<PlaylistItemCurrentProps> = (rootProps) => { // TODO: typescript magic: pick boxProps 
+  const root = useRootStyles(rootProps);
   const {style, text} = useInnerStyles();
 
-  // TODO: what a mess
   return (
     <Box
       {...root}
-      style={props.style}
     >
       <Typography
         style={style}
-        variant="h4"
+        variant='h4'
       >
         {text}
       </Typography>
     </Box>
   );
 }
+
+export default PlaylistItemCurrent;
