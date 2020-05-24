@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core';
+import { BoxProps } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
@@ -6,10 +6,11 @@ import CardDescription from './CardDescription';
 import CardTextAction from './CardTextAction';
 import CardTitle from './CardTitle';
 
-const useStyles = (rootStyle?: React.CSSProperties) => makeStyles((theme) => ({
-  root: {
+const useRootProps = (rootProps: BoxProps): BoxProps => {
+  const theme = useTheme();
+  return {
     alignContent: 'center',
-    backgroundColor: theme.palette.primary.dark,
+    bgcolor: theme.palette.primary.dark,
     color: theme.palette.secondary.contrastText,
     display: 'grid',
     gridTemplateAreas: `
@@ -17,30 +18,23 @@ const useStyles = (rootStyle?: React.CSSProperties) => makeStyles((theme) => ({
       "desc desc desc desc desc"
     `,
     gridTemplateColumns:'repeat(5, 1fr)',
-    overflow: 'hidden',
-    padding: theme.spacing(1),
-    position: 'relative',
-    whiteSpace: 'nowrap',
-    ...rootStyle,
-  }
-}));
-
-export interface CardTextProps {
-  title: string;
-  description: string;
-  style?: React.CSSProperties;
+    p: 1,
+    position: 'relative', // accomodate for absolute positioning of
+    ...rootProps,
+  };
 }
 
-const CardText: React.FC<CardTextProps> = ({ style, children, ...props }) => {
-  const { title, description } = props;
-  const theme = useTheme();
-  const classes = useStyles(style)(theme);
+export interface CardTextProps extends BoxProps {
+  title: string;
+  description: string;
+}
 
+const CardText: React.FC<CardTextProps> = ({ children, title, description, ...rootProps }) => {
   return (
     <Box
       data-testid='card-text'
-      className={classes.root}
       onClick={(ev) => ev.stopPropagation()}
+      {...useRootProps(rootProps)}
     >
       <CardTitle>
         {title}

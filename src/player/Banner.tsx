@@ -37,10 +37,7 @@ const buildCardTextProps = (props: BannerProps) => {
   return {
     title,
     description,
-    style: {
-      gridArea: 'text', // TODO
-      whiteSpace: 'normal',
-    } as React.CSSProperties // https://material-ui.com/guides/typescript/#using-createstyles-to-defeat-type-widening
+    gridArea: 'text',
   };
 }
 

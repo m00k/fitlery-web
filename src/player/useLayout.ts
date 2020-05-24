@@ -85,6 +85,5 @@ export const useLayout = (): {[key: string]: React.CSSProperties} => {
   const styles = {
     root,
   };
-
   return styles;
 }
