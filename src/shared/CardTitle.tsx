@@ -5,7 +5,7 @@ import React, { PropsWithChildren } from 'react';
 const CardTitle: React.FC<PropsWithChildren<any>> = ({ children }) => {
   return (
     <Box
-      id='card-title'
+      data-testid='card-title'
       gridArea={'title'}
       minWidth={0}
     >

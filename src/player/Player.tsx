@@ -51,7 +51,7 @@ const Player = () => {
 
   return (
     <Box
-      id="the-box" // TODO
+      data-testid='player'
       style={styles.root}
     >
       <Banner

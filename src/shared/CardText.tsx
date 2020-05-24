@@ -3,6 +3,7 @@ import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import CardDescription from './CardDescription';
+import CardTextAction from './CardTextAction';
 import CardTitle from './CardTitle';
 
 const useStyles = (rootStyle?: React.CSSProperties) => makeStyles((theme) => ({
@@ -47,15 +48,9 @@ const CardText: React.FC<CardTextProps> = ({ style, children, ...props }) => {
       <CardDescription>
         {description}
       </CardDescription>
-      <Box
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: -theme.spacing(1),
-        }}
-      >
+      <CardTextAction>
         {children}
-      </Box>
+      </CardTextAction>
     </Box>
   );
 };
