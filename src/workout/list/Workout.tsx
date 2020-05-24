@@ -1,7 +1,10 @@
 import React from 'react';
 import Avatar from '../../shared/Avatar';
 import Card from '../../shared/card/Card';
+import CardDescription from '../../shared/card/CardDescription';
 import CardText from '../../shared/card/CardText';
+import CardTextAction from '../../shared/card/CardTextAction';
+import CardTitle from '../../shared/card/CardTitle';
 import { WorkoutData } from '../store/state';
 import ContextMenu, { ContextMenuOption } from './ContextMenu';
 
@@ -22,12 +25,24 @@ const Workout: React.FC<WorkoutProps> = (props) => {
         text={short}
       />
       <CardText
-        description={description}
-        title={title}
+        description={
+          <CardDescription>
+            {description}
+          </CardDescription>
+        }
+        title={
+          <CardTitle>
+            {title}
+          </CardTitle>
+        }
+        action={
+          <CardTextAction>
+            <ContextMenu
+              onClick={onContextMenuClick}
+            />
+          </CardTextAction>
+        }
       >
-        <ContextMenu
-          onClick={onContextMenuClick}
-        />
       </CardText>
     </Card>
   );

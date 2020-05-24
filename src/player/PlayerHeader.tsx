@@ -1,6 +1,8 @@
 import React from 'react';
 import Avatar from '../shared/Avatar';
+import CardDescription from '../shared/card/CardDescription';
 import CardText from '../shared/card/CardText';
+import CardTitle from '../shared/card/CardTitle';
 
 export interface PlayerHeaderProps {
   description: string;
@@ -17,9 +19,18 @@ const PlayerHeader: React.FC<PlayerHeaderProps> = (props) => {
         gridArea='avatar'
       />
       <CardText
-        description={description}
         gridArea='text'
-        title={title}
+        description={
+          <CardDescription>
+            {description}
+          </CardDescription>
+        }
+        title={
+          <CardTitle>
+            {title}
+          </CardTitle>
+        }
+        
       >
       </CardText>
     </>

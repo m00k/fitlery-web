@@ -1,31 +1,12 @@
 import Box from '@material-ui/core/Box';
-import React, { useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { ExerciseData } from '../../exercise/data';
 import ExerciseList from '../../exercise/ExerciseList';
-import { useWorkoutStore, WorkoutActionDispatchers, WorkoutData } from '../store';
 import Duration from './Duration';
 import Header from './Header';
+import useWorkout from './useWorkout';
 
-
-const useWorkout = (notFound: () => void): [WorkoutData, WorkoutActionDispatchers] => {
-  const [workoutState, workoutDispatch] = useWorkoutStore();
-  const { items: workouts, currentItemIndex } = workoutState;
-  const { title } = useParams();
-  const workout = workouts[currentItemIndex];
-  useEffect(() => {
-    if (workout) {
-      return;
-    }
-    const index = workouts.findIndex(w => w.title === title);
-    if (index > -1) {
-      workoutDispatch.select(index);
-    } else {
-      notFound();
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  return [workout, workoutDispatch];
-}
 
 const WorkoutDetail: React.FC<any> = () => {
   const history = useHistory();

@@ -1,9 +1,6 @@
 import { Box, BoxProps, useTheme } from '@material-ui/core';
 import React from 'react';
 import Avatar from '../../shared/Avatar';
-import CardDescription from '../../shared/card/CardDescription';
-import CardText from '../../shared/card/CardText';
-import CardTitle from '../../shared/card/CardTitle';
 import { WorkoutData } from '../store';
 import HeaderAction from './HeaderAction';
 
@@ -29,24 +26,13 @@ const Header: React.FC<HeaderProps> = ({ workout, onClose, ...rootProps }) => {
         text={short}
         gridArea='avatar'
       />
-      <CardText
-        action={
-          <HeaderAction
-            onClose={handleClose}
-          />
-        }
-        description={
-          <CardDescription>
-            {description}
-          </CardDescription>
-        }
-        title={
-          <CardTitle>
-            {title}
-          </CardTitle>
-        }
+      <Box
         gridArea='text'
-      />
+      >
+        <HeaderAction
+          onClose={handleClose}
+        />
+      </Box>
     </Box>
   );
 };
