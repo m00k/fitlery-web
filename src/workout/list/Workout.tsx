@@ -11,32 +11,19 @@ export interface WorkoutProps {
   onContextMenuClick?: (menuOption: ContextMenuOption) => void;
 }
 
-const buildCardTextProps = ({ workout }: WorkoutProps) => {
-  const { title, description } = workout;
-  return {
-    title,
-    description,
-    style: {
-      gridColumn: 1
-    } as React.CSSProperties // https://material-ui.com/guides/typescript/#using-createstyles-to-defeat-type-widening
-  };
-}
-
 const Workout: React.FC<WorkoutProps> = (props) => {
   const { workout, onCardClick, onContextMenuClick } = props;
-  const cardTextProps = buildCardTextProps({ workout });
+  const { description, short, title } = workout;
   return (
     <Card
       onClick={onCardClick}
     >
       <Avatar
-        text={workout.short}
-        style={{
-          gridColumn: 1
-        }}
+        text={short}
       />
       <CardText
-        {...cardTextProps}
+        description={description}
+        title={title}
       >
         <ContextMenu
           onClick={onContextMenuClick}

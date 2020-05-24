@@ -1,8 +1,9 @@
 import { makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
-import Typography from '@material-ui/core/Typography';
 import React from 'react';
+import CardDescription from './CardDescription';
+import CardTitle from './CardTitle';
 
 const useStyles = (rootStyle?: React.CSSProperties) => makeStyles((theme) => ({
   root: {
@@ -14,17 +15,13 @@ const useStyles = (rootStyle?: React.CSSProperties) => makeStyles((theme) => ({
       "title title title title ."
       "desc desc desc desc desc"
     `,
-    gridTemplateColumns:'repeat(4, 1fr) min-content',
+    gridTemplateColumns:'repeat(5, 1fr)',
     overflow: 'hidden',
     padding: theme.spacing(1),
     position: 'relative',
     whiteSpace: 'nowrap',
     ...rootStyle,
-  },
-  description: {
-    gridArea: 'desc',
-    whiteSpace: 'inherit',
-  },
+  }
 }));
 
 export interface CardTextProps {
@@ -40,26 +37,16 @@ const CardText: React.FC<CardTextProps> = ({ style, children, ...props }) => {
 
   return (
     <Box
+      data-testid='card-text'
       className={classes.root}
       onClick={(ev) => ev.stopPropagation()}
     >
-      <Typography
-        variant='subtitle1'
-        noWrap
-        style={{
-          gridArea: 'title'
-        }}
-      >
+      <CardTitle>
         {title}
-      </Typography>
-      <Typography
-        className={classes.description}
-        variant='caption'
-        component='p'
-        noWrap
-      >
+      </CardTitle>
+      <CardDescription>
         {description}
-      </Typography>
+      </CardDescription>
       <Box
         style={{
           position: 'absolute',
