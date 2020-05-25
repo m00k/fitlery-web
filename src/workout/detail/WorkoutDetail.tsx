@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { ExerciseData } from '../../exercise/data';
 import ExerciseList from '../../exercise/ExerciseList';
 import Duration from './Duration';
-import Header from './Header';
+import HeaderEdit from './HeaderEdit';
 import useWorkout from './useWorkout';
 
 
@@ -28,7 +28,7 @@ const WorkoutDetail: React.FC<any> = () => {
   // TODO: edit exercises order drag/drop
   return (
     <Box>
-      <Header
+      <HeaderEdit
         workout={workout}
         onClose={handleClose}
       />

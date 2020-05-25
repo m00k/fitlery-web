@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => {
       float: 'right',
       marginBottom: theme.spacing(.5),
       marginTop: theme.spacing(.5),
-    }
+    },
   };
 });
 
@@ -43,6 +43,7 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
       )}
       {isAdd && <EditText
         defaultValue='New Exercise'
+        pl={5}
         onClose={handleAdd}
       />}
       <Fab

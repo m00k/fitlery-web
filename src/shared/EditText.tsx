@@ -1,4 +1,4 @@
-import { ClickAwayListener, IconButton, makeStyles, TextField } from '@material-ui/core';
+import { ClickAwayListener, IconButton, makeStyles, TextField, BoxProps } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import DoneIcon from '@material-ui/icons/Done';
@@ -17,23 +17,20 @@ const useStyles = makeStyles((theme) => ({
     height: theme.variables.playlist.item.height,
     marginBottom: theme.spacing(.3),
   },
-  inner: {
+  textField: {
     fontSize: theme.typography.h4.fontSize,
-    paddingLeft: theme.spacing(3),
-    paddingRight: theme.spacing(3),
   },
   action: {
     height: '100%',
   }
 }));
 
-export interface EditTextProps {
+export interface EditTextProps extends BoxProps {
   defaultValue: string;
   onClose?: (value: string) => void;
 }
 
-export default function EditText(props: EditTextProps) {
-  const { defaultValue, onClose } = props;
+const EditText: React.FC<EditTextProps> = ({ defaultValue, onClose, ...rootProps }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const [value, setValue] = useState(defaultValue);
@@ -48,11 +45,12 @@ export default function EditText(props: EditTextProps) {
     >
       <Box
         className={classes.root}
+        {...rootProps}
       >
         <TextField
+          className={classes.textField}
           error={error}
           inputRef={inputRef}
-          className={classes.inner}
           defaultValue={defaultValue}
           onChange={event => setValue(event.target.value)}
         >
@@ -71,3 +69,5 @@ export default function EditText(props: EditTextProps) {
     </ClickAwayListener>
   );
 }
+
+export default EditText;
