@@ -21,6 +21,7 @@ const WorkoutDetail: React.FC<any> = () => {
   const handleSetWorkMs = (workSec: number) => workoutDispatch.update({ ...workout, workMs: workSec * 1000});
   const handleAddExercise = (exercise: ExerciseData) => workoutDispatch.update({ ...workout, exercises: [...workout.exercises, exercise] });
   const handleDeleteExercise = (exercises: ExerciseData[]) => workoutDispatch.update({ ...workout, exercises });
+  const handleUpdate = (data: any) => console.log('#############', 'TODO: handleUpdate', data);
   
   const { exercises, breakMs, workMs } = workout;
 
@@ -31,6 +32,7 @@ const WorkoutDetail: React.FC<any> = () => {
       <HeaderEdit
         workout={workout}
         onClose={handleClose}
+        onUpdate={handleUpdate}
       />
       <Duration
         label='Break [sec]'

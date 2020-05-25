@@ -32,7 +32,7 @@ const EditText: React.FC<EditTextProps> = ({ defaultValue, onOk, ...rootProps })
   const classes = useStyles(theme);
   const [value, setValue] = useState(defaultValue);
   const error = !value;
-  const handleOk = () => onOk && onOk({error, value}); // TODO: confirm dialog or cancel away
+  const handleOk = () => onOk && onOk({error, value}); // TODO: confirm dialog or cancel away, how to edit mode in toggle?
   const inputRef = React.createRef<HTMLInputElement>();
   useEffect(() => { inputRef.current && inputRef.current.focus(); }); // TODO: forward ref, give control to parent
 
@@ -58,7 +58,7 @@ const EditText: React.FC<EditTextProps> = ({ defaultValue, onOk, ...rootProps })
           onClick={handleOk}
         >
           <DoneIcon
-            color='primary'
+            color='inherit'
           />
         </IconButton>
       </Box>
