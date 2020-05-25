@@ -17,9 +17,6 @@ const useStyles = makeStyles((theme) => ({
     height: theme.variables.playlist.item.height,
     marginBottom: theme.spacing(.3),
   },
-  textField: {
-    fontSize: theme.typography.h4.fontSize,
-  },
   action: {
     height: '100%',
   }
@@ -27,28 +24,27 @@ const useStyles = makeStyles((theme) => ({
 
 export interface EditTextProps extends BoxProps {
   defaultValue: string;
-  onClose?: (value: string) => void;
+  onOk?: (data: { value: string, error: any | boolean }) => void;
 }
 
-const EditText: React.FC<EditTextProps> = ({ defaultValue, onClose, ...rootProps }) => {
+const EditText: React.FC<EditTextProps> = ({ defaultValue, onOk, ...rootProps }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const [value, setValue] = useState(defaultValue);
   const error = !value;
-  const handleClose = () => onClose && onClose(value);
+  const handleOk = () => onOk && onOk({error, value}); // TODO: confirm dialog or cancel away
   const inputRef = React.createRef<HTMLInputElement>();
   useEffect(() => { inputRef.current && inputRef.current.focus(); }); // TODO: forward ref, give control to parent
 
   return (
     <ClickAwayListener
-      onClickAway={handleClose}
+      onClickAway={handleOk}
     >
       <Box
         className={classes.root}
         {...rootProps}
       >
         <TextField
-          className={classes.textField}
           error={error}
           inputRef={inputRef}
           defaultValue={defaultValue}
@@ -59,7 +55,7 @@ const EditText: React.FC<EditTextProps> = ({ defaultValue, onClose, ...rootProps
         <IconButton
           className={classes.action}
           disabled={error}
-          onClick={handleClose}
+          onClick={handleOk}
         >
           <DoneIcon
             color='primary'

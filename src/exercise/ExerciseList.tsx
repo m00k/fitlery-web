@@ -26,8 +26,9 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
   const { exercises=sampleData, onAdd, onDelete } = props; // TODO: remove sampleData
   const handleDelete = (index: number) => onDelete && onDelete([...exercises.slice(0, index), ...exercises.slice(index + 1)]);
   const [ isAdd, setIsAdd ] = useState(false);
+  const theme = useTheme();
   const classes = useStyles();
-  const handleAdd = (name: string) => {
+  const handleAdd = ({value: name}: { value: string }) => {
     setIsAdd(false);
     onAdd && onAdd({ name });
   };
@@ -43,8 +44,9 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
       )}
       {isAdd && <EditText
         defaultValue='New Exercise'
+        fontSize={theme.typography.h4.fontSize}
         pl={5}
-        onClose={handleAdd}
+        onOk={handleAdd}
       />}
       <Fab
         color='secondary'
