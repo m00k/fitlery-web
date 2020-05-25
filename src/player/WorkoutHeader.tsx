@@ -4,13 +4,13 @@ import CardDescription from '../shared/card/CardDescription';
 import CardText from '../shared/card/CardText';
 import CardTitle from '../shared/card/CardTitle';
 
-export interface PlayerHeaderProps {
+export interface WorkoutHeaderProps {
   description: string;
   short: string;
   title: string;
 }
 
-const PlayerHeader: React.FC<PlayerHeaderProps> = (props) => {
+const WorkoutHeader: React.FC<WorkoutHeaderProps> = (props) => {
   const { description, short, title  } = props;
   return (
     <>
@@ -37,4 +37,4 @@ const PlayerHeader: React.FC<PlayerHeaderProps> = (props) => {
   );
 }
 
-export default PlayerHeader;
+export default WorkoutHeader;

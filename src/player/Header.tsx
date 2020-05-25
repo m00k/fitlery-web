@@ -3,7 +3,7 @@ import { isBreakItem } from "../playlist/PlaylistItem";
 import { PlaylistItemData } from "../playlist/store";
 import CountdownHeader, { CountdownHeaderProps } from './CountdownHeader';
 import HeaderAction from './HeaderAction';
-import PlayerHeader from './PlayerHeader';
+import PlayerHeader from './WorkoutHeader';
 import { PlayState } from "./store";
 
 export interface HeaderProps {
