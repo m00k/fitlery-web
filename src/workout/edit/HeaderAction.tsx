@@ -6,6 +6,7 @@ export interface HeaderActionProps {
   onClose: () => void;
 }
 
+// TODO: makeStyles
 const HeaderAction: React.FC<HeaderActionProps> = (props) => {
   const { onClose } = props;
   return (

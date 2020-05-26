@@ -10,7 +10,7 @@ import HeaderEdit from './HeaderEdit';
 import useWorkout from './useWorkout';
 
 
-const WorkoutDetail: React.FC<any> = () => {
+const WorkoutEdit: React.FC<any> = () => {
   const history = useHistory();
   const notFound = () => history.push(`/workouts`);
   const [workout, workoutDispatch] = useWorkout(notFound);
@@ -65,4 +65,4 @@ const WorkoutDetail: React.FC<any> = () => {
   );
 }
 
-export default WorkoutDetail;
+export default WorkoutEdit;

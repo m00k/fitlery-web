@@ -7,7 +7,7 @@ import Main from './Main';
 import BottomNavigation from './navigation/BottomNavigation';
 import TopNavigation from './navigation/TopNavigation';
 import Player from './player/Player';
-import WorkoutDetail from './workout/detail/WorkoutDetail';
+import WorkoutEdit from './workout/edit/WorkoutEdit';
 import WorkoutList from './workout/list/WorkoutList';
 import UnderConstruction from './shared/UnderConstruction';
 
@@ -25,7 +25,7 @@ const App = () => {
     >
       <TopNavigation />
       <Main>
-        <Route path="/workouts/:title" component={WorkoutDetail} />
+        <Route path="/workouts/:title" component={WorkoutEdit} />
         <Route exact path="/workouts" component={WorkoutList} />
         <Route exact path="/player" component={Player} />
         <Route path="/exercises" component={ExerciseList} />
