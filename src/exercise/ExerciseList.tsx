@@ -1,7 +1,7 @@
 import { Box, Fab, makeStyles, useTheme } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import React, { useState } from 'react';
-import EditText from '../shared/EditText';
+import EditText, { EditResult } from '../shared/EditText';
 import { ExerciseData, exercises as sampleData } from './data';
 import Exercise from './Exercise';
 
@@ -28,7 +28,7 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
   const [ isAdd, setIsAdd ] = useState(false);
   const theme = useTheme();
   const classes = useStyles();
-  const handleAdd = ({value: name}: { value: string }) => {
+  const handleAdd = ({value: name, error }: EditResult<string>) => {
     setIsAdd(false);
     onAdd && onAdd({ name });
   };

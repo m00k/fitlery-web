@@ -22,9 +22,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+export interface EditResult<T> {
+  value: T;
+  error: boolean;
+}
+
 export interface EditTextProps extends BoxProps {
   defaultValue: string;
-  onOk?: (data: { value: string, error: any | boolean }) => void;
+  onOk?: (data: EditResult<string>) => void;
 }
 
 const EditText: React.FC<EditTextProps> = ({ defaultValue, onOk, ...rootProps }) => {

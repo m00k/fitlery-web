@@ -1,24 +1,33 @@
-import { Box, BoxProps, TextField, useTheme } from '@material-ui/core';
+import { Box, BoxProps, useTheme } from '@material-ui/core';
 import React from 'react';
 import Avatar from '../../shared/Avatar';
 import CardDescription from '../../shared/card/CardDescription';
 import CardText from '../../shared/card/CardText';
-import EditText from '../../shared/EditText';
+import CardTitle from '../../shared/card/CardTitle';
+import EditText, { EditResult } from '../../shared/EditText';
 import EditTextToggle from '../../shared/EditTextToggle';
 import { WorkoutData } from '../store';
 import HeaderAction from './HeaderAction';
 
 
-// TODO: click away listener
 export interface HeaderProps extends BoxProps {
   workout: WorkoutData;
-  onClose?: () => void;
-  onUpdate: ({ value, error }: any) => void; // TODO: type
+  onClose?: () => void;  // TODO: not really a header's responsibility
+  onUpdate: ({ value, error }: EditResult<Partial<WorkoutData>>) => void;
 }
 
 const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...rootProps }) => {  
   const { description, short, title  } = workout;
   const handleClose = () => onClose && onClose();
+  const handleUpdate = (key: string) => (update: EditResult<string>) => {
+    if (!onUpdate) {
+      return;
+    }
+    const { value: updatedValue, error } = update;
+    const result = { value: {[key]: updatedValue }, error } 
+    onUpdate(result);
+  }
+
   const theme = useTheme();
   return (
     <Box
@@ -44,8 +53,8 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
             input={
               <EditText
                 defaultValue={description}
-                pl={5}
-                onOk={onUpdate}
+                pl={1}
+                onOk={handleUpdate('description')}
               />
             }
             display={
@@ -54,15 +63,22 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
               </CardDescription>
             }
           />
-          
         }
         title={
-          <TextField
-            defaultValue={title}
-            style={{
-              color: theme.palette.background.paper,
-              gridArea: 'title',
-            }}
+          <EditTextToggle
+            gridArea='title'
+            input={
+              <EditText
+                defaultValue={title}
+                pl={1}
+                onOk={handleUpdate('title')}
+              />
+            }
+            display={
+              <CardTitle>
+                {title}
+              </CardTitle>
+            }
           />
         }
         gridArea='text'
