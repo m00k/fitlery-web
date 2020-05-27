@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 
 
 export interface EditTextToggleProps extends BoxProps {
-  input: React.ReactElement
-  display: React.ReactElement
+  edit: React.ReactElement;
+  display: React.ReactElement;
 }
 
-const EditTextToggle: React.FC<EditTextToggleProps> = ({ input, display, ...rootProps }) => {
+const EditTextToggle: React.FC<EditTextToggleProps> = ({ edit, display, ...rootProps }) => {
   const [isEdit, setIsEdit] = useState(false);
   return (
     <Box
@@ -16,7 +16,7 @@ const EditTextToggle: React.FC<EditTextToggleProps> = ({ input, display, ...root
       onClick={() => setIsEdit(!isEdit)}
     >
       {isEdit
-        ? input
+        ? edit
         : display
       }
     </Box>

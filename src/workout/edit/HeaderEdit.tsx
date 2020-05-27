@@ -1,25 +1,24 @@
-import { Box, BoxProps, useTheme } from '@material-ui/core';
+import { Box, BoxProps, TextField, useTheme } from '@material-ui/core';
 import React from 'react';
 import Avatar from '../../shared/Avatar';
 import CardDescription from '../../shared/card/CardDescription';
 import CardText from '../../shared/card/CardText';
 import CardTitle from '../../shared/card/CardTitle';
-import EditText, { EditResult } from '../../shared/EditText';
-import EditTextToggle from '../../shared/EditTextToggle';
+import EditToggle, { EditResult } from '../../shared/EditToggle';
 import { WorkoutData } from '../store';
 import HeaderAction from './HeaderAction';
 
 
 export interface HeaderProps extends BoxProps {
   workout: WorkoutData;
-  onClose?: () => void;  // TODO: not really a header's responsibility
-  onUpdate: ({ value, error }: EditResult<Partial<WorkoutData>>) => void;
+  onClose?: () => void;  // TODO: page responsibility
+  onUpdate: ({ value, error }: EditResult) => void; // TODO: type
 }
 
 const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...rootProps }) => {  
   const { description, short, title  } = workout;
   const handleClose = () => onClose && onClose();
-  const handleUpdate = (key: string) => (update: EditResult<string>) => {
+  const handleUpdate = (key: string) => (update: EditResult) => { // TODO: type
     if (!onUpdate) {
       return;
     }
@@ -47,37 +46,37 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
             onClose={handleClose}
           />
         }
-        description={
-          <EditTextToggle
-            gridArea='desc'
-            input={
-              <EditText
-                defaultValue={description}
-                pl={1}
-                onOk={handleUpdate('description')}
-              />
-            }
-            display={
-              <CardDescription>
-                {description}
-              </CardDescription>
-            }
-          />
-        }
         title={
-          <EditTextToggle
+          <EditToggle
             gridArea='title'
+            onOk={handleUpdate('title')}
             input={
-              <EditText
+              <TextField
                 defaultValue={title}
-                pl={1}
-                onOk={handleUpdate('title')}
               />
             }
             display={
               <CardTitle>
                 {title}
               </CardTitle>
+            }
+          />
+        }
+        description={
+          <EditToggle
+            gridArea='desc'
+            onOk={handleUpdate('description')}
+            input={
+              <TextField
+                defaultValue={description}
+                multiline
+                rows={3}
+              />
+            }
+            display={
+              <CardDescription>
+                {description}
+              </CardDescription>
             }
           />
         }
