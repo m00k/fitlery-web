@@ -30,7 +30,7 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
   const theme = useTheme();
   return (
     <Box
-      display="grid"
+      display='grid'
       gridTemplateAreas='"avatar text"'
       gridTemplateColumns={`${theme.variables.avatar.height}px auto`}
       mb={.3}
@@ -38,17 +38,18 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
     >
       <EditToggle
           alignItems='center'
+          display='grid'
           fontSize={theme.typography.h4.fontSize}
           height={theme.variables.avatar.height}
           gridArea='avatar'
           onOk={handleUpdate('short')}
-          input={
+          inputEl={
             <TextField
               inputProps={{minLength: 2, maxLength: 2}}
               defaultValue={short}
             />
           }
-          display={
+          displayEl={
             <Avatar
               text={short}
             />
@@ -64,12 +65,12 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
           <EditToggle
             gridArea='title'
             onOk={handleUpdate('title')}
-            input={
+            inputEl={
               <TextField
                 defaultValue={title}
               />
             }
-            display={
+            displayEl={
               <CardTitle>
                 {title}
               </CardTitle>
@@ -80,14 +81,14 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
           <EditToggle
             gridArea='desc'
             onOk={handleUpdate('description')}
-            input={
+            inputEl={
               <TextField
                 defaultValue={description}
                 multiline
                 rows={3}
               />
             }
-            display={
+            displayEl={
               <CardDescription>
                 {description}
               </CardDescription>

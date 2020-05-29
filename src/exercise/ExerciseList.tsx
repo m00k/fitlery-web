@@ -43,7 +43,7 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
           fontSize={theme.typography.h4.fontSize}
           key={exercise.name}
           onOk={handleEdit(i)}
-          input={
+          inputEl={
             <TextField
               defaultValue={exercise.name}
               style={{
@@ -52,7 +52,7 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
               }}
             />
           }
-          display={
+          displayEl={
             <Exercise
               exercise={exercise}
               onDelete={handleDelete.bind(globalThis, i)}

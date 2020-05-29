@@ -13,13 +13,13 @@ const Countdown: FunctionComponent<CountdownProps> = ({ msLeft, ...rootProps }) 
   
   return (
     <Box
-      alignItems="center"
+      alignItems='center'
       bgcolor={theme.palette.primary.dark}
       color={theme.palette.secondary.contrastText}
-      display="grid"
+      display='grid'
       fontWeight={theme.typography.fontWeightBold}
-      fontSize="3rem"
-      justifyContent="center"
+      fontSize='3rem'
+      justifyContent='center'
       {...rootProps}
     >
       {time.toTimeString(msLeft)}

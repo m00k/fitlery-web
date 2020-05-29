@@ -34,16 +34,16 @@ export interface EditResult {
 }
 
 export interface EditToggleProps extends BoxProps {
-  input: React.ReactElement<TextFieldProps>; // TODO: 
-  display: React.ReactElement<PropsWithChildren<any>>;
+  inputEl: React.ReactElement<TextFieldProps>; // TODO: generalize
+  displayEl: React.ReactElement<PropsWithChildren<any>>;
   onOk?: (data: EditResult) => void;
   onCancel?: () => void;
 }
 
-const EditToggle: React.FC<EditToggleProps> = ({ input, display, onOk, onCancel, ...rootProps }) => {
+const EditToggle: React.FC<EditToggleProps> = ({ inputEl, displayEl, onOk, onCancel, ...rootProps }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const defaultValue = input.props.defaultValue;
+  const defaultValue = inputEl.props.defaultValue;
   const [value, setValue] = useState(defaultValue);
   const [isEdit, setIsEdit] = useState(false);
   const error = !value;
@@ -60,16 +60,16 @@ const EditToggle: React.FC<EditToggleProps> = ({ input, display, onOk, onCancel,
     <Box
       className={classes.inputBox}
     >
-      <input.type
+      <inputEl.type
         error={error}
         inputRef={inputRef}
         defaultValue={defaultValue}
         onChange={(event: any) => setValue(event.target.value)} // TODO: type
         onClick={(event: any) => event.stopPropagation()} // prevent closing: TODO: type
-        {...input.props}
+        {...inputEl.props}
       >
         {value}
-      </input.type>
+      </inputEl.type>
       <IconButton
         className={classes.action}
         disabled={error}
@@ -103,7 +103,7 @@ const EditToggle: React.FC<EditToggleProps> = ({ input, display, onOk, onCancel,
       >
         {isEdit
           ? edit
-          : display
+          : displayEl
         }
       </Box>
     </ClickAwayListener>

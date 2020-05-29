@@ -21,12 +21,12 @@ const PieCountdown: FunctionComponent<PieCountdownProps> = ({ fractionDone, inve
   return (
     <Box
       bgcolor={theme.palette.primary.main}
-      position="relative"
-      display="grid"
-      alignItems="center"
-      justifyContent="center"
-      width="100%"
-      height="100%"
+      position='relative'
+      display='grid'
+      alignItems='center'
+      justifyContent='center'
+      width='100%'
+      height='100%'
       {...rootProps}
     >
       <PieSliceWithMargin

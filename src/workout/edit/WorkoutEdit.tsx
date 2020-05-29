@@ -24,7 +24,6 @@ const WorkoutEdit: React.FC<any> = () => {
   const handleDeleteExercise = (exercises: ExerciseData[]) => workoutDispatch.update({ ...workout, exercises });
   const handleEditExercise = (exercise: ExerciseData, index: number) => { // TODO: type
     // TODO: error case?
-    debugger;
     const exercises = [
       ...workout.exercises.slice(0, index),
       exercise,
