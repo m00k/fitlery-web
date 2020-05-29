@@ -22,7 +22,17 @@ const WorkoutEdit: React.FC<any> = () => {
   const handleSetWorkMs = (workSec: number) => workoutDispatch.update({ ...workout, workMs: workSec * 1000});
   const handleAddExercise = (exercise: ExerciseData) => workoutDispatch.update({ ...workout, exercises: [...workout.exercises, exercise] });
   const handleDeleteExercise = (exercises: ExerciseData[]) => workoutDispatch.update({ ...workout, exercises });
-  const handleUpdate = (update: EditResult) => { // TODO: type
+  const handleEditExercise = (exercise: ExerciseData, index: number) => { // TODO: type
+    // TODO: error case?
+    debugger;
+    const exercises = [
+      ...workout.exercises.slice(0, index),
+      exercise,
+      ...workout.exercises.slice(index + 1),
+    ];
+    workoutDispatch.update({ ...workout, exercises });
+  }
+  const handleUpdateHeader = (update: EditResult) => { // TODO: type
     // TODO: error case?
     const { value } = update;
     workoutDispatch.update({ ...workout, ...value });
@@ -37,7 +47,7 @@ const WorkoutEdit: React.FC<any> = () => {
       <HeaderEdit
         workout={workout}
         onClose={handleClose}
-        onUpdate={handleUpdate}
+        onUpdate={handleUpdateHeader}
       />
       <Duration
         label='Break [sec]'
@@ -59,6 +69,7 @@ const WorkoutEdit: React.FC<any> = () => {
         exercises={exercises}
         onAdd={handleAddExercise}
         onDelete={handleDeleteExercise}
+        onEdit={handleEditExercise}
       />
     </Box>
   );
