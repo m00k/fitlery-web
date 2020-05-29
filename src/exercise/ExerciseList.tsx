@@ -25,12 +25,12 @@ export interface ExerciseListProps {
 }
 
 const ExerciseList: React.FC<ExerciseListProps> = (props) => {
-  const { exercises=sampleData, onAdd, onDelete, onEdit } = props; // TODO: remove sampleData
-  const handleDelete = (index: number) => onDelete && onDelete([...exercises.slice(0, index), ...exercises.slice(index + 1)]);
-  const handleEdit = (index: number) => (update: EditResult) => onEdit && onEdit({ name: update.value }, index); // TODO: handle error
+  const { exercises = sampleData, onAdd, onDelete, onEdit } = props; // TODO: remove sampleData
   const [ isAdd, setIsAdd ] = useState(false);
   const theme = useTheme();
   const classes = useStyles();
+  const handleDelete = (index: number) => onDelete && onDelete([...exercises.slice(0, index), ...exercises.slice(index + 1)]);
+  const handleEdit = (index: number) => (update: EditResult) => onEdit && onEdit({ name: update.value }, index); // TODO: handle error
   const handleAdd = ({value: name, error }: EditResult) => { // TODO: type
     setIsAdd(false);
     onAdd && onAdd({ name });

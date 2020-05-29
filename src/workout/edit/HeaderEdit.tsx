@@ -36,10 +36,24 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
       mb={.3}
       {...rootProps}
     >
-      <Avatar
-        text={short}
-        gridArea='avatar'
-      />
+      <EditToggle
+          alignItems='center'
+          fontSize={theme.typography.h4.fontSize}
+          height={theme.variables.avatar.height}
+          gridArea='avatar'
+          onOk={handleUpdate('short')}
+          input={
+            <TextField
+              inputProps={{minLength: 2, maxLength: 2}}
+              defaultValue={short}
+            />
+          }
+          display={
+            <Avatar
+              text={short}
+            />
+          }
+        />
       <CardText
         action={
           <HeaderAction
