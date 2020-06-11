@@ -45,16 +45,20 @@ const EditToggle: React.FC<EditToggleProps> = ({ inputEl, displayEl, onOk, onCan
   const classes = useStyles(theme);
   const defaultValue = inputEl.props.defaultValue;
   const [value, setValue] = useState(defaultValue);
+  const [error, setError] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const error = !value;
 
-  const handleOk = () => onOk && onOk({error, value}); // TODO: confirm dialog or cancel away, how to edit mode in toggle?
-  const handleCancel = (event: React.MouseEvent<any>) => {
+  const handleOk = () => onOk && onOk({error, value});
+  const handleCancel = (ev: React.MouseEvent<any>) => {
     setValue(defaultValue);
     setIsEdit(false);
   };
   const inputRef = React.createRef<HTMLInputElement>();
-  useEffect(() => { inputRef.current && inputRef.current.focus(); }); // TODO: forward ref, give control to parent
+  useEffect(() => { inputRef.current && inputRef.current.focus(); }); // TODO: revisit
+  const handleChange = (ev: any) => { // TODO: type
+    setValue(ev.target.value);
+    setError(!ev.target.validity.valid)
+  } 
 
   const edit =
     <Box
@@ -64,7 +68,7 @@ const EditToggle: React.FC<EditToggleProps> = ({ inputEl, displayEl, onOk, onCan
         error={error}
         inputRef={inputRef}
         defaultValue={defaultValue}
-        onChange={(event: any) => setValue(event.target.value)} // TODO: type
+        onChange={handleChange}
         onClick={(event: any) => event.stopPropagation()} // prevent closing: TODO: type
         {...inputEl.props}
       >
@@ -72,7 +76,6 @@ const EditToggle: React.FC<EditToggleProps> = ({ inputEl, displayEl, onOk, onCan
       </inputEl.type>
       <IconButton
         className={classes.action}
-        disabled={error}
         size='small'
         onClick={handleCancel}
       >
