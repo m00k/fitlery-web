@@ -1,8 +1,17 @@
-import { BoxProps, TextField, useTheme } from '@material-ui/core';
+import { BoxProps, TextField, useTheme, makeStyles } from '@material-ui/core';
 import React from 'react';
 import Avatar, { AvatarProps } from '../../shared/Avatar';
 import EditToggle, { EditResult } from '../../shared/EditToggle';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    alignItems: 'center',
+    display: 'grid',
+    fontSize: theme.typography.h4.fontSize,
+    height: theme.variables.avatar.height,
+    gridArea: 'avatar',
+  },
+}));
 
 export interface AvatarEditProps extends BoxProps, AvatarProps {
   onUpdate: ({ value, error }: EditResult) => void; // TODO: type
@@ -17,17 +26,15 @@ const AvatarEdit: React.FC<AvatarEditProps> = ({ text, onUpdate, ...rootProps })
   }
 
   const theme = useTheme();
+  const classes = useStyles(theme);
+
   return (
     <EditToggle
-      alignItems='center'
-      display='grid'
-      fontSize={theme.typography.h4.fontSize}
-      height={theme.variables.avatar.height}
-      gridArea='avatar'
+      className={classes.root}
       onOk={handleUpdate}
       {...rootProps}
       inputEl={
-      <TextField
+        <TextField
           inputProps={{minLength: 2, maxLength: 2}}
           defaultValue={text}
         />
