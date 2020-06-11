@@ -1,12 +1,12 @@
 import { Box, BoxProps, TextField, useTheme } from '@material-ui/core';
 import React from 'react';
-import Avatar from '../../shared/Avatar';
 import CardDescription from '../../shared/card/CardDescription';
 import CardText from '../../shared/card/CardText';
 import CardTitle from '../../shared/card/CardTitle';
 import EditToggle, { EditResult } from '../../shared/EditToggle';
 import { WorkoutData } from '../store';
 import HeaderAction from './HeaderAction';
+import AvatarEdit from './AvatarEdit';
 
 
 export interface HeaderProps extends BoxProps {
@@ -36,25 +36,10 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
       mb={.3}
       {...rootProps}
     >
-      <EditToggle
-          alignItems='center'
-          display='grid'
-          fontSize={theme.typography.h4.fontSize}
-          height={theme.variables.avatar.height}
-          gridArea='avatar'
-          onOk={handleUpdate('short')}
-          inputEl={
-            <TextField
-              inputProps={{minLength: 2, maxLength: 2}}
-              defaultValue={short}
-            />
-          }
-          displayEl={
-            <Avatar
-              text={short}
-            />
-          }
-        />
+      <AvatarEdit
+        text={short}
+        onUpdate={handleUpdate('short')}
+      />
       <CardText
         action={
           <HeaderAction
