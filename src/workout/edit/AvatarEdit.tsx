@@ -35,7 +35,7 @@ const AvatarEdit: React.FC<AvatarEditProps> = ({ text, onUpdate, ...rootProps })
       {...rootProps}
       inputEl={
         <TextField
-          inputProps={{minLength: 2, maxLength: 2}}
+          inputProps={{minLength: 2, maxLength: 2, required: true}}
           defaultValue={text}
         />
       }

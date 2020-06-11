@@ -46,6 +46,7 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
           inputEl={
             <TextField
               defaultValue={exercise.name}
+              inputProps={{required: true}}
               style={{
                 paddingLeft: theme.spacing(4),
                 paddingRight: theme.spacing(1),

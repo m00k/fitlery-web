@@ -51,6 +51,7 @@ const EditToggle: React.FC<EditToggleProps> = ({ inputEl, displayEl, onOk, onCan
   const handleOk = () => onOk && onOk({error, value});
   const handleCancel = (ev: React.MouseEvent<any>) => {
     setValue(defaultValue);
+    setError(false);
     setIsEdit(false);
   };
   const inputRef = React.createRef<HTMLInputElement>();
@@ -97,7 +98,7 @@ const EditToggle: React.FC<EditToggleProps> = ({ inputEl, displayEl, onOk, onCan
 
   return (
     <ClickAwayListener
-      onClickAway={handleCancel}
+      onClickAway={ev => isEdit && handleCancel(ev)}
     >
       <Box
         onClick={() => setIsEdit(!isEdit)} // TODO: create edit button instead?
