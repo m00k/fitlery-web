@@ -48,7 +48,10 @@ const EditToggle: React.FC<EditToggleProps> = ({ inputEl, displayEl, onOk, onCan
   const [error, setError] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
-  const handleOk = () => onOk && onOk({error, value});
+  const handleOk = (ev: React.MouseEvent<any>) => {
+    onOk && onOk({error, value});
+    setIsEdit(false);
+  }
   const handleCancel = (ev: React.MouseEvent<any>) => {
     setValue(defaultValue);
     setError(false);
@@ -98,10 +101,13 @@ const EditToggle: React.FC<EditToggleProps> = ({ inputEl, displayEl, onOk, onCan
 
   return (
     <ClickAwayListener
-      onClickAway={ev => isEdit && handleCancel(ev)}
+      onClickAway={ev => {
+        if (!isEdit) return;
+        handleCancel(ev);
+      }}
     >
       <Box
-        onClick={() => setIsEdit(!isEdit)} // TODO: create edit button instead?
+        onClick={() => !isEdit && setIsEdit(true)} // TODO: consider edit button
         className={classes.root}
         {...rootProps}
       >
