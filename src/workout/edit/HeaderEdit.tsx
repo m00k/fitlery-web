@@ -2,11 +2,11 @@ import { Box, BoxProps, makeStyles, TextField, useTheme } from '@material-ui/cor
 import React from 'react';
 import CardDescription from '../../shared/card/CardDescription';
 import CardText from '../../shared/card/CardText';
-import CardTitle from '../../shared/card/CardTitle';
 import { EditResult } from '../../shared/EditText';
 import EditToggle from '../../shared/EditToggle';
 import { WorkoutData } from '../store';
 import AvatarEdit from './AvatarEdit';
+import CardTitleEdit from './CardTitleEdit';
 import HeaderAction from './HeaderAction';
 
 const useStyles = makeStyles(theme => ({
@@ -54,21 +54,10 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
           />
         }
         title={
-          <EditToggle
+          <CardTitleEdit
             gridArea='title'
-            onOk={handleUpdate('title')}
-            inputEl={
-              <TextField
-                defaultValue={title}
-                inputProps={{required: true}}
-                className={classes.textfield}
-              />
-            }
-            displayEl={
-              <CardTitle>
-                {title}
-              </CardTitle>
-            }
+            title={title}
+            onUpdate={handleUpdate('title')}
           />
         }
         description={
