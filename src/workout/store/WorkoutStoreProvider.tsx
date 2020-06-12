@@ -9,7 +9,7 @@ export type WorkoutActionDispatchers = { [A in WorkoutActionType]: (payload?: an
 const createActionDispatchers = (dispatch: Dispatch<WorkoutAction>): WorkoutActionDispatchers => {
   return {
     add: (workout: WorkoutData) => dispatch({ type: 'add', payload: { workout } }),
-    delete: (index: number) => dispatch({ type: 'delete', payload: { index }}),
+    delete: () => dispatch({ type: 'delete' }),
     loadSuccess: (workouts: WorkoutData[]) => dispatch({ type: 'loadSuccess', payload: { workouts } }),
     select: (index: number) => dispatch({ type: 'select', payload: { index } }),
     update: (workout: WorkoutData) => dispatch({ type: 'update', payload: { workout } }),

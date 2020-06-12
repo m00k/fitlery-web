@@ -6,8 +6,8 @@ import usePlayerPageStore from '../../player/usePlayerPageStore';
 import { useWorkoutStore } from '../store';
 import { WorkoutData } from '../store/state';
 import toPlaylistData from '../toPlaylistData';
-import Workout from './Workout';
 import { ContextMenuOption } from './ContextMenu';
+import Workout from './Workout';
 
 
 export default function WorkoutList() {
@@ -25,12 +25,12 @@ export default function WorkoutList() {
   }
 
   const handleContextMenuClick = (workout: WorkoutData, index: number, menuOption: ContextMenuOption) => {
+    workoutDispatch.select(index);
     switch (menuOption) {
       case 'delete':
-        console.log('// TODO: confirm dialog, then delete', workout);
+        workoutDispatch.delete();
         break;
       case 'edit':
-        workoutDispatch.select(index);
         const { title } = workout;
         history.push(`/workouts/${title}`); // TODO: bad idea: encoding missing, uniqueness questionable, ...
         break;

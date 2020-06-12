@@ -1,8 +1,8 @@
-import { IconButton, Menu, MenuItem, ListItemIcon, Box, useTheme } from '@material-ui/core';
-import MoreVerticon from '@material-ui/icons/MoreVert';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import { Box, IconButton, ListItemIcon, Menu, MenuItem, useTheme } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
+import MoreVerticon from '@material-ui/icons/MoreVert';
 import React from 'react';
+import DeleteMenuItem from './DeleteMenuItem';
 
 export type ContextMenuOption =
   | 'edit'
@@ -18,7 +18,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ onClick }) => {
   const theme = useTheme();
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
-  const handleMenuClick = (menuOption: ContextMenuOption, event: React.MouseEvent<HTMLLIElement, MouseEvent>): void => {
+  const handleMenuClick = (menuOption: ContextMenuOption): void => {
     handleClose();
     onClick && onClick(menuOption);
   };
@@ -36,7 +36,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ onClick }) => {
       </IconButton>
       <Menu
         anchorEl={anchorEl}
-        keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
@@ -48,14 +47,9 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ onClick }) => {
           </ListItemIcon>
           Edit
         </MenuItem>
-        <MenuItem
+        <DeleteMenuItem
           onClick={handleMenuClick.bind(globalThis, 'delete')}
-        >
-          <ListItemIcon>
-            <DeleteOutlineIcon />
-          </ListItemIcon>
-          Delete
-        </MenuItem>
+        />
       </Menu>
     </Box>
   );
