@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
     display: 'grid',
     gridTemplateColumns: 'auto min-content min-content',
-    height: theme.variables.playlist.item.height,
     marginBottom: theme.spacing(.3),
   },
   action: {

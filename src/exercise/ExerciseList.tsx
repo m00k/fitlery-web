@@ -8,6 +8,9 @@ import Exercise from './Exercise';
 
 const useStyles = makeStyles(theme => ({
   textfield: {
+    alignItems: 'center',
+    display: 'grid',
+    height: theme.variables.playlist.item.height,
     paddingLeft: theme.spacing(5),
     paddingRight: theme.spacing(1),
   },
