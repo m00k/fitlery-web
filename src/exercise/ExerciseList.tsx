@@ -66,6 +66,7 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
         fontSize={theme.typography.h4.fontSize}
         pl={5}
         onOk={handleAdd}
+        onCancel={() => setIsAdd(false)}
       />}
       <Fab
         color='secondary'

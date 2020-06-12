@@ -1,6 +1,7 @@
-import { ClickAwayListener, IconButton, makeStyles, TextField, BoxProps } from '@material-ui/core';
+import { BoxProps, ClickAwayListener, IconButton, makeStyles, TextField } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
+import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
 import React, { useEffect, useState } from 'react';
 
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 1,
     color: theme.palette.primary.main,
     display: 'grid',
-    gridTemplateColumns: 'auto min-content',
+    gridTemplateColumns: 'auto min-content min-content',
     height: theme.variables.playlist.item.height,
     marginBottom: theme.spacing(.3),
   },
@@ -30,20 +31,22 @@ export interface EditResult<T> {
 export interface EditTextProps extends BoxProps {
   defaultValue: string;
   onOk?: (data: EditResult<string>) => void;
+  onCancel?: () => void;
 }
 
-const EditText: React.FC<EditTextProps> = ({ defaultValue, onOk, ...rootProps }) => {
+const EditText: React.FC<EditTextProps> = ({ defaultValue, onOk, onCancel, ...rootProps }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const [value, setValue] = useState(defaultValue);
   const error = !value;
-  const handleOk = () => onOk && onOk({error, value}); // TODO: confirm dialog or cancel away, how to edit mode in toggle?
+  const handleOk = () => onOk && onOk({error, value});
+  const handleCancel = () => onCancel && onCancel();
   const inputRef = React.createRef<HTMLInputElement>();
   useEffect(() => { inputRef.current && inputRef.current.focus(); }); // TODO: forward ref, give control to parent
 
   return (
     <ClickAwayListener
-      onClickAway={handleOk}
+      onClickAway={handleCancel}
     >
       <Box
         className={classes.root}
@@ -57,6 +60,15 @@ const EditText: React.FC<EditTextProps> = ({ defaultValue, onOk, ...rootProps })
         >
           {value}
         </TextField>
+        <IconButton
+          className={classes.action}
+          size='small'
+          onClick={handleCancel}
+        >
+          <CloseIcon
+            color='inherit'
+          />
+        </IconButton>
         <IconButton
           className={classes.action}
           disabled={error}
