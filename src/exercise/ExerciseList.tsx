@@ -62,11 +62,14 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
         />
       )}
       {isAdd && <EditText
-        defaultValue='New Exercise'
         fontSize={theme.typography.h4.fontSize}
         pl={5}
         onOk={handleAdd}
         onCancel={() => setIsAdd(false)}
+        inputEl={
+         <TextField
+          defaultValue='New Exercise'
+         />}
       />}
       <Fab
         color='secondary'

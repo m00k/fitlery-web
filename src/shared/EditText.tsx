@@ -1,4 +1,4 @@
-import { BoxProps, ClickAwayListener, IconButton, makeStyles, TextField } from '@material-ui/core';
+import { BoxProps, ClickAwayListener, IconButton, makeStyles, TextFieldProps } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import CloseIcon from '@material-ui/icons/Close';
@@ -23,26 +23,31 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export interface EditResult<T> {
-  value: T;
+export interface EditResult {
+  value: any;
   error: boolean;
 }
 
 export interface EditTextProps extends BoxProps {
-  defaultValue: string;
-  onOk?: (data: EditResult<string>) => void;
+  inputEl: React.ReactElement<TextFieldProps>; // TODO: generalize
+  onOk?: (data: EditResult) => void;
   onCancel?: () => void;
 }
 
-const EditText: React.FC<EditTextProps> = ({ defaultValue, onOk, onCancel, ...rootProps }) => {
+const EditText: React.FC<EditTextProps> = ({ inputEl, onOk, onCancel, ...rootProps }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
+  const defaultValue = inputEl.props.defaultValue;
   const [value, setValue] = useState(defaultValue);
-  const error = !value;
+  const [error, setError] = useState(false);
   const handleOk = () => onOk && onOk({error, value});
   const handleCancel = () => onCancel && onCancel();
   const inputRef = React.createRef<HTMLInputElement>();
   useEffect(() => { inputRef.current && inputRef.current.focus(); }); // TODO: forward ref, give control to parent
+  const handleChange = (ev: any) => { // TODO: type
+    setValue(ev.target.value);
+    setError(!ev.target.validity.valid)
+  } 
 
   return (
     <ClickAwayListener
@@ -52,14 +57,16 @@ const EditText: React.FC<EditTextProps> = ({ defaultValue, onOk, onCancel, ...ro
         className={classes.root}
         {...rootProps}
       >
-        <TextField
+        <inputEl.type
           error={error}
           inputRef={inputRef}
           defaultValue={defaultValue}
-          onChange={event => setValue(event.target.value)}
+          onChange={handleChange}
+          onClick={(event: any) => event.stopPropagation()} // prevent closing: TODO: type
+          {...inputEl.props}
         >
           {value}
-        </TextField>
+        </inputEl.type>
         <IconButton
           className={classes.action}
           size='small'
@@ -72,6 +79,7 @@ const EditText: React.FC<EditTextProps> = ({ defaultValue, onOk, onCancel, ...ro
         <IconButton
           className={classes.action}
           disabled={error}
+          size='small'
           onClick={handleOk}
         >
           <DoneIcon
