@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 import { navigationActions } from './navigation-actions';
 
 const FtBottomNavigation = () => {
-  // TODO: this seems overly complicated?
   const history = useHistory();
   const [value, setValue] = useState(history.location.pathname);
   useEffect(() => setValue(history.location.pathname), [history.location.pathname]);

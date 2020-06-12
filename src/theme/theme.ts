@@ -126,11 +126,6 @@ const overrides: Overrides = {
       color: secondary.light,
     }
   },
-  MuiButton: {
-    label: {
-      color: secondary.light,
-    }
-  },
   MuiListItemIcon: {
     root: {
       color: secondary.light,
