@@ -1,7 +1,8 @@
-import { BoxProps, TextField, useTheme, makeStyles } from '@material-ui/core';
+import { BoxProps, makeStyles, TextField, useTheme } from '@material-ui/core';
 import React from 'react';
 import Avatar, { AvatarProps } from '../../shared/Avatar';
-import EditToggle, { EditResult } from '../../shared/EditToggle';
+import { EditResult } from '../../shared/EditText';
+import EditToggle from '../../shared/EditToggle';
 
 const useStyles = makeStyles(theme => ({
   root: {

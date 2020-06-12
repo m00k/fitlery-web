@@ -3,10 +3,11 @@ import React from 'react';
 import CardDescription from '../../shared/card/CardDescription';
 import CardText from '../../shared/card/CardText';
 import CardTitle from '../../shared/card/CardTitle';
-import EditToggle, { EditResult } from '../../shared/EditToggle';
+import { EditResult } from '../../shared/EditText';
+import EditToggle from '../../shared/EditToggle';
 import { WorkoutData } from '../store';
-import HeaderAction from './HeaderAction';
 import AvatarEdit from './AvatarEdit';
+import HeaderAction from './HeaderAction';
 
 
 export interface HeaderProps extends BoxProps {

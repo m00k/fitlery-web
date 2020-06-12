@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export interface EditResult {
-  value: any;
+  value?: any;
   error: boolean;
 }
 
@@ -42,12 +42,12 @@ const EditText: React.FC<EditTextProps> = ({ inputEl, onOk, onCancel, ...rootPro
   const [error, setError] = useState(false);
   const handleOk = () => onOk && onOk({error, value});
   const handleCancel = () => onCancel && onCancel();
-  const inputRef = React.createRef<HTMLInputElement>();
-  useEffect(() => { inputRef.current && inputRef.current.focus(); }); // TODO: forward ref, give control to parent
   const handleChange = (ev: any) => { // TODO: type
     setValue(ev.target.value);
     setError(!ev.target.validity.valid)
   } 
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  useEffect(() => { inputRef.current && inputRef.current.focus(); }); // TODO: revisit
 
   return (
     <ClickAwayListener
@@ -62,7 +62,6 @@ const EditText: React.FC<EditTextProps> = ({ inputEl, onOk, onCancel, ...rootPro
           inputRef={inputRef}
           defaultValue={defaultValue}
           onChange={handleChange}
-          onClick={(event: any) => event.stopPropagation()} // prevent closing: TODO: type
           {...inputEl.props}
         >
           {value}

@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ExerciseData } from '../../exercise/data';
 import ExerciseList from '../../exercise/ExerciseList';
-import { EditResult } from '../../shared/EditToggle';
+import { EditResult } from '../../shared/EditText';
 import Duration from './Duration';
 import HeaderEdit from './HeaderEdit';
 import useWorkout from './useWorkout';
@@ -39,7 +39,6 @@ const WorkoutEdit: React.FC<any> = () => {
   
   const { exercises, breakMs, workMs } = workout;
 
-  // TODO: edit exercises
   // TODO: edit exercises order drag/drop
   return (
     <Box>
