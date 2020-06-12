@@ -6,16 +6,17 @@ import EditToggle from '../shared/EditToggle';
 import { ExerciseData, exercises as sampleData } from './data';
 import Exercise from './Exercise';
 
-const useStyles = makeStyles(() => {
-  const theme = useTheme();
-  return {
-    fab: {
-      float: 'right',
-      marginBottom: theme.spacing(.5),
-      marginTop: theme.spacing(.5),
-    },
-  };
-});
+const useStyles = makeStyles(theme => ({
+  textfield: {
+    paddingLeft: theme.spacing(5),
+    paddingRight: theme.spacing(1),
+  },
+  fab: {
+    float: 'right',
+    marginBottom: theme.spacing(.5),
+    marginTop: theme.spacing(.5),
+  },
+}));
 
 export interface ExerciseListProps {
   exercises: ExerciseData[];
@@ -28,7 +29,7 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
   const { exercises = sampleData, onAdd, onDelete, onEdit } = props; // TODO: remove sampleData
   const [ isAdd, setIsAdd ] = useState(false);
   const theme = useTheme();
-  const classes = useStyles();
+  const classes = useStyles(theme);
   const handleDelete = (index: number) => onDelete && onDelete([...exercises.slice(0, index), ...exercises.slice(index + 1)]);
   const handleEdit = (index: number) => (update: EditResult) => onEdit && onEdit({ name: update.value }, index); // TODO: handle error
   const handleAdd = ({value: name, error }: EditResult) => { // TODO: type
@@ -47,10 +48,7 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
             <TextField
               defaultValue={exercise.name}
               inputProps={{required: true}}
-              style={{
-                paddingLeft: theme.spacing(4),
-                paddingRight: theme.spacing(1),
-              }}
+              className={classes.textfield}
             />
           }
           displayEl={

@@ -12,6 +12,11 @@ const useStyles = makeStyles(theme => ({
     height: theme.variables.avatar.height,
     gridArea: 'avatar',
   },
+  textfield: {
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    textAlign: 'center',
+  },
 }));
 
 export interface AvatarEditProps extends BoxProps, AvatarProps {
@@ -38,6 +43,7 @@ const AvatarEdit: React.FC<AvatarEditProps> = ({ text, onUpdate, ...rootProps })
         <TextField
           inputProps={{minLength: 2, maxLength: 2, required: true}}
           defaultValue={text}
+          className={classes.textfield}
         />
       }
       displayEl={

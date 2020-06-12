@@ -71,7 +71,7 @@ const TOOLBAR_HEIGHT = SPACING * 6; // MuiToolbar variant dense
 
 const variables = {
   avatar: {
-    height: SPACING * 14,
+    height: SPACING * 16,
   },
   countdown: {
     height: SPACING * 16,

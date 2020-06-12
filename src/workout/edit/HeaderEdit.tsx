@@ -1,4 +1,4 @@
-import { Box, BoxProps, TextField, useTheme } from '@material-ui/core';
+import { Box, BoxProps, makeStyles, TextField, useTheme } from '@material-ui/core';
 import React from 'react';
 import CardDescription from '../../shared/card/CardDescription';
 import CardText from '../../shared/card/CardText';
@@ -9,6 +9,12 @@ import { WorkoutData } from '../store';
 import AvatarEdit from './AvatarEdit';
 import HeaderAction from './HeaderAction';
 
+const useStyles = makeStyles(theme => ({
+  textfield: {
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+  },
+}));
 
 export interface HeaderProps extends BoxProps {
   workout: WorkoutData;
@@ -27,8 +33,9 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
     const result = { value: {[key]: updatedValue }, error } 
     onUpdate(result);
   }
-
   const theme = useTheme();
+  const classes = useStyles(theme);
+
   return (
     <Box
       display='grid'
@@ -54,6 +61,8 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
             inputEl={
               <TextField
                 defaultValue={title}
+                inputProps={{required: true}}
+                className={classes.textfield}
               />
             }
             displayEl={
@@ -70,8 +79,10 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
             inputEl={
               <TextField
                 defaultValue={description}
+                inputProps={{required: true}}
                 multiline
                 rows={3}
+                className={classes.textfield}
               />
             }
             displayEl={
