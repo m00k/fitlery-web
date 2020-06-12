@@ -1,19 +1,13 @@
-import { Box, BoxProps, makeStyles, TextField, useTheme } from '@material-ui/core';
+import { Box, BoxProps, useTheme } from '@material-ui/core';
 import React from 'react';
-import CardDescription from '../../shared/card/CardDescription';
 import CardText from '../../shared/card/CardText';
 import { EditResult } from '../../shared/EditText';
-import EditToggle from '../../shared/EditToggle';
 import { WorkoutData } from '../store';
 import AvatarEdit from './AvatarEdit';
+import CardDescriptionEdit from './CardDescriptionEdit';
 import CardTitleEdit from './CardTitleEdit';
 import HeaderAction from './HeaderAction';
 
-const useStyles = makeStyles(theme => ({
-  textfield: {
-    padding: theme.spacing(1),
-  },
-}));
 
 export interface HeaderProps extends BoxProps {
   workout: WorkoutData;
@@ -33,7 +27,6 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
     onUpdate(result);
   }
   const theme = useTheme();
-  const classes = useStyles(theme);
 
   return (
     <Box
@@ -61,23 +54,10 @@ const HeaderEdit: React.FC<HeaderProps> = ({ workout, onClose, onUpdate, ...root
           />
         }
         description={
-          <EditToggle
+          <CardDescriptionEdit
             gridArea='desc'
-            onOk={handleUpdate('description')}
-            inputEl={
-              <TextField
-                defaultValue={description}
-                inputProps={{required: true}}
-                multiline
-                rows={3}
-                className={classes.textfield}
-              />
-            }
-            displayEl={
-              <CardDescription>
-                {description}
-              </CardDescription>
-            }
+            description={description}
+            onUpdate={handleUpdate('description')}
           />
         }
         gridArea='text'
