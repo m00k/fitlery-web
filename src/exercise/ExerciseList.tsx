@@ -71,6 +71,7 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
          <TextField
           defaultValue='New Exercise'
           inputProps={{required: true}}
+          className={classes.textfield}
          />}
       />}
       <Fab

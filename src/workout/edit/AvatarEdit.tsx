@@ -9,12 +9,11 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     display: 'grid',
     fontSize: theme.typography.h4.fontSize,
-    height: theme.variables.avatar.height,
+    minHeight: theme.variables.avatar.height,
     gridArea: 'avatar',
   },
   textfield: {
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
+    padding: theme.spacing(1),
     textAlign: 'center',
   },
 }));

@@ -11,8 +11,7 @@ import HeaderAction from './HeaderAction';
 
 const useStyles = makeStyles(theme => ({
   textfield: {
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
+    padding: theme.spacing(1),
   },
 }));
 
