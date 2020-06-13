@@ -1,11 +1,11 @@
-import { Box } from '@material-ui/core';
-import React, { PropsWithChildren } from 'react';
+import { Box, BoxProps } from '@material-ui/core';
+import React from 'react';
 
-interface CardProps {
+interface CardProps extends BoxProps {
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-const Card = ({ children, onClick }: PropsWithChildren<CardProps>) => {
+const Card: React.FC<CardProps> = ({ children, onClick, ...rootProps }) => {
   return (
     <Box
       data-testid='card'
@@ -14,6 +14,7 @@ const Card = ({ children, onClick }: PropsWithChildren<CardProps>) => {
       gridColumn={['span 6', 'span 4', 'span 3']}
       gridTemplateRows='5fr 2fr'
       boxShadow={8}
+      {...rootProps}
       onClick={onClick}
     >
       {children}

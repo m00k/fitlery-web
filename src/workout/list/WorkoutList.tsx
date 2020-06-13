@@ -8,6 +8,7 @@ import { WorkoutData } from '../store/state';
 import toPlaylistData from '../toPlaylistData';
 import { ContextMenuOption } from './ContextMenu';
 import Workout from './Workout';
+import AddWorkout from './AddWorkout';
 
 
 export default function WorkoutList() {
@@ -46,6 +47,9 @@ export default function WorkoutList() {
       gridGap={theme.spacing(1)}
       m={1}
     >
+      <AddWorkout 
+        onClick={workout => console.log('##################', workout)}
+      />
       {workouts.map((workout: WorkoutData, index: number) => (
         <Workout
           key={workout.id}
