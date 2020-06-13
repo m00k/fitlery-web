@@ -18,6 +18,12 @@ export default function WorkoutList() {
   const [workoutState, workoutDispatch] = useWorkoutStore();
   const { items: workouts } = workoutState;
   
+  const handleAddWorkout = (workout: WorkoutData) => {
+    const { short, id } = workout;
+    workoutDispatch.add(workout);
+    history.push(`/workouts/${short}/${id}`);
+  };
+
   const handleCardClick = (workout: WorkoutData, index: number) => {
     workoutDispatch.select(index);
     const playlist = toPlaylistData(workout);
@@ -48,7 +54,7 @@ export default function WorkoutList() {
       m={1}
     >
       <AddWorkout 
-        onClick={workout => console.log('##################', workout)}
+        onClick={handleAddWorkout}
       />
       {workouts.map((workout: WorkoutData, index: number) => (
         <Workout
