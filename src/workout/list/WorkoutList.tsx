@@ -25,14 +25,14 @@ export default function WorkoutList() {
   }
 
   const handleContextMenuClick = (workout: WorkoutData, index: number, menuOption: ContextMenuOption) => {
+    const { id, short } = workout;
     workoutDispatch.select(index);
     switch (menuOption) {
       case 'delete':
         workoutDispatch.delete();
         break;
       case 'edit':
-        const { title } = workout;
-        history.push(`/workouts/${title}`); // TODO: bad idea: encoding missing, uniqueness questionable, ...
+        history.push(`/workouts/${short}/${id}`);
         break;
       default:
         throw Error(`unknowkn menu option ${menuOption}`);
@@ -48,7 +48,7 @@ export default function WorkoutList() {
     >
       {workouts.map((workout: WorkoutData, index: number) => (
         <Workout
-          key={workout.title}
+          key={workout.id}
           workout={workout}
           onCardClick={() => handleCardClick(workout, index)}
           onContextMenuClick={handleContextMenuClick.bind(globalThis, workout, index)}

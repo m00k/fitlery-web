@@ -5,13 +5,13 @@ import { useWorkoutStore, WorkoutActionDispatchers, WorkoutData } from '../store
 const useWorkout = (notFound: () => void): [WorkoutData, WorkoutActionDispatchers] => {
   const [workoutState, workoutDispatch] = useWorkoutStore();
   const { items: workouts, currentItemIndex } = workoutState;
-  const { title } = useParams();
+  const { id } = useParams();
   const workout = workouts[currentItemIndex];
   useEffect(() => {
     if (workout) {
       return;
     }
-    const index = workouts.findIndex(w => w.title === title);
+    const index = workouts.findIndex(w => w.id === id);
     if (index > -1) {
       workoutDispatch.select(index);
     } else {

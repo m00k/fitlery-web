@@ -5,6 +5,7 @@ const NOT_FOUND = -1;
 
 // TODO: naming conventions: interfaces vs models
 export interface WorkoutData {
+  id: string;
   short: string;
   title: string;
   description: string;

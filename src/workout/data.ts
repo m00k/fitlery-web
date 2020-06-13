@@ -5,6 +5,7 @@ const SEC = 1000;
 // TODO: storage
 export const workouts: WorkoutData[] = [
   { 
+    id: '0007-8238-0868-fe98',
     short: '18',
     title: '18min',
     description: '12 exercises that will make the 12 labors of hercules look like a walk in the park',
@@ -30,6 +31,7 @@ export const workouts: WorkoutData[] = [
     ]
   },
   { 
+    id: 'ba98-94f8-2c1a-9408',
     short: 'TB',
     title: 'TABATA',
     description: 'Hakuna Tabata?',
@@ -44,6 +46,7 @@ export const workouts: WorkoutData[] = [
     ]
   },
   { 
+    id: '9998-1f96-0a08-c0f8',
     short: 'MP',
     title: 'Master Planker',
     description: 'Toughest planker on the block',
@@ -61,6 +64,7 @@ export const workouts: WorkoutData[] = [
     ]
   },
   { 
+    id: '66c7-f1e9-3972-c014',
     short: 'AB',
     title: 'ABS-olutely fantastic',
     description: 'A six pack is just the beginning',
@@ -76,6 +80,7 @@ export const workouts: WorkoutData[] = [
     ]
   },
   {
+    id: '96e4-f079-4386-4358',
     short: 'OO',
     title: 'Obliques obligatory',
     description: `Should I google that for you?`,
@@ -90,6 +95,7 @@ export const workouts: WorkoutData[] = [
     ]
   },
   {
+    id: 'ba61-0bc7-fea8-b098',
     short: 'JJ',
     title: 'Jump Jack!',
     description: `I don't care what your real name is`,
