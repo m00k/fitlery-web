@@ -7,8 +7,7 @@ export interface CountdownHeaderProps extends PieCountdownProps {
   msLeft: number;
 }
 
-const CountdownHeader: React.FC<CountdownHeaderProps> = (props) => {
-  const { msLeft } = props;
+const CountdownHeader: React.FC<CountdownHeaderProps> = ({ msLeft, ...props }) => {
   return (
     <>
       <PieCountdown
