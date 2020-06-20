@@ -3,6 +3,7 @@ import AddIcon from '@material-ui/icons/Add';
 import React, { useState } from 'react';
 import EditText, { EditResult } from '../shared/EditText';
 import EditToggle from '../shared/EditToggle';
+import uid from '../util/uid';
 import { ExerciseData, exercises as sampleData } from './data';
 import Exercise from './Exercise';
 
@@ -45,7 +46,7 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
       {exercises.map((exercise: ExerciseData, i: number) =>
         <EditToggle
           fontSize={theme.typography.h4.fontSize}
-          key={exercise.name}
+          key={uid()}
           onOk={handleEdit(i)}
           inputEl={
             <TextField
