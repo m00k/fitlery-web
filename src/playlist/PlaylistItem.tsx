@@ -1,4 +1,4 @@
-import { Box, BoxProps, Chip } from '@material-ui/core';
+import { Box, Chip, makeStyles, Theme } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { PlaylistItemData } from './store';
@@ -7,34 +7,28 @@ export function isBreakItem(item: PlaylistItemData) {
   return item && !!item.tags && item.tags.isBreak;
 }
 
-const useStyles = (isCurrent: boolean) => {
-  const theme = useTheme();
-  const bgcolor = theme.palette.background.paper;
-  const color = theme.palette.primary.main;
-  const height = theme.variables.playlist.item.height;
-  const root: BoxProps = {
+const useStyles = (isCurrent: boolean) => makeStyles((theme: Theme) => ({
+  root: {
     alignItems: 'center',
-    color,
-    bgcolor,
+    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.background.paper,
     borderColor: theme.palette.primary.main,
     borderLeft: theme.spacing(3),
     display: 'grid',
     gridTemplateColumns: '1fr min-content',
-    height,
-    p: 1,
-    pr: 3,
-    width: 1,
-  };
-  const inner: BoxProps = {
+    height: theme.variables.playlist.item.height,
+    padding: theme.spacing(1),
+    pr: theme.spacing(3),
+    width: '100%',
+  },
+  inner: {
     fontSize: '1.5rem',
     fontWeight: isCurrent ? 'bold' : 'initial',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
-  };
-
-  return { root, inner };
-}
+  }
+}));
 
 export interface PlaylistItemProps{
   item: PlaylistItemData
@@ -44,16 +38,17 @@ export interface PlaylistItemProps{
 
 export default function PlaylistItem(props: PlaylistItemProps) {
   const { isCurrent, item, onClick } = props;
-  const { root, inner } = useStyles(isCurrent);
+  const theme = useTheme();
+  const { root, inner } = useStyles(isCurrent)(theme);
 
   return (
     <Box
-      {...root}
+      className={root}
       onClick={onClick}
     >
       <Box
         component="span"
-        {...inner}
+        className={inner}
       >
         {item.name?.toUpperCase()}
       </Box>
