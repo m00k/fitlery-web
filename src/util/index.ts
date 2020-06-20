@@ -1,3 +1,3 @@
 export * from './id';
-export * from './useScroll';
+export * from './useScrollTo';
 export * from './uid';
