@@ -22,6 +22,7 @@ export const initialState: PlaylistState = {
 }
 
 export interface PlaylistItemData {
+  id: string;
   name: string;
   durationMs: number;
   tags?: {[key: string]: any};

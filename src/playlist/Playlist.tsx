@@ -1,7 +1,6 @@
 import { Box, BoxProps } from '@material-ui/core';
 import React from 'react';
 import usePlayerPageStore from '../player/usePlayerPageStore';
-import uid from '../util/uid';
 import PlaylistItem, { isBreakItem } from './PlaylistItem';
 import { PlaylistItemData } from './store';
 
@@ -38,7 +37,7 @@ const Playlist: React.FC<PlaylistProps> = (rootProps) => {
     >
       {taggedItems.map((item, i) =>
         <PlaylistItem
-          key={uid()}
+          key={item.id}
           item={item as PlaylistItemData}
           isCurrent={item.tags?.highlight}
           onClick={() => dispatch.setCurrentItem(i*2)}

@@ -35,10 +35,10 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const handleDelete = (index: number) => onDelete && onDelete([...exercises.slice(0, index), ...exercises.slice(index + 1)]);
-  const handleEdit = (index: number) => (update: EditResult) => onEdit && onEdit({ name: update.value }, index); // TODO: handle error
+  const handleEdit = (index: number) => (update: EditResult) => onEdit && onEdit({ ...exercises[index], name: update.value }, index); // TODO: handle error
   const handleAdd = ({value: name, error }: EditResult) => { // TODO: type
     setIsAdd(false);
-    onAdd && onAdd({ name });
+    onAdd && onAdd({ id: uid(), name });
   };
 
   return (
@@ -46,7 +46,7 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
       {exercises.map((exercise: ExerciseData, i: number) =>
         <EditToggle
           fontSize={theme.typography.h4.fontSize}
-          key={uid()}
+          key={exercise.id}
           onOk={handleEdit(i)}
           inputEl={
             <TextField
