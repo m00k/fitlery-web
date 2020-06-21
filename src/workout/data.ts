@@ -1,6 +1,6 @@
 import { WorkoutData } from "./store/state";
 
-const SEC = 1000;
+const SEC = 100;
 
 // TODO: storage
 export const workouts: WorkoutData[] = [

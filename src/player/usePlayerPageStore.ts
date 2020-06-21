@@ -13,6 +13,7 @@ export interface PlayerPageState {
 export type PlayerPageAction = PlayerAction | PlaylistActionSet | PlaylistActionSetCurrentItem;
 export type PlayerPageActionDispatchers = { [A in PlayerActionType | Extract<PlaylistActionType, 'set' | 'setCurrentItem'>]: (payload?: any) => void };
 
+// TODO: too many re-renders
 const usePlayerPageStore = (): [PlayerPageState, PlayerPageActionDispatchers] => {
   const [playlistState, playlistDispatch] = usePlaylistStore();
   const [countdownState, countdownDispatch] = useCountdownStore();
@@ -61,8 +62,9 @@ const usePlayerPageStore = (): [PlayerPageState, PlayerPageActionDispatchers] =>
 
   const next = () => {
     if (nextItem) {
-      playlistDispatch.next();
-      countdownDispatch.set(nextItem.durationMs);
+      const nextItemIndex = currentItemIndex + 1;
+      playlistDispatch.setCurrentItem(nextItemIndex);
+      countdownDispatch.set(playlistState.items[nextItemIndex].durationMs);
     } else {
       stop();
     }
