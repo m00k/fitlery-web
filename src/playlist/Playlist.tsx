@@ -32,7 +32,6 @@ const Playlist: React.FC<PlaylistProps> = (rootProps) => {
   const { taggedItems, dispatch } = useStoreData();
   return (
     <Box
-      overflow='auto'
       {...rootProps}
     >
       {taggedItems.map((item, i) =>
