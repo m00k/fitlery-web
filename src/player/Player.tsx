@@ -45,7 +45,7 @@ const Player = () => {
   const { playState } = playerState;
   const top = theme.variables.playlist.item.height;
   useEffect(() => {
-    if (playState === 'playing' && currentItemIndex > 1) {
+    if (playState === 'playing' && currentItemIndex > 1 && currentItemIndex % 2 === 0) {
       ref.current?.scrollBy({ top, behavior: 'smooth' });
     }
   }, [currentItemIndex, playState, top]);
