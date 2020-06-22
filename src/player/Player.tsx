@@ -4,31 +4,11 @@ import { useHistory } from 'react-router-dom';
 import Playlist from '../playlist/Playlist';
 import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
 import Controls from './Controls';
-import Header, { HeaderProps } from './Header';
+import Header from './Header';
 import { PlayerActionType } from './store';
 import { useLayout } from './useLayout';
-import usePlayerPageStore, { PlayerPageState } from './usePlayerPageStore';
+import usePlayerPageStore from './usePlayerPageStore';
 
-
-const buildBannerProps = (state: PlayerPageState, onClose: () => void): HeaderProps => {
-  const { countdownState, playlistState, playerState } = state;
-  const { currentItemIndex, items } = playlistState;
-  const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
-  const { msLeft, msTotal } = countdownState;
-  const { playState } = playerState;
-  const { short, name: title, description } = playlistState;
-
-  return {
-    playState,
-    msLeft,
-    msTotal,
-    currentItem,
-    short,
-    title,
-    description,
-    onClose,
-  }
-}
 
 // TODO: dispatch stop when navigating away
 // TODO: handle empty
@@ -44,6 +24,7 @@ const Player = () => {
   const { currentItemIndex } = playlistState;
   const { playState } = playerState;
   const top = theme.variables.playlist.item.height;
+  const i = useRef<number>(0);
   useEffect(() => {
     if (playState === 'playing' && currentItemIndex > 1 && currentItemIndex % 2 === 0) {
       ref.current?.scrollBy({ top, behavior: 'smooth' });
@@ -56,8 +37,8 @@ const Player = () => {
   }
 
   const onClose = () => history.push(`/`);
-  const bannerProps = buildBannerProps(state, onClose);
   const handleControlsClick = (type: PlayerActionType) => dispatch[type]();
+  console.log('#######################', i.current++);
 
   return (
     <Box
@@ -65,9 +46,8 @@ const Player = () => {
       style={styles.root}
     >
       <Header
-        {...bannerProps}
-      >
-      </Header>
+        onClose={onClose}
+      />
       <Controls
         gridArea='controls'
         playState={playState}

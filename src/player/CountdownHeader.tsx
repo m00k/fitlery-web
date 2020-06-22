@@ -4,18 +4,17 @@ import PieCountdown, { PieCountdownProps } from '../countdown/PieCountdown';
 
 
 export interface CountdownHeaderProps extends PieCountdownProps {
-  msLeft: number;
+
 }
 
-const CountdownHeader: React.FC<CountdownHeaderProps> = ({ msLeft, ...props }) => {
+const CountdownHeader: React.FC<CountdownHeaderProps> = ({...rootProps}) => {
   return (
     <>
       <PieCountdown
-        {...props}
         gridArea='avatar'
       />
       <Countdown
-        msLeft={msLeft}
+        {...rootProps}
         gridArea='text'
       />
     </>

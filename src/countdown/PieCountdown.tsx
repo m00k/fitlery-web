@@ -1,22 +1,30 @@
 import Box, { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React, { FunctionComponent } from 'react';
+import { isBreakItem } from "../playlist/PlaylistItem";
+import { usePlaylistStore } from '../playlist/store';
 import PieSlice from './PieSlice';
+import { useCountdownStore } from './store';
 import useColors from './useColors';
 import withMargin from './withMargin';
 
 
 export interface PieCountdownProps extends BoxProps {
-  fractionDone: number;
-  invertColors: boolean;
-  text: string;
 }
 
 const PieSliceWithMargin = withMargin(PieSlice);
 
-const PieCountdown: FunctionComponent<PieCountdownProps> = ({ fractionDone, invertColors, text, ...rootProps }) => {
+const PieCountdown: FunctionComponent<PieCountdownProps> = ({ ...rootProps }) => {
   const theme = useTheme();
-  const [left, done] = useColors(invertColors);
+  const [ countdownState, ] = useCountdownStore();
+  const { msLeft, msTotal } = countdownState;
+  const fractionDone = 1 - msLeft / msTotal;
+  const [ playlistState, ] = usePlaylistStore();
+  const { items, currentItemIndex } = playlistState;
+  const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
+  const isBreak = isBreakItem(currentItem);
+  const text = isBreak ? 'Ready' : 'Go!';
+  const [ left, done ] = useColors(!isBreak);
 
   return (
     <Box

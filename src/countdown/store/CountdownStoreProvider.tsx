@@ -20,12 +20,12 @@ const CountdownStoreContext = createContext<CountdownStoreContext>([initialState
 
 // TODO: type
 export const CountdownStoreProvider = ({ children }: any) => {
-  const [coundtownState, dispatch] = useReducer<CountdownReducer>(countdownReducer, initialState);
+  const [countdownState, dispatch] = useReducer<CountdownReducer>(countdownReducer, initialState);
   const dispatchers: CountdownActionDispatchers = createActionDispatchers(dispatch);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { setInterval(dispatchers.tick, MS_INTERVAL) }, []); // first render only
   return (
-    <CountdownStoreContext.Provider value={[coundtownState, dispatchers]}>
+    <CountdownStoreContext.Provider value={[countdownState, dispatchers]}>
       {children}
     </CountdownStoreContext.Provider>
   );

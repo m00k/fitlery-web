@@ -1,11 +1,9 @@
-import { useEffect } from 'react';
-import { CountdownState, useCountdownStore } from '../countdown/store';
+import { useCountdownStore } from '../countdown/store';
 import { NOT_FOUND, PlaylistActionSet, PlaylistActionType, PlaylistData, PlaylistState, usePlaylistStore, PlaylistActionSetCurrentItem } from '../playlist/store';
 import { PlayerAction, PlayerActionType, PlayerState, usePlayerStore } from './store';
 
 
 export interface PlayerPageState {
-  countdownState: CountdownState;
   playlistState: PlaylistState;
   playerState: PlayerState;
 }
@@ -13,14 +11,12 @@ export interface PlayerPageState {
 export type PlayerPageAction = PlayerAction | PlaylistActionSet | PlaylistActionSetCurrentItem;
 export type PlayerPageActionDispatchers = { [A in PlayerActionType | Extract<PlaylistActionType, 'set' | 'setCurrentItem'>]: (payload?: any) => void };
 
-// TODO: too many re-renders
+// TODO: too many re-renders -> countdown.tick!
 const usePlayerPageStore = (): [PlayerPageState, PlayerPageActionDispatchers] => {
   const [playlistState, playlistDispatch] = usePlaylistStore();
-  const [countdownState, countdownDispatch] = useCountdownStore();
+  const [, countdownDispatch] = useCountdownStore();
   const [playerState, playerDispatch] = usePlayerStore();
-  const state = { countdownState, playlistState, playerState };
-  const { msLeft } = countdownState;
-  const isZero = msLeft === 0;
+  const state = { playlistState, playerState };
   const { currentItemIndex, items } = playlistState;
   const currentItem = items[Math.max(currentItemIndex, 0)];
   const nextItem = items[currentItemIndex + 1];
@@ -79,12 +75,6 @@ const usePlayerPageStore = (): [PlayerPageState, PlayerPageActionDispatchers] =>
       countdownDispatch.set(playlistState.items[index].durationMs);
     }
   };
-
-  useEffect(() => {
-    if (isZero) {
-      next();
-    }
-  }, [isZero]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
   // TODO: calling this one a dispatcher is maybe a little far fetched...

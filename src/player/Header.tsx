@@ -1,38 +1,20 @@
-import React, { ReactNode } from 'react';
-import { isBreakItem } from "../playlist/PlaylistItem";
-import { PlaylistItemData } from "../playlist/store";
-import CountdownHeader, { CountdownHeaderProps } from './CountdownHeader';
+import React from 'react';
+import CountdownHeader from './CountdownHeader';
 import HeaderAction from './HeaderAction';
 import PlayerHeader from './WorkoutHeader';
-import { PlayState } from "./store";
+import usePlayerPageStore from './usePlayerPageStore';
+
 
 export interface HeaderProps {
-  short: string;
-  title: string;
-  description: string;
-  playState: PlayState;
-  msLeft: number;
-  msTotal: number;
-  children?: ReactNode;
-  currentItem: PlaylistItemData;
   onClose: () => void;
 }
 
-const buildCountdownHeaderProps = ({ currentItem, msLeft, msTotal }: Pick<HeaderProps, 'currentItem' | 'msLeft' | 'msTotal'>): CountdownHeaderProps => {
-  const fractionDone = 1 - msLeft / msTotal;
-  const isBreak = isBreakItem(currentItem);
-  const text = isBreak ? 'Ready' : 'Go!';
-  return {
-    fractionDone,
-    invertColors: isBreak,
-    msLeft,
-    text,
-  };
-}
-
 const Header: React.FC<HeaderProps> = (props) => {
-  const { description, playState, short, title, onClose } = props;
-  const countdownHeaderProps = buildCountdownHeaderProps( props );
+  const { onClose } = props;
+  const [ state, ] = usePlayerPageStore();
+  const { playlistState, playerState } = state;
+  const { playState } = playerState;
+  const { short, name: title, description } = playlistState;
   const HeaderImpl = playState === 'stopped'
     ? (
       <PlayerHeader
@@ -42,9 +24,7 @@ const Header: React.FC<HeaderProps> = (props) => {
       />
     )
     : (
-      <CountdownHeader
-        {...countdownHeaderProps}
-      />
+      <CountdownHeader />
     );
   return (
     <>
