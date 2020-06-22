@@ -30,6 +30,7 @@ export interface PlaylistProps extends BoxProps {
 
 const Playlist: React.FC<PlaylistProps> = (rootProps) => {
   const { taggedItems, dispatch } = useStoreData();
+
   return (
     <Box
       {...rootProps}

@@ -3,11 +3,11 @@ import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import Playlist from '../playlist/Playlist';
 import PlaylistItemCurrent from '../playlist/PlaylistItemCurrent';
+import { usePlaylistStore } from '../playlist/store';
 import Controls from './Controls';
 import Header from './Header';
-import { PlayerActionType } from './store';
+import { usePlayerStore } from './store';
 import { useLayout } from './useLayout';
-import usePlayerPageStore from './usePlayerPageStore';
 
 
 // TODO: dispatch stop when navigating away
@@ -18,27 +18,23 @@ const Player = () => {
   const theme = useTheme();
   const ref = useRef<HTMLDivElement>(null);
   
-  const [state, dispatch] = usePlayerPageStore();
-  const { playlistState } = state;
-  const { playerState } = state;
+  const [ playlistState ] = usePlaylistStore();
+  const [ playerState ] = usePlayerStore();
   const { currentItemIndex } = playlistState;
   const { playState } = playerState;
   const top = theme.variables.playlist.item.height;
-  const i = useRef<number>(0);
   useEffect(() => {
     if (playState === 'playing' && currentItemIndex > 1 && currentItemIndex % 2 === 0) {
       ref.current?.scrollBy({ top, behavior: 'smooth' });
     }
   }, [currentItemIndex, playState, top]);
-
+  
   if (!playlistState || !playlistState.items.length) {
     history.push(`/workouts`);
     return null;
   }
-
+  
   const onClose = () => history.push(`/`);
-  const handleControlsClick = (type: PlayerActionType) => dispatch[type]();
-  console.log('#######################', i.current++);
 
   return (
     <Box
@@ -51,7 +47,6 @@ const Player = () => {
       <Controls
         gridArea='controls'
         playState={playState}
-        onClick={handleControlsClick}
       />
       <PlaylistItemCurrent
         gridArea='current'
