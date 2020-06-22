@@ -1,8 +1,9 @@
 import React from 'react';
+import { usePlaylistStore } from '../playlist/store';
 import CountdownHeader from './CountdownHeader';
 import HeaderAction from './HeaderAction';
+import { usePlayerStore } from './store';
 import PlayerHeader from './WorkoutHeader';
-import usePlayerPageStore from './usePlayerPageStore';
 
 
 export interface HeaderProps {
@@ -11,8 +12,8 @@ export interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = (props) => {
   const { onClose } = props;
-  const [ state, ] = usePlayerPageStore();
-  const { playlistState, playerState } = state;
+  const [ playlistState, ] = usePlaylistStore();
+  const [ playerState, ] = usePlayerStore();
   const { playState } = playerState;
   const { short, name: title, description } = playlistState;
   const HeaderImpl = playState === 'stopped'

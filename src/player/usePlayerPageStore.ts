@@ -14,7 +14,7 @@ export type PlayerPageActionDispatchers = { [A in PlayerActionType | Extract<Pla
 // TODO: too many re-renders -> countdown.tick!
 const usePlayerPageStore = (): [PlayerPageState, PlayerPageActionDispatchers] => {
   const [playlistState, playlistDispatch] = usePlaylistStore();
-  const [, countdownDispatch] = useCountdownStore();
+  const [, countdownDispatch] = useCountdownStore(); // even if state is never used, a rerender will happen on each tick
   const [playerState, playerDispatch] = usePlayerStore();
   const state = { playlistState, playerState };
   const { currentItemIndex, items } = playlistState;

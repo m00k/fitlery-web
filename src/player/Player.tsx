@@ -17,7 +17,6 @@ const Player = () => {
   const styles = useLayout();
   const theme = useTheme();
   const ref = useRef<HTMLDivElement>(null);
-  
   const [ playlistState ] = usePlaylistStore();
   const [ playerState ] = usePlayerStore();
   const { currentItemIndex } = playlistState;

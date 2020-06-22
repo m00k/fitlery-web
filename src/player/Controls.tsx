@@ -54,9 +54,6 @@ const Controls: React.FC<ControlsProps> = ({ playState, ...rootProps }) => {
     dispatch[type]();
   }
 
-  const i = React.useRef<number>(0);
-  console.log('#######################', i.current++);
-
   return (
     <Box
       {...useProps(rootProps)}
