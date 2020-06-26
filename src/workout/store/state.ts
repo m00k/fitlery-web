@@ -1,16 +1,16 @@
+import { atom } from "recoil";
 import { ExerciseData } from "../../exercise/data";
 import { workouts } from "../data";
 
 const NOT_FOUND = -1;
 
-// TODO: naming conventions: interfaces vs models
 export interface WorkoutData {
   id: string;
   short: string;
   title: string;
   description: string;
-  workMs: number,
-  breakMs: number,
+  workMs: number;
+  breakMs: number;
   exercises: ExerciseData[];
 }
 
@@ -23,3 +23,8 @@ export const initialState: WorkoutState = {
   items: workouts,  // TODO: real data
   currentItemIndex: NOT_FOUND,
 }
+
+export const workoutAtom = atom({
+  key: 'workoutState',
+  default: initialState,
+});

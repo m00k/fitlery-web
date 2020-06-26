@@ -1,13 +1,13 @@
+import { WorkoutActionType } from './actions';
 import { WorkoutState } from './state';
-import { WorkoutAction, isWorkoutActionAdd, isWorkoutActionDelete, isWorkoutActionLoadSuccess, isWorkoutActionSelect, isWorkoutActionUpdate } from './actions';
 
 
 export const NOT_FOUND = -1;
 
-export type WorkoutReducer = (state: WorkoutState, action: WorkoutAction) => WorkoutState
+export type WorkoutReducerFn = (state: WorkoutState, payload?: any) => WorkoutState
+export type WorkoutReducer = {[A in WorkoutActionType]: WorkoutReducerFn};
 
-const add = (state: WorkoutState, action: WorkoutAction): WorkoutState => {
-  const { workout } = action.payload;
+const add: WorkoutReducerFn = (state, workout) => {
   return {
     ...state,
     items: [ workout, ...state.items ],
@@ -27,27 +27,24 @@ const deleteItem = (state: WorkoutState): WorkoutState => {
   }
 }
 
-const loadSuccess = (state: WorkoutState, action: WorkoutAction): WorkoutState => {
-  const { workouts } = action.payload;
+const loadSuccess: WorkoutReducerFn = (state, workouts) => {
   return {
     ...state,
     items: workouts,
   }
 }
 
-const select = (state: WorkoutState, action: WorkoutAction): WorkoutState => {
-  const { index } = action.payload;
+const select: WorkoutReducerFn = (state, index) => {
   return {
     ...state,
     currentItemIndex: index,
   }
 }
 
-const update = (state: WorkoutState, action: WorkoutAction): WorkoutState => {
+const update: WorkoutReducerFn = (state, workout) => {
   if ( state.currentItemIndex === NOT_FOUND ) {
     return state;
   }
-  const { workout } = action.payload;
   return {
     ...state,
     items: [
@@ -58,21 +55,10 @@ const update = (state: WorkoutState, action: WorkoutAction): WorkoutState => {
   }
 }
 
-export const workoutReducer: WorkoutReducer = (state: WorkoutState, action: WorkoutAction) => {
-  if (isWorkoutActionAdd(action)) {
-    return add(state, action);
-  }
-  if (isWorkoutActionSelect(action)) {
-    return select(state, action);
-  }
-  if (isWorkoutActionDelete(action)) {
-    return deleteItem(state);
-  }
-  if (isWorkoutActionLoadSuccess(action)) {
-    return loadSuccess(state, action);
-  }
-  if (isWorkoutActionUpdate(action)) {
-    return update(state, action);
-  }
-  return state;
+export const workoutReducer: WorkoutReducer =  {
+  add,
+  delete: deleteItem,
+  loadSuccess,
+  select,
+  update,
 }

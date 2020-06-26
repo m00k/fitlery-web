@@ -6,7 +6,7 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import React from 'react';
 import { PlayerActionType, PlayState } from './store/';
-import usePlayerPageStore from './usePlayerPageStore';
+import usePlayerPageDispatcher from './usePlayerPageDispatcher';
 
 interface ControlButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -49,7 +49,7 @@ export interface ControlsProps extends BoxProps {
 }
 
 const Controls: React.FC<ControlsProps> = ({ playState, ...rootProps }) => {
-  const [ , dispatch ] = usePlayerPageStore();
+  const dispatch = usePlayerPageDispatcher();
   const onClick = (type: PlayerActionType) => {
     dispatch[type]();
   }

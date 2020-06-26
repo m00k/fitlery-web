@@ -1,12 +1,13 @@
 import { Box, BoxProps, Typography } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import { isBreakItem } from './PlaylistItem';
-import { NOT_FOUND, usePlaylistStore } from './store';
+import { NOT_FOUND, playlistAtom } from './store';
 
 
 const useInnerStyles = () => {
-  const [playlistState] = usePlaylistStore();
+  const playlistState = useRecoilValue(playlistAtom);
   const { currentItemIndex, items } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
   const fontSize = isBreakItem(currentItem)

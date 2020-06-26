@@ -1,3 +1,6 @@
+import { atom } from "recoil";
+
+
 export type PlayState = 'playing' | 'paused' | 'stopped';
 
 export interface PlayerState {
@@ -7,3 +10,8 @@ export interface PlayerState {
 export const initialState: PlayerState = {
   playState: 'stopped',
 }
+
+export const playerAtom = atom({
+  key: 'playerState',
+  default: initialState,
+});

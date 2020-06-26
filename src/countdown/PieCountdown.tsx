@@ -1,10 +1,11 @@
 import Box, { BoxProps } from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React, { FunctionComponent } from 'react';
+import { useRecoilValue } from 'recoil';
 import { isBreakItem } from "../playlist/PlaylistItem";
-import { usePlaylistStore } from '../playlist/store';
+import { playlistAtom } from '../playlist/store';
 import PieSlice from './PieSlice';
-import { useCountdownStore } from './store';
+import { countdownAtom } from './store';
 import useColors from './useColors';
 import withMargin from './withMargin';
 
@@ -16,10 +17,10 @@ const PieSliceWithMargin = withMargin(PieSlice);
 
 const PieCountdown: FunctionComponent<PieCountdownProps> = ({ ...rootProps }) => {
   const theme = useTheme();
-  const [ countdownState, ] = useCountdownStore();
+  const countdownState = useRecoilValue(countdownAtom);
   const { msLeft, msTotal } = countdownState;
   const fractionDone = 1 - msLeft / msTotal;
-  const [ playlistState, ] = usePlaylistStore();
+  const playlistState = useRecoilValue(playlistAtom);
   const { items, currentItemIndex } = playlistState;
   const currentItem = currentItemIndex > -1 ? items[currentItemIndex] : items[0];
   const isBreak = isBreakItem(currentItem);

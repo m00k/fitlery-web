@@ -3,13 +3,10 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 import App from './App';
-import { CountdownStoreProvider } from './countdown/store';
-import { PlayerStoreProvider } from './player/store';
-import { PlaylistStoreProvider } from './playlist/store';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme/theme';
-import { WorkoutStoreProvider } from './workout/store';
 
 
 ReactDOM.render(
@@ -17,15 +14,9 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <CountdownStoreProvider>
-          <PlaylistStoreProvider>
-            <PlayerStoreProvider>
-              <WorkoutStoreProvider>
-                <App />
-              </WorkoutStoreProvider>
-            </PlayerStoreProvider>
-          </PlaylistStoreProvider>
-        </CountdownStoreProvider>
+        <RecoilRoot>
+          <App />
+        </RecoilRoot>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,

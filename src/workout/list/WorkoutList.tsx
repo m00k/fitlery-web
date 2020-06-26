@@ -2,41 +2,42 @@ import { Box } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import usePlayerPageStore from '../../player/usePlayerPageStore';
-import { useWorkoutStore } from '../store';
-import { WorkoutData } from '../store/state';
+import { useRecoilState } from 'recoil';
+import usePlayerPageDispatcher from '../../player/usePlayerPageDispatcher';
+import { workoutReducer } from '../store';
+import { workoutAtom, WorkoutData } from '../store/state';
 import toPlaylistData from '../toPlaylistData';
+import AddWorkout from './AddWorkout';
 import { ContextMenuOption } from './ContextMenu';
 import Workout from './Workout';
-import AddWorkout from './AddWorkout';
 
 
 export default function WorkoutList() {
   const theme = useTheme();
   const history = useHistory();
-  const [, playerPageDispatch] = usePlayerPageStore();
-  const [workoutState, workoutDispatch] = useWorkoutStore();
+  const dispatch = usePlayerPageDispatcher();
+  const [workoutState, setWorkoutState] = useRecoilState(workoutAtom);
   const { items: workouts } = workoutState;
   
   const handleAddWorkout = (workout: WorkoutData) => {
     const { short, id } = workout;
-    workoutDispatch.add(workout);
+    setWorkoutState(state => workoutReducer.add(state, workout));
     history.push(`/workouts/${short}/${id}`);
   };
 
   const handleCardClick = (workout: WorkoutData, index: number) => {
-    workoutDispatch.select(index);
+    setWorkoutState(state => workoutReducer.select(state, index));
     const playlist = toPlaylistData(workout);
-    playerPageDispatch.set(playlist);
+    dispatch.set(playlist); // TODO: rather do that via navigation
     history.push(`/player`); // TODO: magic strings
   }
 
   const handleContextMenuClick = (workout: WorkoutData, index: number, menuOption: ContextMenuOption) => {
     const { id, short } = workout;
-    workoutDispatch.select(index);
+    setWorkoutState(state => workoutReducer.select(state, index));
     switch (menuOption) {
       case 'delete':
-        workoutDispatch.delete();
+        setWorkoutState(workoutReducer.delete);
         break;
       case 'edit':
         history.push(`/workouts/${short}/${id}`);

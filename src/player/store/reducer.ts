@@ -1,38 +1,37 @@
-import { isPlayerActionPause, isPlayerActionPlay, isPlayerActionStop, PlayerAction } from "./actions";
 import { PlayerState } from "./state";
+import { PlayerActionType } from "./actions";
 
-export type PlayerReducer = (state: PlayerState, action: PlayerAction) => PlayerState
+export type PlayerReducerFn = (state: PlayerState, payload?: any) => PlayerState;
 
-const play = (state: PlayerState): PlayerState => {
+const play: PlayerReducerFn = state => {
   return {
     ...state,
     playState: 'playing',
   }
 }
 
-const pause = (state: PlayerState): PlayerState => {
+const pause: PlayerReducerFn = state => {
   return {
     ...state,
     playState: 'paused',
   }
 }
 
-const stop = (state: PlayerState): PlayerState => {
+const stop: PlayerReducerFn = state => {
   return {
     ...state,
     playState: 'stopped',
   }
 }
 
-export const playerReducer: PlayerReducer = (state: PlayerState, action: PlayerAction) => {
-  if (isPlayerActionPlay(action)) {
-    return play(state);
-  }
-  if (isPlayerActionPause(action)) {
-    return pause(state);
-  }
-  if (isPlayerActionStop(action)) {
-    return stop(state);
-  }
-  return state;
+const prev: PlayerReducerFn = state => state;
+
+const next: PlayerReducerFn = state => state;
+
+export const playerReducer: {[A in PlayerActionType]: PlayerReducerFn} = {
+  play,
+  pause,
+  stop,
+  prev,
+  next,
 }

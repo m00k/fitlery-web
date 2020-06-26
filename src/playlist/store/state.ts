@@ -1,3 +1,5 @@
+import { atom } from "recoil";
+
 const NOT_FOUND = -1;
 const EMPTY = '';
 
@@ -27,3 +29,8 @@ export interface PlaylistItemData {
   durationMs: number;
   tags?: {[key: string]: any};
 }
+
+export const playlistAtom = atom({
+  key: 'playlistState',
+  default: initialState,
+});

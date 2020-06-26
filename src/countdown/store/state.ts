@@ -1,3 +1,6 @@
+import { atom } from "recoil";
+
+
 export const MS_INTERVAL = 100; // TODO
 const MS_TOTAL = 3000; // TODO
 
@@ -12,3 +15,8 @@ export const initialState: CountdownState = {
   msTotal: MS_TOTAL,
   isRunning: false,
 }
+  
+export const countdownAtom = atom({
+  key: 'countdownState',
+  default: initialState,
+});

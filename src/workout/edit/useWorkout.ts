@@ -1,9 +1,12 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useWorkoutStore, WorkoutActionDispatchers, WorkoutData } from '../store';
+import { useRecoilState } from 'recoil';
+import { workoutAtom, WorkoutData, workoutReducer } from '../store';
 
-const useWorkout = (notFound: () => void): [WorkoutData, WorkoutActionDispatchers] => {
-  const [workoutState, workoutDispatch] = useWorkoutStore();
+
+// TODO: rtfm on how to init route w/ data
+const useWorkout = (notFound: () => void): WorkoutData | undefined => {
+  const [workoutState, setWorkoutState] = useRecoilState(workoutAtom);
   const { items: workouts, currentItemIndex } = workoutState;
   const { id } = useParams();
   const workout = workouts[currentItemIndex];
@@ -13,12 +16,12 @@ const useWorkout = (notFound: () => void): [WorkoutData, WorkoutActionDispatcher
     }
     const index = workouts.findIndex(w => w.id === id);
     if (index > -1) {
-      workoutDispatch.select(index);
+      setWorkoutState(state => workoutReducer.select(state, { index }));
     } else {
       notFound();
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  return [workout, workoutDispatch];
+  return workout;
 }
 
 export default useWorkout;
