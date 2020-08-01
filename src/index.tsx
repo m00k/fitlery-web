@@ -7,6 +7,7 @@ import { RecoilRoot } from 'recoil';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme/theme';
+import WorkoutStatePersist from './workout/store/workout-state-persist';
 
 
 ReactDOM.render(
@@ -15,6 +16,7 @@ ReactDOM.render(
       <CssBaseline />
       <BrowserRouter>
         <RecoilRoot>
+          <WorkoutStatePersist />
           <App />
         </RecoilRoot>
       </BrowserRouter>

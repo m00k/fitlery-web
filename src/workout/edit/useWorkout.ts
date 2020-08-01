@@ -10,6 +10,7 @@ const useWorkout = (notFound: () => void): WorkoutData | undefined => {
   const { items: workouts, currentItemIndex } = workoutState;
   const { id } = useParams();
   const workout = workouts[currentItemIndex];
+
   useEffect(() => {
     if (workout) {
       return;
