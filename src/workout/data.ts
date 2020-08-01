@@ -1,3 +1,4 @@
+// TODO: remove sample data
 import { WorkoutData } from "./store/state";
 
 const SEC = 1000;

@@ -1,15 +1,17 @@
-import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { workoutAtom } from './state';
+import React, { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 import { persistState } from '../../util';
+import { workoutAtom, WorkoutState } from './state';
 
 export const WORKOUT_STATE_KEY = 'workout';
 
 const WorkoutStatePersist: React.FC = () => {
-  const [workoutState, ] = useRecoilState(workoutAtom);
+  const workoutState = useRecoilValue(workoutAtom);
+
   useEffect(() => {
-    persistState(WORKOUT_STATE_KEY, workoutState);
+    persistState<WorkoutState>(WORKOUT_STATE_KEY, workoutState);
   }, [workoutState]);
+
   return null;
 }
 

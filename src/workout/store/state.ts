@@ -1,6 +1,7 @@
 import { atom } from "recoil";
 import { ExerciseData } from "../../exercise/data";
-import { workouts } from "../data";
+import { loadState } from "../../util";
+import { WORKOUT_STATE_KEY } from "./workout-state-persist";
 
 const NOT_FOUND = -1;
 
@@ -20,11 +21,11 @@ export interface WorkoutState {
 }
 
 export const initialState: WorkoutState = {
-  items: workouts,  // TODO: real data
+  items: [],
   currentItemIndex: NOT_FOUND,
 }
 
 export const workoutAtom = atom({
   key: 'workoutState',
-  default: initialState,
+  default: loadState<WorkoutState>(WORKOUT_STATE_KEY) || initialState,
 });
