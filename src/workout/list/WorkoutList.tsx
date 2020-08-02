@@ -20,7 +20,6 @@ export default function WorkoutList() {
   const { items: workouts } = workoutState;
   
   const handleAddWorkout = (workout: WorkoutData) => {
-    debugger;
     const { short, id } = workout;
     setWorkoutState(state => workoutReducer.add(state, workout));
     history.push(`${process.env.PUBLIC_URL}/workouts/${short}/${id}`);

@@ -1,15 +1,15 @@
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import ExerciseList from './exercise/ExerciseList';
 import Main from './Main';
 import BottomNavigation from './navigation/BottomNavigation';
 import TopNavigation from './navigation/TopNavigation';
 import Player from './player/Player';
+import UnderConstruction from './shared/UnderConstruction';
 import WorkoutEdit from './workout/edit/WorkoutEdit';
 import WorkoutList from './workout/list/WorkoutList';
-import UnderConstruction from './shared/UnderConstruction';
 
 const App = () => { 
   const theme = useTheme();
@@ -32,6 +32,9 @@ const App = () => {
         <Route path={`${process.env.PUBLIC_URL}/recents`} component={UnderConstruction} />
         <Route path={`${process.env.PUBLIC_URL}/favorites`} component={UnderConstruction} />
         <Route exact path={`${process.env.PUBLIC_URL}/`} component={WorkoutList} />
+        <Route >
+          <Redirect to={`${process.env.PUBLIC_URL}/`} />
+        </Route>
       </Main>
       <BottomNavigation />
     </Box>

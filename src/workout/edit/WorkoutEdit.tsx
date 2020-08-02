@@ -14,7 +14,7 @@ import useWorkout from './useWorkout';
 const WorkoutEdit: React.FC<any> = () => {
   const setWorkoutState = useSetRecoilState(workoutAtom);
   const history = useHistory();
-  const notFound = () => history.push(`/workouts`);
+  const notFound = () => history.push(`${process.env.PUBLIC_URL}/workouts`);
   const workout = useWorkout(notFound);
   if (!workout) {
     return null;

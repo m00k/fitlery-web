@@ -17,7 +17,7 @@ const useWorkout = (notFound: () => void): WorkoutData | undefined => {
     }
     const index = workouts.findIndex(w => w.id === id);
     if (index > -1) {
-      setWorkoutState(state => workoutReducer.select(state, { index }));
+      setWorkoutState(state => workoutReducer.select(state, index));
     } else {
       notFound();
     }

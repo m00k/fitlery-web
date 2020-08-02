@@ -71,7 +71,12 @@ function newWorkout() {
     description: (new Date()).toLocaleDateString(),
     breakMs: 30000,
     workMs: 60000,
-    exercises: []
+    exercises: [
+      {
+        name: "New Excercise",
+        id: "46c7-4d11-yca1-eg87"
+      },
+    ]
   };
   return workout;
 }
