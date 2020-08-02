@@ -25,13 +25,13 @@ const App = () => {
     >
       <TopNavigation />
       <Main>
-        <Route path="/workouts/:short/:id" component={WorkoutEdit} />
-        <Route exact path="/workouts" component={WorkoutList} />
-        <Route exact path="/player" component={Player} />
-        <Route path="/exercises" component={ExerciseList} />
-        <Route path="/recents" component={UnderConstruction} />
-        <Route path="/favorites" component={UnderConstruction} />
-        <Route exact path ="/" component={WorkoutList} />
+        <Route path={`${process.env.PUBLIC_URL}/workouts/:short/:id`} component={WorkoutEdit} />
+        <Route exact path={`${process.env.PUBLIC_URL}/workouts`} component={WorkoutList} />
+        <Route exact path={`${process.env.PUBLIC_URL}/player`} component={Player} />
+        <Route path={`${process.env.PUBLIC_URL}/exercises`} component={ExerciseList} />
+        <Route path={`${process.env.PUBLIC_URL}/recents`} component={UnderConstruction} />
+        <Route path={`${process.env.PUBLIC_URL}/favorites`} component={UnderConstruction} />
+        <Route exact path={`${process.env.PUBLIC_URL}/`} component={WorkoutList} />
       </Main>
       <BottomNavigation />
     </Box>

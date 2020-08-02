@@ -21,7 +21,7 @@ const WorkoutEdit: React.FC<any> = () => {
   }
   
 
-  const handleClose = () => history.push('/');
+  const handleClose = () => history.push(`${process.env.PUBLIC_URL}/`);
   const handleSetBreakMs = (breakSec: number) => setWorkoutState(state => workoutReducer.update(state, { ...workout, breakMs: breakSec * 1000 }));
   const handleSetWorkMs = (workSec: number) => setWorkoutState(state => workoutReducer.update(state, { ...workout, workMs: workSec * 1000 }));
   const handleAddExercise = (exercise: ExerciseData) => setWorkoutState(state => workoutReducer.update(state, { ...workout, exercises: [...workout.exercises, exercise] }));

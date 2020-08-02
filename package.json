@@ -1,6 +1,7 @@
 {
   "name": "fitlery-web",
   "version": "0.1.0",
+  "homepage": "https://m00k.github.io/fitlery-web-dist/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.10.2",

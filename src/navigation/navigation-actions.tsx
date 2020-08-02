@@ -5,24 +5,24 @@ import React from 'react';
 
 export const navigationActions = [
   { 
-    label: "Workouts",
-    value: "/workouts",
+    label: 'Workouts',
+    value: `${process.env.PUBLIC_URL}/workouts`,
     icon: <FitnessCenterIcon />,
   },
   { 
-    label: "Recents",
-    value: "/recents",
+    label: 'Recents',
+    value: `${process.env.PUBLIC_URL}/recents`,
     icon: <RestoreIcon />,
   },
   { 
-    label: "Favorites",
-    value: "/favorites",
+    label: 'Favorites',
+    value: `${process.env.PUBLIC_URL}/favorites`,
     icon: <FavoriteIcon />,
   },
   // TODO: use or lose
   // { 
-  //   label: "Exercises",
-  //   value: "/exercises",
+  //   label: 'Exercises',
+  //   value: '/exercises',
   //   icon: <ListIcon />,
   // },
 ];
