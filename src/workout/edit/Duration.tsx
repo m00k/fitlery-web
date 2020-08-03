@@ -5,6 +5,14 @@ import NumberInput, { NumberInputProps } from '../../shared/NumberInput';
 
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    alignItems: 'center',
+    backgroundColor: theme.palette.primary.main,
+    display: 'grid',
+    gridTemplateColumns: 'min(130px) minmax(min-content, 300px) auto',
+    height: theme.variables.playlist.item.height,
+    marginBottom: theme.spacing(.3),
+  },
   label: {
     alignItems: 'center',
     backgroundColor: theme.palette.primary.main,
@@ -15,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     padding: theme.spacing(1),
     textTransform: 'uppercase',
-    whiteSpace: 'nowrap',
+    whiteSpace: 'nowrap'
   },
 }));
 
@@ -28,12 +36,7 @@ const Duration: React.FC<DurationProps> = ({ label, ...props }) => {
   const classes = useStyles(theme);
   return (
     <Box
-      alignItems='center'
-      bgcolor={theme.palette.primary.main}
-      display='grid'
-      gridTemplateColumns='min(130px) minmax(min-content, 300px) auto'
-      height={theme.variables.playlist.item.height}
-      mb={.3}
+      className={classes.root}
     >
       <Box
         className={classes.label}
