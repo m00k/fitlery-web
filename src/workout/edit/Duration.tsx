@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     backgroundColor: theme.palette.primary.main,
     display: 'grid',
-    gridTemplateColumns: 'min(130px) minmax(min-content, 300px) auto',
+    gridTemplateColumns: 'min(130px) minmax(min-content, 300px)',
     height: theme.variables.playlist.item.height,
     marginBottom: theme.spacing(.3),
   },
@@ -45,10 +45,6 @@ const Duration: React.FC<DurationProps> = ({ label, ...props }) => {
       </Box>
       <NumberInput
         {...props}
-      />
-      <Box
-        bgcolor={theme.palette.primary.main}
-        height={1}
       />
     </Box>
   );
