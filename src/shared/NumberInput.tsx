@@ -9,7 +9,7 @@ const useButtonGroupStyles = makeStyles((theme) => ({
     alignItems: 'center',
     backgroundColor: 'inherit',
     display: 'grid',
-    gridTemplateColumns: `60px minmax(50px, 4fr) 60px 32px`,
+    gridTemplateColumns: `60px minmax(50px, 150px) 60px 32px`,
     height: '100%',
   }
 }));

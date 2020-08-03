@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     backgroundColor: theme.palette.primary.main,
     display: 'grid',
-    gridTemplateColumns: 'min(130px) minmax(min-content, 300px)',
+    gridTemplateColumns: 'min(130px) minmax(150px, 300px)',
     height: theme.variables.playlist.item.height,
     marginBottom: theme.spacing(.3),
   },
