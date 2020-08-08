@@ -115,6 +115,13 @@ const typography = {
 };
 
 const overrides: Overrides = {
+  MuiCssBaseline: {
+    '@global': {
+      ':focus': {
+        outline: 'unset'
+      }
+    },
+  },
   MuiBottomNavigation: {
     root: {
       backgroundColor: primary.main,
