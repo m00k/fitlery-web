@@ -10,19 +10,16 @@ import { WorkoutData } from '../store/state';
 
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    
-  },
-  icon: {
-    alignSelf: 'center',
+  iconContainer: {
     borderRadius: theme.shape.borderRadius,
     borderStyle: 'solid',
     borderWidth: 2,
     color: theme.palette.secondary.light,
     cursor: 'pointer',
-    height: '100%',
-    justifySelf: 'center',
     padding: '25%',
+  },
+  icon: {
+    height: '100%',
     width: '100%',
   }
 }));
@@ -41,12 +38,15 @@ const AddWorkout: React.FC<AddWorkoutProps> = ({onClick}) => {
 
   return (
     <Card
-      className={classes.root}
       onClick={handleClick}
     >
-      <AddIcon
-        className={classes.icon}
-      />
+      <div
+        className={classes.iconContainer}
+      >
+        <AddIcon
+          className={classes.icon}
+        />
+      </div>
       <CardText
         title={
           <CardTitle>
