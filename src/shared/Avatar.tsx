@@ -11,7 +11,6 @@ const useProps = (props: BoxProps) => {
   const root: BoxProps = {
     bgcolor: theme.palette.primary.main,
     display: 'grid',
-    height: '100%',
     p: 1,
     ...props,
   };
