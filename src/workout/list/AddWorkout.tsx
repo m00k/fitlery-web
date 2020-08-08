@@ -73,7 +73,7 @@ function newWorkout() {
     workMs: 60000,
     exercises: [
       {
-        name: "New Excercise",
+        name: "New Exercise",
         id: "46c7-4d11-yca1-eg87"
       },
     ]
