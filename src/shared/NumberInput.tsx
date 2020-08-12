@@ -19,7 +19,6 @@ const useButtonStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.light,
     fontSize: theme.typography.h5.fontSize,
     fontWeight: theme.typography.h5.fontWeight,
-    height: '100%',
     marginLeft: '1px',
     textTransform: 'none',
   },

@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(.3),
   },
   action: {
-    height: '100%',
   }
 }));
 

@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'grid',
     fontSize: theme.typography.h5.fontSize,
     fontWeight: theme.typography.h5.fontWeight,
-    height: '100%',
     padding: theme.spacing(1),
     textTransform: 'uppercase',
     whiteSpace: 'nowrap'

@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   action: {
-    height: '100%',
   }
 }));
 
