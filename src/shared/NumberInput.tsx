@@ -4,24 +4,31 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import ReplayIcon from '@material-ui/icons/Replay';
 import React, { useEffect, useRef } from 'react';
 
-const useButtonGroupStyles = makeStyles((theme) => ({
+
+const useStyles = makeStyles((theme) => ({
   root: {
     alignItems: 'center',
     backgroundColor: 'inherit',
-    display: 'grid',
-    gridTemplateColumns: `60px minmax(50px, 150px) 60px 32px`,
+    display: 'flex',
     height: '100%',
-  }
-}));
-
-const useButtonStyles = makeStyles((theme) => ({
-  root: {
+  },
+  button: {
     color: theme.palette.secondary.light,
     fontSize: theme.typography.h5.fontSize,
     fontWeight: theme.typography.h5.fontWeight,
     marginLeft: '1px',
     textTransform: 'none',
   },
+  duration: {
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius: theme.shape.borderRadius,
+    display: 'flex',
+    flex: 1,
+    height: '100%',
+    justifyContent: 'center',
+    minWidth: '60px',
+  }
 }));
 
 export interface NumberInputProps {
@@ -35,8 +42,7 @@ export interface NumberInputProps {
 const NumberInput: React.FC<NumberInputProps> = (props) => {
   const { value, min=0, max=Number.MAX_VALUE, step=1, onChange } = props;
   const theme = useTheme();
-  const buttonClasses = useButtonStyles(theme);
-  const buttonGroupClasses = useButtonGroupStyles(theme);
+  const classes = useStyles(theme);
   const initial = useRef(0);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { initial.current = value }, []);
@@ -57,35 +63,28 @@ const NumberInput: React.FC<NumberInputProps> = (props) => {
 
   return (
     <Box
-      className={buttonGroupClasses.root}
+      className={classes.root}
     >
       <IconButton
-        className={buttonClasses.root}
+        className={classes.button}
         onClick={handleDown}
       >
         <RemoveIcon />
       </IconButton>
       <Typography
         variant='h4'
-        style={{
-          backgroundColor: '#fff',
-          borderRadius: theme.shape.borderRadius,
-          display: 'grid',
-          alignItems: 'center',
-          height: '100%',
-          textAlign: 'center',
-        }}
+        className={classes.duration}
       >
         {value}
       </Typography>
       <IconButton
-        className={buttonClasses.root}
+        className={classes.button}
         onClick={handleUp}
       >
         <AddIcon />
       </IconButton>
       <IconButton
-        className={buttonClasses.root}
+        className={classes.button}
         onClick={handleReset}
       >
         <ReplayIcon />

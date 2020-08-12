@@ -14,10 +14,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(.3),
   },
   label: {
-    alignItems: 'center',
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.secondary.contrastText,
-    display: 'grid',
     fontSize: theme.typography.h5.fontSize,
     fontWeight: theme.typography.h5.fontWeight,
     padding: theme.spacing(1),
