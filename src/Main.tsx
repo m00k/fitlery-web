@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
+import ScrollToTop from './util/ScrollToTop';
 
 const useStyles = makeStyles((theme) => {
   const navHeight = (theme.overrides?.MuiBottomNavigation?.root as any).height;
@@ -26,20 +26,22 @@ const useStyles = makeStyles((theme) => {
 });
 
 const Main = ({ children }: any) => {
+  const rootEl = React.useRef<any>(null);
   const theme = useTheme();
   const { root, inner } = useStyles(theme);
-
   return (
-    <Box
+    <div
+      ref={rootEl}
       data-testid='main'
       className={root}
     >
-      <Box
+      <ScrollToTop el={rootEl} />
+      <div
         className={inner}
       >
         {children}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
 
