@@ -11,7 +11,7 @@ const FtBottomNavigation = () => {
   useEffect(() => setValue(history.location.pathname), [history.location.pathname]);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
-    history.push(newValue);
+    history.push(`/${newValue}`);
   };
 
   return (
