@@ -38,11 +38,11 @@ const Player = () => {
   }, [currentItemIndex, playState, top]);
   
   if (!playlistState || !playlistState.items.length) {
-    history.push(`${process.env.PUBLIC_URL}/workouts`);
+    history.push(`workouts`);
     return null;
   }
   
-  const onClose = () => history.push(`${process.env.PUBLIC_URL}/`);
+  const onClose = () => history.goBack();
 
   return (
     <Box

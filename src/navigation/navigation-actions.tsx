@@ -6,17 +6,17 @@ import React from 'react';
 export const navigationActions = [
   { 
     label: 'Workouts',
-    value: `${process.env.PUBLIC_URL}/workouts`,
+    value: `workouts`,
     icon: <FitnessCenterIcon />,
   },
   { 
     label: 'Recents',
-    value: `${process.env.PUBLIC_URL}/recents`,
+    value: `recents`,
     icon: <RestoreIcon />,
   },
   { 
     label: 'Favorites',
-    value: `${process.env.PUBLIC_URL}/favorites`,
+    value: `favorites`,
     icon: <FavoriteIcon />,
   },
   // TODO: use or lose

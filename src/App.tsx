@@ -17,7 +17,7 @@ const App = () => {
   // TODO: rtfm -> router
   return (
     <Box
-      height={'100vh'}
+      height='100vh'
       bgcolor={theme.variables.root.backgroundColor}
       style={{
         touchAction: 'manipulation', // https://developers.google.com/web/updates/2013/12/300ms-tap-delay-gone-away
@@ -25,15 +25,14 @@ const App = () => {
     >
       <TopNavigation />
       <Main>
-        <Route path={`${process.env.PUBLIC_URL}/workouts/:short/:id`} component={WorkoutEdit} />
-        <Route exact path={`${process.env.PUBLIC_URL}/workouts`} component={WorkoutList} />
-        <Route exact path={`${process.env.PUBLIC_URL}/player`} component={Player} />
-        <Route path={`${process.env.PUBLIC_URL}/exercises`} component={ExerciseList} />
-        <Route path={`${process.env.PUBLIC_URL}/recents`} component={UnderConstruction} />
-        <Route path={`${process.env.PUBLIC_URL}/favorites`} component={UnderConstruction} />
-        <Route exact path={`${process.env.PUBLIC_URL}/`} component={WorkoutList} />
-        <Route >
-          <Redirect to={`${process.env.PUBLIC_URL}/`} />
+        <Route path='/workouts/:short/:id' component={WorkoutEdit} />
+        <Route exact path='/workouts' component={WorkoutList} />
+        <Route exact path='/player' component={Player} />
+        <Route path='/exercises' component={ExerciseList} />
+        <Route path='/recents' component={UnderConstruction} />
+        <Route path='/favorites' component={UnderConstruction} />
+        <Route path='*'>
+          <Redirect to='/workouts' />
         </Route>
       </Main>
       <BottomNavigation />

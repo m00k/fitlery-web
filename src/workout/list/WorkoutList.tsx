@@ -22,14 +22,14 @@ export default function WorkoutList() {
   const handleAddWorkout = (workout: WorkoutData) => {
     const { short, id } = workout;
     setWorkoutState(state => workoutReducer.add(state, workout));
-    history.push(`${process.env.PUBLIC_URL}/workouts/${short}/${id}`);
+    history.push(`workouts/${short}/${id}`);
   };
 
   const handleCardClick = (workout: WorkoutData, index: number) => {
     setWorkoutState(state => workoutReducer.select(state, index));
     const playlist = toPlaylistData(workout);
     dispatch.set(playlist); // TODO: rather do that via navigation
-    history.push(`${process.env.PUBLIC_URL}/player`); // TODO: magic strings
+    history.push(`player`); // TODO: magic strings
   }
 
   const handleContextMenuClick = (workout: WorkoutData, index: number, menuOption: ContextMenuOption) => {
@@ -40,7 +40,7 @@ export default function WorkoutList() {
         setWorkoutState(workoutReducer.delete);
         break;
       case 'edit':
-        history.push(`${process.env.PUBLIC_URL}/workouts/${short}/${id}`);
+        history.push(`workouts/${short}/${id}`);
         break;
       default:
         throw Error(`unknowkn menu option ${menuOption}`);
