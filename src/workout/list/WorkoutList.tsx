@@ -43,7 +43,7 @@ export default function WorkoutList() {
         history.push(`workouts/${id}`);
         break;
       default:
-        throw Error(`unknowkn menu option ${menuOption}`);
+        throw Error(`unknown menu option ${menuOption}`);
     }
   }
 
