@@ -25,7 +25,7 @@ const App = () => {
     >
       <TopNavigation />
       <Main>
-        <Route path='/workouts/:short/:id' component={WorkoutEdit} />
+        <Route path='/workouts/:id' component={WorkoutEdit} />
         <Route exact path='/workouts' component={WorkoutList} />
         <Route exact path='/player' component={Player} />
         <Route path='/exercises' component={ExerciseList} />

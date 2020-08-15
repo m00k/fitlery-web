@@ -20,9 +20,9 @@ export default function WorkoutList() {
   const { items: workouts } = workoutState;
   
   const handleAddWorkout = (workout: WorkoutData) => {
-    const { short, id } = workout;
+    const { id } = workout;
     setWorkoutState(state => workoutReducer.add(state, workout));
-    history.push(`workouts/${short}/${id}`);
+    history.push(`workouts/${id}`);
   };
 
   const handleCardClick = (workout: WorkoutData, index: number) => {
@@ -33,14 +33,14 @@ export default function WorkoutList() {
   }
 
   const handleContextMenuClick = (workout: WorkoutData, index: number, menuOption: ContextMenuOption) => {
-    const { id, short } = workout;
+    const { id } = workout;
     setWorkoutState(state => workoutReducer.select(state, index));
     switch (menuOption) {
       case 'delete':
         setWorkoutState(workoutReducer.delete);
         break;
       case 'edit':
-        history.push(`workouts/${short}/${id}`);
+        history.push(`workouts/${id}`);
         break;
       default:
         throw Error(`unknowkn menu option ${menuOption}`);
