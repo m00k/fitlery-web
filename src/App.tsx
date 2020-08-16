@@ -1,7 +1,7 @@
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import ExerciseList from './exercise/ExerciseList';
 import Main from './Main';
 import BottomNavigation from './navigation/BottomNavigation';
@@ -25,15 +25,17 @@ const App = () => {
     >
       <TopNavigation />
       <Main>
-        <Route path='/workouts/:id' component={WorkoutEdit} />
-        <Route exact path='/workouts' component={WorkoutList} />
-        <Route exact path='/player' component={Player} />
-        <Route path='/exercises' component={ExerciseList} />
-        <Route path='/recents' component={UnderConstruction} />
-        <Route path='/favorites' component={UnderConstruction} />
-        <Route path='*'>
-          <Redirect to='/workouts' />
-        </Route>
+        <Switch>
+          <Route path='/workouts/:id' component={WorkoutEdit} />
+          <Route exact path='/workouts' component={WorkoutList} />
+          <Route exact path='/player' component={Player} />
+          <Route path='/exercises' component={ExerciseList} />
+          <Route path='/recents' component={UnderConstruction} />
+          <Route path='/favorites' component={UnderConstruction} />
+          <Route path='*'>
+            <Redirect to='/workouts' />
+          </Route>
+        </Switch>
       </Main>
       <BottomNavigation />
     </Box>
