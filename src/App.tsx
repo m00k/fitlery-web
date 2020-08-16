@@ -14,7 +14,6 @@ import WorkoutList from './workout/list/WorkoutList';
 const App = () => { 
   const theme = useTheme();
 
-  // TODO: rtfm -> router
   return (
     <Box
       height='100vh'

@@ -1,4 +1,4 @@
-import { IconButton, makeStyles, Typography } from '@material-ui/core';
+import { BoxProps, IconButton, makeStyles, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import useTheme from '@material-ui/core/styles/useTheme';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export interface ExerciseProps {
+export interface ExerciseProps extends BoxProps {
   exercise: ExerciseData;
   onDelete: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void | undefined;
 }
