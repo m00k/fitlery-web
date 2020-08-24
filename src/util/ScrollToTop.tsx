@@ -10,8 +10,7 @@ const ScrollToTop: React.FC<ScrollToTopProps> = (props) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    console.log(el);
-    el.current?.scrollTo(0, 0);
+    el.current?.scrollTo && el.current.scrollTo(0, 0);
   }, [pathname, el]);
 
   return null;
