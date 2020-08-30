@@ -19,13 +19,13 @@ const WorkoutEdit: React.FC<any> = () => {
   if (!workout) {
     return null;
   }
-  
 
   const handleClose = () => history.goBack();
   const handleSetBreakMs = (breakSec: number) => setWorkoutState(state => workoutReducer.update(state, { ...workout, breakMs: breakSec * 1000 }));
   const handleSetWorkMs = (workSec: number) => setWorkoutState(state => workoutReducer.update(state, { ...workout, workMs: workSec * 1000 }));
   const handleAddExercise = (exercise: ExerciseData) => setWorkoutState(state => workoutReducer.update(state, { ...workout, exercises: [...workout.exercises, exercise] }));
   const handleDeleteExercise = (exercises: ExerciseData[]) => setWorkoutState(state => workoutReducer.update(state, { ...workout, exercises }));
+  const handleSort = handleDeleteExercise;
   const handleEditExercise = (exercise: ExerciseData, index: number) => { // TODO: type
     // TODO: error case?
     const exercises = [
@@ -72,6 +72,7 @@ const WorkoutEdit: React.FC<any> = () => {
         onAdd={handleAddExercise}
         onDelete={handleDeleteExercise}
         onEdit={handleEditExercise}
+        onSort={handleSort}
       />
     </Box>
   );
