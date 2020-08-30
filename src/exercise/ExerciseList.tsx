@@ -6,7 +6,6 @@ import EditToggle from '../shared/EditToggle';
 import uid from '../util/uid';
 import { ExerciseData } from './data';
 import Exercise from './Exercise';
-import { move } from '../util/move';
 
 const useStyles = makeStyles(theme => ({
   textfield: {
@@ -42,38 +41,10 @@ const ExerciseList: React.FC<ExerciseListProps> = (props) => {
     onAdd && onAdd({ id: uid(), name });
   };
 
-  const [dragIdx, setDragIdx] = useState(-1);
-  const [list, setList] = useState<ExerciseData[]>([...exercises]);  
-  const handleDragStart = (ev: React.DragEvent, idx: number) => {
-    setDragIdx(idx);
-    ev.dataTransfer.effectAllowed = 'move';
-    ev.dataTransfer.setData('item', JSON.stringify(idx));
-    // this will hide the item in the list
-    // while the dragged item still being visible
-    //setTimeout(() => (target as HTMLElement).style.visibility = 'hidden');
-  };
-  const handleDragOver = (ev: React.DragEvent, dropIdx: number) => {
-    ev.preventDefault();
-    setList(list => move(list, dragIdx, dropIdx));
-    setDragIdx(dropIdx);
-  };
-  const handleDragEnd = (ev: React.DragEvent) => {
-    const {target} = ev;
-    (target as HTMLElement).style.visibility = 'visible';
-    setDragIdx(-1);
-  };
-
-  console.log('###', 'redraw');
-
   return (
     <Box>
-      {list.map((exercise: ExerciseData, i: number) => 
+      {exercises.map((exercise: ExerciseData, i: number) => 
         <EditToggle
-          draggable={true}
-          onDragStart={(ev: React.DragEvent) => handleDragStart(ev, i)}
-          onDragOver={(ev: React.DragEvent) => handleDragOver(ev, i)}
-          onDragEnd={handleDragEnd}
-          style={i === dragIdx ? { opacity: 0.8 } : {}}
           fontSize={theme.typography.h4.fontSize}
           key={exercise.id}
           onOk={handleEdit(i)}
