@@ -1,28 +1,17 @@
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { workoutAtom, WorkoutData, workoutReducer } from '../store';
+import { SetterOrUpdater } from 'recoil';
+import { WorkoutData, workoutReducer, WorkoutState } from '../store';
 
 
-// TODO: rtfm on how to init route w/ data
-const useWorkout = (notFound: () => void): WorkoutData | undefined => {
-  const [workoutState, setWorkoutState] = useRecoilState(workoutAtom);
-  const { items: workouts, currentItemIndex } = workoutState;
+// find workout by id param and sync state
+const useWorkout = (workoutState: WorkoutState, setWorkoutState: SetterOrUpdater<WorkoutState>): WorkoutData | undefined => {
   const { id } = useParams();
-  const workout = workouts[currentItemIndex];
-
-  useEffect(() => {
-    if (workout) {
-      return;
-    }
-    const index = workouts.findIndex(w => w.id === id);
-    if (index > -1) {
-      setWorkoutState(state => workoutReducer.select(state, index));
-    } else {
-      notFound();
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  return workout;
+  const { items: workouts } = workoutState;
+  const foundAt = workouts.findIndex(w => w.id === id);
+  if (foundAt > -1 && workoutState.currentItemIndex !== foundAt) {
+    setWorkoutState(state => workoutReducer.select(state, foundAt));
+  }
+  return workouts[foundAt];
 }
 
 export default useWorkout;

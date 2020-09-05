@@ -1,7 +1,7 @@
 import Box from '@material-ui/core/Box';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { ExerciseData } from '../../exercise/data';
 import ExerciseList from '../../exercise/ExerciseList';
 import { EditResult } from '../../shared/EditText';
@@ -12,14 +12,14 @@ import useWorkout from './useWorkout';
 
 
 const WorkoutEdit: React.FC<any> = () => {
-  const setWorkoutState = useSetRecoilState(workoutAtom);
+  const [workoutState, setWorkoutState] = useRecoilState(workoutAtom);
   const history = useHistory();
-  const notFound = () => history.goBack();
-  const workout = useWorkout(notFound);
+  const workout = useWorkout(workoutState, setWorkoutState);
   if (!workout) {
+    history.replace('/workout');
     return null;
   }
-
+  
   const handleClose = () => history.goBack();
   const handleSetBreakMs = (breakSec: number) => setWorkoutState(state => workoutReducer.update(state, { ...workout, breakMs: breakSec * 1000 }));
   const handleSetWorkMs = (workSec: number) => setWorkoutState(state => workoutReducer.update(state, { ...workout, workMs: workSec * 1000 }));
@@ -43,7 +43,6 @@ const WorkoutEdit: React.FC<any> = () => {
   
   const { exercises, breakMs, workMs } = workout;
 
-  // TODO: edit exercises order drag/drop
   return (
     <Box>
       <HeaderEdit
