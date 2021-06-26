@@ -49,7 +49,7 @@ const PieCountdown: FunctionComponent<PieCountdownProps> = ({ ...rootProps }) =>
       <PieSliceWithMargin
         bgcolor={done.bgcolor}
         color={done.color}
-        clipIf={(fractionDone < 1)}
+        clipIf={fractionDone < 1}
         fractionStart={0}
         fractionEnd={fractionDone}
         text={text}

@@ -12,7 +12,7 @@ const CountdownTickEffect: React.FC<{}> = () => {
     return () => clearInterval(i);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // first render only
-  return <></>;
+  return null;
 };
 
 export default CountdownTickEffect;
