@@ -29,7 +29,8 @@ export default function WorkoutList() {
     setWorkoutState(state => workoutReducer.select(state, index));
     const playlist = toPlaylistData(workout);
     dispatch.set(playlist); // TODO: rather do that via navigation
-    history.push(`player`); // TODO: magic strings
+    // TODO: timeout fixes 'Cannot update during an existing state transition'
+    setTimeout(() => history.push(`player`)); // TODO: magic strings
   }
 
   const handleContextMenuClick = (workout: WorkoutData, index: number, menuOption: ContextMenuOption) => {
